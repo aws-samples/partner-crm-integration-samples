@@ -52,5 +52,5 @@ This folder contains various code snippets for interacting with AWS services suc
 To begin using these samples, clone the repository to your local machine or download the files directly from GitHub using the following command:
 
 ```bash
-git clone https://github.com/aws-samples/aws-partner-crm-integration-samples.git
+git clone https://github.com/aws-samples/partner-crm-integration-samples.git
 ```
