@@ -1,0 +1,18 @@
+{
+    "success": "ALL",
+    "spmsId": "spmsId",
+    "isApiError": false,
+    "inboundApiResults":
+    [
+        {
+            "warnings": null,
+            "partnerCrmUniqueIdentifier": "testIdentifier",
+            "isSuccess": true,
+            "errors": null,
+            "apnCrmUniqueIdentifier": "01234567"
+        }
+    ],
+    "fileName": "opportunity-inbound/test-2023-05-28T01:21:20.json",
+    "fileApnProcessedDT": "2023-05-28T15:21:22.331Z",
+    "apiErrors": null
+}

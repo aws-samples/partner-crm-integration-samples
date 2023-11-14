@@ -1,0 +1,189 @@
+public with sharing class S3_Authentication {
+    private final String SERVICE = 's3'; 
+    public S3_Authentication() {
+        
+    }
+
+    /**
+     * Signature Version 4 Signing Process
+     * Requests to AWS must be signed—that is, they must include information that AWS can use to authenticate the
+     * requestor. Requests are signed using the access key ID and secret access key of an account or of an IAM user.
+     * https://docs.aws.amazon.com/general/latest/gr/signing_aws_api_requests.html
+     */
+    public HttpRequest signedRequest(String method, Url endpoint, Map<String,String> headers, Blob payload, Boolean presign,String accessKey , String secretKey,String region) {
+
+        Datetime now = Datetime.now();
+        //defaults
+        if (headers == null) headers = new Map<String,String>();
+        if (payload == null) payload = Blob.valueOf('');
+        if (presign == null) presign = false; 
+
+        String termination = 'aws4_request';
+        String iso8601date = now.formatGmt('yyyyMMdd');
+        String iso8601time = now.formatGmt('yyyyMMdd\'T\'HHmmss\'Z\'');
+        String credentialScope = iso8601date + '/' + region + '/' + SERVICE + '/' + termination;
+
+        //prepare headers
+        headers.put('Host', endpoint.getHost());
+        String signedHeaders = signedHeadersFor(headers);
+
+
+        //handle spaces and special characters in paths
+        String spec = '';
+        spec += endpoint.getProtocol() + '://';
+        spec += endpoint.getHost();
+        spec += rfc3986For(endpoint.getPath(), false);
+        if (endpoint.getQuery() != null) spec += '?' + endpoint.getQuery();
+
+
+        //prepare parameters
+        PageReference pr = new PageReference(spec);
+        Map<String,String> parameters = pr.getParameters();
+        parameters.put('X-Amz-Algorithm', 'AWS4-HMAC-SHA256');
+        parameters.put('X-Amz-Credential', accessKey + '/' + credentialScope);
+        parameters.put('X-Amz-Date', iso8601time);
+        parameters.put('X-Amz-Expires', '86400');
+        parameters.put('X-Amz-SignedHeaders', signedHeaders);
+
+
+        //Task 1: Create a Canonical Request for Signature Version 4
+        //https://docs.aws.amazon.com/general/latest/gr/sigv4-create-canonical-request.html
+        String canonicalRequest = canonicalMethodFor(method)
+            + '\n' + canonicalUriFor(endpoint.toExternalForm())
+            + '\n' + canonicalQueryStringFor(parameters)
+            + '\n' + canonicalHeadersFor(headers)
+            + '\n' + signedHeadersFor(headers)
+            + '\n' + (presign ? 'UNSIGNED-PAYLOAD' : hexEncodedHashFor(payload))
+        ;
+
+
+        //Task 2: Create a String to Sign for Signature Version 4
+        //https://docs.aws.amazon.com/general/latest/gr/sigv4-create-string-to-sign.html
+        String algorithm = 'AWS4-HMAC-SHA256';
+        String canonicalRequestHash = hexEncodedHashFor(Blob.valueOf(canonicalRequest));
+        String stringToSign = algorithm + '\n' + iso8601time + '\n' + credentialScope + '\n' + canonicalRequestHash;
+
+        //Task 3: Calculate the AWS Signature Version 4
+        //https://docs.aws.amazon.com/general/latest/gr/sigv4-calculate-signature.html
+        Blob keySecret = Blob.valueOf('AWS4' + secretKey);
+        Blob keyDate = Crypto.generateMac('hmacSHA256', Blob.valueOf(iso8601date), keySecret);
+        Blob keyRegion = Crypto.generateMac('hmacSHA256', Blob.valueOf(region), keyDate);
+        Blob keyService = Crypto.generateMac('hmacSHA256', Blob.valueOf(SERVICE), keyRegion);
+        Blob keySigning = Crypto.generateMac('hmacSHA256', Blob.valueOf('aws4_request'), keyService);
+        Blob blobToSign = Blob.valueOf(stringToSign);
+        Blob hmac = Crypto.generateMac('hmacSHA256', blobToSign, keySigning);
+
+
+        // based on security team's recommandation
+        // https://aristotle.corp.amazon.com/recommendations/26/
+        headers.put('strict-transport-security','max-age=31536000');
+        headers.put('Content-Security-Policy','script-src \'self\'');
+
+        //Task 4: Add the Signing Information to the Request
+        //https://docs.aws.amazon.com/general/latest/gr/sigv4-add-signature-to-request.html
+        if (!presign) headers.put('X-Amz-Content-Sha256', hexEncodedHashFor(payload));
+        String signature = EncodingUtil.convertToHex(hmac);
+        parameters.put('X-Amz-Signature', signature);
+        
+        //prepare request
+        HttpRequest request = new HttpRequest();
+        request.setMethod(method);
+        request.setEndpoint(pr.getUrl());
+        if (payload != Blob.valueOf('')){
+            request.setBodyAsBlob(payload); //affects http method   
+        } 
+        for (String header : headers.keySet()){
+            request.setHeader(header, headers.get(header)); 
+        }
+        return request;
+    }
+
+    @TestVisible static String canonicalMethodFor(String method) {
+        return method.toUpperCase();
+    }
+
+    @TestVisible static String canonicalUriFor(String endpoint) {
+        Url uri = new Url(endpoint);
+        return rfc3986For(uri.getPath(), false);
+    }
+
+     @TestVisible static String canonicalHeadersFor(Map<String,String> key2value) {
+        
+        //lowercase header keys
+        Map<String,String> lower2value = new Map<String,String>();
+        for (String key : key2value.keySet()) lower2value.put(key.toLowerCase(), key2value.get(key).trim().replaceAll('\\s+', ' '));
+        
+        //sort canonical keys by ascii code
+        List<String> sortedKeys = new List<String>(lower2value.keySet());
+        sortedKeys.sort();
+        
+        //prepare values
+        List<String> canonicalHeaders = new List<String>();
+        for (String sortedKey : sortedKeys) canonicalHeaders.add(sortedKey + ':' + lower2value.get(sortedKey) + '\n');
+        
+        return String.join(canonicalHeaders, '');
+    }
+
+    @TestVisible static String signedHeadersFor(Map<String,String> headers) {
+        
+        //lowercase header keys
+        List<String> keys = new List<String>(headers.keySet());
+        for (Integer i = 0; i < keys.size(); i++) keys.set(i, keys[i].toLowerCase());
+        
+        //sort ascii
+        keys.sort();
+        
+        //prepare values
+        List<String> signedHeaders = new List<String>();
+        for (String key : keys) signedHeaders.add(key);
+        
+        return String.join(signedHeaders, ';');
+    }
+
+    @TestVisible static String hexEncodedHashFor(Blob data) {
+        Blob hash = Crypto.generateDigest('SHA256', data);
+        return EncodingUtil.convertToHex(hash);
+    }
+
+    @TestVisible static String rfc3986For(String characters, Boolean encodeSlash) {
+        String result = '';
+        for (Integer i = 0; i < characters.length(); i++) {
+            String character = characters.substring(i, i + 1);
+            
+            if (
+                (character >= 'A' && character <= 'Z') || 
+                (character >= 'a' && character <= 'z') || 
+                (character >= '0' && character <= '9') || 
+                character == '_' || 
+                character == '-' || 
+                character == '~' || 
+                character == '.'
+            ) {
+                result += character;
+            } else if (character == '/') {
+                result += encodeSlash ? '%2F' : character;
+            } else {
+                result += '%' + EncodingUtil.convertToHex(Blob.valueOf(character)).toUpperCase();
+            }
+        }
+        
+        return result;
+    }
+
+    @TestVisible static String canonicalQueryStringFor(Map<String,String> parameters) {
+        
+        //sort keys by ascii code
+        List<String> sortedKeys = new List<String>(parameters.keySet());
+        sortedKeys.sort();
+        
+        //prepare values
+        List<String> canonicalParameters = new List<String>();
+        for (String sortedKey : sortedKeys) canonicalParameters.add(
+            sortedKey + 
+            '=' + 
+            rfc3986For(parameters.get(sortedKey), true)
+        );
+        
+        return String.join(canonicalParameters, '&');
+    }
+}

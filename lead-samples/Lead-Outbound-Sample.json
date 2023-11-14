@@ -1,0 +1,40 @@
+{
+    "version": "1",
+    "spmsId": "spmsId",
+    "leads":
+    [
+        {
+            "website": "www.test.com",
+            "useCaseWorkload": "Big Data;Content Delivery",
+            "title": "Accept To View",
+            "streetAddress": "Accept To View",
+            "status": "Open",
+            "state": "Accept To View",
+            "segmentCompanySize": "Test",
+            "projectDescription": "Test",
+            "postalCode": "Accept To View",
+            "phone": "Accept To View",
+            "partnerCrmLeadId": "partnerCrmLeadId",
+            "levelofAWSUsage": "Test",
+            "leadStatusReason": "Test",
+            "leadSource": "Accelerator Application",
+            "leadOwnerName": "TestName",
+            "leadOwnerEmail": "test@test.com",
+            "leadAge": 4.0,
+            "lastModifiedDate": "2020-01-17T20:08:15.000Z",
+            "lastModifiedBy": "TestName",
+            "industry": "Business & Consumer Services",
+            "fullName": "Accept To View",
+            "email": "Accept To View",
+            "currentLeadStage": null,
+            "createdDate": "2020-01-17T20:08:13.000Z",
+            "createdBy": "TestName",
+            "country": "Accept To View",
+            "company": "Accept To View",
+            "city": "Accept To View",
+            "campaignName": "Test",
+            "campaignMemberStatus": "Attended",
+            "apnCrmUniqueIdentifier": "LXXXXXX"
+        }
+    ]
+}

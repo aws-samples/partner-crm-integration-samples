@@ -1,0 +1,63 @@
+{
+    "version": "2.0",
+    "spmsId": "spmsId",
+    "opportunities":
+    [
+        {
+            "useCase": "AI Machine Learning and Analytics",
+            "targetCloseDate": "2022-09-24",
+            "streetAddress": "123 Example St",
+            "state": "Washington",
+            "stage": "Prospect",
+            "projectDescription": "This is a test description that partners cannot update if it is an AWS referred opportunity. For partner-referred opportunities, this field can only be updateable during initial creation",
+            "primaryContactPhone": null,
+            "primaryContactLastName": "PartnerSalesRepLastName",
+            "primaryContactFirstName": "PartnerSalesRepFirstName",
+            "primaryContactEmail": null,
+            "postalCode": "21043",
+            "partnerProjectTitle": "Partner Project Title - this field is not editable by partners if AWS-led opp. If Partner-led opp, can only be updated during initial creation.",
+            "partnerPrimaryNeedFromAws": "Co-Sell - Architectural Validation;Co-Sell - Technical Consultation",
+            "partnerCrmUniqueIdentifier": "TestIdentifier",
+            "isMarketingDevelopmentFunded": "No",
+            "industryOther": null,
+            "industry": "Government",
+            "expectedMonthlyAwsRevenue": 123.0,
+            "deliveryModel": "BYOL or AMI",
+            "customerWebsite": "test@test.com",
+            "customerTitle": "Test Title",
+            "customerPhone": "1234567890",
+            "customerLastName": "LastName",
+            "customerFirstName": "FirstName",
+            "customerEmail": "test@test.com",
+            "customerCompanyName": "Test LLC",
+            "country": "United States",
+            "competitiveTrackingOther": null,
+            "competitiveTracking": "On-Prem",
+            "city": "Seattle",
+            "campaignName": "WWPS NDPP;P3",
+            "awsAccountId": null,
+            "apnCrmUniqueIdentifier": null,
+            "additionalComments": "Additional comments, partners should update this field",
+            "IsOppFromMarketingActivity": "Yes",
+            "marketingActivityChannel": "Email",
+            "marketingActivityUsecase": "Analytics",
+            "awsSFCampaignName": "Test campaignName",
+            "opportunityType": "Flat Renewal",
+            "doesOppBelongToNatSec": "Yes",
+            "customerDuns": "123456789",
+            "salesActivities": "Customer has shown interest in solution",
+            "parentOppId": "O1234567",
+            "awsProducts":
+            [
+                "Lambda",
+                "AWSManagedServices",
+                "WorkLink"
+            ],
+            "solutionOffered":
+            [
+                "S-XXXXXXX"
+            ],
+            "otherSolutionOffered": null
+        }
+    ]
+}

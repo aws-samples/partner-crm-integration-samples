@@ -1,0 +1,394 @@
+﻿AWS Product Code,Product Name,Product Description,Product Family
+AlexaforBusiness,Alexa for Business,Alexa for Business Provides Tools to Manage Alexa in Your Organization,Business Applications
+S3IntelligentTiering,S3 Intelligent-Tiering,Automates storage cost savings by moving data when access patterns change,Storage
+AmazonBraket,Amazon Braket,"Service for exploring, evaluating, and experimenting with quantum computing. Testing with APN 123.",Quantum Technologies
+AmazonEC2P5,Amazon EC2 - P5,Secure and resizable compute capacity to support virtually any workload,Compute
+AWSSupplyChainDemandPlanning,AWS Supply Chain Demand Planning,"Use ML algorithms built with user, macroeconomic data and retailer history to generate forecasts for capacity planning",Business Applications
+TestNewAWSProductUAT1,Test New AWS Product UAT1,'Test AWS Product for DTI Co-sell',Analytics
+AmazonCodeGuruProfiler,Amazon CodeGuru Profiler,0,Machine Learning
+AWSSystemsManagerIncidentManager,AWS Systems Manager Incident Manager,Enables faster resolution of critical application availability and performance issues,Management & Governance
+AmazonConnectGlobalResiliency,Amazon Connect - Global Resiliency,Make your contact center resilient and available across multiple regions to enhance business continuity plans,Customer Engagement
+AWSIoTFleetWise,AWS IoT FleetWise,"Easily collect, transform, and transfer vehicle data to the cloud in near-real time",Internet of Things
+AWSSiteLink,AWS SiteLink,"AWS Direct Connect SiteLink creates private, end-to-end network connections between the offices, data centers, and colocation facilities in your global network",Networking & Content Delivery
+AmazonConnectCases,Amazon Connect - Cases,"Fast and easy way to manage your customer issues to resolution, even if they require multiple interactions, tasks, and teams",Customer Engagement
+AmazonManagedServiceforApacheFlink,Amazon Managed Service for Apache Flink,Build and run fully managed Apache Flink applications,Analytics
+AmazonVerifiedPermissions,Amazon Verified Permissions,Manage permissions and fine-grained authorization in applications that you build,"Security, Identity & Compliance"
+AWSEntityResolution,AWS Entity Resolution,"Configurable, easy-to-use entity resolution workflows",Analytics
+AWSPrivateCA,AWS Private CA,Create private certificates to identify resources and protect data,"Security, Identity & Compliance"
+AmazonElasticMapReduceEMR,Amazon Elastic MapReduce (EMR),Managed Hadoop Framework,Analytics
+AppStream,AppStream,0,Application Integration
+AmazonElasticTranscoder,Amazon Elastic Transcoder,Easy-to-Use Scalable Media Transcoding,Media Services
+AmazonSimpleEmailServiceSES,Amazon Simple Email Service (SES),High-scale inbound and outbound cloud email service,Customer Engagement
+AmazonSQS,Amazon SQS,"Fully managed message queues for microservices, distributed systems, and serverless applications",Application Integration
+AmazonCloudFront,Amazon CloudFront,Securely deliver content with low latency and high transfer speeds,Networking & Content Delivery
+AmazonEC2AutoScaling,Amazon EC2 Auto Scaling,Add or remove compute capacity to meet changes in demand,Compute
+ElasticLoadBalancingELB,Elastic Load Balancing (ELB),Distribute network traffic to improve application scalability,Networking & Content Delivery
+AmazonWorkspaces,Amazon Workspaces,"Secure, reliable, and scalable access to persistent desktops from any location",End User Computing
+AmazonWorkDocs,Amazon WorkDocs,Secure Enterprise Storage and Sharing Service,End User Computing
+AmazonDynamoDB,Amazon DynamoDB,"Fast, flexible NoSQL database service for single-digit millisecond performance at any scale",Database
+AmazonElastiCache,Amazon ElastiCache,Unlock microsecond latency and scale with in-memory caching,Database
+AmazonRDSforMySQL,Amazon RDS for MySQL,"Set up, operate, and scale a relational database in the cloud with just a few clicks",Database
+AmazonRDSforOracle,Amazon RDS for Oracle,"Set up, operate, and scale an Oracle database in the cloud with just a few clicks",Database
+AmazonRDSforPostgreSQL,Amazon RDS for PostgreSQL,"Set up, operate, and scale a relational database in the cloud with just a few clicks",Database
+AmazonRDSforSQLServer,Amazon RDS for SQL Server,"Set up, operate, and scale a SQL Server database in the cloud with just a few clicks",Database
+AmazonRedshift,Amazon Redshift,"Fast, Simple, Cost-Effective Data Warehousing",Analytics
+AWSCloudHSM,AWS CloudHSM,Managed hardware security module (HSM) on the AWS Cloud,"Security, Identity & Compliance"
+AWSCloudFormation,AWS CloudFormation,Create and Manage Resources with Templates,Management & Governance
+AWSCloudTrail,AWS CloudTrail,Track User Activity and API Usage,Management & Governance
+AmazonCloudWatch,Amazon CloudWatch,Observability of your AWS resources and applications on AWS and on-premises,Management & Governance
+AWSElasticBeanstalk,AWS Elastic Beanstalk,"Easy to begin, Impossible to outgrow",Developer Tools
+AWSMarketplaceAMI,AWS Marketplace - AMI,Amazon Machine Image (AMI) Marketplace Products,Marketplace
+AmazonCognito,Amazon Cognito,"Simple and Secure User Sign-Up, Sign-In, and Access Control","Security, Identity & Compliance"
+AWSDirectConnect,AWS Direct Connect,Dedicated Network Connection to AWS,Networking & Content Delivery
+AmazonRoute53,Amazon Route 53,Scalable DNS and Domain Name Registration,Networking & Content Delivery
+AmazonVirtualPrivateCloudVPC,Amazon Virtual Private Cloud (VPC),Define and launch AWS resources in a logically isolated virtual network,Networking & Content Delivery
+AmazonElasticBlockStoreEBS,Amazon Elastic Block Store (EBS),"Easy to use, high performance block storage at any scale",Storage
+AmazonS3Glacier,Amazon S3 Glacier,"Long-term, secure, durable Amazon S3 object storage classes for data archiving",Storage
+ImportExportDisk,Import/Export Disk,0,Storage
+AmazonS3,Amazon S3,Object storage built to store and retrieve any amount of data from anywhere,Storage
+SimpleDB,SimpleDB,0,Database
+AWSDirectoryService,AWS Directory Service,Managed Microsoft Active Directory in AWS,"Security, Identity & Compliance"
+AWSLambda,AWS Lambda,Run code without thinking about servers or clusters,Compute
+AWSCodeDeploy,AWS CodeDeploy,Automate code deployments to maintain application uptime,Developer Tools
+AWSKeyManagementServiceKMS,AWS Key Management Service (KMS),Easily create and control the keys used to encrypt or digitally sign your data,"Security, Identity & Compliance"
+AWSConfig,AWS Config,Track Resource Inventory and Changes,Management & Governance
+AWSCodePipeline,AWS CodePipeline,Automate continuous delivery pipelines for fast and reliable updates,Developer Tools
+AWSCodeCommit,AWS CodeCommit,Securely host highly scalable private Git repositories. Collaborate on code.,Developer Tools
+AmazonElasticContainerServiceECS,Amazon Elastic Container Service (ECS),"Run highly secure, reliable, and scalable containers",Compute
+AmazonWorkMail,Amazon WorkMail,Secure Email and Calendaring Service,End User Computing
+AmazonWorkSpacesApplicationManagerWAM,Amazon WorkSpaces Application Manager (WAM),"Fast, flexible, and secure way for you to deploy and manage applications for Amazon WorkSpaces",End User Computing
+AmazonElasticFileSystemEFS,Amazon Elastic File System (EFS),"Simple, serverless, set-and-forget, elastic file system",Storage
+AWSDeviceFarm,AWS Device Farm,"Test Android, iOS, and Web Apps on Real Devices in the Cloud",Front-End Web & Mobile
+ContactLensforAmazonConnect,Contact Lens for Amazon Connect,Real-time contact center analytics powered by machine learning,Customer Engagement
+AmazonConnectVoice,Amazon Connect - Voice,Provide superior customer service at a lower cost with an easy-to-use omnichannel cloud contact center,Customer Engagement
+AmazonConnectChat,Amazon Connect - Chat,"Enable customers to start chatting with contact center agents from any business application, web, or mobile",Customer Engagement
+AmazonConnectTelephony,Amazon Connect - Telephony,Capabilities to host both toll-free and direct dial numbers (DID) in all AWS Regions,Customer Engagement
+AmazonInteractiveVideoService,Amazon Interactive Video Service,Managed live video streaming service from ingest to playback,Media Services
+AWSCloudDevelopmentKitCDK,AWS Cloud Development Kit (CDK),Define cloud infrastructure using familiar programming languages,Developer Tools
+AWSCodeStar,AWS CodeStar,"Quickly develop, build, and deploy applications on AWS",Developer Tools
+AWSSDKsandTools,AWS SDKs and Tools,Access and manage AWS services with your preferred development language or platform,Developer Tools
+DataRow,DataRow,0,Analytics
+AWSRoboMaker,AWS RoboMaker,"Develop, test, and deploy intelligent robotics applications",Robotics
+AWSElementalMediaConnect,AWS Elemental MediaConnect,"Reliable, secure, and flexible transport for live video",Media Services
+AmazonManagedStreamingforApacheKafkaMSK,Amazon Managed Streaming for Apache Kafka (MSK),"Securely stream data with a fully managed, highly available Apache Kafka service",Analytics
+AWSLakeFormation,AWS Lake Formation,AWS Lake Formation makes it easy to set up a secure data lake,Analytics
+AWSOutposts,AWS Outposts,Run AWS Services On Premises,Compute
+AmazonEC2C5n,Amazon EC2 - C5n,Designed for compute-intensive workloads with cost-effective high performance,Compute
+AmazonEC2P3dn,Amazon EC2 - P3dn,Accelerate machine learning and high performance computing applications with powerful GPUs,Compute
+AmazonQuantumLedgerDatabaseQLDB,Amazon Quantum Ledger Database (QLDB),Fully managed ledger database,Blockchain
+AmazonTimestream,Amazon Timestream,"Amazon Timestream is a fast, scalable, and serverless time series database for IoT and operational applications.",Database
+AmazonCorretto,Amazon Corretto,0,Developer Tools
+AWSIoTEvents,AWS IoT Events,Easily detect and respond to events from IoT sensors and applications,Internet of Things
+AWSIoTSiteWise,AWS IoT SiteWise,"Collect, organize, and analyze data from industrial equipment at scale",Internet of Things
+AWSPartnerDeviceCatalog,AWS Partner Device Catalog,Device Qualification Catalog,Internet of Things
+AmazonElasticInference,Amazon Elastic Inference,Lower machine learning inference costs by up to 75%,Machine Learning
+AmazonForecast,Amazon Forecast,Amazon Forecast is a fully-managed service for accurate time-series forecasting,Machine Learning
+AmazonPersonalize,Amazon Personalize,Amazon Personalize helps you easily add real-time recommendations to your apps,Machine Learning
+AmazonSageMakerGroundTruth,Amazon SageMaker Ground Truth,Create high-quality datasets for training ML models,Machine Learning
+AmazonTextract,Amazon Textract,Easily extract text and data from virtually any document,Machine Learning
+AWSDeepRacer,AWS DeepRacer,"Fully autonomous 1/18th scale race car, driven by machine learning",Machine Learning
+AmazonEC2Inf1,Amazon EC2 - Inf1,High performance and the lowest cost machine learning inference in the cloud powered by AWS Inferentia chips,Compute
+AWSControlTower,AWS Control Tower,"The easiest way to set up and govern a secure, compliant multi-account environment",Management & Governance
+AWSConsoleMobileApplication,AWS Console Mobile Application,Stay connected to your AWS resources on-the-go,Management & Governance
+AWSLicenseManager,AWS License Manager,"Set rules to manage, discover, and report third-party license usage proactively",Management & Governance
+AWSWellArchitectedTool,AWS Well-Architected Tool,"Use AWS Well-Architected Tool to learn best practices, measure, and improve your workloads",Management & Governance
+AWSAppMesh,AWS App Mesh,Easily monitor and control microservices,Networking & Content Delivery
+CloudMap,Cloud Map,0,Management & Governance
+AWSDataSync,AWS DataSync,"Simplifies, automates, and accelerates moving data",Migration & Transfer
+AWSTransferFamilySFTPFTPSFTP,"AWS Transfer Family (SFTP, FTPS, FTP)","Easily manage and share data with simple, secure, and scalable file transfers",Migration & Transfer
+AWSAmplify,AWS Amplify,"Build scalable mobile and web apps fast, with endless flexibility",Front-End Web & Mobile
+AWSCloudMap,AWS Cloud Map,Build a dynamic map of your cloud,Networking & Content Delivery
+AWSGlobalAccelerator,AWS Global Accelerator,Improve global application availability and performance using the AWS global network,Networking & Content Delivery
+AWSTransitGateway,AWS Transit Gateway,"Easily connect Amazon VPCs, AWS accounts, and on-premises networks to a single gateway",Networking & Content Delivery
+AWSGroundStation,AWS Ground Station,"Run, scale, and automate robotics simulation",Satellite
+AmazonFSxforLustre,Amazon FSx for Lustre,Fast and scalable shared storage to power your compute workloads,Storage
+AmazonFSxforWindowsFileServer,Amazon FSx for Windows File Server,Fully managed file storage built on Windows Server,Storage
+AWSSecurityHub,AWS Security Hub,Automate AWS security checks and centralize security alerts,"Security, Identity & Compliance"
+AmazonMechanicalTurkMTurk,Amazon Mechanical Turk (MTurk),"Access a global, on-demand, 24x7 workforce",Machine Learning
+AmazonManagedBlockchain,Amazon Managed Blockchain,Easily create and manage scalable blockchain networks,Blockchain
+AWSBackup,AWS Backup,Centrally manage and automate backups across AWS services,Storage
+MigrationEvaluatorTSOLogic,Migration Evaluator (TSO Logic),Build a data-driven business case for AWS,Migration & Transfer
+AWSEventbridge,AWS Eventbridge,0,Application Integration
+AmazonDocumentDB,Amazon DocumentDB,Scale JSON workloads with ease using a fully managed document database service,Database
+AmazonSageMakerDataWrangler,Amazon SageMaker Data Wrangler,The fastest and easiest way to prepare data for machine learning,Machine Learning
+AmazonSageMakerAutopilot,Amazon SageMaker Autopilot,Automatically create machine learning models with full visibility,Machine Learning
+AmazonWorkLink,Amazon WorkLink,Enable secure mobile access to internal websites and web apps,End User Computing
+AmazonECSAnywhere,Amazon ECS Anywhere,Easily run containers on customer-managed infrastructure with ECS Anywhere,Containers
+GravitonOpenSource,Graviton Open-Source,0,Compute
+SnowballDataTransfer,Snowball - Data Transfer,Petabyte-scale data transport with on-board storage and compute capabilities,Storage
+SnowballEdgeCompute,Snowball - Edge Compute,Petabyte-scale data transport with on-board storage and compute capabilities,Storage
+SnowconeDataTransfer,Snowcone - Data Transfer,"Snowcone is a small, rugged edge compute and data storage product",Storage
+SnowconeEdgeCompute,Snowcone - Edge Compute,"Snowcone is a small, rugged edge compute and data storage product",Storage
+AmazonKeyspaces,Amazon Keyspaces,Serverless Cassandra-compatible database,Database
+AmazonFraudDetector,Amazon Fraud Detector,Detect more online fraud faster using machine learning,Machine Learning
+AmazonDetective,Amazon Detective,Analyze and visualize security data to rapidly get to the root cause of potential security issues,"Security, Identity & Compliance"
+AWSDistroforOpenTelemetryADOT,AWS Distro for OpenTelemetry (ADOT),"Secure, production-ready open source distribution with predictable performance",Management & Governance
+CODEAWS,CODE.AWS,0,Developer Tools
+AWSOperatorAccess,AWS Operator Access,0,"Security, Identity & Compliance"
+AmazonConnectChat,Amazon Connect Chat,0,Customer Engagement
+AmazonConnectOutboundDialer,Amazon Connect Outbound Dialer,0,Customer Engagement
+AWSSupportSlackApp,AWS Support Slack App,0,Support
+AmazonConnectVoiceID,Amazon Connect Voice ID,0,Customer Engagement
+AWSWavelength,AWS Wavelength,Deliver ultra-low-latency applications for 5G devices,Compute
+AmazonAugmentedAIA2I,Amazon Augmented AI (A2I),Easily implement human review of machine learning predictions,Machine Learning
+AWSCloudDevelopmentKit,AWS Cloud Development Kit,0,Developer Tools
+AmazonQuickSightQ,Amazon QuickSight Q,Ask questions of your data and receive answers with relevant visualizations,Analytics
+AmazonTranscribeMedical,Amazon Transcribe Medical,Automatically convert medical speech to text,Machine Learning
+AmazonRDSProxy,Amazon RDS Proxy,"Make your applications more scalable, resilient, and secure",Database
+AWSApp2Container,AWS App2Container,Containerize and migrate existing applications,Compute
+AmazonEC2Graviton,Amazon EC2 - Graviton,Enable the best price performance and improved sustainability in Amazon EC2,Compute
+AmazonEventBridge,Amazon EventBridge,"Serverless event bus that connects application data from your own apps, SaaS, and AWS services",Application Integration
+AWSPrivateLink,AWS PrivateLink,"Establish private connectivity between VPCs and services hosted on AWS or on-premises, without exposing data to the internet",Networking & Content Delivery
+AWSSitetoSiteVPN,AWS Site-to-Site VPN,Extend your on-premises networks to the cloud,Networking & Content Delivery
+AmazonHoneycode,Amazon Honeycode,Build mobile and web apps without programming,Business Applications
+AWSCodeArtifact,AWS CodeArtifact,"Secure, scalable, and cost-effective artifact management for software development",Developer Tools
+Snowcone,Snowcone,0,Storage
+AWSOpsHub,AWS OpsHub,Graphical user interface to manage your AWS Snowball devices,Storage
+InstanceRefresh,Instance Refresh,0,Compute
+AmazonComprehendMedical,Amazon Comprehend Medical,Extract information from unstructured medical text accurately and quickly,Machine Learning
+AmazonInspector,Amazon Inspector,Automated security assessment service to help improve the security and compliance of applications deployed on AWS,"Security, Identity & Compliance"
+AmazonEC2F1,Amazon EC2 - F1,Enable faster FPGA accelerator development and deployment in the cloud powered by Virtex UltraScale+ FPGAs from Xilinx,Compute
+AWSCloudControlAPI,AWS Cloud Control API,Manage AWS and third-party cloud infrastructure with consistent APIs,Developer Tools
+AmazonManagedWorkflowsforApacheAirflowMWAA,Amazon Managed Workflows for Apache Airflow (MWAA),"Highly available, secure, and managed workflow orchestration for Apache Airflow",Application Integration
+AWSMarketplaceProfessionalServices,AWS Marketplace - Professional Services,Professional Services Marketplace Products,Marketplace
+AmazonEKSAnywhere,Amazon EKS Anywhere,Create and operate Kubernetes clusters on your own infrastructure,Containers
+VMWareManagedCloudonAWS,VMWare Managed Cloud on AWS,"Innovate faster, rapidly transition to the cloud, and work securely from any location with the full range of 200+ AWS services",Compute
+AWSLocalZones,AWS Local Zones,Run latency sensitive applications closer to end users,Compute
+AmazonConnectTasks,Amazon Connect - Tasks,"Easily automate, track, and manage tasks for contact center agents",Customer Engagement
+AmazonFSxforOpenZFS,Amazon FSx for OpenZFS,Fully managed high-performance file storage powered OpenZFS,Storage
+AWSPrivate5G,AWS Private 5G,Managed service for deploying private cellular networks at on-premises,Networking & Content Delivery
+AmazonWorkSpacesWeb,Amazon WorkSpaces Web,"Secure, browser-based access to internal websites and applications with zero administrative burden",End User Computing
+AmazonEC2Mac,Amazon EC2 - Mac,"Develop, build, test, and sign Apple apps on Amazon EC2",Compute
+AWSNetworkFirewall,AWS Network Firewall,Deploy network security across your Amazon VPCs with just a few clicks,"Security, Identity & Compliance"
+GatewayLoadBalancer,Gateway Load Balancer,"Deploy, scale, and run third-party virtual appliances",Networking & Content Delivery
+AmazonManagedGrafana,Amazon Managed Grafana,"Scalable, secure, and highly available data visualization for your operational metrics, logs, and traces",Management & Governance
+AmazonManagedServiceforPrometheus,Amazon Managed Service for Prometheus,"Highly available, secure, and managed monitoring for your containers",Management & Governance
+AmazonCodeGuruProfiler,Amazon CodeGuru Profiler,"Profile your applications in the cloud from a single, centralized dashboard",Machine Learning
+AmazonCodeGuruReviewer,Amazon CodeGuru Reviewer,Automate code reviews and optimize application performance with ML-powered recommendations,Machine Learning
+AmazonEKSonAWSFargate,Amazon EKS on AWS Fargate,Run Kubernetes-based applications on AWS by removing the need to provision and manage infrastructure for pods,Containers
+EC2SAPLaunchWizard,EC2 SAP - Launch Wizard,0,Compute
+EC2SAPBackint,EC2 SAP - Backint,0,Compute
+EC2SAPQuickStarts,EC2 SAP - QuickStarts,0,Compute
+EC2SAPNewCertification,EC2 SAP - New Certification,0,Compute
+AmazonSageMakerJumpStart,Amazon SageMaker JumpStart,"Machine learning (ML) hub offering algorithms, models, and ML solutions.",Machine Learning
+AWSAuditManager,AWS Audit Manager,Continuously assess controls for risk and compliance,"Security, Identity & Compliance"
+AmazonDevOpsGuru,Amazon DevOps Guru,ML-powered cloud operations service to improve application availability.,Machine Learning
+AmazonSimpleNotificationServiceSNSA2A,Amazon Simple Notification Service (SNS) A2A,"Fully managed pub/sub messaging, SMS, email, and mobile push notifications for application-to-application (A2A) communication",Application Integration
+AmazonSimpleNotificationServiceSNSA2P,Amazon Simple Notification Service (SNS) A2P,"Fully managed pub/sub messaging, SMS, email, and mobile push notifications for application-to-person (A2P) communication",Application Integration
+AWSEnterpriseonRamp,AWS Enterprise on Ramp,Recommended if you have business and/or mission critical workloads in AWS,Support
+AmazonFinSpace,Amazon FinSpace,"Store, catalog, prepare, and analyze financial industry data",Analytics
+AWSDatabaseMigrationService,AWS Database Migration Service,Migrate your databases to AWS with minimal downtime,Database
+AmazonLocationService,Amazon Location Service,Securely and easily add location data to applications.,Front-End Web & Mobile
+AmazonEC2RHEL,Amazon EC2 - RHEL,"Secure, flexible, and easy to manage Linux workloads",Compute
+EC2SQLServer,EC2 SQL Server,0,Compute
+AWSSystemsManagerFleetManager,AWS Systems Manager Fleet Manager,"Remotely manage server fleets running on AWS, or on premises",Management & Governance
+AmazonElasticContainerRegistryECR,Amazon Elastic Container Registry (ECR),"Easily store, share, and deploy your container software anywhere",Containers
+VMwareCloudonAWSOutposts,VMware Cloud on AWS Outposts,VMware Cloud in your on-premises environments,Compute
+GravitonISV,Graviton ISV,0,Compute
+AWSEndofSupportMigrationProgramEMP,AWS End-of-Support Migration Program (EMP),Future-proof your legacy Windows Server applications on AWS,Migration & Transfer
+AWSAppRunner,AWS App Runner,Build and run production web applications at scale,Compute
+AmazonLexwithAmazonConnect,Amazon Lex with Amazon Connect,"Easier for customers to build, deploy, and manage chatbots",Machine Learning
+AWSApplicationMigrationServiceMGN,AWS Application Migration Service (MGN),AWS Application Migration Service (MGN) automates lift-and-shift migration,Migration & Transfer
+AmazonCodeGuruSecurity,Amazon CodeGuru Security,Scans application code and identifies vulnerabilities,"Security, Identity & Compliance"
+AmazonEC2Inf2,Amazon EC2 - Inf2,"Inf2 instances are powered by AWS Inferentia2, the second-generation AWS Inferentia accelerator.",Compute
+AmazonRekognitionFaceLiveness,Amazon Rekognition Face Liveness,Detect real users and deter bad actors using spoofs in seconds during facial verification,Machine Learning
+AmazonSecurityLake,Amazon Security Lake,Automatically centralize your security data in a few steps,"Security, Identity & Compliance"
+AWSAppFabric,AWS AppFabric,AWS AppFabric connects multiple SaaS applications with no coding required for better productivity and security,Business Applications
+AWSHealthImaging,AWS HealthImaging,"Store, access, and analyze medical images in the cloud at petabyte scale",Machine Learning
+AmazonQuickSightPaginatedReports,Amazon QuickSight Paginated Reports,"Create, schedule, and share reports and data exports",Analytics
+AWSVerifiedAccess,AWS Verified Access,Provide secure access to corporate applications without a VPN,Networking & Content Delivery
+AmazonCodeWhisperer,Amazon CodeWhisperer,Build applications faster with the ML-powered coding companion,Developer Tools
+AmazonConnectGuides,Amazon Connect Guides,Help agents resolve issues quickly with programmatic step-by-step guidance,Business Applications
+AWSMainframeModernizationBluAge,AWS Mainframe Modernization Blu Age,Refactor toolchain within AWS Mainframe Modernization service,Compute
+AWSMainframeModernizationMicroFocus,AWS Mainframe Modernization Micro Focus,Replatform toolchain within AWS Mainframe Modernization service,Compute
+AmazonBedrock,Amazon Bedrock,The easiest way to build and scale generative AI applications with foundation models (FMs),Machine Learning
+AWSDiode,AWS Diode,Cloud-based CDS service that provides scalable and reliable delivery of data from one cloud security domain to another,Networking & Content Delivery
+CloudEndureMigration,CloudEndure Migration,"Simplify, expedite, and automate migration to AWS with Continuous Data Replication technology, resulting in minimal cutover windows",Migration & Transfer
+CloudEndureDisasterRecovery,CloudEndure Disaster Recovery,"Scalable, cost-effective business continuity for physical, virtual, and cloud servers",Migration & Transfer
+S3GlacierDeepArchive,S3 Glacier Deep Archive,"Long-term, secure, durable Amazon S3 object storage classes for data archiving",Storage
+AmazonRDSonOutposts,Amazon RDS on Outposts,Deploy Amazon RDS managed Databases in on-premises environments,Database
+AWSNeuron,AWS Neuron,SDK to optimize machine learning inference on AWS Inferentia chips,Machine Learning
+AmazonGameLiftFlexMatch,Amazon GameLift FlexMatch,Customizable matchmaking service for multiplayer games,Game Tech
+AmazonCloudWatchRUM,Amazon CloudWatch RUM,Gain visibility into applications’ client-side performance and reduces MTTR,Management & Governance
+AmazonCloudWatchEvidently,Amazon CloudWatch Evidently,"Application developers conduct experiments and identify unintended consequences of new features before rolling them out, thereby reducing risk",Management & Governance
+AWSChatbot,AWS Chatbot,ChatOps for AWS,Management & Governance
+AWSIncidentDetectionandResponse,AWS Incident Detection and Response,Add-on to AWS Enterprise Support that offers customers 24 x 7 proactive incident detection and rapid engagement with the right AWS resources to accelerate their recovery from critical incidents,Support
+AmazonEKSonOutpost,Amazon EKS on Outpost,Deploy managed Amazon EKS clusters in on-premises environments,Containers
+AWSSimSpaceWeaver,AWS SimSpace Weaver,Expand your spatial simulation workloads across multiple servers,Compute
+AmazonKendra,Amazon Kendra,Highly accurate enterprise search service powered by machine learning,Machine Learning
+AWSDeepComposer,AWS DeepComposer,AWS DeepComposer allows developers of all skill levels to get started with Generative AI.,Machine Learning
+AWSEnterpriseSupportPublicPricing,AWS Enterprise Support - Public Pricing,Recommended if you have business and/or mission critical workloads in AWS,Support
+AWSBusinessSupportPublicPricing,AWS Business Support - Public Pricing,Recommended if you have production workloads in AWS,Support
+AWSDeveloperSupportPublicPricing,AWS Developer Support - Public Pricing,Recommended if you are experimenting or testing in AWS,Support
+AWSInfrastructureEventManagement,AWS Infrastructure Event Management,Support for planning and running business critical events,Support
+AWSDataExchange,AWS Data Exchange,Easily exchange data in the cloud,Analytics
+AWSGlueDataBrew,AWS Glue DataBrew,Visual data preparation tool to clean and normalize data for analytics and machine learning,Analytics
+RedHatOpenShiftServiceonAWSROSA,Red Hat OpenShift Service on AWS (ROSA),Managed OpenShift in the cloud,Containers
+AWSProton,AWS Proton,Manage your infrastructure so developers can focus on coding.,Management & Governance
+AmazonLookoutforVision,Amazon Lookout for Vision,Identify defects using computer vision to automate quality inspection.,Machine Learning
+AmazonLookoutforEquipment,Amazon Lookout for Equipment,Detect abnormal equipment behavior by analyzing sensor data,Machine Learning
+AmazonMonitron,Amazon Monitron,End-to-end system for equipment monitoring,Machine Learning
+AWSIoTTwinMaker,AWS IoT TwinMaker,Optimize operations by easily creating digital twins of real-world systems,Internet of Things
+AWSResilienceHub,AWS Resilience Hub,Prepare and protect your applications from disruptions,Management & Governance
+AWSSecretsManager,AWS Secrets Manager,"Easily rotate, manage, and retrieve database credentials, API keys, and other secrets through their lifecycle","Security, Identity & Compliance"
+AmazonEC2VT1,Amazon EC2 - VT1,Low cost transcoding for live streams and video files powered by the U30 media accelerator from Xilinx,Compute
+AmazonEC2P4d,Amazon EC2 - P4d,Highest performance for ML training and HPC applications in the cloud powered by A100 GPUs from NVIDIA,Compute
+AmazonEC2Trn1,Amazon EC2 - Trn1,Best price performance for training deep learning models in the cloud powered by AWS Trainium chips,Compute
+AmazonEC2DL1,Amazon EC2 - DL1,Low cost-to-train for deep learning models powered by Gaudi accelerators from Habana Labs (an Intel company),Compute
+AmazonEC2G5,Amazon EC2 - G5,High performance GPU-based instances for graphics-intensive applications and machine learning inference powered by A10G GPUs from NVIDIA,Compute
+BabelfishforAuroraPostgreSQL,Babelfish for Aurora PostgreSQL,Run Microsoft SQL Server applications on PostgreSQL with little to no code change,Database
+AWSCloudWAN,AWS Cloud WAN,0,Networking & Content Delivery
+AmazonConnectHighVolumeOutboundCommunications,Amazon Connect - High-Volume Outbound Communications,Reach customers at scale with proactive omnichannel communications,Customer Engagement
+AWSModularDataCenter,AWS Modular Data Center,"Provides self-contained modular data centers, extending the use of AWS services to the tactical edge.",Compute
+AmazonVPCLattice,Amazon VPC Lattice,"Simplify connecting, monitoring, and securing your application networks
+Pricebook: Utility, Committed Contract, Private Pricing",Networking & Content Delivery
+AWSCleanRooms,AWS Clean Rooms,Create clean rooms in minutes. Collaborate without sharing raw data.,Analytics
+AmazonOmics,Amazon Omics,"Transform genomic, transcriptomic, and other omics data into insights",Machine Learning
+SAPonAWSGeneral,SAP on AWS - General,"AWS infrastructure (EC2, Storage) to run SAP on AWS",Compute
+OracleonAWSGeneral,Oracle on AWS- General,"AWS infrastructure (EC2, Storage) to run Oracle on AWS",Compute
+AmazonCodeCatalyst,Amazon CodeCatalyst,Unified software development service to quickly build and deliver applications on AWS.,Developer Tools
+AWSSupplyChain,AWS Supply Chain,Mitigate risks and lower costs with an ML-powered supply chain application.,Business Applications
+PartnerLedEnterpriseSupport,Partner-Led Enterprise Support,Partner-led Support (PLS) enables partners to act as the customer’s sole point of contact for technical support.,Support
+PartnerLedBusinessSupport,Partner-Led Business Support,Partner-led Support (PLS) enables partners to act as the customer’s sole point of contact for technical support.,Support
+AmazonWorkSpacesCore,Amazon WorkSpaces Core,Virtual desktop infrastructure APIs for customers’ 3rd party VDI software,End User Computing
+AmazonChimeVoiceConnector,Amazon Chime Voice Connector,Cost-effective SIP trunking and advanced telephony features powered by AWS,Business Applications
+AmazonChimeSDK,Amazon Chime SDK,Embed proven real-time communication capabilities in your applications,Business Applications
+PortingAssistantforNET,Porting Assistant for .NET,Insight and assistance for porting from .NET Framework to .NET Core,Containers
+AmazonDatabaseMigrationAccelerator,Amazon Database Migration Accelerator,Accelerate your database migrations to AWS,Database
+AmazonOpenSearchService,Amazon OpenSearch Service,Run and Scale OpenSearch and Elasticsearch Clusters,Analytics
+AmazonRekognitionImage,Amazon Rekognition Image,Deep learning powered image recognition service,Machine Learning
+AmazonRekognitionCustomLabels,Amazon Rekognition Custom Labels,Develop custom models to analyze images,Machine Learning
+AmazonEC2Linux,Amazon EC2 Linux,"Run all your cloud and enterprise applications in a secure, stable, and high performance Linux environment",Compute
+AmazonEC2WindowsBYOL,Amazon EC2 Windows-BYOL,Secure and resizable compute capacity to support virtually any workload,Compute
+AWSServiceCatalog,AWS Service Catalog,"Create, organize, and govern your curated catalog of AWS products",Management & Governance
+MQ,MQ,0,Application Integration
+AmazonComprehend,Amazon Comprehend,Analyze Unstructured Text,Machine Learning
+AmazonRekognitionVideo,Amazon Rekognition Video,Machine learning powered video analysis service,Machine Learning
+AmazonTranslate,Amazon Translate,Powerful Neural Machine Translation,Machine Learning
+AmazonSageMaker,Amazon SageMaker,"Build, Train, and Deploy Machine Learning Models",Machine Learning
+AmazonTranscribe,Amazon Transcribe,Powerful Speech Recognition,Machine Learning
+AWSDeepLens,AWS DeepLens,Deep Learning Enabled Video Camera,Machine Learning
+AmazonElasticKubernetesServiceEKS,Amazon Elastic Kubernetes Service (EKS),"The most trusted way to start, run, and scale Kubernetes",Containers
+AmazonECSonAWSFargate,Amazon ECS on AWS Fargate,Run containers without having to manage servers or clusters of Amazon EC2 instances,Containers
+AWSServerlessApplicationRepository,AWS Serverless Application Repository,"Discover, deploy, and publish serverless applications",Compute
+AmazonNeptune,Amazon Neptune,Build and run graph applications with highly connected datasets,Database
+AWSCloud9,AWS Cloud9,"A cloud IDE for writing, running, and debugging code",Developer Tools
+FreeRTOSIoT,FreeRTOS (IoT),Real-time operating system for microcontrollers,Internet of Things
+AWSIoTAnalytics,AWS IoT Analytics,Analytics for IoT devices,Internet of Things
+AWSIoTDeviceDefender,AWS IoT Device Defender,Security management for IoT devices,Internet of Things
+AWSIoTDeviceManagement,AWS IoT Device Management,"Register, organize, monitor, and remotely manage connected devices at scale",Internet of Things
+AWSAppSync,AWS AppSync,"Real-Time Data Sync Using GraphQL for Mobile & Web Apps, Online or Offline",Front-End Web & Mobile
+AmazonGuardDuty,Amazon GuardDuty,Protect your AWS accounts with intelligent threat detection,"Security, Identity & Compliance"
+AmazonSumerian,Amazon Sumerian,"Build VR, AR, and 3D applications",AR & VR
+AmazonKinesisVideoStreams,Amazon Kinesis Video Streams,"Capture, Process, and Store Video Streams for Analytics and Machine Learning",Internet of Things
+AWSSingleSignOn,AWS Single Sign-On,Manage Single Sign-On (SSO) Access to AWS Accounts and Business Applications,"Security, Identity & Compliance"
+AWSWAFWebApplicationFirewall,AWS WAF - Web Application Firewall,Protect your web applications from common web exploits,"Security, Identity & Compliance"
+AWSElementalMediaConvert,AWS Elemental MediaConvert,Convert file-based content for broadcast and multiscreen delivery,Media Services
+AWSElementalMediaLive,AWS Elemental MediaLive,Convert video inputs into live outputs for broadcast and streaming delivery,Media Services
+AWSElementalMediaPackage,AWS Elemental MediaPackage,Deliver video to many devices using just-in-time format conversion,Media Services
+AWSElementalMediaTailor,AWS Elemental MediaTailor,Personalize and monetize multiscreen content with server-side ad insertion,Media Services
+AWSElementalMediaStore,AWS Elemental MediaStore,Store and deliver video assets for live or on-demand media workflows,Media Services
+ImportExportSnowball,Import/Export Snowball,0,Storage
+AmazonRDSforMariaDB,Amazon RDS for MariaDB,"Set up, operate, and scale a relational database in the cloud with just a few clicks",Database
+AmazonQuickSight,Amazon QuickSight,"Scalable, serverless, embeddable, ML-powered BI service for the cloud",Analytics
+AmazonMacie,Amazon Macie,Discover and protect your sensitive data at scale,"Security, Identity & Compliance"
+AWSIoTCore,AWS IoT Core,Easily and securely connect devices to the cloud,Internet of Things
+AmazonLumberyard,Amazon Lumberyard,Cross-platform AAA game engine deeply integrated with AWS and Twitch with full source code provided,Game Tech
+AmazonGameLift,Amazon GameLift,Deploy and Scale Session-based Multiplayer Games,Game Tech
+CloudCanvas,Cloud Canvas,0,Game Tech
+AmazonAthena,Amazon Athena,Start querying data instantly. Get results in seconds. Pay only for the queries you run.,Analytics
+AWSGlue,AWS Glue,"AWS Glue is a fully managed ETL (extract, transform, and load) service",Analytics
+AWSBatch,AWS Batch,Fully managed batch processing at any scale,High Performance Computing (HPC)
+AWSCodeBuild,AWS CodeBuild,Build and test code with continuous scaling. Pay only for the build time you use.,Developer Tools
+AWSSystemsManager,AWS Systems Manager,Gain operational insights and take action on AWS resources,Management & Governance
+AmazonLex,Amazon Lex,Build Voice and Text Chatbots,Machine Learning
+AmazonLightsail,Amazon Lightsail,Launch and Manage Virtual Private Servers,Compute
+AWSOpsWorks,AWS OpsWorks,Automate Operations with Chef and Puppet,Management & Governance
+AmazonPinpoint,Amazon Pinpoint,Multichannel marketing communication service,Customer Engagement
+AmazonPolly,Amazon Polly,Turn Text into Lifelike Speech,Machine Learning
+AmazonRDSAuroraforMySQL,Amazon RDS Aurora for MySQL,MySQL-compatible relational database built for the cloud,Database
+AmazonRDSAuroraforPostgreSQL,Amazon RDS Aurora for PostgreSQL,PostgreSQL-compatible relational database built for the cloud,Database
+AWSShield,AWS Shield,Managed DDoS protection,"Security, Identity & Compliance"
+AWSSnowmobile,AWS Snowmobile,Migrate or transport exabyte-scale data sets into and out of AWS,Storage
+AWSStepFunctions,AWS Step Functions,Coordinate Distributed Applications,Application Integration
+AWSXRay,AWS X-Ray,"Analyze and debug production, distributed applications",Developer Tools
+AWSIoTGreengrass,AWS IoT Greengrass,Deploy and run code on your devices,Internet of Things
+AmazonCloudDirectory,Amazon Cloud Directory,"Fully managed, hierarchical data store in AWS cloud","Security, Identity & Compliance"
+AWSCertificateManager,AWS Certificate Manager,"Easily provision, manage, and deploy public and private SSL/TLS certificates for use with AWS services and your internal connected resources","Security, Identity & Compliance"
+AWSDeepLearningAMIs,AWS Deep Learning AMIs,Pre-configured environments to quickly build deep learning applications,Machine Learning
+ApacheMXNetonAWS,Apache MXNet on AWS,Build machine learning applications that train quickly and run anywhere,Machine Learning
+AWSMarketplaceSaas,AWS Marketplace - Saas,Software as a service (Saas) Marketplace Products,Marketplace
+AWSMarketplaceEC2,AWS Marketplace - EC2,EC2 Marketplace Products,Marketplace
+AWSMigrationHub,AWS Migration Hub,Simplify and accelerate the migration of your data centers to AWS,Migration & Transfer
+AmazonGameSparks,Amazon GameSparks,"Managed service providing backend feature tools for building, running, and scaling games",Game Tech
+AmazonFSxforNetAppONTAP,Amazon FSx for NetApp ONTAP,Fully managed storage built on NetApp's popular ONTAP file system,Storage
+AWSStorageGatewayFSxFileGateway,AWS Storage Gateway (FSx File Gateway),"Fast, low-latency access on premises to fully managed file shares",Storage
+AWSStorageGatewayS3FileGateway,AWS Storage Gateway (S3 File Gateway),Store and access objects in Amazon S3 from NFS or SMB file data with local caching,Storage
+AWSStorageGatewayTapeGateway,AWS Storage Gateway (Tape Gateway),Backup and archive on-premises data to virtual tapes in AWS,Storage
+AWSStorageGatewayVolumeGateway,AWS Storage Gateway (Volume Gateway),Hybrid cloud block storage with local caching,Storage
+AWSFirewallManager,AWS Firewall Manager,Centrally configure and manage firewall rules across accounts and applications,"Security, Identity & Compliance"
+AWSGameKit,AWS GameKit,GameKit enables game developers to deploy and customize game features from game engine,Game Tech
+AWSParallelCluster,AWS ParallelCluster,Quickly build HPC compute environments on AWS,High Performance Computing (HPC)
+ElasticFabricAdapterEFA,Elastic Fabric Adapter (EFA),Run HPC and ML applications at scale,High Performance Computing (HPC)
+AWSFaultInjectionSimulator,AWS Fault Injection Simulator,Improve resiliency and performance with controlled experiments,Developer Tools
+AmazonKinesisDataStreamsKDS,Amazon Kinesis Data Streams (KDS),Collect streaming data with a data stream,Analytics
+AmazonKinesisDataFirehoseKDF,Amazon Kinesis Data Firehose (KDF),Process and deliver streaming data with data delivery stream,Analytics
+AWSClientVPN,AWS Client VPN,Extend your on-premises networks to the cloud and securely access them from anywhere,Networking & Content Delivery
+AWSOutpostsServers,AWS Outposts Servers,Run AWS Outposts in locations with limited space or smaller capacity requirements,Compute
+AWSCloudShell,AWS CloudShell,Command line access to AWS resources and tools directly from a browser,Developer Tools
+AmazonMQforActiveMQ,Amazon MQ for ActiveMQ,Fully managed service for open source message brokers for ActiveMQ,Application Integration
+AmazonMQforRabbitMQ,Amazon MQ for RabbitMQ,Fully managed service for open source message brokers for RabbitMQ,Application Integration
+Wickr,Wickr,"Provide secure, unified communications solutions for messaging, video conferencing, file and location sharing using end-to-end encryption (E2EE)",Business Applications
+AWSBugBust,AWS BugBust,Bug bashing events,Machine Learning
+AmazonCloudWatchSynthetics,Amazon CloudWatch Synthetics,Monitor application endpoints more easily,Management & Governance
+AmazonNimbleStudio,Amazon Nimble Studio,Accelerate building a cloud-based content creation studio,Media Services
+AWSApplicationCostProfiler,AWS Application Cost Profiler,Cost per tenant and workload,Management & Governance
+AmplifyAdminUIimportexistingCognitoUserPoolandIdentityPools,Amplify Admin UI import existing Cognito User Pool and Identity Pools,Programmatic interface for configuring and managing app backends,Front-End Web & Mobile
+AmazonRoute53ApplicationRecoveryController,Amazon Route 53 Application Recovery Controller,Simplify and automate recovery for highly available applications,Networking & Content Delivery
+NICEDCV,NICE DCV,Deliver high-performance remote desktop and application streaming,High Performance Computing (HPC)
+CrossRegionDataTransfer,Cross-Region Data Transfer,Cross-region data transfer costs,Migration & Transfer
+AmazonMemoryDB,Amazon MemoryDB,"Redis-compatible, durable, in-memory database service for ultra-fast performance",Database
+GameLiftFleetIQ,GameLift FleetIQ,Optimizes the use of low-cost Spot Instances for cloud-based game hosting with Amazon EC2,Game Tech
+AWSDeepLearningContainers,AWS Deep Learning Containers,"Quickly set up deep learning environments with optimized, pre-packaged container images",Machine Learning
+AWSMigrationHubStrategyRecommendations,AWS Migration Hub Strategy Recommendations,Analyzes your applications to help you determine the optimal strategy and tools to migrate and modernize at scale.,Migration & Transfer
+SnowballwithTapeGateway,Snowball with Tape Gateway,"Secure, offline tape data migration capability for AWS Snowball Edge",Storage
+AmazonEC2G4,Amazon EC2 - G4,The industry’s most cost-effective GPU instances for machine learning inference and graphics-intensive applications powered by T4 GPUs from NVIDIA,Compute
+AmazonRDSCustomforSQLServer,Amazon RDS Custom for SQL Server,Managed database services for applications that require operating system and database customization,Database
+AmazonS3GlacierInstantRetrieval,Amazon S3 Glacier Instant Retrieval,"Amazon S3 Glacier Instant Retrieval is durable, low-cost archive storage with milliseconds retrieval",Storage
+AmazonConnectForecastPlanSchedule,Amazon Connect - Forecast Plan Schedule,"Amazon Connect - Forecasting, Cap Planning, and Scheduling",Customer Engagement
+AmazonDataZone,Amazon DataZone,Unlock data across organizational boundaries with built-in governance,Analytics
+AmazonRDSCustomForOracle,Amazon RDS Custom For Oracle,Managed database services for applications that require operating system and database customization,Database
+VMwareCloudonAWS,VMware Cloud on AWS,"Rapidly migrate, extend, modernize, and protect your VMware environment to the AWS Cloud",Compute
+AWSElasticDisasterRecovery,AWS Elastic Disaster Recovery,"Scalable, cost-effective application recovery to AWS",Storage
+AWSManagedServicesAccelerate,AWS Managed Services Accelerate,Extends customers teams and capabilities to drive operational excellence with a flexible consumption model,Management & Governance
+AWSManagedServicesAdvanced,AWS Managed Services Advanced,Fully managed operational solution that trades some flexibility for increased operational rigor,Management & Governance
+AWSManagedServicesOperationsonDemandOOD,AWS Managed Services Operations on Demand (OOD),Curated catalog of operational capabilities that augment the extensive scope provided by AMS Operations Plans,Management & Governance
+AWSMainframeModernization,AWS Mainframe Modernization,"Migrate, modernize, and run mainframe applications on AWS",Migration & Transfer
+AmazonSageMakerCanvas,Amazon SageMaker Canvas,Provide business analysts with a UI that allows them to generate ML predictions,Machine Learning
+AmazonSageMakerFeatureStore,Amazon SageMaker Feature Store,A fully managed repository for machine learning features,Machine Learning
+AmazonSageMakerInference,Amazon SageMaker Inference,Easily deploy and manage ML models at scale,Machine Learning
+AmazonSageMakerNotebookInstances,Amazon SageMaker Notebook Instances,"Compute instances running the Jupyter notebook app, billed by the instance type chosen",Machine Learning
+AmazonSageMakerProcessing,Amazon SageMaker Processing,"Easily run pre-processing, post-processing, and model evaluation workloads on fully managed infrastructure",Machine Learning
+AmazonSageMakerStudio,Amazon SageMaker Studio,"Provides a single, web-based visual interface where customers can perform all ML development steps",Machine Learning
+AmazonSageMakerTraining,Amazon SageMaker Training,Reduces the time and cost to train and tune ML models,Machine Learning
+AWSPanorama,AWS Panorama,Enabling computer vision applications at the edge,Machine Learning
+AWSMigrationHubRefactorSpaces,AWS Migration Hub Refactor Spaces,Starting point for incremental application refactoring to microservices,Migration & Transfer
+AmazonLookoutforMetrics,Amazon Lookout for Metrics,Accurately detect anomalies in your business metrics and quickly understand why,Machine Learning
+AmazonSageMakerEdgeManager,Amazon SageMaker Edge Manager,Easily operate ML models running on edge devices,Machine Learning
+AmazonHealthLake,Amazon HealthLake,Making sense of health data,Machine Learning
+AmazonConnectWisdom,Amazon Connect - Wisdom,Deliver agents the information they need to solve issues in real-time,Customer Engagement
+AmazonConnectCustomerProfiles,Amazon Connect - Customer Profiles,"Enable agents to deliver faster, more personalized customer service",Customer Engagement
+AmazonConnectVoiceID,Amazon Connect - Voice ID,Real-time caller authentication and fraud risk detection using ML-powered voice analysis,Customer Engagement
+ContactLensforAmazonConnectRealTime,Contact Lens for Amazon Connect - Real Time,0,Customer Engagement
+AmazonFileCache,Amazon File Cache,High-speed cache for datasets stored anywhere,Storage
+AWSIoTCoreforLoRaWAN,AWS IoT Core for LoRaWAN,"Connect, manage, and secure LoRaWAN devices at scale",Internet of Things
+AmazonCloudSearch,Amazon CloudSearch,Managed Search Service,Analytics
+AmazonCloudWatchApplicationInsights,Amazon CloudWatch Application Insights,Monitor Resources and Applications,Management & Governance
+PrimaryPartnerSolution,Primary Partner Solution,0,0
+Amazon GameCast,Amazon GameCast,Available under NDA - Amazon GameCast enables customers to build low-latency streaming services for 3D games/experiences,Game Tech
+AmazonChime,Amazon Chime,Amazon Chime is a communications service that transforms online meetings,Business Applications
+AmazonEC2Spot,Amazon EC2 Spot,Run fault-tolerant workloads for up to 90% off,Compute
+AmazonEC2Windows,Amazon EC2 Windows,Secure and resizable compute capacity to support virtually any workload,Compute
+AmazonConnectPerformanceEvaluation,Amazon Connect - Performance Evaluation,Enables businesses to review customer conversations and use conversational analytics to automate evaluation to identify agents' coaching needs,Customer Engagement
+AWSMainframeModernizationPrecisely,AWS Mainframe Modernization Precisely,Augmentation toolchain within AWS Mainframe Modernization service,Compute
+EPIC49ProductCreationTestChangedName,EPIC 49 Product Creation Test - Changed Name,I just changed the description on this product it should update,Compute

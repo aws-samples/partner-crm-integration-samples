@@ -1,0 +1,21 @@
+{
+    "success": "NONE",
+    "spmsId": "spmsId",
+    "isApiError": false,
+    "inboundApiResults":
+    [
+        {
+            "warnings": null,
+            "partnerCrmUniqueIdentifier": "testLeadIdentifier",
+            "isSuccess": false,
+            "errors":
+            [
+                "No new update identified for this record"
+            ],
+            "apnCrmUniqueIdentifier": "L1234567"
+        }
+    ],
+    "fileName": "lead-inbound/test-2023-05-28T01:21:20.json",
+    "fileApnProcessedDT": "2023-05-28T15:21:22.331Z",
+    "apiErrors": null
+}

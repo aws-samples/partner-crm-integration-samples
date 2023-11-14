@@ -1,0 +1,26 @@
+{
+    "version": "1.0",
+    "spmsId": "spmsId",
+    "Leads":
+    [
+        {
+            "projectDescription": "This is a test description for leads that partners can send on lead update",
+            "industry": "Government",
+            "segmentCompanySize": "10000+",
+            "useCaseWorkLoad": "Big Data;IOT",
+            "status": "Open",
+            "leadStatusReason": "Discussion with customer",
+            "phone": "1234567890",
+            "lastName": "LastName",
+            "firstName": "FirstName",
+            "email": "test@test.com",
+            "streetAddress": null,
+            "country": "United States",
+            "city": "Seattle",
+            "postalCode": "98201",
+            "website": "www.test.com",
+            "partnerCrmLeadId": "testLeadIdentifier",
+            "apnCrmUniqueIdentifier": "L1234567"
+        }
+    ]
+}

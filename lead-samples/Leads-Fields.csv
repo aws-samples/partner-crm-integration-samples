@@ -1,0 +1,34 @@
+﻿Field,Current Help Text,Mandatory fIelds/Validations,Read/Update,Data Type,Format/Length,Example,Inbound/Outbound
+status,Field indicating the status of the lead based on lifecycle (E.g. Open or Qualified or Closed),Mandatory. Accepts only standard values,Update,Picklist. Standard values,,,Inbound and Outbound
+currentLeadStage,Accepted/Rejected option for partners to accept or reject an opportunity shared by AWS. PII information on the opportunity is only available once partner accept the lead,Mandatory. Accepts only standard values,Update,Picklist. Standard values,,,Inbound and Outbound
+partnerCrmLeadId,Unique identifier of the lead in the Partner's CRM,Mandatory ,Update,Text,18,,Inbound and Outbound
+apnCrmUniqueIdentifier,Unique identifier of the lead in AWS APN system,Mandatory,Read Only,Text,18,,Inbound and Outbound
+Campaign Name,AWS Campaign name that is associated with the lead generation,Mandatory ,Read Only,Text,255,,Outbound Only
+firstName,First name of the end customer on the lead,Recommended,Update,Text,40,,Inbound Only
+lastName,Last name of the end customer on the lead,Recommended,Update,Text,80,,Inbound Only
+fullName,Full name of the end customer on the lead,Visible only after Partner Accepts the lead,Read Only,Text,120,,Outbound Only
+email,Email of the end customer on the lead,Recommended. Visible only after Partner Accepts the lead,Update,Email,,,Inbound and Outbound
+website,Website of the end customer on the lead,,Update,URL,255,,Inbound and Outbound
+useCaseWorkload,"End customer use case that the lead is solving for (E.g. Migration, Business applications)",,Update,Picklist. Standard values,,,Inbound and Outbound
+title,Title of the end customer on the lead,,Update,Text,128,,Inbound and Outbound
+streetAddress,Address of the end customer on the lead,,Update,Text,255,,Inbound and Outbound
+state,State (part of the address) of the end customer on the lead,,Update,Picklist. Standard values,,,Inbound and Outbound
+segmentCompanySize,Company Size of the end customer on the lead,,Update,Text,255,,Inbound and Outbound
+projectDescription,Descriptive field articulating the customer need on the lead,,Update,Long Text Area,32000,,Inbound and Outbound
+postalCode,Postal Code (part of the address) of the end customer on the lead,,Update,Text,20,,Inbound and Outbound
+phone,Phone number of the end customer on the lead,,Update,Phone,,,Inbound and Outbound
+levelofAWSUsage,End customer maturity on AWS,,Read Only,Text,255,,Outbound Only
+leadStatusReason,"Please provide details regarding your engagement and next steps with the lead. Do not disclose any information that is confidential, sensitive or that would be considered personal information of an individual.",,Update,Text,255,,Inbound and Outbound
+leadSource,Lead source as maintained by AWS,,Read Only,Text,255,,Outbound Only
+leadOwnerName,Name of the owner of the lead in the Partner organization.  This needs to be a Partner Central user,,Update,Text,120,,Outbound Only
+leadOwnerEmail,Email of the owner of the lead in the Partner organization.  This needs to be a Partner Central user,,Update,Email,,,Inbound and Outbound
+leadAge,Age in days since the lead was created,,Read Only,Number,10,,Outbound Only
+lastModifiedDate,Date-Time when the lead was last modified,,Read Only,DATE,YYYY-MM-DDTHH:MI:SS.000Z, 2020-01-17T20:03:10.000Z,Outbound Only
+lastModifiedBy,Name of the person/entity that modified the lead,,Read Only,Text,255,,Outbound Only
+industry,Industry of the end customer on the lead,,Update,Picklist. Standard values,,,Inbound and Outbound
+createdDate,Date-Time the lead was created,,Read Only,DATE,YYYY-MM-DDTHH:MI:SS.000Z, 2020-01-17T20:03:10.000Z,Outbound Only
+createdBy,Name of the person/entity that created the lead,,Read Only,Text,255,,Outbound Only
+country,Country (part of the address) of the end customer on the lead,,Update,Picklist. Standard values,,,Inbound and Outbound
+Company,Name of the end customer company name on the lead,Visible only after Partner Accepts the lead,Read Only,Text,255,,Outbound Only
+city,City (part of the address) of the end customer on the lead,,Update,Text,40,,Inbound and Outbound
+CampaignMemberStatus,Level of engagement on the lead ,,Read Only,Text,40,,Outbound Only
