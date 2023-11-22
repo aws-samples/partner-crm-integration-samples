@@ -21,6 +21,7 @@ This folder includes samples related to opportunities, such as standard value se
 - `Sample AWSProductsAndSolutions.xlsx`: An Excel spreadsheet listing sample AWS products and solutions.
 - `SamplePartnerSolutions.csv`: A CSV file listing sample partner solutions.
 - `SampleAWSProducts.csv`: A CSV file listing sample AWS products.
+- `Opportunity - Testing Scenarios.xlsx`: An Excel spreadsheet detailing the scenarios for testing the opportunity sharing.
 
 ### lead-samples
 
@@ -34,6 +35,7 @@ This folder contains samples related to leads, which include standard value sets
 - `Lead-Results-Success-Sample.json`: A JSON sample showing the results of a successful lead sync.
 - `Lead-Update-Inbound-Sample.json`: A JSON sample for updating a lead in the CRM.
 - `Leads-Fields.csv`: Field details for leads in CSV format.
+- `Leads - Testing Scenarios.xlsx`: An Excel spreadsheet detailing the scenarios for testing the lead sharing.
 
 ### code-snippets
 
