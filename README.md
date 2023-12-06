@@ -22,6 +22,7 @@ This folder includes samples related to opportunities, such as standard value se
 - `SamplePartnerSolutions.csv`: A CSV file listing sample partner solutions.
 - `SampleAWSProducts.csv`: A CSV file listing sample AWS products.
 - `Opportunity - Testing Scenarios.xlsx`: An Excel spreadsheet detailing the scenarios for testing the opportunity sharing.
+- `Opportunity-FieldsAndStandardValues-DiffWithPrevVersion-V14.3`: An excel spreadsheet that has both, the list of fields and the standard values along with the indications of what has changed from the previous verison. This is ideal for partners who are moving from a previous version to a new version.
 
 ### lead-samples
 
