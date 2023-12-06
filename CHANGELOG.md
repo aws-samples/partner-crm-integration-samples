@@ -2,6 +2,12 @@
 
 All notable changes to the AWS Partner CRM Integration Samples project will be documented in this file.
 
+## [14.3] - 2023-12-06
+- Added Opportunity-FieldsAndStandardValues-DiffWithPrevVersion-V14.3 to help partners get the diff with previous versions. 
+
+## [14.2] - 2023-12-04
+- Added Resource folder with AWS Products.json
+
 ## [14] - 2023-11-13
 As part of the [Enhanced co-sell experience for AWS Partners](https://aws.amazon.com/new/about-aws/whats-new/2023/11/enhanced-co-sell-experience-aws-partners/), released the development kit for AWS Partner CRM Integration on Github.
 
@@ -45,3 +51,5 @@ As part of the [Enhanced co-sell experience for AWS Partners](https://aws.amazon
 ### Security
 
 [v14]: https://github.com/aws-samples/aws-partner-crm-integration-samples/releases/tag/v14
+[v14.2]: https://github.com/aws-samples/aws-partner-crm-integration-samples/releases/tag/v14.2
+[v14.3]: https://github.com/aws-samples/aws-partner-crm-integration-samples/releases/tag/v14.3
