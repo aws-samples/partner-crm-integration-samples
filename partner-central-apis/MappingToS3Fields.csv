@@ -1,0 +1,114 @@
+﻿Field Name - APN CRM JSON Name,Field Name - ACE Pipeline Manager2,Field Name - AWS Partner Selling APIs
+primaryContactEmail,Partner Sales Contact Email,"
+PartnerOpportunityContact.PartnerAccountManager.Email"
+primaryContactFirstName,Partner Sales Contact First Name,"
+PartnerOpportunityContact.PartnerAccountManager.FirstName"
+primaryContactLastName,Partner Sales Contact Last Name,"
+PartnerOpportunityContact.PartnerAccountManager.LastName"
+primaryContactPhone,Partner Sales Contact Primary Phone,"
+PartnerOpportunityContact.PartnerAccountManager.Phone"
+primaryContactTitle,Partner Contact Title,"
+PartnerOpportunityContact.PartnerAccountManager.Title"
+doesOppBelongToNatSec,Does this opportunity contain classified National Security information?,AccessControls.NationalSecurity
+opportunityOwnerEmail,Opportunity Owner Email,AccessControls.Owner.Email
+opportunityOwnerName,Opportunity Owner Name,"AccessControls.Owner.FirstName
+AccessControls.Owner.LastName"
+aWSAccountOwnerEmail,AWS Account Manager Email,AWSOpportunityTeam.AWSAccountOwner.Email
+aWSAccountOwnerName,AWS Account Manager Name,"AWSOpportunityTeam.AWSAccountOwner.FirstName
+AWSOpportunityTeam.AWSAccountOwner.LastName"
+aWSSalesRepEmail,AWS Sales Rep Email,AWSOpportunityTeam.AWSSalesRep.Email
+aWSSalesRepName,AWS Sales Rep Name,"AWSOpportunityTeam.AWSSalesRep.FirstName
+AWSOpportunityTeam.AWSSalesRep.LastName"
+aWSISVSuccessManagerEmail,AWS ISV Success Manager Email,AWSOpportunityTeam.ISVSM.Email
+aWSISVSuccessManagerName,AWS ISV Success Manager Name,"AWSOpportunityTeam.ISVSM.FirstName
+AWSOpportunityTeam.ISVSM.LastName"
+partnerDeveloperManagerEmail,Partner Developer Manager Email,AWSOpportunityTeam.PDM.Email
+partnerDeveloperManager,Partner Developer Manager,"AWSOpportunityTeam.PDM.FirstName
+AWSOpportunityTeam.PDM.LastName"
+aWSPartnerSuccessManagerName,AWS Partner Success Manager Email,AWSOpportunityTeam.PSM.Email
+aWSPartnerSuccessManagerEmail,AWS Partner Success Manager Name,"AWSOpportunityTeam.PSM.FirstName
+AWSOpportunityTeam.PSM.LastName"
+wWPSPDMEmail,WWPS PDM Email,AWSOpportunityTeam.WWPSPDM.Email
+wWPSPDM,WWPS PDM,"AWSOpportunityTeam.WWPSPDM.FirstName
+AWSOpportunityTeam.WWPSPDM.LastName"
+aWSClosedLostReason,AWS Closed Lost Reason,AWSSalesLifeCycle.ClosedLostReason
+aWSStage,AWS Stage,AWSSalesLifeCycle.Stage
+aWSCloseDate,AWS Close Date,AWSSalesLifeCycle.TargetCloseDate
+createdDate,#N/A,CreatedDate
+city,City,Customer.Account.Address.City
+country,Country,Customer.Account.Address.Country
+postalCode,Postal Code,Customer.Account.Address.PostalCode
+state,State,Customer.Account.Address.StateOrRegion
+streetAddress,Address,Customer.Account.Address.StreetAddress
+awsAccountId,Customer AWS Account ID,Customer.Account.AWSAccountId
+customerCompanyName,Customer Company Name,Customer.Account.CompanyName
+customerDuns,Customer Data Universal Number System (DUNS),Customer.Account.Duns
+industry,Industry Vertical,Customer.Account.Industry
+industryOther,Other - Industry Vertical,Customer.Account.OtherIndustry
+customerWebsite,Customer Website,Customer.Account.WebsiteUrl
+customerEmail,Customer Email,Customer.Contact.Email
+customerFirstName,Customer First Name,Customer.Contact.FirstName
+customerLastName,Customer Last Name,Customer.Contact.LastName
+customerPhone,Customer Phone,Customer.Contact.Phone
+customerTitle,Customer Title,Customer.Contact.Title
+apnCrmUniqueIdentifier,Opportunity ID,Identifier
+lastModifiedDate,#N/A,LastModifiedDate
+status,Status,LifeCycle.ApprovalStatus
+closedLostReason,Closed Reason,LifeCycle.ClosedLostReason
+recommendedNextBestActions,AWS Recommended Action,LifeCycle.NextBestActions
+nextStep,Next Steps,LifeCycle.NextSteps
+nextStepHistory,Next Steps Log,LifeCycle.NextStepsHistory
+engagementScore,AWS Marketplace Engagement Score,LifeCycle.PropensityToBuyScore
+apnReviewerComments,,LifeCycle.ReviewComments
+stage,Stage,LifeCycle.Stage
+targetCloseDate,Target Close Date,LifeCycle.TargetCloseDate
+isMarketingDevelopmentFunded,Was Marketing Development Funds Used?,Marketing.AWSFundingUsed
+awsSFCampaignName,Marketing Campaign Code,Marketing.CampaignName
+marketingActivityChannel,Marketing Activity Channel,Marketing.Channels
+IsOppFromMarketingActivity,Is Opportunity from Marketing Activity?,Marketing.Source
+marketingActivityUsecase,Marketing Activity Use Case,Marketing.UseCases
+opportunityType,Opportunity Type,OpportunityType
+opportunityOwnership,Opportunity Ownership,Origin
+acceptBy,,PartnerAcceptance.AcceptBy
+partnerAcceptanceStatus,Partner Acceptance Status,PartnerAcceptance.Status
+apnCrmLeadUniqueIdentifier,#N/A,PartnerOpportunityIdentifier
+partnerCrmUniqueIdentifier,Partner CRM Unique Identifier,PartnerOpportunityIdentifier
+partnerPrimaryNeedFromAws,Partner primary need from AWS,PrimaryNeedsFromAWS
+cosellConvertReason ,,PrimaryNeedsFromAWSChangeReason
+additionalComments,Additional Comments,Project.AdditionalComments
+campaignName,APN Programs,Project.APNPrograms
+competitiveTracking,Competitive Tracking,Project.CompetitorName
+projectDescription,Customer Business Problem,Project.CustomerBusinessProblem
+useCase,Use Case,Project.CustomerUseCase
+deliveryModel,Delivery Model,Project.DeliveryModels
+expectedMonthlyAwsRevenue,Estimated AWS Monthly Recurring Revenue,"Project.ExpectedMonthlyAWSRevenue.Amount
+Project.ExpectedMonthlyAWSRevenue.Currency"
+competitiveTrackingOther,Competitive Tracking Other,Project.OtherCompetitorNames
+otherSolutionOffered,Other Solution Offered,Project.OtherSolutionDescription
+parentOppId,Parent Opportunity ID,Project.RelatedOpportunityIdentifier
+salesActivities,Sales Activities,Project.SalesActivities
+partnerProjectTitle,Partner Project Title,Project.Title
+rejectionReason,Rejection reason,LifeCycle.RejectionReason
+offers,Offer ID,RelatedEntityIdentifiers.AWSMarketplaceOffers
+awsProducts,AWS products,RelatedEntityIdentifiers.AWSProducts
+solutionOffered,Solution offered,RelatedEntityIdentifiers.Solutions
+procurementType,Procurement Type,SoftwareRevenue.DeliveryModel
+contractEndDate,Contract effective date,SoftwareRevenue.EffectiveDate
+contractStartDate,Contract expiration date,SoftwareRevenue.ExpirationDate
+customerSoftwareValue,Customer Software Value,SoftwareRevenue.Value.Amount
+customerSoftwareValueCurrency,Currency,SoftwareRevenue.Value.Currency
+awsFieldEngagement,Did AWS Account Rep support you on this?,#N/A
+contractVehicle,Contract Vehicle,#N/A
+partnerPrimaryNeedFromAwsOther,"
+If Other, please describe your needs",#N/A
+isThisAPublicReference,Is this a public reference?,#N/A
+isThisForMarketplace,Is this for Marketplace,#N/A
+leadSource,,#N/A
+isNetNewBusinessForCompany,Is This Net New Engagement With Customer,#N/A
+publicReferenceTitle,Public Reference Title,#N/A
+publicReferenceUrl,Public Reference URL,#N/A
+rfxSolicitationNumber,RFx/Public Tender Solicitation No.,#N/A
+subUseCase,Customer Sub Use Case,#N/A
+createdBy,#N/A,#N/A
+lastModifiedBy,#N/A,#N/A
+backwardsCompatibilityChanges,#N/A,#N/A
