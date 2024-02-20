@@ -2,8 +2,17 @@
 
 All notable changes to the AWS Partner CRM Integration Samples project will be documented in this file.
 
+## [14.3] - 2024-02-15
+- Updated changelog with historical changes
+- 2/15 Added two files - CSV and XLSX formats of the file showing the mapping between AWS Partner Central API fields to S3 based integration fields.
+- 1/28 Fixed the issue in Finalized Deployment "Needs" to "Need"
+- 1/19 Inserted a column that shows whether the values are mandatory, conditionally mandatory or optional on outbound payload. Insert another column that indicates the conditions when a field is conditionally mandatory on outbound payload.
+- 1/19 Standard Values: Updated the change in the Migration acceleration program value
+Fields: Refined the wording for the description of solutionOffer
+- 1/9 Added file For the list of countries in this file, AWS does not store Postal Code.
+
 ## [14.3] - 2023-12-06
-- Added Opportunity-FieldsAndStandardValues-DiffWithPrevVersion-V14.3 to help partners get the diff with previous versions. 
+- Added Opportunity-FieldsAndStandardValues-DiffWithPrevVersion-V14.3 to help partners get the diff with previous versions.
 
 ## [14.2] - 2023-12-04
 - Added Resource folder with AWS Products.json
