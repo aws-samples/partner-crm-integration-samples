@@ -2,6 +2,12 @@
 
 All notable changes to the AWS Partner CRM Integration Samples project will be documented in this file.
 
+## [14.3] - 2024-03-07
+- Five State values were missing on the CSV format of the field definitions but were available in the Excel. Corrected the CSV to add Palau, American Samoa, Northern Mariance Islands, Marshall Islands
+- Removed the Opportunity-Filed.xlsx and Opportunity-StandardValues.xlsx which were same as Opportunity-Filed.csv and Opportunity-StandardValues.csv. This is to reduce the discrepancies if any. Same with Lead-Fields.xlsx and Lead-StandardValues.xlsx. Going forward we will maintain the CSV files only.
+- Updated the Readme and Changelogs
+
+
 ## [14.3] - 2024-02-15
 - Updated changelog with historical changes
 - 2/15 Added two files - CSV and XLSX formats of the file showing the mapping between AWS Partner Central API fields to S3 based integration fields.
