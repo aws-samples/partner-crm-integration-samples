@@ -11,16 +11,11 @@ The repository is organized into three main folders:
 This folder includes samples related to opportunities, such as standard value sets, field mappings, and sample JSON payloads for creating opportunities and processing outbound results:
 
 - `Opportunity - StandardValues.csv`: Standard values for opportunity fields in CSV format.
-- `Opportunity - StandardValues.xlsx`: Standard values for opportunity fields in Excel format.
 - `Opportunity-Create-Inbound-Sample.json`: A JSON sample for creating an opportunity in the CRM.
 - `Opportunity-Fields.csv`: Field details for opportunities in CSV format.
-- `Opportunity-Fields.xlsx`: Field details for opportunities in Excel format.
 - `Opportunity-Outbound-Sample.json`: A JSON sample representing an opportunity sent from the CRM.
 - `Opportunity-Results_With-Errors-Sample.json`: A JSON sample showing the results of an opportunity sync with errors.
 - `Opportunity-Results-Success-Sample.json`: A JSON sample showing the results of a successful opportunity sync.
-- `Sample AWSProductsAndSolutions.xlsx`: An Excel spreadsheet listing sample AWS products and solutions.
-- `SamplePartnerSolutions.csv`: A CSV file listing sample partner solutions.
-- `SampleAWSProducts.csv`: A CSV file listing sample AWS products.
 - `Opportunity - Testing Scenarios.xlsx`: An Excel spreadsheet detailing the scenarios for testing the opportunity sharing.
 - `Opportunity-FieldsAndStandardValues-DiffWithPrevVersion-V14.3`: An excel spreadsheet that has both, the list of fields and the standard values along with the indications of what has changed from the previous verison. This is ideal for partners who are moving from a previous version to a new version.
 
@@ -28,9 +23,7 @@ This folder includes samples related to opportunities, such as standard value se
 
 This folder contains samples related to leads, which include standard value sets, field mappings, and sample JSON payloads for managing lead data:
 
-- `Leads-Fields.xlsx`: An Excel spreadsheet detailing the lead fields for mapping purposes.
 - `Lead - StandardValues.csv`: Standard values for lead fields in CSV format.
-- `Lead - StandardValues.xlsx`: Standard values for lead fields in Excel format.
 - `Lead-Outbound-Sample.json`: A JSON sample representing a lead sent from the CRM.
 - `Lead-Results_With-Errors-Sample.json`: A JSON sample showing the results of a lead sync with errors.
 - `Lead-Results-Success-Sample.json`: A JSON sample showing the results of a successful lead sync.
@@ -49,6 +42,12 @@ This folder contains various code snippets for interacting with AWS services suc
 - `s3_ace_partner_test.cls`: An Apex code snippet for testing Amazon S3 integration with ACE partners.
 - `S3_Authentication.cls`: An Apex snippet for authenticating with Amazon S3.
 - `Sample_AceOutboundBatch.cls`: An Apex code snippet for handling outbound batch processing with ACE.
+
+### resources
+- `aws_products.json`: JSON format of the Products offered by AWS. Use the values in this file to use in the opportunity
+- `SampleAWSProducts.csv`: A CSV file listing sample AWS products.
+- `Sample AWSProductsAndSolutions.xlsx`: An Excel spreadsheet listing sample AWS products and solutions.
+- `SamplePartnerSolutions.csv`: A CSV file listing sample partner solutions.
 
 ## Getting Started
 
