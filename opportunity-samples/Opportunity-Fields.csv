@@ -29,7 +29,7 @@ awsSFCampaignName,Marketing Campaign Code,Text,Marketing.CampaignName,,Accepts o
 awsProducts,AWS products,Array,RelatedEntityIdentifiers.AWSProducts,,"Takes multiple values in the format ""awsProducts"": [""productCode1"", ""productCode2""]",Enables the association of specific AWS products with the opportunity. Partners can indicate which AWS products are relevant to the opportunity's solution and align with the customer's needs.,"New Field that takes multiple values separated by comma.
 For example, ""awsProducts"" : [""Lambda"", ""AWSManagedServices"" , ""WorkLink""]
 
-For obtaining the complete list of AWS Products, visit Partner Central > Sell > Opportunity Management. Click on Bulk Actions > Import Opportunities > Start Import. Link: https://partnercentral-uat.awspartner.aws.dev/OpportunityBulkImportPage
+For obtaining the complete list of AWS Products, visit Partner Central > Sell > Opportunity Management. Click on Bulk Actions > Import Opportunities > Start Import. Link: https://partnercentral.awspartner.com/OpportunityBulkImportPage
 
 Under Products and Offerings, Click on the link ""Your Products and Offerings can be viewed here. ",Optional,"
 ",Optional,"
