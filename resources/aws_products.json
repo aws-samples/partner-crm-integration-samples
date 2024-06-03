@@ -54,10 +54,10 @@
     "Description": "Continuously assess controls for risk and compliance"
   },
   {
-    "Identifier": "AWSBackup",
-    "Name": "AWS Backup",
-    "Family": "Storage",
-    "Description": "Centrally manage and automate backups across AWS services"
+    "Identifier": "AWSB2BDataInterchange",
+    "Name": "AWS B2B Data Interchange",
+    "Family": "Application Integration",
+    "Description": "Service for automating the transformation of Electronic Data Interchange (EDI) documents into common data representations"
   },
   {
     "Identifier": "AWSBatch",
@@ -94,6 +94,18 @@
     "Name": "AWS Clean Rooms",
     "Family": "Analytics",
     "Description": "Create clean rooms in minutes. Collaborate without sharing raw data."
+  },
+  {
+    "Identifier": "AWSCleanRoomsDifferentialPrivacy",
+    "Name": "AWS Clean Rooms Differential Privacy",
+    "Family": "Analytics",
+    "Description": "Protect the privacy of your users with mathematically-backed controls in a few clicks"
+  },
+  {
+    "Identifier": "AWSCleanRoomsML",
+    "Name": "AWS Clean Rooms ML",
+    "Family": "Analytics",
+    "Description": "Apply machine learning with your partners without sharing underlying data"
   },
   {
     "Identifier": "AWSClientVPN",
@@ -148,12 +160,6 @@
     "Name": "AWS CloudTrail",
     "Family": "Management & Governance",
     "Description": "Track User Activity and API Usage"
-  },
-  {
-    "Identifier": "AWSCloudWAN",
-    "Name": "AWS Cloud WAN",
-    "Family": "Networking & Content Delivery",
-    "Description": null
   },
   {
     "Identifier": "AWSCodeArtifact",
@@ -226,6 +232,12 @@
     "Name": "AWS Database Migration Service",
     "Family": "Database",
     "Description": "Migrate your databases to AWS with minimal downtime"
+  },
+  {
+    "Identifier": "AWSDeadlineCloud",
+    "Name": "AWS Deadline Cloud",
+    "Family": "Media Services",
+    "Description": "Fully managed service that simplifies render management for teams creating computer-generated 2D/3D graphics and visual effects"
   },
   {
     "Identifier": "AWSDeepComposer",
@@ -366,8 +378,8 @@
     "Description": "Configurable, easy-to-use entity resolution workflows"
   },
   {
-    "Identifier": "AWSFaultInjectionSimulator",
-    "Name": "AWS Fault Injection Simulator",
+    "Identifier": "AWSFaultInjectionServiceFIS",
+    "Name": "AWS Fault Injection Service (FIS)",
     "Family": "Developer Tools",
     "Description": "Improve resiliency and performance with controlled experiments"
   },
@@ -412,6 +424,18 @@
     "Name": "AWS HealthImaging",
     "Family": "Machine Learning",
     "Description": "Store, access, and analyze medical images in the cloud at petabyte scale"
+  },
+  {
+    "Identifier": "AWSHealthScribe",
+    "Name": "AWS HealthScribe",
+    "Family": "Machine Learning",
+    "Description": "Automatically generate clinical notes from patient-clinician conversations"
+  },
+  {
+    "Identifier": "AWSIAMAccessAnalyzer",
+    "Name": "AWS IAM Access Analyzer",
+    "Family": "Security, Identity & Compliance",
+    "Description": "IAM Access Analyzer guides you towards least-privilege permissions"
   },
   {
     "Identifier": "AWSIncidentDetectionandResponse",
@@ -522,16 +546,40 @@
     "Description": "Refactor toolchain within AWS Mainframe Modernization service"
   },
   {
+    "Identifier": "AWSMainframeModernizationFileTransferBMC",
+    "Name": "AWS Mainframe Modernization File Transfer BMC",
+    "Family": "Compute",
+    "Description": "File transfer toolchain within AWS Mainframe Modernization service powered by BMC"
+  },
+  {
     "Identifier": "AWSMainframeModernizationMicroFocus",
     "Name": "AWS Mainframe Modernization Micro Focus",
     "Family": "Compute",
     "Description": "Replatform toolchain within AWS Mainframe Modernization service"
   },
   {
-    "Identifier": "AWSMainframeModernizationPrecisely",
-    "Name": "AWS Mainframe Modernization Precisely",
+    "Identifier": "AWSMainframeModernizationPreciselyforIBMi",
+    "Name": "AWS Mainframe Modernization Precisely for IBM i",
     "Family": "Compute",
-    "Description": "Augmentation toolchain within AWS Mainframe Modernization service"
+    "Description": "Data replication toolchain for IBMi within AWS Mainframe Modernization service"
+  },
+  {
+    "Identifier": "AWSMainframeModernizationPreciselyforIBMzOS",
+    "Name": "AWS Mainframe Modernization Precisely for IBM z/OS",
+    "Family": "Compute",
+    "Description": "Data replication toolchain for IBMz within AWS Mainframe Modernization service"
+  },
+  {
+    "Identifier": "AWSMainframeModernizationReplatformNTTDATAUniKix",
+    "Name": "AWS Mainframe Modernization Replatform NTT DATA UniKix",
+    "Family": "Compute",
+    "Description": "Replatform toolchain capability with AWS Mainframe Modernization service powered by NTT Data UniKix"
+  },
+  {
+    "Identifier": "AWSMainframeModernizationSPARCStromasys",
+    "Name": "AWS Mainframe Modernization SPARC Stromasys",
+    "Family": "Compute",
+    "Description": "Virtualization for SPARC toolchain within AWS Mainframe Modernization service powered by Stromasys"
   },
   {
     "Identifier": "AWSManagedServicesAccelerate",
@@ -804,6 +852,30 @@
     "Description": "Use ML algorithms built with user, macroeconomic data and retailer history to generate forecasts for capacity planning"
   },
   {
+    "Identifier": "AWSSupplyChainInsights",
+    "Name": "AWS Supply Chain - Insights",
+    "Family": "Application Integration",
+    "Description": "Extract inventory, supply, and demand related data from existing systems into a single data model"
+  },
+  {
+    "Identifier": "AWSSupplyChainNtierVisibility",
+    "Name": "AWS Supply Chain - N-tier Visibility",
+    "Family": "Business Applications",
+    "Description": "Extends visibility and insights beyond your organization to your external trading partners"
+  },
+  {
+    "Identifier": "AWSSupplyChainSupplyPlanning",
+    "Name": "AWS Supply Chain - Supply Planning",
+    "Family": "Business Applications",
+    "Description": "Forecasts and plans purchases of raw materials, components, and finished goods"
+  },
+  {
+    "Identifier": "AWSSupplyChainSustainability",
+    "Name": "AWS Supply Chain - Sustainability",
+    "Family": "Business Applications",
+    "Description": "Provides a secure and efficient way for sustainability professionals to obtain the documents and datasets from supplier network"
+  },
+  {
     "Identifier": "AWSSystemsManager",
     "Name": "AWS Systems Manager",
     "Family": "Management & Governance",
@@ -862,6 +934,12 @@
     "Name": "AWS X-Ray",
     "Family": "Developer Tools",
     "Description": "Analyze and debug production, distributed applications"
+  },
+  {
+    "Identifier": "AWSrePostPrivate",
+    "Name": "AWS re:Post Private",
+    "Family": "Support",
+    "Description": "Knowledge service to accelerate cloud adoption and increase developer productivity"
   },
   {
     "Identifier": "AlexaforBusiness",
@@ -1002,12 +1080,6 @@
     "Description": "Scans application code and identifies vulnerabilities"
   },
   {
-    "Identifier": "AmazonCodeWhisperer",
-    "Name": "Amazon CodeWhisperer",
-    "Family": "Developer Tools",
-    "Description": "Build applications faster with the ML-powered coding companion"
-  },
-  {
     "Identifier": "AmazonCognito",
     "Name": "Amazon Cognito",
     "Family": "Security, Identity & Compliance",
@@ -1074,6 +1146,12 @@
     "Description": "Enables businesses to review customer conversations and use conversational analytics to automate evaluation to identify agents' coaching needs"
   },
   {
+    "Identifier": "AmazonConnectSMS",
+    "Name": "Amazon Connect - SMS",
+    "Family": "Customer Engagement",
+    "Description": "Amazon Connect two-way SMS capabilities, making it easy to resolve customer issues via text messaging"
+  },
+  {
     "Identifier": "AmazonConnectScreenRecording",
     "Name": "Amazon Connect - Screen Recording",
     "Family": "Customer Engagement",
@@ -1102,12 +1180,6 @@
     "Name": "Amazon Connect - Voice ID",
     "Family": "Customer Engagement",
     "Description": "Real-time caller authentication and fraud risk detection using ML-powered voice analysis"
-  },
-  {
-    "Identifier": "AmazonConnectWisdom",
-    "Name": "Amazon Connect - Wisdom",
-    "Family": "Customer Engagement",
-    "Description": "Deliver agents the information they need to solve issues in real-time"
   },
   {
     "Identifier": "AmazonDataZone",
@@ -1156,6 +1228,12 @@
     "Name": "Amazon EC2 - C5n",
     "Family": "Compute",
     "Description": "Designed for compute-intensive workloads with cost-effective high performance"
+  },
+  {
+    "Identifier": "AmazonEC2CapacityBlocksforML",
+    "Name": "Amazon EC2 Capacity Blocks for ML",
+    "Family": "Compute",
+    "Description": "Reserve GPU instances in Amazon EC2 UltraClusters to run your ML workloads"
   },
   {
     "Identifier": "AmazonEC2DL1",
@@ -1650,6 +1728,18 @@
     "Description": "Turn Text into Lifelike Speech"
   },
   {
+    "Identifier": "AmazonQDeveloper",
+    "Name": "Amazon Q Developer",
+    "Family": "Developer Tools",
+    "Description": "A GenAI-powered assistant to help you build, deploy, operate, and maintain applications on AWS"
+  },
+  {
+    "Identifier": "AmazonQinConnect",
+    "Name": "Amazon Q in Connect",
+    "Family": "Customer Engagement",
+    "Description": "Deliver agents the responses, actions, and information they need to solve issues in real-time"
+  },
+  {
     "Identifier": "AmazonQuantumLedgerDatabaseQLDB",
     "Name": "Amazon Quantum Ledger Database (QLDB)",
     "Family": "Blockchain",
@@ -1708,6 +1798,12 @@
     "Name": "Amazon RDS Proxy",
     "Family": "Database",
     "Description": "Make your applications more scalable, resilient, and secure"
+  },
+  {
+    "Identifier": "AmazonRDSforDb2",
+    "Name": "Amazon RDS for Db2",
+    "Family": "Database",
+    "Description": "Set up, operate, and scale a Db2 database in the cloud with just a few clicks"
   },
   {
     "Identifier": "AmazonRDSforMariaDB",
@@ -1792,6 +1888,12 @@
     "Name": "Amazon S3",
     "Family": "Storage",
     "Description": "Object storage built to store and retrieve any amount of data from anywhere"
+  },
+  {
+    "Identifier": "AmazonS3ExpressOneZone",
+    "Name": "Amazon S3 Express One Zone",
+    "Family": "Storage",
+    "Description": "Fastest cloud object storage for latency sensitive, performance-critical applications"
   },
   {
     "Identifier": "AmazonS3Glacier",
@@ -1926,8 +2028,8 @@
     "Description": "Easily extract text and data from virtually any document"
   },
   {
-    "Identifier": "AmazonTimestream",
-    "Name": "Amazon Timestream",
+    "Identifier": "AmazonTimestreamforLiveAnalytics",
+    "Name": "Amazon Timestream for LiveAnalytics",
     "Family": "Database",
     "Description": "Amazon Timestream is a fast, scalable, and serverless time series database for IoT and operational applications."
   },
@@ -2176,6 +2278,12 @@
     "Name": "Snowcone - Edge Compute",
     "Family": "Storage",
     "Description": "Snowcone is a small, rugged edge compute and data storage product"
+  },
+  {
+    "Identifier": "TimestreamforInfluxDB",
+    "Name": "Timestream for InfluxDB",
+    "Family": "Database",
+    "Description": "Makes it easy to run InfluxDB databases on AWS for near real-time applications using open source APIs"
   },
   {
     "Identifier": "VMWareManagedCloudonAWS",
