@@ -38,10 +38,12 @@ This folder contains various code snippets for interacting with AWS services suc
 - `SFDC apex s3 sample.txt`: A Salesforce Apex code sample for integrating with Amazon S3.
 - `ace_read_s3.py`: A Python script for reading files from Amazon S3.
 - `Apex_get_files_from_s3_ace_partner_test.cls`: An Apex code snippet for retrieving files from an S3 bucket for ACE partners.
+- `IAMAnywhere_Setup.yaml`: A Cloudformation template to help with IAM Anywhere set up for ACE CRM Integration via AWS Partner CRM Connector.
 - `Apex_Sample_REST_API_Code.cls`: A Salesforce Apex sample for making REST API calls.
 - `s3_ace_partner_test.cls`: An Apex code snippet for testing Amazon S3 integration with ACE partners.
 - `S3_Authentication.cls`: An Apex snippet for authenticating with Amazon S3.
 - `Sample_AceOutboundBatch.cls`: An Apex code snippet for handling outbound batch processing with ACE.
+
 
 ### resources
 - `aws_products.json`: JSON format of the Products offered by AWS. Use the values in this file to use in the opportunity
