@@ -1,0 +1,193 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: This will create wekan
+Parameters:
+  aceintegrationrolename:
+    Description: Name of the iam role. Can put any alphanumeric name here.
+    Type: String
+    MinLength: 2
+    MaxLength: 32
+    Default: aceintegrationrole1
+    AllowedPattern: ^[a-zA-Z0-9-]*$
+    ConstraintDescription: Please set alphanumeric name
+  aceintegrationiamprofilename:
+    Description: Name of the IAM Anywhere Profile. Can put any alphanumeric name here.
+    Type: String
+    MinLength: 2
+    MaxLength: 32
+    Default: aceintegrationiamprofile1
+    AllowedPattern: ^[a-zA-Z0-9-]*$
+    ConstraintDescription: Please set alphanumeric name
+  CACertificateAuthorityCountry:
+    Description: Country Name of the CA CertificateAuthority.
+    Type: String
+    MinLength: 2
+    MaxLength: 3
+    Default: US
+    AllowedPattern: ^[a-zA-Z]*$
+    ConstraintDescription: Please set a valid three digit code for country
+  CACertificateAuthorityOrg:
+    Description: Organization Name of the CA CertificateAuthority. Can put any alphanumeric name here.
+    Type: String
+    MinLength: 2
+    MaxLength: 32
+    Default: Organization-1
+    AllowedPattern: ^[a-zA-Z0-9-]*$
+    ConstraintDescription: Please set alphanumeric name
+  CACertificateAuthorityOrgUnit:
+    Description: Organization Unit Name of the CA CertificateAuthority. Can put any alphanumeric name here.
+    Type: String
+    MinLength: 2
+    MaxLength: 32
+    Default: OrganizationUnit-1
+    AllowedPattern: ^[a-zA-Z0-9-]*$
+    ConstraintDescription: Please set alphanumeric name
+  CACertificateAuthorityState:
+    Description: State Name of the CA CertificateAuthority.
+    Type: String
+    MinLength: 2
+    MaxLength: 2
+    AllowedPattern: ^[a-zA-Z]*$
+    ConstraintDescription: Please set a valid two digit code for state
+  CACertificateAuthorityCommonName:
+    Description: Common Name of the CA CertificateAuthority. For e.g., sample.com
+    Type: String
+    MinLength: 2
+    MaxLength: 32
+    Default: sample.com
+    AllowedPattern: ^(?:\*\.)?[a-z0-9]+(?:[\-.][a-z0-9]+)*\.[a-z]{2,6}$
+    ConstraintDescription: Please set a valid common name
+  PrivateCertificateDomainName:
+    Description: Common Name of the CA CertificateAuthority. For e.g., sample.com
+    Type: String
+    MinLength: 2
+    MaxLength: 32
+    Default: sample.com
+    AllowedPattern: ^(?:\*\.)?[a-z0-9]+(?:[\-.][a-z0-9]+)*\.[a-z]{2,6}$
+    ConstraintDescription: Please set a valid common name
+  CACertificateAuthorityLocality:
+    Description: Locality Name of the CA CertificateAuthority. Can put any alphanumeric name here.
+    Type: String
+    MinLength: 2
+    MaxLength: 32
+    AllowedPattern: ^[a-zA-Z0-9-]*$
+    ConstraintDescription: Please set valid city name
+Outputs:
+  aceintegrationiamprofile:
+    Value: !GetAtt aceintegrationiamprofile.ProfileArn
+    Description: ACE Integration IAM anywhere ProfileArn
+  aceintegrationrole:
+    Value: !GetAtt aceintegrationrole.Arn
+    Description: ACE Integration IAM anywhere Role ARN
+  aceintegrationta:
+    Value: !GetAtt aceintegrationta.TrustAnchorArn
+    Description: ACE Integration IAM anywhere TrustAnchor ARN
+  CACertificateAuthority:
+    Value: !Ref CACertificateAuthority
+    Description: CACertificateAuthority
+  CACertificate:
+    Value: !Ref CACertificate
+    Description: CACertificate
+  Certificate:
+    Value: !Ref Certificate
+    Description: Private ceriticate created. Download the CRT and PEM files from here.
+Resources:
+  aceintegrationiamprofile:
+    Type: AWS::RolesAnywhere::Profile
+    Properties:
+      RequireInstanceProperties: false
+      RoleArns:
+        - !GetAtt aceintegrationrole.Arn
+      Enabled: true
+      DurationSeconds: 3600
+      Name: !Ref aceintegrationiamprofilename
+  CACertificateAuthority:
+    Type: AWS::ACMPCA::CertificateAuthority
+    Properties:
+      SigningAlgorithm: SHA256WITHRSA
+      Type: ROOT
+      UsageMode: GENERAL_PURPOSE
+      KeyAlgorithm: RSA_2048
+      Subject:
+        Country: !Ref CACertificateAuthorityCountry
+        Organization: !Ref CACertificateAuthorityOrg
+        OrganizationalUnit: !Ref CACertificateAuthorityOrgUnit
+        State: !Ref CACertificateAuthorityState
+        CommonName: !Ref CACertificateAuthorityCommonName
+        Locality: !Ref CACertificateAuthorityLocality
+    Metadata:
+      AWS::CloudFormation::Designer:
+        id: bef27b1d-2714-4a5a-8703-1203a3a72a83
+  CACertificate:
+    Type: AWS::ACMPCA::Certificate
+    Properties:
+      CertificateAuthorityArn: !Ref CACertificateAuthority
+      CertificateSigningRequest: !GetAtt CACertificateAuthority.CertificateSigningRequest
+      SigningAlgorithm: SHA256WITHRSA
+      TemplateArn: arn:aws:acm-pca:::template/RootCACertificate/V1
+      Validity:
+        Type: YEARS
+        Value: 10
+    Metadata:
+      AWS::CloudFormation::Designer:
+        id: c09997f6-0018-442e-92b2-5a58b34fa03b
+  CAActivation:
+    Type: AWS::ACMPCA::CertificateAuthorityActivation
+    Properties:
+      CertificateAuthorityArn: !Ref CACertificateAuthority
+      Certificate: !GetAtt CACertificate.Certificate
+      Status: ACTIVE
+    Metadata:
+      AWS::CloudFormation::Designer:
+        id: e8330c00-345e-4ae7-94ba-ce22acf6927a
+  aceintegrationta:
+    Type: AWS::RolesAnywhere::TrustAnchor
+    DependsOn: CAActivation
+    Properties:
+      Enabled: true
+      Source:
+        SourceData:
+          AcmPcaArn: !GetAtt CACertificateAuthority.Arn
+        SourceType: AWS_ACM_PCA
+      Name: aceintegrationta
+  Certificate:
+    Type: AWS::CertificateManager::Certificate
+    DependsOn: Permission
+    Properties:
+      DomainName: !Ref PrivateCertificateDomainName
+      CertificateAuthorityArn: !Ref CACertificateAuthority
+      KeyAlgorithm: RSA_2048
+  Permission:
+    Type: AWS::ACMPCA::Permission
+    DependsOn: CAActivation
+    Properties:
+      CertificateAuthorityArn: !Ref CACertificateAuthority
+      Actions:
+        - IssueCertificate
+        - GetCertificate
+        - ListPermissions
+      Principal: acm.amazonaws.com
+  aceintegrationrole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Action:
+              - sts:AssumeRole
+              - sts:TagSession
+              - sts:SetSourceIdentity
+            Principal:
+              Service: rolesanywhere.amazonaws.com
+      Path: /
+      Policies:
+        - PolicyName: teststsaccesspolicy
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Action: 
+                  - sts:GetCallerIdentity
+                Resource: '*'
+      MaxSessionDuration: 3600
+      RoleName: !Ref aceintegrationrolename
