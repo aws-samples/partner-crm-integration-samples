@@ -71,7 +71,7 @@ opportunityType,Opportunity Type,OpportunityType
 opportunityOwnership,Opportunity Ownership,Origin
 acceptBy,,PartnerAcceptance.AcceptBy
 partnerAcceptanceStatus,Partner Acceptance Status,PartnerAcceptance.Status
-apnCrmLeadUniqueIdentifier,#N/A,PartnerOpportunityIdentifier
+apnCrmLeadUniqueIdentifier,#N/A,#N/A
 partnerCrmUniqueIdentifier,Partner CRM Unique Identifier,PartnerOpportunityIdentifier
 partnerPrimaryNeedFromAws,Partner primary need from AWS,PrimaryNeedsFromAWS
 cosellConvertReason ,,PrimaryNeedsFromAWSChangeReason
