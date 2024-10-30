@@ -1,0 +1,88 @@
+{
+   "Catalog":"AWS",
+   "Customer":{
+      "Account":{
+         "Address":{
+            "City":null,
+            "CountryCode":"US",
+            "PostalCode":"9931",
+            "StateOrRegion":"New York",
+            "StreetAddress":null
+         },
+         "AwsAccountId":"909090909090",
+         "CompanyName":"TestAssignEditable1",
+         "Duns":"111100111",
+         "Industry":"Financial Services",
+         "OtherIndustry":null,
+         "WebsiteUrl":"www.TestAssignEditable1.com"
+      },
+      "Contacts":[
+         {
+            "BusinessTitle":"Executive",
+            "Email":"testnamelast09@gmail.com",
+            "FirstName":"TestContact011",
+            "LastName":"MLastName001",
+            "Phone":"+14567898765"
+         }
+      ]
+   },
+   "Identifier":"O12345678",
+   "LastModifiedDate":"2024-09-26T04:33:32Z",
+   "LifeCycle":{
+      "ClosedLostReason":null,
+      "NextSteps":"Updating the stage. This is a new Next step.",
+      "NextStepsHistory":null,
+      "ReviewComments":null,
+      "ReviewStatus":"Approved",
+      "ReviewStatusReason":null,
+      "Stage":"Technical Validation",
+      "TargetCloseDate":"2029-10-05"
+   },
+   "Marketing":{
+      "AwsFundingUsed":null,
+      "CampaignName":null,
+      "Channels":null,
+      "Source":"None",
+      "UseCases":null
+   },
+   "NationalSecurity":"No",
+   "OpportunityType":"Net New Business",
+   "PartnerOpportunityIdentifier":null,
+   "PrimaryNeedsFromAws":[
+      "Co-Sell - Architectural Validation"
+   ],
+   "Project":{
+      "AdditionalComments":null,
+      "ApnPrograms":null,
+      "CompetitorName":"Google Cloud Platform",
+      "CustomerBusinessProblem":"ProjectDescriptionBusinessNeedLengthGreaterThanFiftyCharacters",
+      "CustomerUseCase":"Security & Compliance",
+      "DeliveryModels":[
+         "SaaS or PaaS"
+      ],
+      "ExpectedCustomerSpend":[
+         {
+            "Amount":"12500",
+            "CurrencyCode":"USD",
+            "Frequency":"Monthly",
+            "TargetCompany":"AWS"
+         }
+      ],
+      "OtherCompetitorNames":null,
+      "OtherSolutionDescription":"TestSolution",
+      "RelatedOpportunityIdentifier":null,
+      "SalesActivities":[
+         "Conducted POC / Demo"
+      ],
+      "Title":"TestAssignEditable1"
+   },
+   "SoftwareRevenue":{
+      "DeliveryModel":"Pay-as-you-go",
+      "EffectiveDate":"2023-10-31",
+      "ExpirationDate":"2024-03-31",
+      "Value":{
+         "Amount":"10000.0",
+         "CurrencyCode":"USD"
+      }
+   }
+}
