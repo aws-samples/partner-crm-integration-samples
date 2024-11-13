@@ -18,12 +18,6 @@
     "Description": "AWS AppFabric connects multiple SaaS applications with no coding required for better productivity and security"
   },
   {
-    "Identifier": "AWSAppMesh",
-    "Name": "AWS App Mesh",
-    "Family": "Networking & Content Delivery",
-    "Description": "Easily monitor and control microservices"
-  },
-  {
     "Identifier": "AWSAppRunner",
     "Name": "AWS App Runner",
     "Family": "Compute",
@@ -58,6 +52,12 @@
     "Name": "AWS B2B Data Interchange",
     "Family": "Application Integration",
     "Description": "Service for automating the transformation of Electronic Data Interchange (EDI) documents into common data representations"
+  },
+  {
+    "Identifier": "AWSBackup",
+    "Name": "AWS Backup",
+    "Family": "Storage",
+    "Description": "Centrally manage and automate backups across AWS services"
   },
   {
     "Identifier": "AWSBatch",
@@ -112,12 +112,6 @@
     "Name": "AWS Client VPN",
     "Family": "Networking & Content Delivery",
     "Description": "Extend your on-premises networks to the cloud and securely access them from anywhere"
-  },
-  {
-    "Identifier": "AWSCloud9",
-    "Name": "AWS Cloud9",
-    "Family": "Developer Tools",
-    "Description": "A cloud IDE for writing, running, and debugging code"
   },
   {
     "Identifier": "AWSCloudControlAPI",
@@ -192,12 +186,6 @@
     "Description": "Automate continuous delivery pipelines for fast and reliable updates"
   },
   {
-    "Identifier": "AWSCodeStar",
-    "Name": "AWS CodeStar",
-    "Family": "Developer Tools",
-    "Description": "Quickly develop, build, and deploy applications on AWS"
-  },
-  {
     "Identifier": "AWSConfig",
     "Name": "AWS Config",
     "Family": "Management & Governance",
@@ -214,6 +202,12 @@
     "Name": "AWS Control Tower",
     "Family": "Management & Governance",
     "Description": "The easiest way to set up and govern a secure, compliant multi-account environment"
+  },
+  {
+    "Identifier": "AWSCountdownPremium",
+    "Name": "AWS Countdown Premium",
+    "Family": "Support",
+    "Description": "Optimize your business-critical events, product launches, migrations, and modernizations on AWS"
   },
   {
     "Identifier": "AWSDataExchange",
@@ -342,16 +336,16 @@
     "Description": "Deliver video to many devices using just-in-time format conversion"
   },
   {
-    "Identifier": "AWSElementalMediaStore",
-    "Name": "AWS Elemental MediaStore",
-    "Family": "Media Services",
-    "Description": "Store and deliver video assets for live or on-demand media workflows"
-  },
-  {
     "Identifier": "AWSElementalMediaTailor",
     "Name": "AWS Elemental MediaTailor",
     "Family": "Media Services",
     "Description": "Personalize and monetize multiscreen content with server-side ad insertion"
+  },
+  {
+    "Identifier": "AWSEndUserMessaging",
+    "Name": "AWS End User Messaging",
+    "Family": "Business Applications",
+    "Description": "Dependable, cost-effective messaging without compromising safety, security, or results"
   },
   {
     "Identifier": "AWSEndofSupportMigrationProgramEMP",
@@ -642,6 +636,18 @@
     "Description": "Analyzes your applications to help you determine the optimal strategy and tools to migrate and modernize at scale."
   },
   {
+    "Identifier": "AWSMissionNetworkingDedicatedCircuit",
+    "Name": "AWS Mission Networking Dedicated Circuit",
+    "Family": "Networking & Content Delivery",
+    "Description": "Dedicated Encrypted Network Connection to Amazon Dedicated Cloud(ADC)"
+  },
+  {
+    "Identifier": "AWSMissionNetworkingIPTunnel",
+    "Name": "AWS Mission Networking IP Tunnel",
+    "Family": "Networking & Content Delivery",
+    "Description": "Encrypted Network Connection to Amazon Dedicated Cloud(ADC) over the Internet"
+  },
+  {
     "Identifier": "AWSModularDataCenter",
     "Name": "AWS Modular Data Center",
     "Family": "Compute",
@@ -738,12 +744,6 @@
     "Description": "Prepare and protect your applications from disruptions"
   },
   {
-    "Identifier": "AWSRoboMaker",
-    "Name": "AWS RoboMaker",
-    "Family": "Robotics",
-    "Description": "Develop, test, and deploy intelligent robotics applications"
-  },
-  {
     "Identifier": "AWSSDKsandTools",
     "Name": "AWS SDKs and Tools",
     "Family": "Developer Tools",
@@ -804,22 +804,10 @@
     "Description": "Extend your on-premises networks to the cloud"
   },
   {
-    "Identifier": "AWSSnowmobile",
-    "Name": "AWS Snowmobile",
-    "Family": "Storage",
-    "Description": "Migrate or transport exabyte-scale data sets into and out of AWS"
-  },
-  {
     "Identifier": "AWSStepFunctions",
     "Name": "AWS Step Functions",
     "Family": "Application Integration",
     "Description": "Coordinate Distributed Applications"
-  },
-  {
-    "Identifier": "AWSStorageGatewayFSxFileGateway",
-    "Name": "AWS Storage Gateway (FSx File Gateway)",
-    "Family": "Storage",
-    "Description": "Fast, low-latency access on premises to fully managed file shares"
   },
   {
     "Identifier": "AWSStorageGatewayS3FileGateway",
@@ -1038,12 +1026,6 @@
     "Description": "Monitor Resources and Applications"
   },
   {
-    "Identifier": "AmazonCloudWatchEvidently",
-    "Name": "Amazon CloudWatch Evidently",
-    "Family": "Management & Governance",
-    "Description": "Application developers conduct experiments and identify unintended consequences of new features before rolling them out, thereby reducing risk"
-  },
-  {
     "Identifier": "AmazonCloudWatchRUM",
     "Name": "Amazon CloudWatch RUM",
     "Family": "Management & Governance",
@@ -1140,6 +1122,12 @@
     "Description": "Reach customers at scale with proactive omnichannel communications"
   },
   {
+    "Identifier": "AmazonConnectInappandwebcalling",
+    "Name": "Amazon Connect In-app and web calling",
+    "Family": "Customer Engagement",
+    "Description": "In-app and web calling capabilities make it easy to deliver voice experiences in websites/mobile applications"
+  },
+  {
     "Identifier": "AmazonConnectPerformanceEvaluation",
     "Name": "Amazon Connect - Performance Evaluation",
     "Family": "Customer Engagement",
@@ -1170,6 +1158,12 @@
     "Description": "Capabilities to host both toll-free and direct dial numbers (DID) in all AWS Regions"
   },
   {
+    "Identifier": "AmazonConnectVideocalling",
+    "Name": "Amazon Connect Video calling",
+    "Family": "Customer Engagement",
+    "Description": "Video calling capabilities make it easy to deliver video experiences for your contact center"
+  },
+  {
     "Identifier": "AmazonConnectVoice",
     "Name": "Amazon Connect - Voice",
     "Family": "Customer Engagement",
@@ -1180,6 +1174,12 @@
     "Name": "Amazon Connect - Voice ID",
     "Family": "Customer Engagement",
     "Description": "Real-time caller authentication and fraud risk detection using ML-powered voice analysis"
+  },
+  {
+    "Identifier": "AmazonDataFirehose",
+    "Name": "Amazon Data Firehose",
+    "Family": "Analytics",
+    "Description": "Process and deliver streaming data with data delivery stream"
   },
   {
     "Identifier": "AmazonDataZone",
@@ -1524,6 +1524,12 @@
     "Description": "Build mobile and web apps without programming"
   },
   {
+    "Identifier": "AmazonIVSChat",
+    "Name": "Amazon IVS Chat",
+    "Family": "Media Services",
+    "Description": "Scalable stream chat feature with a built-in moderation option designed to accompany live streaming videos"
+  },
+  {
     "Identifier": "AmazonInspector",
     "Name": "Amazon Inspector",
     "Family": "Security, Identity & Compliance",
@@ -1546,12 +1552,6 @@
     "Name": "Amazon Keyspaces",
     "Family": "Database",
     "Description": "Serverless Cassandra-compatible database"
-  },
-  {
-    "Identifier": "AmazonKinesisDataFirehoseKDF",
-    "Name": "Amazon Kinesis Data Firehose (KDF)",
-    "Family": "Analytics",
-    "Description": "Process and deliver streaming data with data delivery stream"
   },
   {
     "Identifier": "AmazonKinesisDataStreamsKDS",
@@ -1588,12 +1588,6 @@
     "Name": "Amazon Location Service",
     "Family": "Front-End Web & Mobile",
     "Description": "Securely and easily add location data to applications."
-  },
-  {
-    "Identifier": "AmazonLookoutforEquipment",
-    "Name": "Amazon Lookout for Equipment",
-    "Family": "Machine Learning",
-    "Description": "Detect abnormal equipment behavior by analyzing sensor data"
   },
   {
     "Identifier": "AmazonLookoutforMetrics",
@@ -1680,12 +1674,6 @@
     "Description": "Redis-compatible, durable, in-memory database service for ultra-fast performance"
   },
   {
-    "Identifier": "AmazonMonitron",
-    "Name": "Amazon Monitron",
-    "Family": "Machine Learning",
-    "Description": "End-to-end system for equipment monitoring"
-  },
-  {
     "Identifier": "AmazonNeptune",
     "Name": "Amazon Neptune",
     "Family": "Database",
@@ -1728,6 +1716,12 @@
     "Description": "Turn Text into Lifelike Speech"
   },
   {
+    "Identifier": "AmazonQBusiness",
+    "Name": "Amazon Q Business",
+    "Family": "Machine Learning",
+    "Description": "Application for building generative-AI-powered assistants grounded in an organization's data to improve employee productivity"
+  },
+  {
     "Identifier": "AmazonQDeveloper",
     "Name": "Amazon Q Developer",
     "Family": "Developer Tools",
@@ -1738,12 +1732,6 @@
     "Name": "Amazon Q in Connect",
     "Family": "Customer Engagement",
     "Description": "Deliver agents the responses, actions, and information they need to solve issues in real-time"
-  },
-  {
-    "Identifier": "AmazonQuantumLedgerDatabaseQLDB",
-    "Name": "Amazon Quantum Ledger Database (QLDB)",
-    "Family": "Blockchain",
-    "Description": "Fully managed ledger database"
   },
   {
     "Identifier": "AmazonQuickSight",
@@ -1956,6 +1944,12 @@
     "Description": "Create high-quality datasets for training ML models"
   },
   {
+    "Identifier": "AmazonSageMakerHyperPod",
+    "Name": "Amazon SageMaker HyperPod",
+    "Family": "Machine Learning",
+    "Description": "Reduce time to train foundation models by up to 40% with purpose-built infrastructure for distributed training at scale"
+  },
+  {
     "Identifier": "AmazonSageMakerInference",
     "Name": "Amazon SageMaker Inference",
     "Family": "Machine Learning",
@@ -2070,12 +2064,6 @@
     "Description": "Define and launch AWS resources in a logically isolated virtual network"
   },
   {
-    "Identifier": "AmazonWorkDocs",
-    "Name": "Amazon WorkDocs",
-    "Family": "End User Computing",
-    "Description": "Secure Enterprise Storage and Sharing Service"
-  },
-  {
     "Identifier": "AmazonWorkLink",
     "Name": "Amazon WorkLink",
     "Family": "End User Computing",
@@ -2098,6 +2086,12 @@
     "Name": "Amazon WorkSpaces Core",
     "Family": "End User Computing",
     "Description": "Virtual desktop infrastructure APIs for customers\u2019 3rd party VDI software"
+  },
+  {
+    "Identifier": "AmazonWorkSpacesPools",
+    "Name": "Amazon WorkSpaces Pools",
+    "Family": "End User Computing",
+    "Description": "Create pools of virtual desktops to simplify management and reduce cost"
   },
   {
     "Identifier": "AmazonWorkSpacesWeb",
@@ -2140,6 +2134,12 @@
     "Name": "CloudEndure Migration",
     "Family": "Migration & Transfer",
     "Description": "Simplify, expedite, and automate migration to AWS with Continuous Data Replication technology, resulting in minimal cutover windows"
+  },
+  {
+    "Identifier": "CloudTrailLake",
+    "Name": "CloudTrail Lake",
+    "Family": "Management & Governance",
+    "Description": "Track user activity and API usage on AWS and in hybrid and multicloud environments"
   },
   {
     "Identifier": "ContactLensforAmazonConnect",
@@ -2194,6 +2194,12 @@
     "Name": "NICE DCV",
     "Family": "High Performance Computing (HPC)",
     "Description": "Deliver high-performance remote desktop and application streaming"
+  },
+  {
+    "Identifier": "OracleDatabaseAWS",
+    "Name": "Oracle Database@AWS",
+    "Family": "Database",
+    "Description": "Allows customers to lift and shift Oracle Exadata workloads and rapidly innovate with the broad portfolio of AWS services"
   },
   {
     "Identifier": "OracleonAWSGeneral",
