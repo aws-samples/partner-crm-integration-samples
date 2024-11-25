@@ -1,0 +1,10 @@
+Metadata-Version: 2.1
+Name: utils
+Version: 0.0.1
+Summary: Helper utilities
+Classifier: Programming Language :: Python :: 3
+Classifier: Operating System :: OS Independent
+Requires-Dist: mypy-boto3-builder
+Requires-Dist: pytest
+Requires-Dist: jsonpatch
+Requires-Dist: setuptools
