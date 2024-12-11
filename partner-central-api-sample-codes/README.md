@@ -16,7 +16,7 @@ are written in [Python 3.x](./python_preview), [Java](./java_preview)，[Go](./g
 ```
 git clone https://github.com/aws-samples/partner-crm-integration-samples.git
 
-cd partner-crm-integration-samples/partner-central-sample-codes
+cd partner-crm-integration-samples/partner-central-api-sample-codes
 ```
 
 Instructions on setting up your environment to run the sample codes can be found in each of the programming language folder of this repository.
