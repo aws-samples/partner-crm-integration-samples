@@ -1,0 +1,88 @@
+{
+  "Catalog": "AWS",
+  "Customer": {
+    "Account": {
+      "Address": {
+        "City": null,
+        "CountryCode": "AL",
+        "PostalCode": "9931",
+        "StateOrRegion": "New York",
+        "StreetAddress": null
+      },
+      "AwsAccountId": "111111111111",
+      "CompanyName": "TestAssignEditable1",
+      "Duns": "111100111",
+      "Industry": "Financial Services",
+      "OtherIndustry": null,
+      "WebsiteUrl": "www.TestAssignEditable1.com"
+    },
+    "Contacts": [
+      {
+        "BusinessTitle": "Executive",
+        "Email": "testnamelast09@test.com",
+        "FirstName": "TestContact011",
+        "LastName": "MLastName001",
+        "Phone": "+14444444444"
+      }
+    ]
+  },
+  "Identifier": "O1111111",
+  "LastModifiedDate": "2024-11-17T05:14:45Z",
+  "LifeCycle": {
+    "ClosedLostReason": null,
+    "NextSteps": "Next steps on the opportunity. TEST is used to communicate to AWS the next action required, please update.",
+    "NextStepsHistory": null,
+    "ReviewComments": null,
+    "ReviewStatus": "Approved",
+    "ReviewStatusReason": null,
+    "Stage": "Qualified",
+    "TargetCloseDate": "2029-10-05"
+  },
+  "Marketing": {
+		"AwsFundingUsed": null,
+		"CampaignName": null,
+		"Channels": null,
+		"Source": "None",
+		"UseCases": null
+  },
+  "NationalSecurity": "No",
+  "OpportunityType": "Net New Business",
+  "PartnerOpportunityIdentifier": null,
+  "PrimaryNeedsFromAws": [
+    "Co-Sell - Architectural Validation"
+  ],
+  "Project": {
+    "AdditionalComments": null,
+    "ApnPrograms": null,
+    "CompetitorName": "Competitor Platform",
+    "CustomerBusinessProblem": "ProjectDescriptionBusinessNeedLengthGreaterThanFiftyCharacters",
+    "CustomerUseCase": "Security & Compliance",
+    "DeliveryModels": [
+      "SaaS or PaaS"
+    ],
+    "ExpectedCustomerSpend": [
+      {
+        "Amount": "12500",
+        "CurrencyCode": "USD",
+        "Frequency": "Monthly",
+        "TargetCompany": "AWS"
+      }
+    ],
+    "OtherCompetitorNames": null,
+    "OtherSolutionDescription": "TestSolution",
+    "RelatedOpportunityIdentifier": null,
+    "SalesActivities": [
+      "Conducted POC / Demo"
+    ],
+    "Title": "TestAssignEditable1"
+  },
+  "SoftwareRevenue": {
+    "DeliveryModel": "Pay-as-you-go",
+    "EffectiveDate": "2023-10-31",
+    "ExpirationDate": "2024-03-31",
+    "Value": {
+      "Amount": "10000.0",
+      "CurrencyCode": "USD"
+    }
+  }
+}

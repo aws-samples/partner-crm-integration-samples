@@ -1,0 +1,101 @@
+{
+	"ClientToken": "test-do312212312331345656567345453",
+	"Catalog": "AWS",
+	"Origin": "Partner Referral",
+	"Customer": {
+		"Account": {
+			"Address": {
+				"City": null,
+				"CountryCode": "US",
+				"PostalCode": "10001",
+				"StateOrRegion": "New York",
+				"StreetAddress": null
+			},
+			"AwsAccountId": "111111111111",
+			"CompanyName": "ValidSandboxCreate3",
+			"Duns": "111100111",
+			"Industry": "Automotive",
+			"OtherIndustry": null,
+			"WebsiteUrl": "www.testsite011.amazon.com"
+		},
+		"Contacts": [
+			{
+				"BusinessTitle": "Executive",
+				"Email": "test@test.com",
+				"FirstName": "TestContact011",
+				"LastName": "MLastName001",
+				"Phone": "+14444444444"
+			}
+		]
+	},
+	"LifeCycle": {
+		"ClosedLostReason": null,
+		"NextSteps": "Next steps on the opportunity. TEST is used to communicate to AWS the next action required, please update.",
+		"NextStepsHistory": null,
+		"ReviewComments": null,
+		"ReviewStatus": "Pending Submission",
+		"ReviewStatusReason": null,
+		"Stage": "Prospect",
+		"TargetCloseDate": "2029-10-07"
+	},
+	"Marketing": {
+		"AwsFundingUsed": "Yes",
+		"CampaignName": "TestCampaignName01",
+		"Channels": [
+			"Content Syndication"
+		],
+		"Source": "Marketing Activity",
+		"UseCases": [
+			"Serverless"
+		]
+	},
+	"NationalSecurity": "No",
+	"OpportunityTeam": [
+		{
+			"BusinessTitle": "PartnerAccountManager",
+			"Email": "test001@test.com",
+			"FirstName": "TestContact001",
+			"LastName": "CLastName001",
+			"Phone": "+14444444444"
+		}
+	],
+	"OpportunityType": "Net New Business",
+	"PartnerOpportunityIdentifier": null,
+	"PrimaryNeedsFromAws": [
+		"Co-Sell - Architectural Validation"
+	],
+	"Project": {
+		"AdditionalComments": null,
+		"ApnPrograms": null,
+		"CompetitorName": "Competitor Platform",
+		"CustomerBusinessProblem": "A very important problem goes here ValidSandboxCreate",
+		"CustomerUseCase": "Archiving",
+		"DeliveryModels": [
+			"SaaS or PaaS"
+		],
+		"ExpectedCustomerSpend": [
+			{
+				"Amount": "12500",
+				"CurrencyCode": "USD",
+				"Frequency": "Monthly",
+				"TargetCompany": "AWS"
+			}
+		],
+		"OtherCompetitorNames": null,
+		"OtherSolutionDescription": "TestSolution",
+		"RelatedOpportunityIdentifier": null,
+		"SalesActivities": [
+			"Conducted POC / Demo"
+		],
+		"Title": "Some New Project Name"
+	},
+	"SoftwareRevenue": {
+		"DeliveryModel": "Pay-as-you-go",
+		"EffectiveDate": "2023-10-31",
+		"ExpirationDate": "2024-03-31",
+		"Value": {
+			"Amount": "10000.0",
+			"CurrencyCode": "USD"
+		}
+	}
+}

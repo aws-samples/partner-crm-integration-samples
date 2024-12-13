@@ -51,6 +51,12 @@ This folder contains various code snippets for interacting with AWS services suc
 - `Sample AWSProductsAndSolutions.xlsx`: An Excel spreadsheet listing sample AWS products and solutions.
 - `SamplePartnerSolutions.csv`: A CSV file listing sample partner solutions.
 
+### partner-central-api-sample-codes
+- `java_preview`: Contains sample codes in Java
+- `python_preview`: Contains sample codes in Python
+- `go_preview`: Contains sample codes in Go
+- `dotnet_preview`: Contains sample codes in C#
+
 ## Getting Started
 
 To begin using these samples, clone the repository to your local machine or download the files directly from GitHub using the following command:

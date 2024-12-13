@@ -1,0 +1,9 @@
+setup.py
+utils/__init__.py
+utils/helpers.py
+utils/stringify_details.py
+utils.egg-info/PKG-INFO
+utils.egg-info/SOURCES.txt
+utils.egg-info/dependency_links.txt
+utils.egg-info/requires.txt
+utils.egg-info/top_level.txt

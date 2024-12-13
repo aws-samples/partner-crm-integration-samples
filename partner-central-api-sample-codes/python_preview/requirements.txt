@@ -1,0 +1,5 @@
+boto3
+mypy-boto3-builder
+pytest
+jsonpatch
+setuptools

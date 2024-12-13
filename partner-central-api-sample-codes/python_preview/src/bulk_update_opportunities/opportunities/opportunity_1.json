@@ -1,0 +1,90 @@
+{
+    "Catalog": "AWS",
+    "Customer": {
+      "Account": {
+        "Address": {
+          "City": "Boston",
+          "CountryCode": "US",
+          "PostalCode": "03141",
+          "StateOrRegion": "Massachusetts",
+          "StreetAddress": "123 Test St."
+        },
+        "AwsAccountId": "111111111111",
+        "CompanyName": "Test Investments Inc ",
+        "Duns": "111100112",
+        "Industry": "Computers and Electronics",
+        "OtherIndustry": null,
+        "WebsiteUrl": "https://www.test.com"
+      },
+      "Contacts": [
+        {
+          "BusinessTitle": "Mr",
+          "Email": "johndoe@test.com",
+          "FirstName": "John",
+          "LastName": "Doe",
+          "Phone": "+14444444444"
+        }
+      ]
+    },
+    "Identifier": "O1111111",
+	"LastModifiedDate": "2024-11-02T18:40:33Z",
+	"LifeCycle": {
+		"ClosedLostReason": null,
+		"NextSteps": "Create Action Plan / Roadmap",
+		"NextStepsHistory": null,
+		"ReviewComments": null,
+		"ReviewStatus": "Action Required",
+		"ReviewStatusReason": "null",
+		"Stage": "Prospect",
+		"TargetCloseDate": "2027-03-31"
+	},
+	"Marketing": {
+		"AwsFundingUsed": "No",
+		"CampaignName": "Startup Event",
+		"Channels": [
+			"Live Event"
+		],
+		"Source": "Marketing Activity",
+		"UseCases": [
+			"Application Integration",
+			"Front End Web & Mobile"
+		]
+	},
+	"NationalSecurity": "No",
+	"OpportunityType": "Net New Business",
+	"PartnerOpportunityIdentifier": "0101001101010101010hgfgfg",
+	"PrimaryNeedsFromAws": [
+		"Co-Sell - Architectural Validation",
+		"Co-Sell - Pricing Assistance"
+	],
+	"Project": {
+		"AdditionalComments": "Comments demonstrating Partner has engaged with customer on Opportunity",
+		"ApnPrograms": [
+			"Well-Architected",
+			"APN Solution Space"
+		],
+		"CompetitorName": "Competitor Platform",
+		"CustomerBusinessProblem": "Historically taken a regional approach to Access Management which has resulted in no common standards/policies, increased risk and high management overhead",
+		"CustomerUseCase": "Security & Compliance",
+		"DeliveryModels": [
+			"SaaS or PaaS"
+		],
+		"ExpectedCustomerSpend": [
+			{
+				"Amount": "12500",
+				"CurrencyCode": "USD",
+				"EstimationUrl": null,
+				"Frequency": "Monthly",
+				"TargetCompany": "AWS"
+			}
+		],
+		"OtherCompetitorNames": null,
+		"OtherSolutionDescription": "Other Solution Description Placeholder",
+		"RelatedOpportunityIdentifier": null,
+		"SalesActivities": [
+			"Initialized discussions with customer",
+			"Customer has shown interest in solution"
+		],
+		"Title": "HVT-FTX-New Business"
+	}
+}
