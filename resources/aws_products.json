@@ -66,6 +66,12 @@
     "Description": "Fully managed batch processing at any scale"
   },
   {
+    "Identifier": "AWSBillingConductor",
+    "Name": "AWS Billing Conductor",
+    "Family": "Management & Governance",
+    "Description": "Simplify billing and reporting with customizable pricing and cost visibility"
+  },
+  {
     "Identifier": "AWSBugBust",
     "Name": "AWS BugBust",
     "Family": "Machine Learning",
@@ -156,6 +162,12 @@
     "Description": "Track User Activity and API Usage"
   },
   {
+    "Identifier": "AWSCloudWAN",
+    "Name": "AWS Cloud WAN",
+    "Family": "Networking & Content Delivery",
+    "Description": "AWS Cloud WAN"
+  },
+  {
     "Identifier": "AWSCodeArtifact",
     "Name": "AWS CodeArtifact",
     "Family": "Developer Tools",
@@ -220,6 +232,12 @@
     "Name": "AWS DataSync",
     "Family": "Migration & Transfer",
     "Description": "Simplifies, automates, and accelerates moving data"
+  },
+  {
+    "Identifier": "AWSDataTransferTerminal",
+    "Name": "AWS Data Transfer Terminal",
+    "Family": "Networking & Content Delivery",
+    "Description": "Secure, physical locations for quick transfer of data to AWS"
   },
   {
     "Identifier": "AWSDatabaseMigrationService",
@@ -492,6 +510,12 @@
     "Description": "Deploy and run code on your devices"
   },
   {
+    "Identifier": "AWSIoTGreengrassnucleuslite",
+    "Name": "AWS IoT Greengrass nucleus lite",
+    "Family": "Internet of Things",
+    "Description": "A lightweight runtime for AWS IoT Greengrass"
+  },
+  {
     "Identifier": "AWSIoTSiteWise",
     "Name": "AWS IoT SiteWise",
     "Family": "Internet of Things",
@@ -762,6 +786,12 @@
     "Description": "Automate AWS security checks and centralize security alerts"
   },
   {
+    "Identifier": "AWSSecurityIncidentResponse",
+    "Name": "AWS Security Incident Response",
+    "Family": "Security, Identity & Compliance",
+    "Description": "Prepare for, respond to, and recover from security events"
+  },
+  {
     "Identifier": "AWSServerlessApplicationRepository",
     "Name": "AWS Serverless Application Repository",
     "Family": "Compute",
@@ -966,10 +996,64 @@
     "Description": "Easily implement human review of machine learning predictions"
   },
   {
+    "Identifier": "AmazonAuroraDSQL",
+    "Name": "Amazon Aurora DSQL",
+    "Family": "Database",
+    "Description": "Fastest serverless distributed SQL database for always available applications"
+  },
+  {
     "Identifier": "AmazonBedrock",
     "Name": "Amazon Bedrock",
     "Family": "Machine Learning",
     "Description": "The easiest way to build and scale generative AI applications with foundation models (FMs)"
+  },
+  {
+    "Identifier": "AmazonBedrockAI21LabsModels",
+    "Name": "Amazon Bedrock - AI21 Labs Models",
+    "Family": "Machine Learning",
+    "Description": "Amazon Bedrock models provided by AI21 Labs"
+  },
+  {
+    "Identifier": "AmazonBedrockAmazonModels",
+    "Name": "Amazon Bedrock - Amazon Models",
+    "Family": "Machine Learning",
+    "Description": "Amazon Bedrock models provided by Amazon"
+  },
+  {
+    "Identifier": "AmazonBedrockAnthropicModels",
+    "Name": "Amazon Bedrock - Anthropic Models",
+    "Family": "Machine Learning",
+    "Description": "Amazon Bedrock models provided by Anthropic"
+  },
+  {
+    "Identifier": "AmazonBedrockCohereModels",
+    "Name": "Amazon Bedrock - Cohere Models",
+    "Family": "Machine Learning",
+    "Description": "Amazon Bedrock models provided by Cohere"
+  },
+  {
+    "Identifier": "AmazonBedrockGuardrails",
+    "Name": "Amazon Bedrock - Guardrails",
+    "Family": "Machine Learning",
+    "Description": "Implement safeguards customized to application requirements and responsible AI policies"
+  },
+  {
+    "Identifier": "AmazonBedrockMetaModels",
+    "Name": "Amazon Bedrock - Meta Models",
+    "Family": "Machine Learning",
+    "Description": "Amazon Bedrock models provided by Meta"
+  },
+  {
+    "Identifier": "AmazonBedrockMistralAIModels",
+    "Name": "Amazon Bedrock - Mistral AI Models",
+    "Family": "Machine Learning",
+    "Description": "Amazon Bedrock models provided by Mistral AI"
+  },
+  {
+    "Identifier": "AmazonBedrockStabilityAIModels",
+    "Name": "Amazon Bedrock - Stability AI Models",
+    "Family": "Machine Learning",
+    "Description": "Amazon Bedrock models provided by Stability AI"
   },
   {
     "Identifier": "AmazonBraket",
@@ -1098,6 +1182,18 @@
     "Description": "Enable agents to deliver faster, more personalized customer service"
   },
   {
+    "Identifier": "AmazonConnectEmail",
+    "Name": "Amazon Connect - Email",
+    "Family": "Customer Engagement",
+    "Description": "Effortlessly prioritize, assign, and resolve customer service emails"
+  },
+  {
+    "Identifier": "AmazonConnectExternalVoiceTransfers",
+    "Name": "Amazon Connect - External Voice Transfers",
+    "Family": "Customer Engagement",
+    "Description": "Integrates with other voice systems to directly transfer voice calls and metadata without using the public telephone network"
+  },
+  {
     "Identifier": "AmazonConnectForecastPlanSchedule",
     "Name": "Amazon Connect - Forecast Plan Schedule",
     "Family": "Customer Engagement",
@@ -1122,10 +1218,22 @@
     "Description": "Reach customers at scale with proactive omnichannel communications"
   },
   {
+    "Identifier": "AmazonConnectIVR",
+    "Name": "Amazon Connect - IVR",
+    "Family": "Customer Engagement",
+    "Description": "Delivers natural, conversational interactive voice response experiences by leveraging high-quality TTS, ASR, NLU, and passive voice authentication"
+  },
+  {
     "Identifier": "AmazonConnectInappandwebcalling",
     "Name": "Amazon Connect In-app and web calling",
     "Family": "Customer Engagement",
     "Description": "In-app and web calling capabilities make it easy to deliver voice experiences in websites/mobile applications"
+  },
+  {
+    "Identifier": "AmazonConnectOutboundCampaigns",
+    "Name": "Amazon Connect - Outbound Campaigns",
+    "Family": "Customer Engagement",
+    "Description": "Create high volume ML-powered outbound campaigns in just a few clicks"
   },
   {
     "Identifier": "AmazonConnectPerformanceEvaluation",
@@ -1326,6 +1434,12 @@
     "Description": "Best price performance for training deep learning models in the cloud powered by AWS Trainium chips"
   },
   {
+    "Identifier": "AmazonEC2Trn2",
+    "Name": "Amazon EC2 - Trn2",
+    "Family": "Compute",
+    "Description": "Trainium2-powered Trn2 instances are designed for training and deploying large GenAI models with up to trillion+ parameters"
+  },
+  {
     "Identifier": "AmazonEC2VT1",
     "Name": "Amazon EC2 - VT1",
     "Family": "Compute",
@@ -1360,6 +1474,18 @@
     "Name": "Amazon EKS Anywhere",
     "Family": "Containers",
     "Description": "Create and operate Kubernetes clusters on your own infrastructure"
+  },
+  {
+    "Identifier": "AmazonEKSAutoMode",
+    "Name": "Amazon EKS Auto Mode",
+    "Family": "Compute",
+    "Description": "Fully automate your Kubernetes clusters"
+  },
+  {
+    "Identifier": "AmazonEKSHybridNodes",
+    "Name": "Amazon EKS Hybrid Nodes",
+    "Family": "Compute",
+    "Description": "Bring the power of Amazon EKS to your on premises applications"
   },
   {
     "Identifier": "AmazonEKSonAWSFargate",
@@ -1578,6 +1704,12 @@
     "Description": "Easier for customers to build, deploy, and manage chatbots"
   },
   {
+    "Identifier": "AmazonLibra",
+    "Name": "Amazon Libra",
+    "Family": "Customer Engagement",
+    "Description": "A complete teleconferencing system that keeps the conversation at the table, regardless of where participants are located"
+  },
+  {
     "Identifier": "AmazonLightsail",
     "Name": "Amazon Lightsail",
     "Family": "Compute",
@@ -1594,12 +1726,6 @@
     "Name": "Amazon Lookout for Metrics",
     "Family": "Machine Learning",
     "Description": "Accurately detect anomalies in your business metrics and quickly understand why"
-  },
-  {
-    "Identifier": "AmazonLookoutforVision",
-    "Name": "Amazon Lookout for Vision",
-    "Family": "Machine Learning",
-    "Description": "Identify defects using computer vision to automate quality inspection."
   },
   {
     "Identifier": "AmazonLumberyard",
@@ -1902,10 +2028,10 @@
     "Description": "Fully managed message queues for microservices, distributed systems, and serverless applications"
   },
   {
-    "Identifier": "AmazonSageMaker",
-    "Name": "Amazon SageMaker",
+    "Identifier": "AmazonSageMakerAI",
+    "Name": "Amazon SageMaker AI",
     "Family": "Machine Learning",
-    "Description": "Build, Train, and Deploy Machine Learning Models"
+    "Description": "Build, train, and deploy ML and foundation models, with fully managed infrastructure, tools, and workflows"
   },
   {
     "Identifier": "AmazonSageMakerAutopilot",
@@ -1918,6 +2044,12 @@
     "Name": "Amazon SageMaker Canvas",
     "Family": "Machine Learning",
     "Description": "Provide business analysts with a UI that allows them to generate ML predictions"
+  },
+  {
+    "Identifier": "AmazonSageMakerCatalog",
+    "Name": "Amazon SageMaker Catalog",
+    "Family": "Machine Learning",
+    "Description": "Discover, govern, and collaborate on data and AI securely"
   },
   {
     "Identifier": "AmazonSageMakerDataWrangler",
@@ -1962,6 +2094,12 @@
     "Description": "Machine learning (ML) hub offering algorithms, models, and ML solutions."
   },
   {
+    "Identifier": "AmazonSageMakerLakehouse",
+    "Name": "Amazon SageMaker Lakehouse",
+    "Family": "Machine Learning",
+    "Description": "Unify data access across Amazon S3 data lakes, Amazon Redshift, and other data sources"
+  },
+  {
     "Identifier": "AmazonSageMakerNotebookInstances",
     "Name": "Amazon SageMaker Notebook Instances",
     "Family": "Machine Learning",
@@ -1984,6 +2122,12 @@
     "Name": "Amazon SageMaker Training",
     "Family": "Machine Learning",
     "Description": "Reduces the time and cost to train and tune ML models"
+  },
+  {
+    "Identifier": "AmazonSageMakerUnifiedStudio",
+    "Name": "Amazon SageMaker Unified Studio",
+    "Family": "Machine Learning",
+    "Description": "Build with all your data and tools for analytics and AI in a single development environment"
   },
   {
     "Identifier": "AmazonSecurityLake",
