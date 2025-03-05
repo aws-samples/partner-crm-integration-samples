@@ -1,8 +1,7 @@
 partner-central:
-  bundle: s3
   long: '&AWS; &pcsh;'
   short: '&pcsh;'
-  sort: S3
+  sort: Partner Central
   expanded:
     long: AWS Partner Central
     short: Partner Central
