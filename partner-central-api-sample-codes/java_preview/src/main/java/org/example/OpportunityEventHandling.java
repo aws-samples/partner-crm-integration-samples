@@ -7,7 +7,6 @@ import java.util.Map;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-// snippet-start:[eventbridge.java2._create_schedule_rule.import]
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.eventbridge.EventBridgeClient;
 import software.amazon.awssdk.services.eventbridge.model.PutRuleRequest;
