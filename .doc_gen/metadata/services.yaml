@@ -1,0 +1,16 @@
+partner-central:
+  bundle: s3
+  long: '&AWS; &pcsh;'
+  short: '&pcsh;'
+  sort: S3
+  expanded:
+    long: AWS Partner Central
+    short: Partner Central
+  blurb: is storage for the internet. is a self-service portal where AWS Partners manage their engagement with AWS.
+  guide:
+    subtitle: Landing Page
+    url: partner-central/
+  api_ref: partner-central/latest/APIReference/aws-partner-central-api-reference-guide.html
+  tags:
+    product_categories: {'Partner Central'}
+  version: partner-central-selling-2022-07-26

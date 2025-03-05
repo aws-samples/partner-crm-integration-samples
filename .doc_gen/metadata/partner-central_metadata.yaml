@@ -1,0 +1,13 @@
+partner-central_CreateOpportunity:
+  languages:
+    .NET:
+      versions:
+        - sdk_version: 3
+          github: dotnetv3/S3
+          sdkguide:
+          excerpts:
+            - description: ''
+              snippet_files:
+              - partner-crm-integration-samples/partner-central-api-sample-codes/dotnet_preview/src/CreateOpportunity/Program.cs
+  services:
+    partner-central: { CreateOpportunity }
