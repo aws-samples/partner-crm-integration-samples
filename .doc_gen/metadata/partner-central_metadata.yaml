@@ -8,6 +8,6 @@ partner-central_CreateOpportunity:
           excerpts:
             - description: ''
               snippet_files:
-              - partner-crm-integration-samples/partner-central-api-sample-codes/dotnet_preview/src/CreateOpportunity/Program.cs
+              - partner-central-api-sample-codes/dotnet_preview/src/CreateOpportunity/Program.cs
   services:
     partner-central: { CreateOpportunity }
