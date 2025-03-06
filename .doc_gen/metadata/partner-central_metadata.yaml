@@ -1,16 +1,15 @@
 partner-central_CreateOpportunity:
-  title: Hello &AWS; &pcsh;
-  title_abbrev: Hello &AWS; &pcsh;
-  synopsis: get started using &AWS; &pcsh;.
+  category:
   languages:
     .NET:
       versions:
         - sdk_version: 3
+          github:
           sdkguide:
           excerpts:
             - description: 
               snippet_files:
-              - partner-central-api-sample-codes/dotnet_preview/src/CreateOpportunity/Program.cs
+                - partner-central-api-sample-codes/dotnet_preview/src/CreateOpportunity/Program.cs
   services:
     partner-central: { CreateOpportunity }
     
