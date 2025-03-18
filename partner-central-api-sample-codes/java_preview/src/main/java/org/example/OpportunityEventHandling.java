@@ -15,7 +15,7 @@ import software.amazon.awssdk.services.eventbridge.model.PutRuleResponse;
 import software.amazon.awssdk.services.eventbridge.model.PutTargetsRequest;
 import software.amazon.awssdk.services.eventbridge.model.PutTargetsResponse;
 import software.amazon.awssdk.services.eventbridge.model.Target;
-
+// snippet-end:[eventbridge.java2._create_schedule_rule.import]
 /**
  * Create Opportunity Created EventBridge rule and target is set to Lambda function
  */
