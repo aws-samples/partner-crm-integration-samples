@@ -1,4 +1,4 @@
-partner-central_CreateOpportunity:
+partnercentral-selling_CreateOpportunity:
   languages:
     .NET:
       versions:
@@ -8,4 +8,4 @@ partner-central_CreateOpportunity:
           - partner-central-api-sample-codes/dotnet_preview/src/CreateOpportunity/Program.cs
         sdk_version: 3
   services:
-    partner-central: { CreateOpportunity }
+    partnercentral-selling: { CreateOpportunity }
