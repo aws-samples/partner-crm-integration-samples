@@ -1,0 +1,11 @@
+partner-central_CreateOpportunity:
+  languages:
+    .NET:
+      versions:
+      - excerpts:
+        - description: Create an opportunity.
+          snippet_files:
+          - partner-central-api-sample-codes/dotnet_preview/src/CreateOpportunity/Program.cs
+        sdk_version: 3
+  services:
+    partner-central: { CreateOpportunity }
