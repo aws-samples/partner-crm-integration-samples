@@ -1,0 +1,279 @@
+{
+   "AWSTemplateFormatVersion":"2010-09-09",
+   "Description":"CloudFormation template to create LinkPolicy and PartnerCentralRole v8",
+   "Outputs":{
+      "PartnerCentralEventRuleName":{
+         "Description":"Name of the EventBridge rule",
+         "Value":"partnercentralProductionRule"
+      },
+      "PartnerCentralLogGroupName":{
+         "Description":"Name of the CloudWatch log group for PartnerCentral events",
+         "Value":{
+            "Fn::Join":[
+               "",
+               [
+                  "/aws/events/partnercentralapi",
+                  {
+                     "Fn::Select":[
+                        6,
+                        {
+                           "Fn::Split":[
+                              "-",
+                              {
+                                 "Ref":"AWS::StackId"
+                              }
+                           ]
+                        }
+                     ]
+                  }
+               ]
+            ]
+         }
+      },
+      "PartnerCentralLambdaFunctionName":{
+         "Description":"Name of the Lambda function handling PartnerCentral events",
+         "Value":{
+            "Fn::Join":[
+               "",
+               [
+                  "partnercentralapi",
+                  {
+                     "Fn::Select":[
+                        6,
+                        {
+                           "Fn::Split":[
+                              "-",
+                              {
+                                 "Ref":"AWS::StackId"
+                              }
+                           ]
+                        }
+                     ]
+                  }
+               ]
+            ]
+         }
+      },
+      "PartnerCentralAPIUserAccessKeyId":{
+         "Description":"Access Key ID of the PartnerCentralAPIUser",
+         "Value":{
+            "Ref":"PartnerCentralAPIUserAccessKey"
+         }
+      },
+      "PartnerCentralAPIUserSecretAccessKey":{
+         "Description":"Secret Access Key of the PartnerCentralAPIUser",
+         "Value":{
+            "Fn::GetAtt":[
+               "PartnerCentralAPIUserAccessKey",
+               "SecretAccessKey"
+            ]
+         }
+      },
+      "PartnerCentralAPIUserArn":{
+         "Description":"ARN of the PartnerCentralAPIUser",
+         "Value":{
+            "Fn::GetAtt":[
+               "PartnerCentralAPIUser",
+               "Arn"
+            ]
+         }
+      },
+      "PartnerCentralAPIUserName":{
+         "Description":"Username of the PartnerCentralAPIUser",
+         "Value":{
+            "Ref":"PartnerCentralAPIUser"
+         }
+      }
+   },
+   "Resources":{
+      "PartnerCentralLogGroup":{
+         "Type":"AWS::Logs::LogGroup",
+         "Properties":{
+            "LogGroupName":{
+               "Fn::Join":[
+                  "",
+                  [
+                     "/aws/events/partnercentralapi",
+                     {
+                        "Fn::Select":[
+                           6,
+                           {
+                              "Fn::Split":[
+                                 "-",
+                                 {
+                                    "Ref":"AWS::StackId"
+                                 }
+                              ]
+                           }
+                        ]
+                     }
+                  ]
+               ]
+            },
+            "RetentionInDays":14
+         }
+      },
+      "LambdaExecutionRole":{
+         "Type":"AWS::IAM::Role",
+         "Properties":{
+            "RoleName":"lambda-execution-role",
+            "AssumeRolePolicyDocument":{
+               "Version":"2012-10-17",
+               "Statement":[
+                  {
+                     "Effect":"Allow",
+                     "Principal":{
+                        "Service":"lambda.amazonaws.com"
+                     },
+                     "Action":"sts:AssumeRole"
+                  }
+               ]
+            },
+            "ManagedPolicyArns":[
+               "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+            ]
+         }
+      },
+      "PartnerCentralLambda":{
+         "Type":"AWS::Lambda::Function",
+         "Properties":{
+            "Handler":"index.lambda_handler",
+            "Runtime":"python3.12",
+            "Role":{
+               "Fn::GetAtt":[
+                  "LambdaExecutionRole",
+                  "Arn"
+               ]
+            },
+            "FunctionName":{
+               "Fn::Join":[
+                  "",
+                  [
+                     "partnercentralapi",
+                     {
+                        "Fn::Select":[
+                           6,
+                           {
+                              "Fn::Split":[
+                                 "-",
+                                 {
+                                    "Ref":"AWS::StackId"
+                                 }
+                              ]
+                           }
+                        ]
+                     }
+                  ]
+               ]
+            },
+            "Code":{
+               "ZipFile":{
+                  "Fn::Join":[
+                     "\n",
+                     [
+                        "import json",
+                        "",
+                        "def lambda_handler(event, context):",
+                        "    print(json.dumps(event))",
+                        "    if event['detail-type'] ==  \"Opportunity Created\":",
+                        "        print(event['detail-type'])",
+                        "    if event['detail-type'] ==  \"Opportunity Updated\":",
+                        "        print(event['detail-type'])",
+                        "    if event['detail-type'] ==  \"Opportunity Engagement Invitation Created\":",
+                        "        print(event['detail-type'])",
+                        "    if event['detail-type'] ==  \"Opportunity Engagement Invitation Accepted\":",
+                        "        print(event['detail-type'])",
+                        "    if event['detail-type'] ==  \"Opportunity Engagement Invitation Rejected\":",
+                        "        print(event['detail-type'])",
+                        "    return {",
+                        "        'statusCode': 200,",
+                        "        'body': json.dumps(event['detail-type'])",
+                        "    }"
+                     ]
+                  ]
+               }
+            }
+         }
+      },
+      "PartnerCentralEventRule":{
+         "Type":"AWS::Events::Rule",
+         "Properties":{
+            "Name":"partnercentralProductionRule",
+            "EventPattern":{
+               "source":[
+                  "aws.partnercentral-selling"
+               ],
+               "detail":{
+                  "catalog":[
+                     "AWS"
+                  ]
+               }
+            },
+            "State":"ENABLED",
+            "Targets":[
+               {
+                  "Id":"CloudWatchLogsTarget",
+                  "Arn":{
+                     "Fn::Join":[
+                        "",
+                        [
+                           "arn:",
+                           {
+                              "Ref":"AWS::Partition"
+                           },
+                           ":logs:",
+                           {
+                              "Ref":"AWS::Region"
+                           },
+                           ":",
+                           {
+                              "Ref":"AWS::AccountId"
+                           },
+                           ":log-group:/aws/events/partnercentralapi",
+                           {
+                              "Fn::Select":[
+                                 6,
+                                 {
+                                    "Fn::Split":[
+                                       "-",
+                                       {
+                                          "Ref":"AWS::StackId"
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        ]
+                     ]
+                  }
+               },
+               {
+                  "Id":"LambdaTarget",
+                  "Arn":{
+                     "Fn::GetAtt":[
+                        "PartnerCentralLambda",
+                        "Arn"
+                     ]
+                  }
+               }
+            ]
+         }
+      },
+      "PartnerCentralAPIUser":{
+         "Type":"AWS::IAM::User",
+         "Properties":{
+            "UserName":"PartnerCentralAPIUser",
+            "ManagedPolicyArns":[
+               "arn:aws:iam::aws:policy/AWSPartnerCentralOpportunityManagement"
+            ]
+         }
+      },
+      "PartnerCentralAPIUserAccessKey":{
+         "DependsOn":"PartnerCentralAPIUser",
+         "Type":"AWS::IAM::AccessKey",
+         "Properties":{
+            "UserName":"PartnerCentralAPIUser"
+         }
+      }
+   }
+}
