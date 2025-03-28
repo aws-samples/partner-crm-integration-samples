@@ -1,0 +1,331 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Description": "CloudFormation template to create LinkPolicy and PartnerCentralRole v8",
+    "Outputs":
+    {
+        "LinkPolicyArn":
+        {
+            "Description": "ARN of the created LinkPolicy",
+            "Value":
+            {
+                "Ref": "LinkPolicy"
+            }
+        },
+        "aclinkUserAccessKeyId":
+        {
+            "Description": "Access Key ID of the Salesforce IAM User",
+            "Value":
+            {
+                "Ref": "aclinkUserAccessKey"
+            }
+        },
+        "aclinkUserArn":
+        {
+            "Value":
+            {
+                "Fn::GetAtt":
+                [
+                    "aclinkUser",
+                    "Arn"
+                ]
+            }
+        },
+        "aclinkUserName":
+        {
+            "Value":
+            {
+                "Ref": "aclinkUser"
+            }
+        },
+        "aclinkUserSecretAccessKey":
+        {
+            "Description": "Secret Access Key of the Salesforce IAM User",
+            "Value":
+            {
+                "Fn::GetAtt":
+                [
+                    "aclinkUserAccessKey",
+                    "SecretAccessKey"
+                ]
+            }
+        }
+    },
+    "Parameters":
+    {
+        "UserPassword":
+        {
+            "Description": "Initial password for the IAM user (must be at least 8 characters long)",
+            "MinLength": 8,
+            "NoEcho": true,
+            "Type": "String"
+        }
+    },
+    "Resources":
+    {
+        "LinkPolicy":
+        {
+            "Properties":
+            {
+                "Groups":
+                [
+                    {
+                        "Ref": "aclinkGroup"
+                    }
+                ],
+                "ManagedPolicyName": "PartnerAccountManagement",
+                "PolicyDocument":
+                {
+                    "Statement":
+                    [
+                        {
+                            "Action":
+                            [
+                                "iam:CreateRole"
+                            ],
+                            "Effect": "Allow",
+                            "Resource":  [
+                                "arn:aws:iam::*:role/PartnerCentralRoleForCloudAdmin*",
+                                "arn:aws:iam::*:role/PartnerCentralRoleForAce*",
+                                "arn:aws:iam::*:role/PartnerCentralRoleForAlliance*"
+                            ],
+                            "Sid": "CreatePartnerCentralRoles"
+                        },
+                        {
+                            "Action":
+                            [
+                                "iam:AttachRolePolicy"
+                            ],
+                            "Condition":
+                            {
+                                "ArnLike":
+                                {
+                                    "iam:PolicyARN": [
+                                        "arn:aws:iam::*:policy/PartnerCentralAccountManagementUserRoleAssociation",
+                                        "arn:aws:iam::*:policy/AWSPartnerCentralFullAccess",
+                                        "arn:aws:iam::*:policy/AWSMarketplaceSellerFullAccess"
+                                    ]
+                                }
+                            },
+                            "Effect": "Allow",
+                            "Resource": "arn:aws:iam::*:role/PartnerCentralRoleForCloudAdmin*",
+                            "Sid": "AttachPolicyToPartnerCentralCloudAdminRole"
+                        },
+                        {
+                            "Action":
+                            [
+                                "iam:AttachRolePolicy"
+                            ],
+                            "Condition":
+                            {
+                                "ArnLike":
+                                {
+                                    "iam:PolicyARN": [
+                                        "arn:aws:iam::*:policy/AWSPartnerCentralOpportunityManagement",
+                                        "arn:aws:iam::*:policy/AWSMarketplaceSellerOfferManagement"
+                                    ]
+                                }
+                            },
+                            "Effect": "Allow",
+                            "Resource": "arn:aws:iam::*:role/PartnerCentralRoleForAce*",
+                            "Sid": "AttachPolicyToPartnerCentralAceRole"
+                        },
+                        {
+                            "Action":
+                            [
+                                "iam:AttachRolePolicy"
+                            ],
+                            "Condition":
+                            {
+                                "ArnLike":
+                                {
+                                    "iam:PolicyARN": [
+                                        "arn:aws:iam::*:policy/AWSPartnerCentralFullAccess",
+                                        "arn:aws:iam::*:policy/AWSMarketplaceSellerFullAccess"
+                                    ]
+                                }
+                            },
+                            "Effect": "Allow",
+                            "Resource": "arn:aws:iam::*:role/PartnerCentralRoleForAlliance*",
+                            "Sid": "AttachPolicyToPartnerCentralAllianceRole"
+                        },
+                        {
+                            "Action":
+                            [
+                                "partnercentral-account-management:AssociatePartnerAccount"
+                            ],
+                            "Effect": "Allow",
+                            "Resource": "*",
+                            "Sid": "AssociatePartnerAccount"
+                        },
+                        {
+                            "Sid": "SellerRegistration",
+                            "Effect": "Allow",
+                            "Action": [
+                                "aws-marketplace:ListChangeSets",
+                                "aws-marketplace:DescribeChangeSet",
+                                "aws-marketplace:StartChangeSet",
+                                "aws-marketplace:ListEntities",
+                                "aws-marketplace:DescribeEntity"
+                            ],
+                            "Resource": "*"
+                        }
+                    ],
+                    "Version": "2012-10-17"
+                }
+            },
+            "Type": "AWS::IAM::ManagedPolicy"
+        },
+        "UserchngePWPolicy":
+        {
+            "Properties":
+            {
+                "Groups":
+                [
+                    {
+                        "Ref": "aclinkGroup"
+                    }
+                ],
+                "ManagedPolicyName": "AclinkuserPWchange",
+                "PolicyDocument":
+                {
+                    "Statement":
+                    [
+                        {
+                            "Action":
+                            [
+                                "iam:ChangePassword"
+                            ],
+                            "Effect": "Allow",
+                            "Resource":
+                            [
+                                "arn:aws:iam::*:user/${aws:username}"
+                            ]
+                        },
+                        {
+                            "Action":
+                            [
+                                "iam:GetAccountPasswordPolicy"
+                            ],
+                            "Effect": "Allow",
+                            "Resource": "*"
+                        }
+                    ],
+                    "Version": "2012-10-17"
+                }
+            },
+            "Type": "AWS::IAM::ManagedPolicy"
+        },
+        "aclinkGroup":
+        {
+            "Properties":
+            {
+                "GroupName":
+                {
+                    "Fn::Join":
+                    [
+                        "",
+                        [
+                            "aclinkGroup",
+                            {
+                                "Fn::Select":
+                                [
+                                    6,
+                                    {
+                                        "Fn::Split":
+                                        [
+                                            "-",
+                                            {
+                                                "Ref": "AWS::StackId"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    ]
+                },
+                "Path": "/"
+            },
+            "Type": "AWS::IAM::Group"
+        },
+        "aclinkUser":
+        {
+            "Properties":
+            {
+                "Groups":
+                [
+                    {
+                        "Ref": "aclinkGroup"
+                    }
+                ],
+                "LoginProfile":
+                {
+                    "Password":
+                    {
+                        "Ref": "UserPassword"
+                    },
+                    "PasswordResetRequired": true
+                },
+                "UserName":
+                {
+                    "Fn::Join":
+                    [
+                        "",
+                        [
+                            "aclinkuser",
+                            {
+                                "Fn::Select":
+                                [
+                                    6,
+                                    {
+                                        "Fn::Split":
+                                        [
+                                            "-",
+                                            {
+                                                "Ref": "AWS::StackId"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    ]
+                }
+            },
+            "Type": "AWS::IAM::User"
+        },
+        "aclinkUserAccessKey":
+        {
+            "DependsOn": "aclinkUser",
+            "Properties":
+            {
+                "UserName":
+                {
+                    "Fn::Join":
+                    [
+                        "",
+                        [
+                            "aclinkuser",
+                            {
+                                "Fn::Select":
+                                [
+                                    6,
+                                    {
+                                        "Fn::Split":
+                                        [
+                                            "-",
+                                            {
+                                                "Ref": "AWS::StackId"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    ]
+                }
+            },
+            "Type": "AWS::IAM::AccessKey"
+        }
+    }
+}
