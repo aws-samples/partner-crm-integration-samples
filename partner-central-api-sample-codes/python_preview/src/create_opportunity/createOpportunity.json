@@ -1,6 +1,6 @@
 {
 	"ClientToken": "test-do31221231233130000",
-	"Catalog": "AWS",
+	"Catalog": "Sandbox",
 	"Origin": "Partner Referral",
 	"Customer": {
 		"Account": {
@@ -67,7 +67,7 @@
 	"Project": {
 		"AdditionalComments": null,
 		"ApnPrograms": null,
-		"CompetitorName": "Competitor Platform",
+		"CompetitorName": "No Competition",
 		"CustomerBusinessProblem": "A very important problem goes here ValidSandboxCreate",
 		"CustomerUseCase": "Security & Compliance",
 		"DeliveryModels": [

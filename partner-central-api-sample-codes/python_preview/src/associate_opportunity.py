@@ -42,13 +42,13 @@ def associate_opportunity(entity_type, entity_identifier, opportunityIdentifier)
 def usage_demo():
     #entity_type = Solutions | AWSProducts | AWSMarketplaceOffers 
     entity_type = "Solutions"
-    entity_identifier = "S-0059612"
-    opportunityIdentifier = "O4236435"
+    entity_identifier = "S-0059717"
+    opportunityIdentifier = "O5465588"
 
     logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
 
     print("-" * 88)
-    print("Get updated Opportunity.")
+    print("Associate Opportunity.")
     print("-" * 88)
 
     helper.pretty_print_datetime(associate_opportunity(entity_type, entity_identifier, opportunityIdentifier))

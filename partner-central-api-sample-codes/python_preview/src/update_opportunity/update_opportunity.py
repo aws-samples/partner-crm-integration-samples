@@ -39,7 +39,7 @@ def get_opportunity(identifier):
         print(err.response)
 
 def update_opportunity():
-    update_opportunity_request_orig = sd.stringify_json("src/update_opportunity/update_opportunity.json")
+    update_opportunity_request_orig = sd.stringify_json("src/update_opportunity/update_opportunity_technical_validation.json")
     update_opportunity_request = helper.remove_nulls(update_opportunity_request_orig)
     
     try:
@@ -59,7 +59,7 @@ def update_opportunity_if_eligible(identifier):
         print("Failed to retrieve opportunity details")
 
 def usage_demo():
-    identifier = "O4235295"
+    identifier = "O5465588"
 
     logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
 

@@ -127,15 +127,37 @@ def save_to_csv(data_records, file_path):
             writer.writerow({col: flattened_record.get(col, '') for col in column_names})
 
 def save_individual_files(data_records, directory, aws):
-    """Save each record to a separate JSON file."""
+    """Save each record to a separate JSON file locally and to S3 bucket."""
     if not os.path.exists(directory):
         os.makedirs(directory)
 
+    # Initialize S3 client
+    s3_client = boto3.client('s3')
+    bucket_name = os.getenv('S3_BUCKET_NAME')  # Get bucket name from environment variable
+    
+    if not bucket_name:
+        raise ValueError("S3_BUCKET_NAME environment variable must be set")
+
     for record in data_records:
         record_id = record.get("Id", "unknown_id") if aws == "" else record.get("RelatedOpportunityId", "unknown_id")
-        file_path = os.path.join(directory, f"{record_id}{aws}.json")
+        file_name = f"{record_id}{aws}.json"
+        file_path = os.path.join(directory, file_name)
+        
+        # Save locally
         with open(file_path, 'w', encoding='utf-8') as file:
             json.dump(record, file, cls=helper.DateTimeEncoder, indent=4)
+        
+        # Upload to S3
+        try:
+            s3_key = f"opportunities/{file_name}"  # You can customize the S3 key prefix
+            s3_client.upload_file(
+                file_path,
+                bucket_name,
+                s3_key
+            )
+            print(f"Successfully uploaded {file_name} to S3 bucket {bucket_name}")
+        except Exception as e:
+            print(f"Error uploading {file_name} to S3: {str(e)}")
 
 def main():
     logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")

@@ -36,12 +36,12 @@ def get_opportunity(identifier):
         print(err.response)
 
 def usage_demo():
-    identifier = "O4235295"
+    identifier = "O5465588"
 
     logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
 
     print("-" * 88)
-    print("Get updated Opportunity.")
+    print("Get AWS Opportunity summary.")
     print("-" * 88)
 
     helper.pretty_print_datetime(get_opportunity(identifier))

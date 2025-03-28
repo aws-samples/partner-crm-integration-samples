@@ -45,12 +45,12 @@ def start_engagement_from_opportunity_task(identifier):
             return None
    
 def usage_demo():
-    identifier = "O4236435"
+    identifier = "O5465588"
 
     logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
 
     print("-" * 88)
-    print("Get updated Opportunity.")
+    print("Start Engagement from Opportunity Task.")
     print("-" * 88)
 
     helper.pretty_print_datetime(start_engagement_from_opportunity_task(identifier))
