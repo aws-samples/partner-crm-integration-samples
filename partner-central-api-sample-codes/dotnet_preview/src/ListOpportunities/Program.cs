@@ -12,7 +12,7 @@ namespace AWSExample
 {
     class Program
     {
-        static readonly string catalogToUse = "AWS";
+        static readonly string catalogToUse = "Sandbox";
         static async Task Main(string[] args)
         {
             // Initialize credentials from .aws/credentials file

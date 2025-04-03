@@ -285,3 +285,31 @@ partnercentral-selling_StartEngagementFromOpportunityTask:
         sdk_version: 3
   services:
     partnercentral-selling: { StartEngagementFromOpportunityTask }
+partnercentral-selling__UpdateAssociatedEntity:
+  title: Update Associated Entity of an opportunity
+  title_abbrev: Update Associated Entity of an opportunity
+  synopsis_list:
+    - Disassociate an old entity.
+    - Associate a new entity.
+  category: Scenarios
+  languages:
+    Java:
+      versions:
+        - sdk_version: 2
+          github: partner-central-api-sample-codes/java_preview/
+          sdkguide:
+          excerpts:
+            - description: Update Associated Entity of an opportunity
+              snippet_files:
+              - partner-central-api-sample-codes/java_preview/src/main/java/org/example/ReplaceSolution.java
+    Python:
+      versions:
+        - sdk_version: 3
+          github: partner-central-api-sample-codes/python_preview/
+          sdkguide:
+          excerpts:
+            - description: Update Associated Entity of an opportunity
+              snippet_files:
+              - partner-central-api-sample-codes/python_preview/src/replace_solution.py
+  services:
+    partnercentral-selling: { DisassociateOpportunity, AssociateOpportunity }
