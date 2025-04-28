@@ -30,7 +30,7 @@ partnercentral-selling_UpdateOpportunity:
       - excerpts:
         - description: Update an opportunity.
           snippet_files:
-          - partner-central-api-sample-codes/java_preview/src/main/java/org/example/UpdateOpportunity
+          - partner-central-api-sample-codes/java_preview/src/main/java/org/example/UpdateOpportunity.java
         sdk_version: 2
     Python:
       versions:
@@ -38,7 +38,7 @@ partnercentral-selling_UpdateOpportunity:
         - description: Update an opportunity.
           snippet_files:
           - partner-central-api-sample-codes/python_preview/src/update_opportunity/update_opportunity.py
-        sdk_version: 3        
+        sdk_version: 3
   services:
     partnercentral-selling: { UpdateOpportunity }
 partnercentral-selling_GetOpportunity:
@@ -164,14 +164,14 @@ partnercentral-selling_GetAwsOpportunitySummary:
     Java:
       versions:
       - excerpts:
-        - description: Retrieves a summary of an AWS Opportunity.
+        - description: Retrieves a summary of an &AWS; Opportunity.
           snippet_files:
           - partner-central-api-sample-codes/java_preview/src/main/java/org/example/GetAwsOpportunitySummary.java
         sdk_version: 2
     Python:
       versions:
       - excerpts:
-        - description: Retrieves a summary of an AWS Opportunity.
+        - description: Retrieves a summary of an &AWS; Opportunity.
           snippet_files:
           - partner-central-api-sample-codes/python_preview/src/get_aws_opportunity_summary.py
         sdk_version: 3
@@ -182,14 +182,14 @@ partnercentral-selling_GetEngagementInvitation:
     Java:
       versions:
       - excerpts:
-        - description: Retrieves the details of an engagement invitation shared by AWS with a partner.
+        - description: Retrieves the details of an engagement invitation shared by &AWS; with a partner.
           snippet_files:
           - partner-central-api-sample-codes/java_preview/src/main/java/org/example/GetEngagementInvitation.java
         sdk_version: 2
     Python:
       versions:
       - excerpts:
-        - description: Retrieves the details of an engagement invitation shared by AWS with a partner.
+        - description: Retrieves the details of an engagement invitation shared by &AWS; with a partner.
           snippet_files:
           - partner-central-api-sample-codes/python_preview/src/get_engagement_invitation.py
         sdk_version: 3
@@ -200,14 +200,14 @@ partnercentral-selling_ListEngagementInvitations:
     Java:
       versions:
       - excerpts:
-        - description: Retrieves a list of engagement invitations sent to the partner. 
+        - description: Retrieves a list of engagement invitations sent to the partner.
           snippet_files:
           - partner-central-api-sample-codes/java_preview/src/main/java/org/example/ListEngagementInvitations.java
         sdk_version: 2
     Python:
       versions:
       - excerpts:
-        - description: Retrieves a list of engagement invitations sent to the partner. 
+        - description: Retrieves a list of engagement invitations sent to the partner.
           snippet_files:
           - partner-central-api-sample-codes/python_preview/src/list_engagement_invitations.py
         sdk_version: 3
@@ -225,7 +225,7 @@ partnercentral-selling_ListSolutions:
     Python:
       versions:
       - excerpts:
-        - description: Retrieves a list of Partner Solutions that the partner registered on Partner Central. 
+        - description: Retrieves a list of Partner Solutions that the partner registered on Partner Central.
           snippet_files:
           - partner-central-api-sample-codes/python_preview/src/list_solutions.py
         sdk_version: 3
@@ -236,14 +236,14 @@ partnercentral-selling_RejectEngagementInvitation:
     Java:
       versions:
       - excerpts:
-        - description: Rejects an EngagementInvitation that AWS shared. 
+        - description: Rejects an EngagementInvitation that &AWS; shared.
           snippet_files:
           - partner-central-api-sample-codes/java_preview/src/main/java/org/example/RejectEngagementInvitation.java
         sdk_version: 2
     Python:
       versions:
       - excerpts:
-        - description: Rejects an EngagementInvitation that AWS shared.  
+        - description: Rejects an EngagementInvitation that &AWS; shared.
           snippet_files:
           - partner-central-api-sample-codes/python_preview/src/reject_opportunity_engagement_invitation.py
         sdk_version: 3
@@ -254,14 +254,14 @@ partnercentral-selling_StartEngagementByAcceptingInvitationTask:
     Java:
       versions:
       - excerpts:
-        - description: Starts the engagement by accepting an EngagementInvitation. 
+        - description: Starts the engagement by accepting an EngagementInvitation.
           snippet_files:
           - partner-central-api-sample-codes/java_preview/src/main/java/org/example/StartEngagementByAcceptingInvitationTask.java
         sdk_version: 2
     Python:
       versions:
       - excerpts:
-        - description: Starts the engagement by accepting an EngagementInvitation. 
+        - description: Starts the engagement by accepting an EngagementInvitation.
           snippet_files:
           - partner-central-api-sample-codes/python_preview/src/start_engagement_by_accepting_invitation_task.py
         sdk_version: 3
@@ -272,14 +272,14 @@ partnercentral-selling_StartEngagementFromOpportunityTask:
     Java:
       versions:
       - excerpts:
-        - description: Initiates the engagement process from an existing opportunity by accepting the engagement invitation and creating a corresponding opportunity in the partner’s system. 
+        - description: Initiates the engagement process from an existing opportunity by accepting the engagement invitation and creating a corresponding opportunity in the partner’s system.
           snippet_files:
           - partner-central-api-sample-codes/java_preview/src/main/java/org/example/StartEngagementFromOpportunityTask.java
         sdk_version: 2
     Python:
       versions:
       - excerpts:
-        - description: Initiates the engagement process from an existing opportunity by accepting the engagement invitation and creating a corresponding opportunity in the partner’s system.  
+        - description: Initiates the engagement process from an existing opportunity by accepting the engagement invitation and creating a corresponding opportunity in the partner’s system.
           snippet_files:
           - partner-central-api-sample-codes/python_preview/src/start_engagement_from_opportunity_task.py
         sdk_version: 3
