@@ -296,7 +296,7 @@ partnercentral-selling__UpdateAssociatedEntity:
     Java:
       versions:
         - sdk_version: 2
-          github: javav2
+          github: https://github.com/aws-samples/partner-crm-integration-samples/tree/main/partner-central-api-sample-codes/java_preview
           sdkguide:
           excerpts:
             - description: Update associated entity of an opportunity
