@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Partner Central API - Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        h1 {
+            color: #232f3e;
+        }
+        .container {
+            margin-top: 20px;
+        }
+        .form-section {
+            margin-bottom: 30px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #ff9900;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        button:hover {
+            background-color: #e88e00;
+        }
+        .error {
+            color: #d13212;
+            margin-top: 10px;
+        }
+        .info-box {
+            background-color: #f0f7fb;
+            border-left: 5px solid #0066c0;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 0 4px 4px 0;
+        }
+        .note {
+            color: #666;
+            font-style: italic;
+            margin-top: 5px;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <h1>Partner Central API - Login</h1>
+    
+    <div class="container">
+        <div class="info-box">
+            <p><strong>AWS Credentials</strong></p>
+            <p>Enter your AWS credentials to use the Partner Central API. Your credentials will only be stored in your session and will not be saved on the server.</p>
+            <p>These credentials must have permissions to access the Partner Central API.</p>
+            <p><strong>Note:</strong> All fields are optional. If left empty, the application will use instance profile credentials or environment variables.</p>
+        </div>
+        
+        {% if error %}
+        <div class="error">{{ error }}</div>
+        {% endif %}
+        
+        <form method="post" class="form-section">
+            <div class="form-group">
+                <label for="access_key">AWS Access Key ID:</label>
+                <input type="text" id="access_key" name="access_key">
+                <div class="note">Leave empty to use instance profile or environment variables</div>
+            </div>
+            
+            <div class="form-group">
+                <label for="secret_key">AWS Secret Access Key:</label>
+                <input type="password" id="secret_key" name="secret_key">
+            </div>
+            
+            <div class="form-group">
+                <label for="session_token">AWS Session Token (optional):</label>
+                <input type="password" id="session_token" name="session_token">
+                <div class="note">Required only for temporary credentials</div>
+            </div>
+            
+            <div class="form-group">
+                <label for="region">AWS Region:</label>
+                <input type="text" id="region" name="region" value="us-east-1">
+            </div>
+            
+            <div>
+                <button type="submit">Login</button>
+                <a href="/skip_login" onclick="submitSkipForm(event)" class="button" style="text-decoration: none; display: inline-block;">Skip Login</a>
+            </div>
+        </form>
+        
+        <!-- Hidden form for skip login -->
+        <form id="skipForm" action="/skip_login" method="post" style="display: none;">
+            <input type="hidden" name="region" id="skip_region" value="us-east-1">
+        </form>
+    </div>
+    
+    <script>
+        function submitSkipForm(event) {
+            event.preventDefault();
+            // Copy the region value from the main form to the skip form
+            document.getElementById('skip_region').value = document.getElementById('region').value;
+            // Submit the skip form
+            document.getElementById('skipForm').submit();
+        }
+    </script>
+</body>
+</html>

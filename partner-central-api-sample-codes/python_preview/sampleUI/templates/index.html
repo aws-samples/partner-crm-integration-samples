@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Partner Central API - Home</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        h1, h2, h3 {
+            color: #232f3e;
+        }
+        .container {
+            margin-top: 20px;
+        }
+        .section {
+            margin-bottom: 40px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .section-title {
+            margin-top: 0;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #ff9900;
+        }
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .card {
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 20px;
+            margin-bottom: 20px;
+            background-color: #ffffff;
+            flex: 1;
+            min-width: 300px;
+        }
+        .card h3 {
+            margin-top: 0;
+            color: #232f3e;
+        }
+        .card p {
+            margin-bottom: 20px;
+        }
+        .button {
+            display: inline-block;
+            background-color: #ff9900;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .button:hover {
+            background-color: #e88e00;
+        }
+        .user-info {
+            background-color: #f0f7fb;
+            border-left: 5px solid #0066c0;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 0 4px 4px 0;
+        }
+        .logout {
+            float: right;
+            color: #0066c0;
+            text-decoration: none;
+        }
+        .logout:hover {
+            text-decoration: underline;
+        }
+        .user-info {
+            background-color: #f0f7fb;
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Partner Central API Web Interface <a href="/logout" class="logout">Logout</a></h1>
+    
+    <div class="container">
+        {% if user_name %}
+        <div class="user-info">
+            <p>Welcome, {{ user_name }}!</p>
+        </div>
+        {% endif %}
+        
+        <div class="user-info">
+            <p><strong>Authentication Mode:</strong> 
+                {% if session.get('aws_access_key') %}
+                    Using session credentials for region: {{ session.get('aws_region', 'us-east-1') }}
+                    {% if session.get('aws_identity') %}
+                    <br><small>{{ session.get('aws_identity') }}</small>
+                    {% endif %}
+                {% else %}
+                    Using instance profile or environment variables for region: {{ session.get('aws_region', 'us-east-1') }}
+                {% endif %}
+            </p>
+        </div>
+        
+        <!-- General Purpose Section -->
+        <div class="section">
+            <h2 class="section-title">1. General Purpose</h2>
+            <div class="card-container">
+                <div class="card">
+                    <h3>List Opportunities</h3>
+                    <p>View a list of all available opportunities</p>
+                    <a href="/ListOpportunities" class="button">Go to List Opportunities</a>
+                </div>
+                
+                <div class="card">
+                    <h3>Get Opportunity</h3>
+                    <p>Retrieve details for a specific opportunity by ID</p>
+                    <a href="/GetOpportunity" class="button">Go to Get Opportunity</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Partner Originated Opportunity Section -->
+        <div class="section">
+            <h2 class="section-title">2. Partner Originated Opportunity</h2>
+            <div class="card-container">
+                <div class="card">
+                    <h3>Create Opportunity</h3>
+                    <p>Create a new partner-originated opportunity with a custom JSON payload</p>
+                    <a href="/CreateOpportunity" class="button">Go to Create Opportunity</a>
+                </div>
+                
+                <div class="card">
+                    <h3>List Solutions</h3>
+                    <p>View a list of all available solutions</p>
+                    <a href="/ListSolutions" class="button">Go to List Solutions</a>
+                </div>
+                
+                <div class="card">
+                    <h3>Associate Opportunity</h3>
+                    <p>Associate an opportunity with a solution, AWS product, or marketplace offer</p>
+                    <a href="/AssociateOpportunity" class="button">Go to Associate Opportunity</a>
+                </div>
+                
+                <div class="card">
+                    <h3>Start Engagement from Opportunity</h3>
+                    <p>Start an AWS engagement from an opportunity task</p>
+                    <a href="/StartEngagementFromOpportunity" class="button">Go to Start Engagement</a>
+                </div>
+                
+                <div class="card">
+                    <h3>Simulate Approval from AWS</h3>
+                    <p>Simulate AWS approval for an opportunity by updating its status</p>
+                    <a href="/SimulateApproval" class="button">Go to Simulate Approval</a>
+                </div>
+                
+                <div class="card">
+                    <h3>Simulate Action Required from AWS</h3>
+                    <p>Simulate AWS requesting additional information for an opportunity</p>
+                    <a href="/SimulateActionRequired" class="button">Go to Simulate Action Required</a>
+                </div>
+                
+                <div class="card">
+                    <h3>Update Opportunity Stage</h3>
+                    <p>Update an opportunity's stage to a different value</p>
+                    <a href="/UpdateOpportunityStage" class="button">Go to Update Opportunity Stage</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- AWS Originated Opportunity Section -->
+        <div class="section">
+            <h2 class="section-title">3. AWS Originated Opportunity</h2>
+            <div class="card-container">
+                <div class="card">
+                    <h3>Create AWS Opportunity</h3>
+                    <p>Simulate the creation of an AWS-originated opportunity</p>
+                    <a href="/CreateAwsOpportunity" class="button">Go to Create AWS Opportunity</a>
+                </div>
+                
+                <div class="card">
+                    <h3>List Engagement Invitations</h3>
+                    <p>View a list of all engagement invitations</p>
+                    <a href="/ListEngagementInvitations" class="button">Go to List Engagement Invitations</a>
+                </div>
+                
+                <div class="card">
+                    <h3>Get Engagement Invitation</h3>
+                    <p>Retrieve details for a specific engagement invitation by ARN</p>
+                    <a href="/GetEngagementInvitation" class="button">Go to Get Engagement Invitation</a>
+                </div>
+                
+                <div class="card">
+                    <h3>Accept Engagement Invitation</h3>
+                    <p>Accept an engagement invitation by providing the Engagement Invitation ID</p>
+                    <a href="/AcceptEngagementInvitation" class="button">Go to Accept Engagement Invitation</a>
+                </div>
+                
+                <div class="card">
+                    <h3>Get Opportunity</h3>
+                    <p>Retrieve details for a specific opportunity by ID</p>
+                    <a href="/GetOpportunity" class="button">Go to Get Opportunity</a>
+                </div>
+                
+                <div class="card">
+                    <h3>Update Opportunity Stage</h3>
+                    <p>Update an opportunity's stage to a different value</p>
+                    <a href="/UpdateOpportunityStage" class="button">Go to Update Opportunity Stage</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

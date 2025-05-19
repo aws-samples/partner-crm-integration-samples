@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Partner Central - Get Opportunity</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        h1 {
+            color: #232f3e;
+        }
+        .container {
+            margin-top: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input[type="text"] {
+            width: 300px;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #ff9900;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #e88e00;
+        }
+        #result {
+            margin-top: 20px;
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+            white-space: pre-wrap;
+            display: none;
+        }
+        .error {
+            color: #d13212;
+            margin-top: 10px;
+        }
+        .loading {
+            display: none;
+            margin-top: 15px;
+        }
+        .nav-link {
+            display: inline-block;
+            margin-top: 20px;
+            color: #0066c0;
+            text-decoration: none;
+        }
+        .nav-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>Partner Central - Get Opportunity</h1>
+    
+    <div class="container">
+        <div class="form-group">
+            <label for="opportunity_id">Opportunity ID:</label>
+            <input type="text" id="opportunity_id" name="opportunity_id" placeholder="Enter opportunity ID (e.g., O5465588)">
+        </div>
+        
+        <button id="submit-btn" onclick="getOpportunity()">Get Opportunity</button>
+        
+        <div class="loading" id="loading">Loading...</div>
+        <div id="error" class="error"></div>
+        <pre id="result"></pre>
+        
+        <a href="/" class="nav-link">Back to Home</a>
+    </div>
+
+    <script>
+        function getOpportunity() {
+            const opportunityId = document.getElementById('opportunity_id').value.trim();
+            const resultElement = document.getElementById('result');
+            const errorElement = document.getElementById('error');
+            const loadingElement = document.getElementById('loading');
+            
+            // Reset previous results
+            resultElement.style.display = 'none';
+            errorElement.textContent = '';
+            
+            if (!opportunityId) {
+                errorElement.textContent = 'Please enter an Opportunity ID';
+                return;
+            }
+            
+            // Show loading indicator
+            loadingElement.style.display = 'block';
+            
+            // Create form data
+            const formData = new FormData();
+            formData.append('opportunity_id', opportunityId);
+            
+            // Send request
+            fetch('/api/get_opportunity', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                loadingElement.style.display = 'none';
+                
+                if (data.error) {
+                    errorElement.textContent = data.error;
+                } else {
+                    resultElement.textContent = JSON.stringify(data.result, null, 2);
+                    resultElement.style.display = 'block';
+                }
+            })
+            .catch(error => {
+                loadingElement.style.display = 'none';
+                errorElement.textContent = 'Error: ' + error.message;
+            });
+        }
+    </script>
+</body>
+</html>

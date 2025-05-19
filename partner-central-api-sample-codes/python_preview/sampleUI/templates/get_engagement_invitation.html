@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Partner Central - Get Engagement Invitation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        h1 {
+            color: #232f3e;
+        }
+        .container {
+            margin-top: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input[type="text"] {
+            width: 100%;
+            max-width: 600px;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #ff9900;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        button:hover {
+            background-color: #e88e00;
+        }
+        #result {
+            margin-top: 20px;
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+            white-space: pre-wrap;
+            display: none;
+        }
+        .error {
+            color: #d13212;
+            margin-top: 10px;
+            padding: 10px;
+            border: 1px solid #d13212;
+            border-radius: 4px;
+            background-color: #fff0f0;
+            display: none;
+        }
+        .info-box {
+            background-color: #f0f7fb;
+            border-left: 5px solid #0066c0;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 0 4px 4px 0;
+        }
+        .loading {
+            display: none;
+            margin-top: 15px;
+        }
+        .nav-link {
+            display: inline-block;
+            margin-top: 20px;
+            color: #0066c0;
+            text-decoration: none;
+        }
+        .nav-link:hover {
+            text-decoration: underline;
+        }
+        .button-group {
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Partner Central - Get Engagement Invitation</h1>
+    
+    <div class="container">
+        <div class="info-box">
+            <p><strong>Note:</strong> This feature retrieves details of a specific engagement invitation using its ARN identifier.</p>
+            <p>Example ARN format: <code>arn:aws:partnercentral:us-east-1::catalog/Sandbox/engagement-invitation/engi-0aqvjn4nevnoy</code></p>
+        </div>
+        
+        <div class="form-group">
+            <label for="invitation_id">Engagement Invitation ARN:</label>
+            <input type="text" id="invitation_id" name="invitation_id" value="arn:aws:partnercentral:us-east-1::catalog/Sandbox/engagement-invitation/engi-0aqvjn4nevnoy">
+        </div>
+        
+        <div class="button-group">
+            <button id="submit-btn" onclick="getEngagementInvitation(false)">Get Engagement Invitation</button>
+        </div>
+        
+        <div class="loading" id="loading">Loading...</div>
+        <div id="error" class="error"></div>
+        <pre id="result"></pre>
+        
+        <a href="/" class="nav-link">Back to Home</a>
+    </div>
+
+    <script>
+        function getEngagementInvitation(useMock) {
+            const invitationId = document.getElementById('invitation_id').value.trim();
+            const resultElement = document.getElementById('result');
+            const errorElement = document.getElementById('error');
+            const loadingElement = document.getElementById('loading');
+            
+            // Reset previous results
+            resultElement.style.display = 'none';
+            errorElement.style.display = 'none';
+            errorElement.textContent = '';
+            
+            // Validate input
+            if (!invitationId) {
+                errorElement.textContent = 'Please enter an Engagement Invitation ARN';
+                errorElement.style.display = 'block';
+                return;
+            }
+            
+            // Show loading indicator
+            loadingElement.style.display = 'block';
+            
+            // Create form data
+            const formData = new FormData();
+            formData.append('invitation_id', invitationId);
+            formData.append('use_mock', useMock ? 'true' : 'false');
+            
+            // Send request
+            fetch('/api/get_engagement_invitation', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                return response.json().then(data => {
+                    if (!response.ok) {
+                        // Server returned an error status
+                        throw new Error(data.error || 'Unknown error occurred');
+                    }
+                    return data;
+                });
+            })
+            .then(data => {
+                loadingElement.style.display = 'none';
+                
+                if (data.error) {
+                    errorElement.textContent = data.error;
+                    errorElement.style.display = 'block';
+                } else {
+                    resultElement.textContent = JSON.stringify(data.result, null, 2);
+                    resultElement.style.display = 'block';
+                }
+            })
+            .catch(error => {
+                loadingElement.style.display = 'none';
+                errorElement.textContent = 'Error: ' + error.message;
+                errorElement.style.display = 'block';
+            });
+        }
+    </script>
+</body>
+</html>

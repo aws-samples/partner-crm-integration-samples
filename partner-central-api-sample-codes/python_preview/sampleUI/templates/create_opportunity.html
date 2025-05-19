@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Partner Central - Create Opportunity</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        h1 {
+            color: #232f3e;
+        }
+        .container {
+            margin-top: 20px;
+        }
+        button {
+            background-color: #ff9900;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-bottom: 15px;
+        }
+        button:hover {
+            background-color: #e88e00;
+        }
+        #editor-container {
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        #json-editor {
+            width: 100%;
+            height: 500px;
+            font-family: monospace;
+            font-size: 14px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            resize: vertical;
+        }
+        #result {
+            margin-top: 20px;
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+            white-space: pre-wrap;
+            display: none;
+        }
+        .error {
+            color: #d13212;
+            margin-top: 10px;
+        }
+        .loading {
+            display: none;
+            margin-top: 15px;
+        }
+        .nav-link {
+            display: inline-block;
+            margin-top: 20px;
+            color: #0066c0;
+            text-decoration: none;
+        }
+        .nav-link:hover {
+            text-decoration: underline;
+        }
+        .button-container {
+            display: flex;
+            gap: 10px;
+        }
+        .success {
+            color: #008000;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Partner Central - Create Opportunity</h1>
+    
+    <div class="container">
+        <p>Edit the JSON payload below and click "Create Opportunity" to submit.</p>
+        
+        <div class="button-container">
+            <button id="create-btn" onclick="createOpportunity()">Create Opportunity</button>
+            <button id="format-btn" onclick="formatJson()">Format JSON</button>
+        </div>
+        
+        <div id="editor-container">
+            <textarea id="json-editor">{{ default_payload }}</textarea>
+        </div>
+        
+        <div class="loading" id="loading">Creating opportunity...</div>
+        <div id="error" class="error"></div>
+        <div id="success" class="success"></div>
+        <pre id="result"></pre>
+        
+        <a href="/" class="nav-link">Back to Home</a>
+    </div>
+
+    <script>
+        // Format the JSON when the page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            formatJson();
+        });
+        
+        function formatJson() {
+            const editorElement = document.getElementById('json-editor');
+            try {
+                const jsonObj = JSON.parse(editorElement.value);
+                editorElement.value = JSON.stringify(jsonObj, null, 2);
+            } catch (e) {
+                // If JSON is invalid, don't format it
+                document.getElementById('error').textContent = 'Invalid JSON: ' + e.message;
+            }
+        }
+        
+        function createOpportunity() {
+            const jsonPayload = document.getElementById('json-editor').value;
+            const resultElement = document.getElementById('result');
+            const errorElement = document.getElementById('error');
+            const successElement = document.getElementById('success');
+            const loadingElement = document.getElementById('loading');
+            
+            // Reset previous results
+            resultElement.style.display = 'none';
+            errorElement.textContent = '';
+            successElement.textContent = '';
+            
+            try {
+                // Validate JSON
+                JSON.parse(jsonPayload);
+            } catch (e) {
+                errorElement.textContent = 'Invalid JSON: ' + e.message;
+                return;
+            }
+            
+            // Show loading indicator
+            loadingElement.style.display = 'block';
+            
+            // Create form data
+            const formData = new FormData();
+            formData.append('payload', jsonPayload);
+            
+            // Send request
+            fetch('/api/create_opportunity', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                loadingElement.style.display = 'none';
+                
+                if (data.error) {
+                    errorElement.textContent = 'Error: ' + JSON.stringify(data.error);
+                } else {
+                    successElement.textContent = 'Opportunity created successfully!';
+                    resultElement.textContent = JSON.stringify(data.result, null, 2);
+                    resultElement.style.display = 'block';
+                }
+            })
+            .catch(error => {
+                loadingElement.style.display = 'none';
+                errorElement.textContent = 'Error: ' + error.message;
+            });
+        }
+    </script>
+</body>
+</html>

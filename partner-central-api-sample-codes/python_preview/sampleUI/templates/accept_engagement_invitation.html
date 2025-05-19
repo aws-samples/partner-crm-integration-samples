@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accept Engagement Invitation</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            padding: 20px;
+        }
+        .result-container {
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f8f9fa;
+            display: none;
+        }
+        pre {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+    </style>
+    <!-- Local jQuery reference instead of external CDN -->
+    <script src="/static/js/jquery-3.5.1.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Accept Engagement Invitation</h1>
+        <p>Use this form to accept an engagement invitation by providing the Engagement Invitation ID.</p>
+
+        <form id="acceptInvitationForm">
+            <div class="form-group">
+                <label for="invitation_id">Engagement Invitation ID:</label>
+                <input type="text" class="form-control" id="invitation_id" name="invitation_id"
+                       placeholder="Enter the Engagement Invitation ID (ARN)" required>
+                <small class="form-text text-muted">Example: arn:aws:partnercentral:us-east-1::catalog/Sandbox/engagement-invitation/engi-0000002isusga</small>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Accept Invitation</button>
+        </form>
+
+        <div class="result-container" id="resultContainer">
+            <h3>Result:</h3>
+            <pre id="resultOutput"></pre>
+        </div>
+
+        <div class="alert alert-danger mt-3" id="errorContainer" style="display: none;">
+            <h3>Error:</h3>
+            <p id="errorMessage"></p>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            $('#acceptInvitationForm').submit(function(e) {
+                e.preventDefault();
+
+                // Hide previous results/errors
+                $('#resultContainer').hide();
+                $('#errorContainer').hide();
+
+                // Get the invitation ID
+                const invitationId = $('#invitation_id').val().trim();
+
+                // Make the API call
+                $.ajax({
+                    url: '/api/accept_engagement_invitation',
+                    method: 'POST',
+                    data: {
+                        invitation_id: invitationId
+                    },
+                    success: function(response) {
+                        // Display the result
+                        $('#resultOutput').text(JSON.stringify(response.result, null, 2));
+                        $('#resultContainer').show();
+                    },
+                    error: function(xhr) {
+                        // Display error message
+                        let errorMsg = 'An error occurred while processing your request.';
+                        if (xhr.responseJSON && xhr.responseJSON.error) {
+                            errorMsg = xhr.responseJSON.error;
+                        }
+                        $('#errorMessage').text(errorMsg);
+                        $('#errorContainer').show();
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
