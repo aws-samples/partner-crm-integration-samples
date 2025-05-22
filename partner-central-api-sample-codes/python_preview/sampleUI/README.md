@@ -46,18 +46,36 @@ aws configure
 
 Enter your AWS Access Key ID, Secret Access Key, default region (e.g., us-east-1), and output format when prompted.
 
-#### Option 2: Environment Variables
-
-Set the following environment variables:
-```shell
-export AWS_ACCESS_KEY_ID=your_access_key
-export AWS_SECRET_ACCESS_KEY=your_secret_key
-export AWS_DEFAULT_REGION=us-east-1
-```
-
-#### Option 3: Instance Profile (Recommended for EC2 Deployment)
+#### Option 2: Instance Profile (Recommended for EC2 Deployment)
 
 When deploying to EC2, attach an IAM role to the instance with the necessary permissions for Partner Central API access. The application will automatically use the instance profile credentials.
+
+#### To note: 
+By default, the application will skip the AWS credentials page and use credentials from the AWS credentials file or instance profile. To enable users to enter their own AWS credentials:
+1. Set useLogin to True in `config.py`:
+   ```python
+   CONFIG = {
+    'useLogin': True  # Set to True to enable AWS credentials login page, False to skip it
+    }
+    ```
+2. When useLogin is True, users will be prompted to enter their AWS credentials after logging in with Cognito.
+
+3. When useLogin is False, the application will use credentials from the AWS credentials file or instance profile.
+
+#### Credential Priority
+The application uses the following priority order for AWS credentials:
+
+- When useLogin is True:
+
+    1. Environment variables (set from session in app.py from user entered AWS credentials)
+    2. AWS credentials file (for local development)
+    3. Instance profile (for EC2 deployment)
+
+- When useLogin is False:
+
+    1. AWS credentials file (for local development)
+    2. Instance profile (for EC2 deployment)
+
 
 ### 3. Amazon Cognito Setup (Required)
 
@@ -70,16 +88,22 @@ The application uses Amazon Cognito for authentication:
    - Add the callback URL for your application
    - Select the appropriate OAuth scopes
 
-4. Update the configuration in `app.py` or create a `config.py` file:
-```python
-COGNITO_CONFIG = {
+4. Update the configuration in `app.py` :
+   ```python
+   USER_POOL_ID = 'us-east-1_daXTsClRy'  # Replace with your User Pool ID
+   CLIENT_ID = '7tep9c1o3lhl4k6stm6rjf0vjg'  # Replace with your App Client ID
+   REGION = 'us-east-1'  # Replace with your AWS region
+    ```
+   or create a `config.py` file:
+    ```python
+    COGNITO_CONFIG = {
     'REGION': 'us-east-1',
     'USER_POOL_ID': 'your_user_pool_id',
     'APP_CLIENT_ID': 'your_app_client_id',
     'DOMAIN': 'your_cognito_domain',
     'REDIRECT_URI': 'http://localhost:8800/callback'
-}
-```
+    }
+    ```
 
 ### 4. Running the Application Locally
 

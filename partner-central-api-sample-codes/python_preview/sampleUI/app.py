@@ -30,27 +30,63 @@ import simulate_action_required_api
 import socket
 import start_engagement_by_accepting_invitation_task
 import update_opportunity_stage_api
+import datetime
 from utils.helpers import DateTimeEncoder
 from functools import wraps
-
-# Create logs directory
-os.makedirs('logs', exist_ok=True)
+from config import CONFIG
 
 # Configure logging
+import logging
+import os
+
+# Create logs directory
+log_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'logs')
+os.makedirs(log_dir, exist_ok=True)
+log_file = os.path.join(log_dir, 'app.log')
+
+# Reset root logger
+for handler in logging.root.handlers[:]:
+    logging.root.removeHandler(handler)
+
+# Configure basic logging
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
     handlers=[
-        logging.FileHandler('logs/app.log'),
+        logging.FileHandler(log_file),
         logging.StreamHandler()
     ]
 )
 
-# Configure logger
+# Get logger for this module
 logger = logging.getLogger(__name__)
+logger.info("Application starting up")
 
+
+# In app.py
 app = Flask(__name__)
 app.secret_key = os.environ.get('FLASK_SECRET_KEY', uuid.uuid4().hex)
+app.config['SESSION_TYPE'] = 'filesystem'  # Add this line
+
+@app.before_request
+def load_aws_credentials_to_context():
+    """Load AWS credentials from session into Flask g object"""
+    from flask import g
+    
+    # Clear any existing credentials in g
+    g.aws_access_key = None
+    g.aws_secret_key = None
+    g.aws_session_token = None
+    g.aws_region = None
+    
+    # Load credentials from session if available
+    if 'aws_access_key' in session and session['aws_access_key']:
+        g.aws_access_key = session['aws_access_key']
+        g.aws_secret_key = session['aws_secret_key']
+        g.aws_session_token = session.get('aws_session_token')
+        g.aws_region = session.get('aws_region', 'us-east-1')
+        app.logger.info("Loaded AWS credentials from session into application context")
+
 
 # Try to detect if running on EC2 by checking hostname
 try:
@@ -168,17 +204,35 @@ def callback():
         session['user_email'] = user_info.get('email')
         session['user_name'] = user_info.get('name', user_info.get('email'))
         
-        # Redirect to the originally requested URL or AWS credentials page
-        next_url = session.pop('next_url', url_for('aws_credentials'))
+        # Check if we should skip the AWS credentials page
+        use_login = CONFIG.get('useLogin', False)
+        if not use_login:
+            # Skip AWS credentials page
+            session['skipped_login'] = True
+            next_url = session.pop('next_url', url_for('index'))
+        else:
+            # Go to AWS credentials page
+            next_url = session.pop('next_url', url_for('aws_credentials'))
+        
         return redirect(next_url)
     except Exception as e:
         logger.error(f"Error exchanging code for tokens: {str(e)}")
         return f"Authentication error: {str(e)}", 500
 
+
+
 @app.route('/aws_credentials', methods=['GET', 'POST'])
 @cognito_auth_required
 def aws_credentials():
     """Handle AWS credentials input"""
+    # Check if we should skip the AWS credentials page
+    use_login = CONFIG.get('useLogin', False)
+    print(f"use_login value is {use_login}")  # Use print instead of logger
+    if not use_login:
+        # Skip AWS credentials page
+        session['skipped_login'] = True
+        return redirect(url_for('index'))
+    
     error = None
     if request.method == 'POST':
         # Check if user clicked "Skip Login"
@@ -190,6 +244,17 @@ def aws_credentials():
             session.pop('aws_region', None)
             session['aws_region'] = request.form.get('region', 'us-east-1').strip()
             session['skipped_login'] = True
+            
+            # Clear environment variables
+            if 'AWS_ACCESS_KEY_ID' in os.environ:
+                del os.environ['AWS_ACCESS_KEY_ID']
+            if 'AWS_SECRET_ACCESS_KEY' in os.environ:
+                del os.environ['AWS_SECRET_ACCESS_KEY']
+            if 'AWS_SESSION_TOKEN' in os.environ:
+                del os.environ['AWS_SESSION_TOKEN']
+            if 'AWS_REGION' in os.environ:
+                del os.environ['AWS_REGION']
+                
             return redirect(url_for('index'))
         
         # Store credentials in session
@@ -198,52 +263,54 @@ def aws_credentials():
         session_token = request.form.get('session_token', '').strip()
         region = request.form.get('region', 'us-east-1').strip()
         
-        # If access key is provided, validate the credentials
+        # Log the credentials being stored
+        logger.info(f"Storing credentials in session: {access_key[:4]}...{access_key[-4:] if len(access_key) > 8 else ''}")
+        
+        # Store credentials in session
+        session['aws_access_key'] = access_key
+        session['aws_secret_key'] = secret_key
+        session['aws_session_token'] = session_token
+        session['aws_region'] = region
+        session['skipped_login'] = True  # Mark as processed
+        
+        # Force session to be saved
+        session.modified = True
+        
+        # Set environment variables
         if access_key and secret_key:
-            session['aws_access_key'] = access_key
-            session['aws_secret_key'] = secret_key
-            session['aws_session_token'] = session_token
-            session['aws_region'] = region
-            
-            # Try to validate credentials by making a simple API call
-            try:
-                client_kwargs = {
-                    'service_name': 'sts',
-                    'region_name': region,
-                    'aws_access_key_id': access_key,
-                    'aws_secret_access_key': secret_key
-                }
-                
-                # Add session token if provided
-                if session_token:
-                    client_kwargs['aws_session_token'] = session_token
-                    
-                client = boto3.client(**client_kwargs)
-                identity = client.get_caller_identity()
-                session['aws_identity'] = f"Authenticated as: {identity.get('Arn', 'Unknown')}"
-                return redirect(url_for('index'))
-            except Exception as e:
-                # Clear invalid credentials
-                session.pop('aws_access_key', None)
-                session.pop('aws_secret_key', None)
-                session.pop('aws_session_token', None)
-                session.pop('aws_region', None)
-                error = f"Invalid credentials: {str(e)}"
-        else:
-            # No credentials provided, proceed with instance profile
-            session['aws_region'] = region
-            return redirect(url_for('index'))
+            os.environ['AWS_ACCESS_KEY_ID'] = access_key
+            os.environ['AWS_SECRET_ACCESS_KEY'] = secret_key
+            if session_token:
+                os.environ['AWS_SESSION_TOKEN'] = session_token
+            os.environ['AWS_REGION'] = region
+            logger.info(f"Set AWS environment variables: {access_key[:4]}...{access_key[-4:] if len(access_key) > 8 else ''}")
+        
+        # Always redirect to index after processing
+        return redirect(url_for('index'))
     
+    # For GET requests, render the form
     return render_template('aws_credentials.html', error=error, user_name=session.get('user_name'))
+
 
 @app.route('/')
 @cognito_auth_required
 def index():
     """Render the main page with navigation options"""
-    # Check if AWS credentials are needed
-    if 'aws_access_key' not in session and 'skipped_login' not in session:
+    # Check if the user is coming from the AWS credentials page
+    referrer = request.referrer
+    coming_from_aws_credentials = referrer and 'aws_credentials' in referrer
+    
+    # Only check for credentials if not coming from the AWS credentials page
+    use_login = CONFIG.get('useLogin', False)
+    if use_login and not coming_from_aws_credentials and 'aws_access_key' not in session and 'skipped_login' not in session:
         return redirect(url_for('aws_credentials'))
+    
+    # Always render the index page if authenticated
     return render_template('index.html', user_name=session.get('user_name'))
+
+
+
+
 
 # Add all your existing routes here with @cognito_auth_required instead of @requires_auth
 @app.route('/GetOpportunity', methods=['GET'])
