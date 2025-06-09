@@ -18,10 +18,22 @@
     "Description": "AWS AppFabric connects multiple SaaS applications with no coding required for better productivity and security"
   },
   {
+    "Identifier": "AWSAppMesh",
+    "Name": "AWS App Mesh",
+    "Family": "Networking & Content Delivery",
+    "Description": "Easily monitor and control microservices"
+  },
+  {
     "Identifier": "AWSAppRunner",
     "Name": "AWS App Runner",
     "Family": "Compute",
     "Description": "Build and run production web applications at scale"
+  },
+  {
+    "Identifier": "AWSAppStudio",
+    "Name": "AWS App Studio",
+    "Family": "Machine Learning",
+    "Description": "Low-code application building service powered by Gen AI"
   },
   {
     "Identifier": "AWSAppSync",
@@ -78,10 +90,10 @@
     "Description": "Bug bashing events"
   },
   {
-    "Identifier": "AWSBusinessSupportPublicPricing",
-    "Name": "AWS Business Support - Public Pricing",
+    "Identifier": "AWSBusinessSupport",
+    "Name": "AWS Business Support",
     "Family": "Support",
-    "Description": "Recommended if you have production workloads in AWS"
+    "Description": "Recommended if you have production workloads in AWS. Includes 24/7 access to cloud experts, technical support, and architectural guidance to help optimize cloud operations and accelerate business outcomes."
   },
   {
     "Identifier": "AWSCertificateManager",
@@ -118,6 +130,12 @@
     "Name": "AWS Client VPN",
     "Family": "Networking & Content Delivery",
     "Description": "Extend your on-premises networks to the cloud and securely access them from anywhere"
+  },
+  {
+    "Identifier": "AWSCloud9",
+    "Name": "AWS Cloud9",
+    "Family": "Developer Tools",
+    "Description": "A cloud IDE for writing, running, and debugging code"
   },
   {
     "Identifier": "AWSCloudControlAPI",
@@ -165,7 +183,7 @@
     "Identifier": "AWSCloudWAN",
     "Name": "AWS Cloud WAN",
     "Family": "Networking & Content Delivery",
-    "Description": "AWS Cloud WAN"
+    "Description": "AWSCloudWAN"
   },
   {
     "Identifier": "AWSCodeArtifact",
@@ -198,6 +216,12 @@
     "Description": "Automate continuous delivery pipelines for fast and reliable updates"
   },
   {
+    "Identifier": "AWSCodeStar",
+    "Name": "AWS CodeStar",
+    "Family": "Developer Tools",
+    "Description": "Quickly develop, build, and deploy applications on AWS"
+  },
+  {
     "Identifier": "AWSConfig",
     "Name": "AWS Config",
     "Family": "Management & Governance",
@@ -219,7 +243,7 @@
     "Identifier": "AWSCountdownPremium",
     "Name": "AWS Countdown Premium",
     "Family": "Support",
-    "Description": "Optimize your business-critical events, product launches, migrations, and modernizations on AWS"
+    "Description": "Proactive support program for mission-critical launches and events. Provides intensive, short-term engagement with AWS experts to ensure operational readiness, identify and mitigate risks, and plan capacity using proven AWS playbooks and best practices."
   },
   {
     "Identifier": "AWSDataExchange",
@@ -282,8 +306,8 @@
     "Description": "Fully autonomous 1/18th scale race car, driven by machine learning"
   },
   {
-    "Identifier": "AWSDeveloperSupportPublicPricing",
-    "Name": "AWS Developer Support - Public Pricing",
+    "Identifier": "AWSDeveloperSupport",
+    "Name": "AWS Developer Support",
     "Family": "Support",
     "Description": "Recommended if you are experimenting or testing in AWS"
   },
@@ -348,10 +372,22 @@
     "Description": "Convert video inputs into live outputs for broadcast and streaming delivery"
   },
   {
+    "Identifier": "AWSElementalMediaLiveAnywhere",
+    "Name": "AWS Elemental MediaLive Anywhere",
+    "Family": "Media Services",
+    "Description": "Cloud-controlled live video encoding on your own infrastructure"
+  },
+  {
     "Identifier": "AWSElementalMediaPackage",
     "Name": "AWS Elemental MediaPackage",
     "Family": "Media Services",
     "Description": "Deliver video to many devices using just-in-time format conversion"
+  },
+  {
+    "Identifier": "AWSElementalMediaStore",
+    "Name": "AWS Elemental MediaStore",
+    "Family": "Media Services",
+    "Description": "Store and deliver video assets for live or on-demand media workflows"
   },
   {
     "Identifier": "AWSElementalMediaTailor",
@@ -366,6 +402,12 @@
     "Description": "Dependable, cost-effective messaging without compromising safety, security, or results"
   },
   {
+    "Identifier": "AWSEndUserMessagingSocial",
+    "Name": "AWS End User Messaging Social",
+    "Family": "Business Applications",
+    "Description": "Send captivating multimedia content and interactive messages with WhatsApp messaging"
+  },
+  {
     "Identifier": "AWSEndofSupportMigrationProgramEMP",
     "Name": "AWS End-of-Support Migration Program (EMP)",
     "Family": "Migration & Transfer",
@@ -374,12 +416,6 @@
   {
     "Identifier": "AWSEnterpriseSupportPublicPricing",
     "Name": "AWS Enterprise Support - Public Pricing",
-    "Family": "Support",
-    "Description": "Recommended if you have business and/or mission critical workloads in AWS"
-  },
-  {
-    "Identifier": "AWSEnterpriseonRamp",
-    "Name": "AWS Enterprise on Ramp",
     "Family": "Support",
     "Description": "Recommended if you have business and/or mission critical workloads in AWS"
   },
@@ -453,7 +489,7 @@
     "Identifier": "AWSIncidentDetectionandResponse",
     "Name": "AWS Incident Detection and Response",
     "Family": "Support",
-    "Description": "Add-on to AWS Enterprise Support that offers customers 24 x 7 proactive incident detection and rapid engagement with the right AWS resources to accelerate their recovery from critical incidents"
+    "Description": "Add-on service offering 24/7 monitoring and rapid response for critical workloads. Includes proactive issue detection, accelerated troubleshooting, and coordinated incident management to minimize downtime and maintain business continuity."
   },
   {
     "Identifier": "AWSInfrastructureEventManagement",
@@ -726,22 +762,28 @@
     "Description": "Quickly build HPC compute environments on AWS"
   },
   {
+    "Identifier": "AWSParallelComputingService",
+    "Name": "AWS Parallel Computing Service",
+    "Family": "High Performance Computing (HPC)",
+    "Description": "Easily run HPC workloads at virtually any scale"
+  },
+  {
     "Identifier": "AWSPartnerDeviceCatalog",
     "Name": "AWS Partner Device Catalog",
     "Family": "Internet of Things",
     "Description": "Device Qualification Catalog"
   },
   {
+    "Identifier": "AWSPartnerLedSupport",
+    "Name": "AWS Partner-Led Support",
+    "Family": "Support",
+    "Description": "AWS Partner-Led Support (PLS) empowers you to offer high quality support, leveraging specialized tooling and knowledge built on the experience of AWS Support"
+  },
+  {
     "Identifier": "AWSPaymentCryptography",
     "Name": "AWS Payment Cryptography",
     "Family": "Security, Identity & Compliance",
     "Description": "Simplify cryptography operations in your cloud-hosted payment application"
-  },
-  {
-    "Identifier": "AWSPrivate5G",
-    "Name": "AWS Private 5G",
-    "Family": "Networking & Content Delivery",
-    "Description": "Managed service for deploying private cellular networks at on-premises"
   },
   {
     "Identifier": "AWSPrivateCA",
@@ -766,6 +808,12 @@
     "Name": "AWS Resilience Hub",
     "Family": "Management & Governance",
     "Description": "Prepare and protect your applications from disruptions"
+  },
+  {
+    "Identifier": "AWSRoboMaker",
+    "Name": "AWS RoboMaker",
+    "Family": "Robotics",
+    "Description": "Develop, test, and deploy intelligent robotics applications"
   },
   {
     "Identifier": "AWSSDKsandTools",
@@ -832,6 +880,12 @@
     "Name": "AWS Site-to-Site VPN",
     "Family": "Networking & Content Delivery",
     "Description": "Extend your on-premises networks to the cloud"
+  },
+  {
+    "Identifier": "AWSSnowmobile",
+    "Name": "AWS Snowmobile",
+    "Family": "Storage",
+    "Description": "Migrate or transport exabyte-scale data sets into and out of AWS"
   },
   {
     "Identifier": "AWSStepFunctions",
@@ -916,6 +970,24 @@
     "Name": "AWS Transfer Family (SFTP, FTPS, FTP)",
     "Family": "Migration & Transfer",
     "Description": "Easily manage and share data with simple, secure, and scalable file transfers"
+  },
+  {
+    "Identifier": "AWSTransformforNET",
+    "Name": "AWS Transform for .NET",
+    "Family": "Developer Tools",
+    "Description": "Accelerate .NET application porting from Windows to Linux"
+  },
+  {
+    "Identifier": "AWSTransformforVMware",
+    "Name": "AWS Transform for VMware",
+    "Family": "Developer Tools",
+    "Description": "Accelerate migration and modernization of VMware workloads"
+  },
+  {
+    "Identifier": "AWSTransformformainframe",
+    "Name": "AWS Transform for mainframe",
+    "Family": "Developer Tools",
+    "Description": "Accelerate mainframe application modernization"
   },
   {
     "Identifier": "AWSTransitGateway",
@@ -1014,16 +1086,22 @@
     "Description": "Amazon Bedrock models provided by AI21 Labs"
   },
   {
+    "Identifier": "AmazonBedrockAgents",
+    "Name": "Amazon Bedrock - Agents",
+    "Family": "Machine Learning",
+    "Description": "Automate multistep tasks by connecting with APIs and data sources"
+  },
+  {
     "Identifier": "AmazonBedrockAmazonModels",
     "Name": "Amazon Bedrock - Amazon Models",
     "Family": "Machine Learning",
-    "Description": "Amazon Bedrock models provided by Amazon"
+    "Description": "Amazon Bedrock models provided by Amazon (Nova, Titan)"
   },
   {
     "Identifier": "AmazonBedrockAnthropicModels",
     "Name": "Amazon Bedrock - Anthropic Models",
     "Family": "Machine Learning",
-    "Description": "Amazon Bedrock models provided by Anthropic"
+    "Description": "Amazon Bedrock models provided by Anthropic (Claude)"
   },
   {
     "Identifier": "AmazonBedrockCohereModels",
@@ -1032,16 +1110,40 @@
     "Description": "Amazon Bedrock models provided by Cohere"
   },
   {
+    "Identifier": "AmazonBedrockDataAutomation",
+    "Name": "Amazon Bedrock - Data Automation",
+    "Family": "Machine Learning",
+    "Description": "Automate the generation of insights from unstructured multimodal content such as documents, images, audio, and video"
+  },
+  {
+    "Identifier": "AmazonBedrockDeepSeekModels",
+    "Name": "Amazon Bedrock - DeepSeek Models",
+    "Family": "Machine Learning",
+    "Description": "Amazon Bedrock models provided by DeepSeek"
+  },
+  {
     "Identifier": "AmazonBedrockGuardrails",
     "Name": "Amazon Bedrock - Guardrails",
     "Family": "Machine Learning",
     "Description": "Implement safeguards customized to application requirements and responsible AI policies"
   },
   {
+    "Identifier": "AmazonBedrockKnowledgeBases",
+    "Name": "Amazon Bedrock - Knowledge Bases",
+    "Family": "Machine Learning",
+    "Description": "Adds contextual information from your data sources to deliver more relevant, accurate, and customized responses"
+  },
+  {
+    "Identifier": "AmazonBedrockLumaAIModels",
+    "Name": "Amazon Bedrock - Luma AI Models",
+    "Family": "Machine Learning",
+    "Description": "Amazon Bedrock models provided by Luma AI"
+  },
+  {
     "Identifier": "AmazonBedrockMetaModels",
     "Name": "Amazon Bedrock - Meta Models",
     "Family": "Machine Learning",
-    "Description": "Amazon Bedrock models provided by Meta"
+    "Description": "Amazon Bedrock models provided by Meta (Llama)"
   },
   {
     "Identifier": "AmazonBedrockMistralAIModels",
@@ -1056,16 +1158,28 @@
     "Description": "Amazon Bedrock models provided by Stability AI"
   },
   {
+    "Identifier": "AmazonBedrockTwelveLabsModels",
+    "Name": "Amazon Bedrock - TwelveLabs Models",
+    "Family": "Machine Learning",
+    "Description": "Amazon Bedrock models provided by TwelveLabs"
+  },
+  {
+    "Identifier": "AmazonBedrockWriterModels",
+    "Name": "Amazon Bedrock - Writer Models",
+    "Family": "Machine Learning",
+    "Description": "Amazon Bedrock models provided by Writer"
+  },
+  {
+    "Identifier": "AmazonBedrockpoolsideModels",
+    "Name": "Amazon Bedrock - poolside Models",
+    "Family": "Machine Learning",
+    "Description": "Amazon Bedrock models provided by poolside"
+  },
+  {
     "Identifier": "AmazonBraket",
     "Name": "Amazon Braket",
     "Family": "Quantum Technologies",
     "Description": "Service for exploring, evaluating, and experimenting with quantum computing."
-  },
-  {
-    "Identifier": "AmazonChime",
-    "Name": "Amazon Chime",
-    "Family": "Business Applications",
-    "Description": "Amazon Chime is a communications service that transforms online meetings"
   },
   {
     "Identifier": "AmazonChimeSDK",
@@ -1110,6 +1224,12 @@
     "Description": "Monitor Resources and Applications"
   },
   {
+    "Identifier": "AmazonCloudWatchEvidently",
+    "Name": "Amazon CloudWatch Evidently",
+    "Family": "Management & Governance",
+    "Description": "Application developers conduct experiments and identify unintended consequences of new features before rolling them out, thereby reducing risk"
+  },
+  {
     "Identifier": "AmazonCloudWatchRUM",
     "Name": "Amazon CloudWatch RUM",
     "Family": "Management & Governance",
@@ -1130,13 +1250,13 @@
   {
     "Identifier": "AmazonCodeGuruProfiler",
     "Name": "Amazon CodeGuru Profiler",
-    "Family": "Machine Learning",
+    "Family": "Developer Tools",
     "Description": "Profile your applications in the cloud from a single, centralized dashboard"
   },
   {
     "Identifier": "AmazonCodeGuruReviewer",
     "Name": "Amazon CodeGuru Reviewer",
-    "Family": "Machine Learning",
+    "Family": "Developer Tools",
     "Description": "Automate code reviews and optimize application performance with ML-powered recommendations"
   },
   {
@@ -1162,6 +1282,18 @@
     "Name": "Amazon Comprehend Medical",
     "Family": "Machine Learning",
     "Description": "Extract information from unstructured medical text accurately and quickly"
+  },
+  {
+    "Identifier": "AmazonConnectAI",
+    "Name": "Amazon Connect AI",
+    "Family": "Customer Engagement",
+    "Description": "Cloud customer engagement application enables AI capabilities across customer touchpoints with all-inclusive pricing"
+  },
+  {
+    "Identifier": "AmazonConnectAppleMessagesforBusiness",
+    "Name": "Amazon Connect - Apple Messages for Business",
+    "Family": "Customer Engagement",
+    "Description": "Enables you to deliver personalized customer experiences on Apple Messages, the default messaging application on all iOS devices"
   },
   {
     "Identifier": "AmazonConnectCases",
@@ -1278,10 +1410,10 @@
     "Description": "Provide superior customer service at a lower cost with an easy-to-use omnichannel cloud contact center"
   },
   {
-    "Identifier": "AmazonConnectVoiceID",
-    "Name": "Amazon Connect - Voice ID",
+    "Identifier": "AmazonConnectforWhatsAppBusinessMessaging",
+    "Name": "Amazon Connect for WhatsApp Business Messaging",
     "Family": "Customer Engagement",
-    "Description": "Real-time caller authentication and fraud risk detection using ML-powered voice analysis"
+    "Description": "Customers can initiate a conversation by simply tapping on WhatsApp-enabled phone numbers or chat buttons"
   },
   {
     "Identifier": "AmazonDataFirehose",
@@ -1310,7 +1442,7 @@
   {
     "Identifier": "AmazonDevOpsGuru",
     "Name": "Amazon DevOps Guru",
-    "Family": "Machine Learning",
+    "Family": "Management & Governance",
     "Description": "ML-powered cloud operations service to improve application availability."
   },
   {
@@ -1368,6 +1500,18 @@
     "Description": "High performance GPU-based instances for graphics-intensive applications and machine learning inference powered by A10G GPUs from NVIDIA"
   },
   {
+    "Identifier": "AmazonEC2G6",
+    "Name": "Amazon EC2 - G6",
+    "Family": "Compute",
+    "Description": "High performance for ML inference and Graphic applications in the cloud powered by GPUs from NVIDIA"
+  },
+  {
+    "Identifier": "AmazonEC2G6e",
+    "Name": "Amazon EC2 - G6e",
+    "Family": "Compute",
+    "Description": "High performance for ML inference and Graphic applications in the cloud powered by GPUs from NVIDIA"
+  },
+  {
     "Identifier": "AmazonEC2Graviton",
     "Name": "Amazon EC2 - Graviton",
     "Family": "Compute",
@@ -1410,10 +1554,34 @@
     "Description": "Highest performance for ML training and HPC applications in the cloud powered by A100 GPUs from NVIDIA"
   },
   {
+    "Identifier": "AmazonEC2P4de",
+    "Name": "Amazon EC2 - P4de",
+    "Family": "Compute",
+    "Description": "High performance for ML training and HPC applications in the cloud powered by A100-80G GPUs from NVIDIA"
+  },
+  {
     "Identifier": "AmazonEC2P5",
     "Name": "Amazon EC2 - P5",
     "Family": "Compute",
-    "Description": "Secure and resizable compute capacity to support virtually any workload"
+    "Description": "High performance for ML training and HPC applications in the cloud powered by H100 GPUs from NVIDIA"
+  },
+  {
+    "Identifier": "AmazonEC2P5e",
+    "Name": "Amazon EC2 - P5e",
+    "Family": "Compute",
+    "Description": "High performance for ML training and HPC applications in the cloud powered by H200 GPUs from NVIDIA"
+  },
+  {
+    "Identifier": "AmazonEC2P5en",
+    "Name": "Amazon EC2 - P5en",
+    "Family": "Compute",
+    "Description": "High performance for ML training and HPC applications in the cloud powered by H200 GPUs from NVIDIA, and latest PCIe version"
+  },
+  {
+    "Identifier": "AmazonEC2P6",
+    "Name": "Amazon EC2 - P6",
+    "Family": "Compute",
+    "Description": "High performance for ML training and HPC applications in the cloud powered by Latest Blackwell GPUs from NVIDIA"
   },
   {
     "Identifier": "AmazonEC2RHEL",
@@ -1554,6 +1722,12 @@
     "Description": "Easy-to-Use Scalable Media Transcoding"
   },
   {
+    "Identifier": "AmazonElasticVMwareServiceAmazonEVS",
+    "Name": "Amazon Elastic VMware Service (Amazon EVS)",
+    "Family": "Compute",
+    "Description": "A new, native AWS service for customers to run VMware Cloud Foundation (VCF) within their Amazon VPC"
+  },
+  {
     "Identifier": "AmazonEventBridge",
     "Name": "Amazon EventBridge",
     "Family": "Application Integration",
@@ -1671,7 +1845,7 @@
     "Identifier": "AmazonKendra",
     "Name": "Amazon Kendra",
     "Family": "Machine Learning",
-    "Description": "Highly accurate enterprise search service powered by machine learning"
+    "Description": "A highly accurate managed Index for intelligent search and retrieval-augmented generation (RAG) digital assistants"
   },
   {
     "Identifier": "AmazonKeyspaces",
@@ -1722,10 +1896,22 @@
     "Description": "Securely and easily add location data to applications."
   },
   {
+    "Identifier": "AmazonLookoutforEquipment",
+    "Name": "Amazon Lookout for Equipment",
+    "Family": "Machine Learning",
+    "Description": "Detect abnormal equipment behavior by analyzing sensor data"
+  },
+  {
     "Identifier": "AmazonLookoutforMetrics",
     "Name": "Amazon Lookout for Metrics",
     "Family": "Machine Learning",
     "Description": "Accurately detect anomalies in your business metrics and quickly understand why"
+  },
+  {
+    "Identifier": "AmazonLookoutforVision",
+    "Name": "Amazon Lookout for Vision",
+    "Family": "Machine Learning",
+    "Description": "Identify defects using computer vision to automate quality inspection."
   },
   {
     "Identifier": "AmazonLumberyard",
@@ -1800,6 +1986,12 @@
     "Description": "Redis-compatible, durable, in-memory database service for ultra-fast performance"
   },
   {
+    "Identifier": "AmazonMonitron",
+    "Name": "Amazon Monitron",
+    "Family": "Machine Learning",
+    "Description": "End-to-end system for equipment monitoring"
+  },
+  {
     "Identifier": "AmazonNeptune",
     "Name": "Amazon Neptune",
     "Family": "Database",
@@ -1818,6 +2010,12 @@
     "Description": "Transform genomic, transcriptomic, and other omics data into insights"
   },
   {
+    "Identifier": "AmazonOne",
+    "Name": "Amazon One",
+    "Family": "Business Applications",
+    "Description": "Amazon One uses palm biometrics to securely authenticate payments and access, offering fast, contactless convenience"
+  },
+  {
     "Identifier": "AmazonOpenSearchService",
     "Name": "Amazon OpenSearch Service",
     "Family": "Analytics",
@@ -1830,12 +2028,6 @@
     "Description": "Amazon Personalize helps you easily add real-time recommendations to your apps"
   },
   {
-    "Identifier": "AmazonPinpoint",
-    "Name": "Amazon Pinpoint",
-    "Family": "Customer Engagement",
-    "Description": "Multichannel marketing communication service"
-  },
-  {
     "Identifier": "AmazonPolly",
     "Name": "Amazon Polly",
     "Family": "Machine Learning",
@@ -1845,7 +2037,19 @@
     "Identifier": "AmazonQBusiness",
     "Name": "Amazon Q Business",
     "Family": "Machine Learning",
-    "Description": "Application for building generative-AI-powered assistants grounded in an organization's data to improve employee productivity"
+    "Description": "The most capable generative AI-powered assistant for finding information, gaining insight, and taking action at work"
+  },
+  {
+    "Identifier": "AmazonQBusinessQembedded",
+    "Name": "Amazon Q Business - Q embedded",
+    "Family": "Machine Learning",
+    "Description": "Ability to embed Q business experience (with visual customizations) in applications and public webpages"
+  },
+  {
+    "Identifier": "AmazonQBusinessQindex",
+    "Name": "Amazon Q Business - Q index",
+    "Family": "Machine Learning",
+    "Description": "Ability for ISVs to pull data from a customer's Q index to enhance the ISV's existing GenAI features"
   },
   {
     "Identifier": "AmazonQDeveloper",
@@ -1854,10 +2058,22 @@
     "Description": "A GenAI-powered assistant to help you build, deploy, operate, and maintain applications on AWS"
   },
   {
+    "Identifier": "AmazonQDeveloperforJavaTransformation",
+    "Name": "Amazon Q Developer for Java Transformation",
+    "Family": "Developer Tools",
+    "Description": "Accelerate Java application upgrades"
+  },
+  {
     "Identifier": "AmazonQinConnect",
     "Name": "Amazon Q in Connect",
     "Family": "Customer Engagement",
     "Description": "Deliver agents the responses, actions, and information they need to solve issues in real-time"
+  },
+  {
+    "Identifier": "AmazonQuantumLedgerDatabaseQLDB",
+    "Name": "Amazon Quantum Ledger Database (QLDB)",
+    "Family": "Blockchain",
+    "Description": "Fully managed ledger database"
   },
   {
     "Identifier": "AmazonQuickSight",
@@ -1894,12 +2110,6 @@
     "Name": "Amazon RDS Custom For Oracle",
     "Family": "Database",
     "Description": "Managed database services for applications that require operating system and database customization"
-  },
-  {
-    "Identifier": "AmazonRDSCustomforOracleRAC",
-    "Name": "Amazon RDS Custom for Oracle RAC",
-    "Family": "Database",
-    "Description": "Managed database service for applications that require operating systems, database customizations and Oracle Real Application Cluster Capabilities"
   },
   {
     "Identifier": "AmazonRDSCustomforSQLServer",
@@ -2028,10 +2238,10 @@
     "Description": "Fully managed message queues for microservices, distributed systems, and serverless applications"
   },
   {
-    "Identifier": "AmazonSageMakerAI",
-    "Name": "Amazon SageMaker AI",
-    "Family": "Machine Learning",
-    "Description": "Build, train, and deploy ML and foundation models, with fully managed infrastructure, tools, and workflows"
+    "Identifier": "AmazonSageMaker",
+    "Name": "Amazon SageMaker",
+    "Family": "Private Rate Card",
+    "Description": "Amazon SageMaker is a fully-managed machine learning service that enables developers to build, train, and deploy machine learning models quickly. This Service-Specific PPA requires Customers to commit to minimum usage (measured in USD) for a maximum 12-month term. In return, the Customer will receive discounts on their monthly SageMaker On-Demand and Spot spend over the term of their agreement."
   },
   {
     "Identifier": "AmazonSageMakerAutopilot",
@@ -2184,12 +2394,6 @@
     "Description": "Automatically convert medical speech to text"
   },
   {
-    "Identifier": "AmazonTranslate",
-    "Name": "Amazon Translate",
-    "Family": "Machine Learning",
-    "Description": "Powerful Neural Machine Translation"
-  },
-  {
     "Identifier": "AmazonVPCLattice",
     "Name": "Amazon VPC Lattice",
     "Family": "Networking & Content Delivery",
@@ -2206,6 +2410,12 @@
     "Name": "Amazon Virtual Private Cloud (VPC)",
     "Family": "Networking & Content Delivery",
     "Description": "Define and launch AWS resources in a logically isolated virtual network"
+  },
+  {
+    "Identifier": "AmazonWorkDocs",
+    "Name": "Amazon WorkDocs",
+    "Family": "End User Computing",
+    "Description": "Secure Enterprise Storage and Sharing Service"
   },
   {
     "Identifier": "AmazonWorkLink",
@@ -2236,6 +2446,12 @@
     "Name": "Amazon WorkSpaces Pools",
     "Family": "End User Computing",
     "Description": "Create pools of virtual desktops to simplify management and reduce cost"
+  },
+  {
+    "Identifier": "AmazonWorkSpacesThinClient",
+    "Name": "Amazon WorkSpaces Thin Client",
+    "Family": "End User Computing",
+    "Description": "Reduce costs, simplify logistics, and accelerate deployment using virtual desktops"
   },
   {
     "Identifier": "AmazonWorkSpacesWeb",
@@ -2328,6 +2544,12 @@
     "Description": "Deploy, scale, and run third-party virtual appliances"
   },
   {
+    "Identifier": "GitLabDuowithAmazonQ",
+    "Name": "GitLab Duo with Amazon Q",
+    "Family": "Developer Tools",
+    "Description": "Development teams using GitLab can enable advanced AI agent capabilities from Amazon Q Developer to accelerate GitLab workflows"
+  },
+  {
     "Identifier": "MigrationEvaluatorTSOLogic",
     "Name": "Migration Evaluator (TSO Logic)",
     "Family": "Migration & Transfer",
@@ -2350,18 +2572,6 @@
     "Name": "Oracle on AWS- General",
     "Family": "Compute",
     "Description": "AWS infrastructure (EC2, Storage) to run Oracle on AWS"
-  },
-  {
-    "Identifier": "PartnerLedBusinessSupport",
-    "Name": "Partner-Led Business Support",
-    "Family": "Support",
-    "Description": "Partner-led Support (PLS) enables partners to act as the customer\u2019s sole point of contact for technical support."
-  },
-  {
-    "Identifier": "PartnerLedEnterpriseSupport",
-    "Name": "Partner-Led Enterprise Support",
-    "Family": "Support",
-    "Description": "Partner-led Support (PLS) enables partners to act as the customer\u2019s sole point of contact for technical support."
   },
   {
     "Identifier": "PortingAssistantforNET",
