@@ -31,7 +31,8 @@ partner-central-api-sample-codes/java_preview/libs/
 *.zip
 APIReferenceGuide.pdf
 out/
-
+node_modules/
+opportunityManagement/
 *.pyc
 build/
 
