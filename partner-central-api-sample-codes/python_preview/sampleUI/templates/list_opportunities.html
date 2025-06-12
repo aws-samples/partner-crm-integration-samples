@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Partner Central - List Opportunities</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        h1, h2 {
+            color: #232f3e;
+        }
+        .container {
+            margin-top: 20px;
+        }
+        button {
+            background-color: #ff9900;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #e88e00;
+        }
+        #result {
+            margin-top: 20px;
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+            white-space: pre-wrap;
+            display: none;
+        }
+        .error {
+            color: #d13212;
+            margin-top: 10px;
+        }
+        .loading {
+            display: none;
+            margin-top: 15px;
+        }
+        .nav-link {
+            display: inline-block;
+            margin-top: 20px;
+            color: #0066c0;
+            text-decoration: none;
+        }
+        .nav-link:hover {
+            text-decoration: underline;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            display: none;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+    </style>
+</head>
+<body>
+    <h1>Partner Central - List Opportunities</h1>
+    
+    <div class="container">
+        <p>Click the button below to retrieve a list of opportunities.</p>
+        
+        <button id="submit-btn" onclick="listOpportunities()">List Opportunities</button>
+        
+        <div class="loading" id="loading">Loading...</div>
+        <div id="error" class="error"></div>
+        
+        <div id="table-container">
+            <h2>Opportunity Summary</h2>
+            <table id="opportunities-table">
+                <thead>
+                    <tr>
+                        <th>Opportunity ID</th>
+                        <th>Country Code</th>
+                        <th>Review Status</th>
+                        <th>Stage</th>
+                        <th>Target Close Date</th>
+                    </tr>
+                </thead>
+                <tbody id="table-body">
+                    <!-- Table rows will be inserted here dynamically -->
+                </tbody>
+            </table>
+        </div>
+        
+        <h2>Complete JSON Payload</h2>
+        <pre id="result"></pre>
+        
+        <a href="/" class="nav-link">Back to Home</a>
+    </div>
+
+    <script>
+        function listOpportunities() {
+            const resultElement = document.getElementById('result');
+            const tableElement = document.getElementById('opportunities-table');
+            const tableBodyElement = document.getElementById('table-body');
+            const errorElement = document.getElementById('error');
+            const loadingElement = document.getElementById('loading');
+            
+            // Reset previous results
+            resultElement.style.display = 'none';
+            tableElement.style.display = 'none';
+            errorElement.textContent = '';
+            tableBodyElement.innerHTML = '';
+            
+            // Show loading indicator
+            loadingElement.style.display = 'block';
+            
+            // Send request
+            fetch('/api/list_opportunities', {
+                method: 'POST'
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                loadingElement.style.display = 'none';
+                
+                if (data.error) {
+                    errorElement.textContent = data.error;
+                } else {
+                    // Display the complete JSON payload
+                    resultElement.textContent = JSON.stringify(data.result, null, 2);
+                    resultElement.style.display = 'block';
+                    
+                    // Create the table rows
+                    if (data.result && data.result.OpportunitySummaries && Array.isArray(data.result.OpportunitySummaries)) {
+                        // Log the data structure to help debug
+                        console.log("OpportunitySummaries data:", data.result.OpportunitySummaries);
+                        
+                        data.result.OpportunitySummaries.forEach(opportunity => {
+                            const row = document.createElement('tr');
+                            
+                            // Opportunity ID
+                            const idCell = document.createElement('td');
+                            idCell.textContent = opportunity.Id || 'N/A';
+                            row.appendChild(idCell);
+                            
+                            // Country Code
+                            const countryCell = document.createElement('td');
+                            countryCell.textContent = opportunity.Customer && 
+                                                     opportunity.Customer.Account && 
+                                                     opportunity.Customer.Account.Address && 
+                                                     opportunity.Customer.Account.Address.CountryCode || 'N/A';
+                            row.appendChild(countryCell);
+                            
+                            // Review Status
+                            const reviewStatusCell = document.createElement('td');
+                            reviewStatusCell.textContent = opportunity.LifeCycle && 
+                                                          opportunity.LifeCycle.ReviewStatus || 'N/A';
+                            row.appendChild(reviewStatusCell);
+                            
+                            // Stage
+                            const stageCell = document.createElement('td');
+                            stageCell.textContent = opportunity.LifeCycle && 
+                                                   opportunity.LifeCycle.Stage || 'N/A';
+                            row.appendChild(stageCell);
+                            
+                            // Target Close Date
+                            const targetCloseDateCell = document.createElement('td');
+                            targetCloseDateCell.textContent = opportunity.LifeCycle && 
+                                                            opportunity.LifeCycle.TargetCloseDate || 'N/A';
+                            row.appendChild(targetCloseDateCell);
+                            
+                            tableBodyElement.appendChild(row);
+                        });
+                        
+                        // Show the table
+                        tableElement.style.display = 'table';
+                    } else {
+                        // Log what we actually received to help debug
+                        console.log("Received data structure:", data.result);
+                        
+                        // Add a message if no opportunities were found
+                        errorElement.textContent = "No opportunities found or unexpected data format.";
+                    }
+                }
+            })
+            .catch(error => {
+                loadingElement.style.display = 'none';
+                errorElement.textContent = 'Error: ' + error.message;
+            });
+        }
+    </script>
+</body>
+</html>

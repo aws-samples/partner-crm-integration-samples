@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Partner Central - Start Engagement from Opportunity</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        h1 {
+            color: #232f3e;
+        }
+        .container {
+            margin-top: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input[type="text"] {
+            width: 300px;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #ff9900;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #e88e00;
+        }
+        #result {
+            margin-top: 20px;
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+            white-space: pre-wrap;
+            display: none;
+        }
+        .error {
+            color: #d13212;
+            margin-top: 10px;
+        }
+        .success {
+            color: #008000;
+            margin-top: 10px;
+        }
+        .loading {
+            display: none;
+            margin-top: 15px;
+        }
+        .nav-link {
+            display: inline-block;
+            margin-top: 20px;
+            color: #0066c0;
+            text-decoration: none;
+        }
+        .nav-link:hover {
+            text-decoration: underline;
+        }
+        .help-text {
+            font-size: 0.9em;
+            color: #666;
+            margin-top: 3px;
+        }
+        .info-box {
+            background-color: #f0f7fb;
+            border-left: 5px solid #0066c0;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 0 4px 4px 0;
+        }
+        .optional-label {
+            font-weight: normal;
+            font-size: 0.9em;
+            color: #666;
+            margin-left: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Partner Central - Start Engagement from Opportunity</h1>
+    
+    <div class="container">
+        <div class="info-box">
+            <p><strong>Start Engagement from Opportunity Task</strong></p>
+            <p>This action will start an AWS engagement for the specified opportunity with the following settings:</p>
+            <ul>
+                <li><strong>Involvement Type:</strong> Co-Sell</li>
+                <li><strong>Visibility:</strong> Full</li>
+            </ul>
+            <p>Please ensure the opportunity is in the correct state before starting an engagement.</p>
+        </div>
+        
+        <div class="form-group">
+            <label for="opportunity_id">Opportunity Identifier:</label>
+            <input type="text" id="opportunity_id" name="opportunity_id" placeholder="e.g., O5465588">
+            <div class="help-text">The ID of the opportunity to start an engagement from</div>
+        </div>
+        
+        <div class="form-group">
+            <label for="client_token">Client Token: <span class="optional-label">(optional)</span></label>
+            <input type="text" id="client_token" name="client_token" placeholder="e.g., my-custom-token-123">
+            <div class="help-text">A unique identifier for this request. If not provided, a random token will be generated.</div>
+        </div>
+        
+        <button id="submit-btn" onclick="startEngagement()">Start Engagement</button>
+        
+        <div class="loading" id="loading">Processing...</div>
+        <div id="error" class="error"></div>
+        <div id="success" class="success"></div>
+        <pre id="result"></pre>
+        
+        <a href="/" class="nav-link">Back to Home</a>
+    </div>
+
+    <script>
+        function startEngagement() {
+            const opportunityId = document.getElementById('opportunity_id').value.trim();
+            const clientToken = document.getElementById('client_token').value.trim();
+            
+            const resultElement = document.getElementById('result');
+            const errorElement = document.getElementById('error');
+            const successElement = document.getElementById('success');
+            const loadingElement = document.getElementById('loading');
+            
+            // Reset previous results
+            resultElement.style.display = 'none';
+            errorElement.textContent = '';
+            successElement.textContent = '';
+            
+            // Validate inputs
+            if (!opportunityId) {
+                errorElement.textContent = 'Please enter an Opportunity Identifier';
+                return;
+            }
+            
+            // Show loading indicator
+            loadingElement.style.display = 'block';
+            
+            // Create form data
+            const formData = new FormData();
+            formData.append('opportunity_id', opportunityId);
+            if (clientToken) {
+                formData.append('client_token', clientToken);
+            }
+            
+            // Send request
+            fetch('/api/start_engagement_from_opportunity', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                loadingElement.style.display = 'none';
+                
+                if (data.error) {
+                    errorElement.textContent = 'Error: ' + JSON.stringify(data.error);
+                } else {
+                    successElement.textContent = 'Engagement started successfully!';
+                    resultElement.textContent = JSON.stringify(data.result, null, 2);
+                    resultElement.style.display = 'block';
+                }
+            })
+            .catch(error => {
+                loadingElement.style.display = 'none';
+                errorElement.textContent = 'Error: ' + error.message;
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Partner Central - Update Opportunity Stage</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        h1, h2, h3 {
+            color: #232f3e;
+        }
+        .container {
+            margin-top: 20px;
+        }
+        button {
+            background-color: #ff9900;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-bottom: 15px;
+        }
+        button:hover {
+            background-color: #e88e00;
+        }
+        .form-section {
+            margin-bottom: 30px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input[type="text"], select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .loading {
+            display: none;
+            margin-top: 15px;
+        }
+        .error {
+            color: #d13212;
+            margin-top: 10px;
+        }
+        .success {
+            color: #008000;
+            margin-top: 10px;
+        }
+        .result {
+            margin-top: 20px;
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+            white-space: pre-wrap;
+            font-family: monospace;
+            font-size: 14px;
+            max-height: 400px;
+            overflow-y: auto;
+            display: none;
+        }
+        .nav-link {
+            display: inline-block;
+            margin-top: 20px;
+            color: #0066c0;
+            text-decoration: none;
+        }
+        .nav-link:hover {
+            text-decoration: underline;
+        }
+        .info-box {
+            background-color: #f0f7fb;
+            border-left: 5px solid #0066c0;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 0 4px 4px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Partner Central - Update Opportunity Stage</h1>
+    
+    <div class="container">
+        <div class="info-box">
+            <p><strong>Update Opportunity Stage</strong></p>
+            <p>This page allows you to update an opportunity's stage. Enter the opportunity ID and select the new stage value.</p>
+        </div>
+        
+        <div class="form-section">
+            <div class="form-group">
+                <label for="opportunity-id">Opportunity Identifier:</label>
+                <input type="text" id="opportunity-id" placeholder="Enter opportunity ID">
+            </div>
+            
+            <div class="form-group">
+                <label for="stage">New Stage:</label>
+                <select id="stage">
+                    <option value="Prospect">Prospect</option>
+                    <option value="Qualified">Qualified</option>
+                    <option value="Technical Validation">Technical Validation</option>
+                    <option value="Business Validation">Business Validation</option>
+                    <option value="Committed">Committed</option>
+                    <option value="Launched">Launched</option>
+                    <option value="Closed Lost">Closed Lost</option>
+                </select>
+            </div>
+            
+            <button id="update-btn" onclick="updateOpportunityStage()">Update Stage</button>
+        </div>
+        
+        <div class="loading" id="loading">Updating opportunity stage...</div>
+        <div id="error" class="error"></div>
+        <div id="success" class="success"></div>
+        
+        <h2 style="color: #8B4513; display: none;" id="original-title">Original Opportunity</h2>
+        <pre id="original-result" class="result"></pre>
+        
+        <h2 style="color: #8B4513; display: none;" id="update-request-title">Update Request</h2>
+        <pre id="update-request-result" class="result"></pre>
+        
+        <h2 style="color: #008000; display: none;" id="updated-title">Updated Opportunity</h2>
+        <pre id="updated-result" class="result"></pre>
+        
+        <a href="/" class="nav-link">Back to Home</a>
+    </div>
+
+    <script>
+        function updateOpportunityStage() {
+            const opportunityId = document.getElementById('opportunity-id').value.trim();
+            const stage = document.getElementById('stage').value;
+            
+            const errorElement = document.getElementById('error');
+            const successElement = document.getElementById('success');
+            const loadingElement = document.getElementById('loading');
+            
+            const originalTitleElement = document.getElementById('original-title');
+            const originalResultElement = document.getElementById('original-result');
+            
+            const updateRequestTitleElement = document.getElementById('update-request-title');
+            const updateRequestResultElement = document.getElementById('update-request-result');
+            
+            const updatedTitleElement = document.getElementById('updated-title');
+            const updatedResultElement = document.getElementById('updated-result');
+            
+            // Reset previous results
+            errorElement.textContent = '';
+            successElement.textContent = '';
+            originalResultElement.style.display = 'none';
+            originalTitleElement.style.display = 'none';
+            updateRequestResultElement.style.display = 'none';
+            updateRequestTitleElement.style.display = 'none';
+            updatedResultElement.style.display = 'none';
+            updatedTitleElement.style.display = 'none';
+            
+            if (!opportunityId) {
+                errorElement.textContent = 'Error: Opportunity Identifier is required';
+                return;
+            }
+            
+            // Show loading indicator
+            loadingElement.style.display = 'block';
+            
+            // Create form data
+            const formData = new FormData();
+            formData.append('opportunity_id', opportunityId);
+            formData.append('stage', stage);
+            
+            // Send request
+            fetch('/api/update_opportunity_stage', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                loadingElement.style.display = 'none';
+                
+                if (data.error) {
+                    // Display error message in red
+                    errorElement.textContent = 'Error: ' + JSON.stringify(data.error);
+                    return;
+                }
+                
+                // Show success message
+                successElement.textContent = `Opportunity stage successfully updated from "${data.result.original_stage}" to "${stage}"`;
+                
+                // Display original opportunity
+                if (data.result.original) {
+                    originalTitleElement.style.display = 'block';
+                    originalResultElement.textContent = JSON.stringify(data.result.original, null, 2);
+                    originalResultElement.style.display = 'block';
+                }
+                
+                // Display update request
+                if (data.result.update_request) {
+                    updateRequestTitleElement.style.display = 'block';
+                    updateRequestResultElement.textContent = JSON.stringify(data.result.update_request, null, 2);
+                    updateRequestResultElement.style.display = 'block';
+                }
+                
+                // Display updated opportunity
+                if (data.result.updated_opportunity) {
+                    updatedTitleElement.style.display = 'block';
+                    updatedResultElement.textContent = JSON.stringify(data.result.updated_opportunity, null, 2);
+                    updatedResultElement.style.display = 'block';
+                }
+            })
+            .catch(error => {
+                loadingElement.style.display = 'none';
+                errorElement.textContent = 'Error: ' + error.message;
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Partner Central - Create Opportunity</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        h1, h2, h3 {
+            color: #232f3e;
+        }
+        .container {
+            margin-top: 20px;
+        }
+        button {
+            background-color: #ff9900;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-bottom: 15px;
+        }
+        button:hover {
+            background-color: #e88e00;
+        }
+        .form-section {
+            margin-bottom: 30px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input[type="text"], input[type="date"], select, textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        textarea {
+            height: 100px;
+            resize: vertical;
+        }
+        .readonly {
+            background-color: #f0f0f0;
+            cursor: not-allowed;
+        }
+        #json-display {
+            margin-top: 20px;
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+            white-space: pre-wrap;
+            font-family: monospace;
+            font-size: 14px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        #result {
+            margin-top: 20px;
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+            white-space: pre-wrap;
+            display: none;
+        }
+        .error {
+            color: #d13212;
+            margin-top: 10px;
+        }
+        .success {
+            color: #008000;
+            margin-top: 10px;
+        }
+        .loading {
+            display: none;
+            margin-top: 15px;
+        }
+        .nav-link {
+            display: inline-block;
+            margin-top: 20px;
+            color: #0066c0;
+            text-decoration: none;
+        }
+        .nav-link:hover {
+            text-decoration: underline;
+        }
+        .section-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .section-title button {
+            margin: 0;
+            padding: 5px 10px;
+            font-size: 0.8em;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Partner Central - Create Opportunity</h1>
+    
+    <div class="container">
+        <p>Fill out the form below to create a new opportunity. Fields marked with * are required.</p>
+        
+        <form id="opportunity-form">
+            <!-- Fixed Fields Section -->
+            <div class="form-section">
+                <h2>System Fields</h2>
+                <div class="form-group">
+                    <label for="clientToken">Client Token:</label>
+                    <input type="text" id="clientToken" name="clientToken" class="readonly" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="catalog">Catalog:</label>
+                    <input type="text" id="catalog" name="catalog" value="Sandbox" class="readonly" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="origin">Origin:</label>
+                    <input type="text" id="origin" name="origin" value="Partner Referral" class="readonly" readonly>
+                </div>
+            </div>
+            
+            <!-- Customer Section -->
+            <div class="form-section">
+                <div class="section-title">
+                    <h2>Customer Information</h2>
+                    <button type="button" onclick="toggleSection('customer-section')">Show/Hide</button>
+                </div>
+                <div id="customer-section">
+                    <h3>Account</h3>
+                    <div class="form-group">
+                        <label for="companyName">Company Name*:</label>
+                        <input type="text" id="companyName" name="companyName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="awsAccountId">AWS Account ID:</label>
+                        <input type="text" id="awsAccountId" name="awsAccountId">
+                    </div>
+                    <div class="form-group">
+                        <label for="duns">DUNS Number:</label>
+                        <input type="text" id="duns" name="duns">
+                    </div>
+                    <div class="form-group">
+                        <label for="industry">Industry:</label>
+                        <input type="text" id="industry" name="industry">
+                    </div>
+                    <div class="form-group">
+                        <label for="otherIndustry">Other Industry:</label>
+                        <input type="text" id="otherIndustry" name="otherIndustry">
+                    </div>
+                    <div class="form-group">
+                        <label for="websiteUrl">Website URL:</label>
+                        <input type="text" id="websiteUrl" name="websiteUrl">
+                    </div>
+                    
+                    <h3>Address</h3>
+                    <div class="form-group">
+                        <label for="streetAddress">Street Address:</label>
+                        <input type="text" id="streetAddress" name="streetAddress">
+                    </div>
+                    <div class="form-group">
+                        <label for="city">City:</label>
+                        <input type="text" id="city" name="city">
+                    </div>
+                    <div class="form-group">
+                        <label for="stateOrRegion">State/Region:</label>
+                        <input type="text" id="stateOrRegion" name="stateOrRegion">
+                    </div>
+                    <div class="form-group">
+                        <label for="postalCode">Postal Code:</label>
+                        <input type="text" id="postalCode" name="postalCode">
+                    </div>
+                    <div class="form-group">
+                        <label for="countryCode">Country Code*:</label>
+                        <input type="text" id="countryCode" name="countryCode" required>
+                    </div>
+                    
+                    <h3>Primary Contact</h3>
+                    <div class="form-group">
+                        <label for="contactFirstName">First Name*:</label>
+                        <input type="text" id="contactFirstName" name="contactFirstName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contactLastName">Last Name*:</label>
+                        <input type="text" id="contactLastName" name="contactLastName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contactEmail">Email*:</label>
+                        <input type="text" id="contactEmail" name="contactEmail" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contactPhone">Phone:</label>
+                        <input type="text" id="contactPhone" name="contactPhone">
+                    </div>
+                    <div class="form-group">
+                        <label for="contactBusinessTitle">Business Title:</label>
+                        <input type="text" id="contactBusinessTitle" name="contactBusinessTitle">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Project Section -->
+            <div class="form-section">
+                <div class="section-title">
+                    <h2>Project Information</h2>
+                    <button type="button" onclick="toggleSection('project-section')">Show/Hide</button>
+                </div>
+                <div id="project-section">
+                    <div class="form-group">
+                        <label for="projectTitle">Project Title*:</label>
+                        <input type="text" id="projectTitle" name="projectTitle" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="customerBusinessProblem">Customer Business Problem*:</label>
+                        <textarea id="customerBusinessProblem" name="customerBusinessProblem" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="customerUseCase">Customer Use Case*:</label>
+                        <input type="text" id="customerUseCase" name="customerUseCase" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="competitorName">Competitor Name:</label>
+                        <input type="text" id="competitorName" name="competitorName">
+                    </div>
+                    <div class="form-group">
+                        <label for="otherCompetitorNames">Other Competitor Names:</label>
+                        <input type="text" id="otherCompetitorNames" name="otherCompetitorNames">
+                    </div>
+                    <div class="form-group">
+                        <label for="otherSolutionDescription">Other Solution Description:</label>
+                        <textarea id="otherSolutionDescription" name="otherSolutionDescription"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="relatedOpportunityIdentifier">Related Opportunity Identifier:</label>
+                        <input type="text" id="relatedOpportunityIdentifier" name="relatedOpportunityIdentifier">
+                    </div>
+                    <div class="form-group">
+                        <label for="additionalComments">Additional Comments:</label>
+                        <textarea id="additionalComments" name="additionalComments"></textarea>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Lifecycle Section -->
+            <div class="form-section">
+                <div class="section-title">
+                    <h2>Lifecycle Information</h2>
+                    <button type="button" onclick="toggleSection('lifecycle-section')">Show/Hide</button>
+                </div>
+                <div id="lifecycle-section">
+                    <div class="form-group">
+                        <label for="stage">Stage*:</label>
+                        <input type="text" id="stage" name="stage" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="targetCloseDate">Target Close Date*:</label>
+                        <input type="date" id="targetCloseDate" name="targetCloseDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="nextSteps">Next Steps:</label>
+                        <textarea id="nextSteps" name="nextSteps"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="reviewStatus">Review Status:</label>
+                        <input type="text" id="reviewStatus" name="reviewStatus">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Marketing Section -->
+            <div class="form-section">
+                <div class="section-title">
+                    <h2>Marketing Information</h2>
+                    <button type="button" onclick="toggleSection('marketing-section')">Show/Hide</button>
+                </div>
+                <div id="marketing-section">
+                    <div class="form-group">
+                        <label for="awsFundingUsed">AWS Funding Used:</label>
+                        <input type="text" id="awsFundingUsed" name="awsFundingUsed">
+                    </div>
+                    <div class="form-group">
+                        <label for="campaignName">Campaign Name:</label>
+                        <input type="text" id="campaignName" name="campaignName">
+                    </div>
+                    <div class="form-group">
+                        <label for="source">Source:</label>
+                        <input type="text" id="source" name="source">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Other Information -->
+            <div class="form-section">
+                <div class="section-title">
+                    <h2>Other Information</h2>
+                    <button type="button" onclick="toggleSection('other-section')">Show/Hide</button>
+                </div>
+                <div id="other-section">
+                    <div class="form-group">
+                        <label for="nationalSecurity">National Security:</label>
+                        <input type="text" id="nationalSecurity" name="nationalSecurity">
+                    </div>
+                    <div class="form-group">
+                        <label for="opportunityType">Opportunity Type*:</label>
+                        <input type="text" id="opportunityType" name="opportunityType" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="partnerOpportunityIdentifier">Partner Opportunity Identifier:</label>
+                        <input type="text" id="partnerOpportunityIdentifier" name="partnerOpportunityIdentifier">
+                    </div>
+                </div>
+            </div>
+            
+            <button type="button" id="create-btn" onclick="createOpportunity()">Create Opportunity</button>
+        </form>
+        
+        <div class="loading" id="loading">Creating opportunity...</div>
+        <div id="error" class="error"></div>
+        <div id="success" class="success"></div>
+        
+        <h2 style="color: #8B4513;">Request JSON Payload</h2>
+        <div id="json-display"></div>
+        
+        <h2 style="color: #008000; display: none;" id="response-title">Response JSON Payload</h2>
+        <pre id="result"></pre>
+        
+        <a href="/" class="nav-link">Back to Home</a>
+    </div>
+
+    <script>
+        // Initial JSON payload from server
+        const initialPayload = {{ default_payload|safe }};
+        let currentPayload;
+        
+        try {
+            // Try to parse the JSON payload
+            currentPayload = JSON.parse(initialPayload);
+            console.log("Successfully parsed JSON payload:", currentPayload);
+        } catch (e) {
+            console.error("Error parsing JSON payload:", e);
+            currentPayload = {};
+        }
+        
+        // Initialize form with values from JSON
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log("DOM loaded, initializing form");
+            initializeForm();
+            updateJsonDisplay();
+        });
+        
+        function initializeForm() {
+            console.log("Initializing form with payload:", currentPayload);
+            
+            // System fields
+            document.getElementById('clientToken').value = currentPayload.ClientToken || '';
+            document.getElementById('catalog').value = currentPayload.Catalog || 'Sandbox';
+            document.getElementById('origin').value = currentPayload.Origin || 'Partner Referral';
+            
+            // Customer fields
+            if (currentPayload.Customer && currentPayload.Customer.Account) {
+                document.getElementById('companyName').value = currentPayload.Customer.Account.CompanyName || '';
+                document.getElementById('awsAccountId').value = currentPayload.Customer.Account.AwsAccountId || '';
+                document.getElementById('duns').value = currentPayload.Customer.Account.Duns || '';
+                document.getElementById('industry').value = currentPayload.Customer.Account.Industry || '';
+                document.getElementById('otherIndustry').value = currentPayload.Customer.Account.OtherIndustry || '';
+                document.getElementById('websiteUrl').value = currentPayload.Customer.Account.WebsiteUrl || '';
+                
+                if (currentPayload.Customer.Account.Address) {
+                    document.getElementById('streetAddress').value = currentPayload.Customer.Account.Address.StreetAddress || '';
+                    document.getElementById('city').value = currentPayload.Customer.Account.Address.City || '';
+                    document.getElementById('stateOrRegion').value = currentPayload.Customer.Account.Address.StateOrRegion || '';
+                    document.getElementById('postalCode').value = currentPayload.Customer.Account.Address.PostalCode || '';
+                    document.getElementById('countryCode').value = currentPayload.Customer.Account.Address.CountryCode || '';
+                }
+            }
+            
+            // Contact fields
+            if (currentPayload.Customer && currentPayload.Customer.Contacts && currentPayload.Customer.Contacts.length > 0) {
+                const contact = currentPayload.Customer.Contacts[0];
+                document.getElementById('contactFirstName').value = contact.FirstName || '';
+                document.getElementById('contactLastName').value = contact.LastName || '';
+                document.getElementById('contactEmail').value = contact.Email || '';
+                document.getElementById('contactPhone').value = contact.Phone || '';
+                document.getElementById('contactBusinessTitle').value = contact.BusinessTitle || '';
+            }
+            
+            // Project fields
+            if (currentPayload.Project) {
+                document.getElementById('projectTitle').value = currentPayload.Project.Title || '';
+                document.getElementById('customerBusinessProblem').value = currentPayload.Project.CustomerBusinessProblem || '';
+                document.getElementById('customerUseCase').value = currentPayload.Project.CustomerUseCase || '';
+                document.getElementById('competitorName').value = currentPayload.Project.CompetitorName || '';
+                document.getElementById('otherCompetitorNames').value = currentPayload.Project.OtherCompetitorNames || '';
+                document.getElementById('otherSolutionDescription').value = currentPayload.Project.OtherSolutionDescription || '';
+                document.getElementById('relatedOpportunityIdentifier').value = currentPayload.Project.RelatedOpportunityIdentifier || '';
+                document.getElementById('additionalComments').value = currentPayload.Project.AdditionalComments || '';
+            }
+            
+            // Lifecycle fields
+            if (currentPayload.LifeCycle) {
+                document.getElementById('stage').value = currentPayload.LifeCycle.Stage || '';
+                
+                // Format date for input type="date"
+                if (currentPayload.LifeCycle.TargetCloseDate) {
+                    const dateStr = currentPayload.LifeCycle.TargetCloseDate;
+                    document.getElementById('targetCloseDate').value = dateStr;
+                }
+                
+                document.getElementById('nextSteps').value = currentPayload.LifeCycle.NextSteps || '';
+                document.getElementById('reviewStatus').value = currentPayload.LifeCycle.ReviewStatus || '';
+            }
+            
+            // Marketing fields
+            if (currentPayload.Marketing) {
+                document.getElementById('awsFundingUsed').value = currentPayload.Marketing.AwsFundingUsed || '';
+                document.getElementById('campaignName').value = currentPayload.Marketing.CampaignName || '';
+                document.getElementById('source').value = currentPayload.Marketing.Source || '';
+            }
+            
+            // Other fields
+            document.getElementById('nationalSecurity').value = currentPayload.NationalSecurity || '';
+            document.getElementById('opportunityType').value = currentPayload.OpportunityType || '';
+            document.getElementById('partnerOpportunityIdentifier').value = currentPayload.PartnerOpportunityIdentifier || '';
+            
+            // Add event listeners to all form fields
+            const formInputs = document.querySelectorAll('#opportunity-form input, #opportunity-form textarea, #opportunity-form select');
+            formInputs.forEach(input => {
+                if (!input.classList.contains('readonly')) {
+                    input.addEventListener('input', updatePayloadFromForm);
+                }
+            });
+        }
+        
+        function updatePayloadFromForm() {
+            // Update Customer.Account fields
+            if (!currentPayload.Customer) currentPayload.Customer = {};
+            if (!currentPayload.Customer.Account) currentPayload.Customer.Account = {};
+            if (!currentPayload.Customer.Account.Address) currentPayload.Customer.Account.Address = {};
+            
+            // Helper function to convert empty strings to null
+            function valueOrNull(value) {
+                return value.trim() === '' ? null : value;
+            }
+            
+            currentPayload.Customer.Account.CompanyName = valueOrNull(document.getElementById('companyName').value);
+            currentPayload.Customer.Account.AwsAccountId = valueOrNull(document.getElementById('awsAccountId').value);
+            currentPayload.Customer.Account.Duns = valueOrNull(document.getElementById('duns').value);
+            currentPayload.Customer.Account.Industry = valueOrNull(document.getElementById('industry').value);
+            currentPayload.Customer.Account.OtherIndustry = valueOrNull(document.getElementById('otherIndustry').value);
+            currentPayload.Customer.Account.WebsiteUrl = valueOrNull(document.getElementById('websiteUrl').value);
+            
+            currentPayload.Customer.Account.Address.StreetAddress = valueOrNull(document.getElementById('streetAddress').value);
+            currentPayload.Customer.Account.Address.City = valueOrNull(document.getElementById('city').value);
+            currentPayload.Customer.Account.Address.StateOrRegion = valueOrNull(document.getElementById('stateOrRegion').value);
+            currentPayload.Customer.Account.Address.PostalCode = valueOrNull(document.getElementById('postalCode').value);
+            currentPayload.Customer.Account.Address.CountryCode = valueOrNull(document.getElementById('countryCode').value);
+            
+            // Update Customer.Contacts
+            if (!currentPayload.Customer.Contacts) currentPayload.Customer.Contacts = [{}];
+            currentPayload.Customer.Contacts[0].FirstName = valueOrNull(document.getElementById('contactFirstName').value);
+            currentPayload.Customer.Contacts[0].LastName = valueOrNull(document.getElementById('contactLastName').value);
+            currentPayload.Customer.Contacts[0].Email = valueOrNull(document.getElementById('contactEmail').value);
+            currentPayload.Customer.Contacts[0].Phone = valueOrNull(document.getElementById('contactPhone').value);
+            currentPayload.Customer.Contacts[0].BusinessTitle = valueOrNull(document.getElementById('contactBusinessTitle').value);
+            
+            // Update Project fields
+            if (!currentPayload.Project) currentPayload.Project = {};
+            currentPayload.Project.Title = valueOrNull(document.getElementById('projectTitle').value);
+            currentPayload.Project.CustomerBusinessProblem = valueOrNull(document.getElementById('customerBusinessProblem').value);
+            currentPayload.Project.CustomerUseCase = valueOrNull(document.getElementById('customerUseCase').value);
+            currentPayload.Project.CompetitorName = valueOrNull(document.getElementById('competitorName').value);
+            currentPayload.Project.OtherCompetitorNames = valueOrNull(document.getElementById('otherCompetitorNames').value);
+            currentPayload.Project.OtherSolutionDescription = valueOrNull(document.getElementById('otherSolutionDescription').value);
+            currentPayload.Project.RelatedOpportunityIdentifier = valueOrNull(document.getElementById('relatedOpportunityIdentifier').value);
+            currentPayload.Project.AdditionalComments = valueOrNull(document.getElementById('additionalComments').value);
+            
+            // Update Lifecycle fields
+            if (!currentPayload.LifeCycle) currentPayload.LifeCycle = {};
+            currentPayload.LifeCycle.Stage = valueOrNull(document.getElementById('stage').value);
+            currentPayload.LifeCycle.TargetCloseDate = valueOrNull(document.getElementById('targetCloseDate').value);
+            currentPayload.LifeCycle.NextSteps = valueOrNull(document.getElementById('nextSteps').value);
+            currentPayload.LifeCycle.ReviewStatus = valueOrNull(document.getElementById('reviewStatus').value);
+            
+            // Update Marketing fields
+            if (!currentPayload.Marketing) currentPayload.Marketing = {};
+            currentPayload.Marketing.AwsFundingUsed = valueOrNull(document.getElementById('awsFundingUsed').value);
+            currentPayload.Marketing.CampaignName = valueOrNull(document.getElementById('campaignName').value);
+            currentPayload.Marketing.Source = valueOrNull(document.getElementById('source').value);
+            
+            // Update other fields
+            currentPayload.NationalSecurity = valueOrNull(document.getElementById('nationalSecurity').value);
+            currentPayload.OpportunityType = valueOrNull(document.getElementById('opportunityType').value);
+            currentPayload.PartnerOpportunityIdentifier = valueOrNull(document.getElementById('partnerOpportunityIdentifier').value);
+            
+            // Update JSON display
+            updateJsonDisplay();
+        }
+        
+        function updateJsonDisplay() {
+            document.getElementById('json-display').textContent = JSON.stringify(currentPayload, null, 2);
+        }
+        
+        function toggleSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            if (section.classList.contains('hidden')) {
+                section.classList.remove('hidden');
+            } else {
+                section.classList.add('hidden');
+            }
+        }
+        
+        function createOpportunity() {
+            const resultElement = document.getElementById('result');
+            const errorElement = document.getElementById('error');
+            const successElement = document.getElementById('success');
+            const loadingElement = document.getElementById('loading');
+            const responseTitleElement = document.getElementById('response-title');
+            
+            // Reset previous results
+            resultElement.style.display = 'none';
+            responseTitleElement.style.display = 'none';
+            errorElement.textContent = '';
+            successElement.textContent = '';
+            
+            // Show loading indicator
+            loadingElement.style.display = 'block';
+            
+            // Create form data
+            const formData = new FormData();
+            formData.append('payload', JSON.stringify(currentPayload));
+            formData.append('origin', currentPayload.Origin || 'Partner Referral');
+            
+            // Send request
+            fetch('/api/create_opportunity', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                loadingElement.style.display = 'none';
+                
+                // Show the response title
+                responseTitleElement.style.display = 'block';
+                
+                if (data.error || (data.result && data.result.error)) {
+                    // Display error message in red
+                    errorElement.textContent = 'Error: ' + JSON.stringify(data.error || data.result.error);
+                    
+                    // Display the complete response JSON
+                    resultElement.textContent = JSON.stringify(data, null, 2);
+                    resultElement.style.display = 'block';
+                } else {
+                    // Only show success message if there's no error
+                    successElement.textContent = 'Opportunity created successfully!';
+                    resultElement.textContent = JSON.stringify(data.result, null, 2);
+                    resultElement.style.display = 'block';
+                }
+            })
+            .catch(error => {
+                loadingElement.style.display = 'none';
+                errorElement.textContent = 'Error: ' + error.message;
+                
+                // Show the response title
+                responseTitleElement.style.display = 'block';
+                
+                // Display any available error details
+                if (error.response) {
+                    try {
+                        resultElement.textContent = JSON.stringify(error.response, null, 2);
+                        resultElement.style.display = 'block';
+                    } catch (e) {
+                        // If error response can't be stringified
+                        resultElement.textContent = 'Error details not available';
+                        resultElement.style.display = 'block';
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>

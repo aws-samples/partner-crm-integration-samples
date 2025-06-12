@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Partner Central - Simulate Approval</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        h1, h2, h3 {
+            color: #232f3e;
+        }
+        .container {
+            margin-top: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input[type="text"] {
+            width: 300px;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #ff9900;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #e88e00;
+        }
+        .json-display {
+            margin-top: 20px;
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+            white-space: pre-wrap;
+            font-family: monospace;
+            font-size: 14px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        .error {
+            color: #d13212;
+            margin-top: 10px;
+        }
+        .success {
+            color: #008000;
+            margin-top: 10px;
+        }
+        .loading {
+            display: none;
+            margin-top: 15px;
+        }
+        .nav-link {
+            display: inline-block;
+            margin-top: 20px;
+            color: #0066c0;
+            text-decoration: none;
+        }
+        .nav-link:hover {
+            text-decoration: underline;
+        }
+        .info-box {
+            background-color: #f0f7fb;
+            border-left: 5px solid #0066c0;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 0 4px 4px 0;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Partner Central - Simulate Approval from AWS</h1>
+    
+    <div class="container">
+        <div class="info-box">
+            <p><strong>Simulate Approval Process</strong></p>
+            <p>This tool simulates AWS approval for an opportunity by:</p>
+            <ol>
+                <li>Retrieving the opportunity details using the Get Opportunity API</li>
+                <li>Modifying the response to prepare it for update (changing Id to Identifier, removing certain fields)</li>
+                <li>Setting the ReviewStatus to "Approved"</li>
+                <li>Submitting the update using the Update Opportunity API</li>
+            </ol>
+            <p>Enter an Opportunity ID below to start the process.</p>
+        </div>
+        
+        <div class="form-group">
+            <label for="opportunity_id">Opportunity Identifier:</label>
+            <input type="text" id="opportunity_id" name="opportunity_id" placeholder="e.g., O5465588">
+        </div>
+        
+        <button id="submit-btn" onclick="simulateApproval()">Simulate Approval</button>
+        
+        <div class="loading" id="loading">Processing...</div>
+        <div id="error" class="error"></div>
+        <div id="success" class="success"></div>
+        
+        <div id="results-container" class="hidden">
+            <h2 style="color: #8B4513;">Original Opportunity</h2>
+            <div id="original-status" class="info-box" style="display: none;"></div>
+            <div id="original-json" class="json-display"></div>
+            
+            <h2 style="color: #8B4513;">Update Request</h2>
+            <div id="request-json" class="json-display"></div>
+            
+            <h2 style="color: #008000;">Update Response</h2>
+            <div id="response-json" class="json-display"></div>
+        </div>
+        
+        <a href="/" class="nav-link">Back to Home</a>
+    </div>
+
+    <script>
+        function simulateApproval() {
+            const opportunityId = document.getElementById('opportunity_id').value.trim();
+            const errorElement = document.getElementById('error');
+            const successElement = document.getElementById('success');
+            const loadingElement = document.getElementById('loading');
+            const resultsContainer = document.getElementById('results-container');
+            const originalStatusElement = document.getElementById('original-status');
+            const originalJsonElement = document.getElementById('original-json');
+            const requestJsonElement = document.getElementById('request-json');
+            const responseJsonElement = document.getElementById('response-json');
+            
+            // Reset previous results
+            errorElement.textContent = '';
+            successElement.textContent = '';
+            resultsContainer.classList.add('hidden');
+            originalStatusElement.style.display = 'none';
+            originalJsonElement.textContent = '';
+            requestJsonElement.textContent = '';
+            responseJsonElement.textContent = '';
+            
+            // Validate inputs
+            if (!opportunityId) {
+                errorElement.textContent = 'Please enter an Opportunity Identifier';
+                return;
+            }
+            
+            // Show loading indicator
+            loadingElement.style.display = 'block';
+            
+            // Create form data
+            const formData = new FormData();
+            formData.append('opportunity_id', opportunityId);
+            
+            // Send request
+            fetch('/api/simulate_approval', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+    loadingElement.style.display = 'none';
+    
+    if (data.error) {
+        // Display error message in red
+        errorElement.textContent = 'ERROR: ' + JSON.stringify(data.error);
+        // Don't show success message or results when there's an error
+        successElement.textContent = '';
+        resultsContainer.classList.add('hidden');
+    } else if (data.result && data.result.error) {
+        // If there was an error in the result
+        errorElement.textContent = 'ERROR: ' + JSON.stringify(data.result.error);
+        responseJsonElement.textContent = JSON.stringify(data.result.error, null, 2);
+        // Don't show success message when there's an error in the result
+        successElement.textContent = '';
+        // But still show the results container to display the error details
+        resultsContainer.classList.remove('hidden');
+    } else {
+        // Only show success message when there's no error
+        successElement.textContent = 'Action Required simulation completed successfully!';
+        
+        // Display the JSON results
+        resultsContainer.classList.remove('hidden');
+        
+        // Display original review status if available
+        if (data.result.original_review_status) {
+            originalStatusElement.style.display = 'block';
+            originalStatusElement.innerHTML = `<strong>Original Review Status:</strong> ${data.result.original_review_status} → <strong>Changed to:</strong> Action Required`;
+        } else {
+            originalStatusElement.style.display = 'none';
+        }
+        
+        if (data.result.original) {
+            originalJsonElement.textContent = JSON.stringify(data.result.original, null, 2);
+        }
+        
+        if (data.result.update_request) {
+            // Show the actual update request with ReviewStatus set to Action Required
+            requestJsonElement.textContent = JSON.stringify(data.result.update_request, null, 2);
+        }
+        
+        if (data.result.updated_opportunity) {
+            // Show the updated opportunity if available
+            responseJsonElement.textContent = JSON.stringify(data.result.updated_opportunity, null, 2);
+        } else if (data.result.update_response) {
+            // Fall back to the update response
+            responseJsonElement.textContent = JSON.stringify(data.result.update_response, null, 2);
+        }
+    }
+})
+
+            .catch(error => {
+                loadingElement.style.display = 'none';
+                errorElement.textContent = 'Error: ' + error.message;
+            });
+        }
+    </script>
+</body>
+</html>

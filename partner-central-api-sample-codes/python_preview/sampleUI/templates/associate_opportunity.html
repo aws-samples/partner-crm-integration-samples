@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Partner Central - Associate Opportunity</title>
+    <script src="/static/js/jquery-3.5.1.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        h1 {
+            color: #232f3e;
+        }
+        .container {
+            margin-top: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input[type="text"], select {
+            width: 300px;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #ff9900;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #e88e00;
+        }
+        #result {
+            margin-top: 20px;
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+            white-space: pre-wrap;
+            display: none;
+        }
+        .error {
+            color: #d13212;
+            margin-top: 10px;
+        }
+        .success {
+            color: #008000;
+            margin-top: 10px;
+        }
+        .loading {
+            display: none;
+            margin-top: 15px;
+        }
+        .nav-link {
+            display: inline-block;
+            margin-top: 20px;
+            color: #0066c0;
+            text-decoration: none;
+        }
+        .nav-link:hover {
+            text-decoration: underline;
+        }
+        .help-text {
+            font-size: 0.9em;
+            color: #666;
+            margin-top: 3px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Partner Central - Associate Opportunity</h1>
+    
+    <div class="container">
+        <p>Associate an opportunity with a solution, AWS product, or AWS Marketplace offer.</p>
+        
+        <div class="form-group">
+            <label for="opportunity_id">Opportunity Identifier:</label>
+            <input type="text" id="opportunity_id" name="opportunity_id" placeholder="e.g., O5465588">
+            <div class="help-text">The ID of the opportunity to associate</div>
+        </div>
+        
+        <div class="form-group">
+            <label for="entity_type">Related Entity Type:</label>
+            <select id="entity_type" name="entity_type">
+                <option value="Solutions">Solutions</option>
+                <option value="AWSProducts">AWS Products</option>
+                <option value="AWSMarketplaceOffers">AWS Marketplace Offers</option>
+            </select>
+            <div class="help-text">The type of entity to associate with the opportunity</div>
+        </div>
+        
+        <div class="form-group">
+            <label for="entity_id">Related Entity Identifier:</label>
+            <input type="text" id="entity_id" name="entity_id" placeholder="e.g., S-0059717">
+            <div class="help-text">The ID of the entity to associate with the opportunity</div>
+        </div>
+        
+        <button id="submit-btn">Associate Opportunity</button>
+        
+        <div class="loading" id="loading">Processing...</div>
+        <div id="error" class="error"></div>
+        <div id="success" class="success"></div>
+        <pre id="result"></pre>
+        
+        <a href="/" class="nav-link">Back to Home</a>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            $('#submit-btn').click(function() {
+                const opportunityId = $('#opportunity_id').val().trim();
+                const entityType = $('#entity_type').val();
+                const entityId = $('#entity_id').val().trim();
+                
+                // Reset previous results
+                $('#result').hide();
+                $('#error').text('');
+                $('#success').text('');
+                
+                // Validate inputs
+                if (!opportunityId) {
+                    $('#error').text('Please enter an Opportunity Identifier');
+                    return;
+                }
+                
+                if (!entityId) {
+                    $('#error').text('Please enter a Related Entity Identifier');
+                    return;
+                }
+                
+                // Show loading indicator
+                $('#loading').show();
+                
+                // Make the API call
+                $.ajax({
+                    url: '/api/associate_opportunity',
+                    method: 'POST',
+                    data: {
+                        opportunity_id: opportunityId,
+                        entity_type: entityType,
+                        entity_id: entityId
+                    },
+                    success: function(data) {
+                        $('#loading').hide();
+                        
+                        if (data.error) {
+                            $('#error').text('ERROR: ' + JSON.stringify(data.error));
+                        } else {
+                            $('#success').text('Association successful!');
+                            $('#result').text(JSON.stringify(data.result, null, 2)).show();
+                        }
+                    },
+                    error: function(xhr) {
+                        $('#loading').hide();
+                        let errorMsg = 'An error occurred while processing your request.';
+                        if (xhr.responseJSON && xhr.responseJSON.error) {
+                            errorMsg = xhr.responseJSON.error;
+                        }
+                        $('#error').text('ERROR: ' + errorMsg);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

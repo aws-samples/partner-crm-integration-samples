@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Partner Central - List Engagement Invitations</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        h1 {
+            color: #232f3e;
+        }
+        .container {
+            margin-top: 20px;
+        }
+        button {
+            background-color: #ff9900;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        button:hover {
+            background-color: #e88e00;
+        }
+        #result {
+            margin-top: 20px;
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+            white-space: pre-wrap;
+            display: none;
+        }
+        .error {
+            color: #d13212;
+            margin-top: 10px;
+            padding: 10px;
+            border: 1px solid #d13212;
+            border-radius: 4px;
+            background-color: #fff0f0;
+            display: none;
+        }
+        .info-box {
+            background-color: #f0f7fb;
+            border-left: 5px solid #0066c0;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 0 4px 4px 0;
+        }
+        .loading {
+            display: none;
+            margin-top: 15px;
+        }
+        .nav-link {
+            display: inline-block;
+            margin-top: 20px;
+            color: #0066c0;
+            text-decoration: none;
+        }
+        .nav-link:hover {
+            text-decoration: underline;
+        }
+        .button-group {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Partner Central - List Engagement Invitations</h1>
+    
+    <div class="container">
+        <div class="info-box">
+            <p><strong>Note:</strong> This feature requires specific permissions to access engagement invitations. If you receive an error, please check that your AWS credentials have the necessary permissions.</p>
+            <p>Common errors:</p>
+            <ul>
+                <li>AccessDeniedException - Your credentials don't have permission to call the ListEngagementInvitations API</li>
+                <li>ValidationException - The request parameters are invalid</li>
+                <li>ResourceNotFoundException - The specified resource doesn't exist</li>
+            </ul>
+        </div>
+        
+        <p>Click one of the buttons below to retrieve engagement invitations:</p>
+        
+        <div class="button-group">
+            <button id="submit-btn" onclick="listEngagementInvitations(false)">List Engagement Invitations</button>
+        </div>
+        
+        <div class="loading" id="loading">Loading...</div>
+        <div id="error" class="error"></div>
+        <pre id="result"></pre>
+        
+        <a href="/" class="nav-link">Back to Home</a>
+    </div>
+
+    <script>
+        function listEngagementInvitations(useMock) {
+            const resultElement = document.getElementById('result');
+            const errorElement = document.getElementById('error');
+            const loadingElement = document.getElementById('loading');
+            
+            // Reset previous results
+            resultElement.style.display = 'none';
+            errorElement.style.display = 'none';
+            errorElement.textContent = '';
+            
+            // Show loading indicator
+            loadingElement.style.display = 'block';
+            
+            // Create form data
+            const formData = new FormData();
+            formData.append('use_mock', useMock ? 'true' : 'false');
+            
+            // Send request
+            fetch('/api/list_engagement_invitations', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                return response.json().then(data => {
+                    if (!response.ok) {
+                        // Server returned an error status
+                        throw new Error(data.error || 'Unknown error occurred');
+                    }
+                    return data;
+                });
+            })
+            .then(data => {
+                loadingElement.style.display = 'none';
+                
+                if (data.error) {
+                    errorElement.textContent = data.error;
+                    errorElement.style.display = 'block';
+                } else {
+                    resultElement.textContent = JSON.stringify(data.result, null, 2);
+                    resultElement.style.display = 'block';
+                }
+            })
+            .catch(error => {
+                loadingElement.style.display = 'none';
+                errorElement.textContent = 'Error: ' + error.message;
+                errorElement.style.display = 'block';
+            });
+        }
+    </script>
+</body>
+</html>
