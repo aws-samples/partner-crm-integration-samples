@@ -1284,12 +1284,6 @@
     "Description": "Extract information from unstructured medical text accurately and quickly"
   },
   {
-    "Identifier": "AmazonConnectAI",
-    "Name": "Amazon Connect AI",
-    "Family": "Customer Engagement",
-    "Description": "Cloud customer engagement application enables AI capabilities across customer touchpoints with all-inclusive pricing"
-  },
-  {
     "Identifier": "AmazonConnectAppleMessagesforBusiness",
     "Name": "Amazon Connect - Apple Messages for Business",
     "Family": "Customer Engagement",
@@ -1396,6 +1390,30 @@
     "Name": "Amazon Connect - Telephony",
     "Family": "Customer Engagement",
     "Description": "Capabilities to host both toll-free and direct dial numbers (DID) in all AWS Regions"
+  },
+  {
+    "Identifier": "AmazonConnectUnlimitedAIChat",
+    "Name": "Amazon Connect - Unlimited AI Chat",
+    "Family": "Customer Engagement",
+    "Description": "Provides unlimited use of Amazon Connect AI Chat capabilities and is charged per the Chat channel"
+  },
+  {
+    "Identifier": "AmazonConnectUnlimitedAIEmail",
+    "Name": "Amazon Connect - Unlimited AI Email",
+    "Family": "Customer Engagement",
+    "Description": "Provides unlimited use of Amazon Connect AI Email capabilities and is charged per the Email channel"
+  },
+  {
+    "Identifier": "AmazonConnectUnlimitedAIMessaging",
+    "Name": "Amazon Connect - Unlimited AI Messaging",
+    "Family": "Customer Engagement",
+    "Description": "Provides unlimited use of Amazon Connect AI Messaging capabilities and is charged per the messaging channel"
+  },
+  {
+    "Identifier": "AmazonConnectUnlimitedAIVoice",
+    "Name": "Amazon Connect - Unlimited AI Voice",
+    "Family": "Customer Engagement",
+    "Description": "Provides unlimited use of Amazon Connect AI Voice capabilities and is charged per the voice channel"
   },
   {
     "Identifier": "AmazonConnectVideocalling",
