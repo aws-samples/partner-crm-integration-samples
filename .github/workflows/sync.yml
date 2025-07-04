@@ -1,0 +1,27 @@
+name: Sync with GitFarm
+
+on:
+  workflow_dispatch:      # Manual trigger only
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+          
+      - name: Sync repositories
+        run: |
+          git remote add gitfarm https://code.amazon.com/packages/Partner-crm-integration-samples.git
+          git fetch gitfarm
+          git push origin --all
+
