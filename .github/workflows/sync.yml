@@ -1,7 +1,7 @@
 name: Sync with GitFarm
 
 on:
-  workflow_dispatch:      # Manual trigger only
+  workflow_dispatch:
 
 jobs:
   sync:
@@ -12,16 +12,16 @@ jobs:
         with:
           fetch-depth: 0
           
-      - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-east-1
+      - name: Configure Git
+        run: |
+          git config --global credential.helper store
+          echo "https://${{ secrets.GIT_USERNAME }}:${{ secrets.GIT_PASSWORD }}@git-codecommit.us-east-1.amazonaws.com" > ~/.git-credentials
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
           
       - name: Sync repositories
         run: |
-          git remote add gitfarm https://code.amazon.com/packages/Partner-crm-integration-samples.git
+          git remote add gitfarm https://git-codecommit.us-east-1.amazonaws.com/v1/repos/Partner-crm-integration-samples
           git fetch gitfarm
           git push origin --all
 
