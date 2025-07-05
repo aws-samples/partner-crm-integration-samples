@@ -5,15 +5,15 @@ A React-based web application demonstrating AWS Partner Central API integration 
 ## Features
 
 - **Opportunity Management**: Create, view, edit, and list opportunities
-- **AWS Opportunity Creation**: Specialized workflow for AWS opportunities  
-- **Opportunity Association**: Associate opportunities with partners
-- **Assignment Management**: Assign opportunities to team members
+- **AWS Originated Opportunity Creation**: Specialized workflow for simulating AWS originated opportunities  
+- **Opportunity Association**: Associate solutions, AWS products, AWS Marketplace private offer to the opportunities
+- **Assignment Management**: Assign team members to the opportunities
 - **Engagement Invitations**: Handle engagement invitation workflows
-- **Review Simulation**: Simulate opportunity review processes
+- **Simulation of review from AWS**: Simulate opportunity review processes from AWS
 
 ## Live Demo
 
-🚀 **[View Live Application](https://aws-samples.github.io/partner-crm-integration-samples/partner-central-api-sample-codes/opportunityManagement)**
+🚀 **[View Live Application](https://aws-samples.github.io/partner-crm-integration-samples/)**
 
 ## Getting Started
 
