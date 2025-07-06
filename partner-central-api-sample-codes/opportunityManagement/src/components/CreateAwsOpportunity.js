@@ -396,7 +396,7 @@ function CreateAwsOpportunity() {
         <SpaceBetween size="l">
           <Alert type="warning">
             <Box fontWeight="bold">
-              Opportunity is only created on AWS side, not in Partner's Partner Central Account yet. You need to use /ListEngagementInvitations to see the engagement invitations from AWS and use /AcceptEngagementInvitation to accept the invitation. Write down the opportunity Id {response.Id}. After you accept the engagement invitation, you should get the same opportunity Id in the response.
+              Opportunity is only created on AWS side, not in Partner's Partner Central Account yet. You need to use ListEngagementInvitations to see the engagement invitations from AWS and use StartEngagementByAcceptingInvitationTask to accept the invitation. Write down the opportunity Id {response.Id}. After you accept the engagement invitation, you should get the same opportunity Id in the response.
             </Box>
           </Alert>
           
