@@ -5,7 +5,6 @@ const Header = ({ onSignOut }) => {
   return (
     <TopNavigation
       identity={{
-        href: '/',
         title: 'Opportunity Management',
       }}
       utilities={[

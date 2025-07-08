@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { useNavigate } from 'react-router-dom';
+import { hasCredentials } from '../utils/sessionStorage';
 import {
   Container,
   Header,
@@ -22,6 +23,14 @@ function CreateAwsOpportunity() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [response, setResponse] = useState(null);
+  
+  useEffect(() => {
+    // Check if credentials exist
+    if (!hasCredentials()) {
+      navigate('/');
+      return;
+    }
+  }, [navigate]);
   
   // Generate a random UUID for clientToken
   const [clientToken] = useState(uuidv4());

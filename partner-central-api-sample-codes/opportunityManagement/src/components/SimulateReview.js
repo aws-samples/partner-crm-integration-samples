@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { getOpportunityId } from '../utils/sessionStorage';
+import { getOpportunityId, hasCredentials } from '../utils/sessionStorage';
 import { decodeHtmlEntities } from '../utils/commonUtils';
 import {
   Container,
@@ -27,6 +27,14 @@ function SimulateReview() {
   const [reviewStatus, setReviewStatus] = useState("Approved");
   const [updatePayload, setUpdatePayload] = useState(null);
   const [updateResponse, setUpdateResponse] = useState(null);
+  
+  // Check authentication first
+  useEffect(() => {
+    if (!hasCredentials()) {
+      navigate('/');
+      return;
+    }
+  }, [navigate]);
   
   // Fetch opportunity details on component mount
   useEffect(() => {

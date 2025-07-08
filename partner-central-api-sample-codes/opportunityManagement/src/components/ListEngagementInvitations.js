@@ -8,8 +8,7 @@ import {
   SpaceBetween,
   Box,
   Alert,
-  Spinner,
-  Link
+  Spinner
 } from "@cloudscape-design/components";
 import { hasCredentials } from '../utils/sessionStorage';
 
@@ -97,15 +96,16 @@ function ListEngagementInvitations() {
       id: "id",
       header: "Invitation ID",
       cell: item => (
-        <Link 
+        <a 
           href="#" 
           onClick={(e) => {
             e.preventDefault();
+            saveEngagementInvitationId(item.Arn || item.Id);
             navigate(`/engagement-invitation/${item.Id}`);
           }}
         >
           {item.Id}
-        </Link>
+        </a>
       )
     },
     {

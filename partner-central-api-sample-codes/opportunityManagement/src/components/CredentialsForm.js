@@ -167,6 +167,19 @@ const CredentialsForm = () => {
         <strong>Tip:</strong> To see hidden folders (e.g., .aws) when selecting files:
         <br />• Mac: Press Command + Shift + .
         <br />• Windows: Press Ctrl + Shift + .
+        <br /><br /><strong>Credential Sync:</strong> Upload a file with credentials in this format:
+        <br />aws_access_key_id=YOUR_ACCESS_KEY
+        <br />aws_secret_access_key=YOUR_SECRET_KEY
+        <br />aws_session_token=YOUR_SESSION_TOKEN
+        <br />region=us-east-1
+      </Box>
+      
+      <Box margin={{ top: 'l' }} padding={{ top: 's' }} color="text-status-inactive" fontSize="body-s">
+        <div style={{ borderTop: '1px solid #e9ebed', paddingTop: '12px' }}>
+          <div>Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.</div>
+          <div>This sample application is licensed under the MIT-0 License.</div>
+          <div><strong>This application is only used for Sandbox testing purposes.</strong></div>
+        </div>
       </Box>
     </Container>
   );

@@ -1,5 +1,5 @@
 import React from 'react';
-import { HashRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import { AppLayout, ContentLayout } from '@cloudscape-design/components';
 import '@cloudscape-design/global-styles/index.css';
 
@@ -22,7 +22,7 @@ import GetEngagementInvitation from './components/GetEngagementInvitation';
 import AcceptEngagementInvitation from './components/AcceptEngagementInvitation';
 import RejectEngagementInvitation from './components/RejectEngagementInvitation';
 import SimulateReview from './components/SimulateReview';
-import { clearCredentials, hasCredentials } from './utils/sessionStorage';
+import { clearCredentials } from './utils/sessionStorage';
 
 function App() {
   const handleSignOut = () => {

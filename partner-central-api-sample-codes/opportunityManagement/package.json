@@ -1,7 +1,7 @@
 {
   "name": "opportunity-management",
   "description": "AWS Partner Central API Opportunity Management Sample",
-  "version": "0.1.4",
+  "version": "0.2.4",
   "private": true,
   "homepage": "https://aws-samples.github.io/partner-crm-integration-samples",
   "dependencies": {

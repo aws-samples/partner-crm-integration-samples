@@ -16,18 +16,27 @@ import { hasCredentials } from '../utils/sessionStorage';
 function EngagementInvitationDetails({ invitationId: propInvitationId }) {
   const { id } = useParams();
   const navigate = useNavigate();
-  const invitationId = propInvitationId || id;
+  const [invitationId, setInvitationId] = useState(null);
   const [invitation, setInvitation] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
+  
+  console.log('EngagementInvitationDetails component rendered');
+  console.log('Current URL:', window.location.href);
+  console.log('URL param id:', id);
+  
   useEffect(() => {
-    // Check if credentials exist
-    if (!hasCredentials()) {
-      navigate('/');
+    console.log('useEffect running with id:', id);
+    
+    if (!id) {
+      console.log('No ID in URL, setting error');
+      setError('No engagement invitation ID provided');
+      setLoading(false);
       return;
     }
-
+    
+    console.log('Using ID directly for API call:', id);
+    
     const fetchInvitationDetails = async () => {
       try {
         setLoading(true);
@@ -50,7 +59,7 @@ function EngagementInvitationDetails({ invitationId: propInvitationId }) {
         // Prepare the payload
         const payload = {
           Catalog: "Sandbox",
-          Identifier: invitationId
+          Identifier: id
         };
         
         console.log('GetEngagementInvitation payload:', payload);
@@ -70,9 +79,9 @@ function EngagementInvitationDetails({ invitationId: propInvitationId }) {
         setLoading(false);
       }
     };
-
+    
     fetchInvitationDetails();
-  }, [invitationId, navigate]);
+  }, [id]);
 
   if (loading) {
     return (
@@ -111,6 +120,9 @@ function EngagementInvitationDetails({ invitationId: propInvitationId }) {
   const project = invitation.Payload?.OpportunityInvitation?.Project || {};
   const senderContacts = invitation.Payload?.OpportunityInvitation?.SenderContacts || [];
 
+  console.log('About to render engagement invitation details');
+  console.log('Invitation data:', invitation);
+  
   return (
     <Container>
       <SpaceBetween size="l">

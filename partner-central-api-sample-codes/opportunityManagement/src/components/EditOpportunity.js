@@ -93,7 +93,7 @@ function EditOpportunity() {
           NationalSecurity: response.NationalSecurity || '',
           OpportunityType: response.OpportunityType || '',
           PrimaryNeedsFromAws: response.PrimaryNeedsFromAws || [],
-          CompetitorName: response.Project?.CompetitorName || '',
+          CompetitorName: response.Project?.CompetitorName || 'On-Prem',
           CustomerBusinessProblem: decodeHtmlEntities(response.Project?.CustomerBusinessProblem || ''),
           CustomerUseCase: decodeHtmlEntities(response.Project?.CustomerUseCase || ''),
           DeliveryModels: response.Project?.DeliveryModels || [],

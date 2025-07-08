@@ -15,9 +15,6 @@ A React-based web application demonstrating AWS Partner Central API integration 
 
 🚀 **[View Live Application](https://aws-samples.github.io/partner-crm-integration-samples/)**
 
-### Demo Video
-https://github.com/aws-samples/partner-crm-integration-samples/raw/main/partner-central-api-sample-codes/opportunityManagement/docs/demo.mp4
-
 ## Getting Started
 
 ### Prerequisites
