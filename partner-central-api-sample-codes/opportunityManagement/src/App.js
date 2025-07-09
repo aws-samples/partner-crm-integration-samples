@@ -27,7 +27,7 @@ import { clearCredentials } from './utils/sessionStorage';
 function App() {
   const handleSignOut = () => {
     clearCredentials();
-    window.location.href = '/';
+    window.location.hash = '#/';
   };
 
   return (
