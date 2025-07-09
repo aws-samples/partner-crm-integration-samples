@@ -119,7 +119,18 @@ const CredentialsForm = () => {
         }
       >
         {error && <Alert type="error">{error}</Alert>}
-        
+      
+      <Alert type="warning">
+        <Box fontWeight="bold">⚠️ SECURITY WARNING</Box>
+        <SpaceBetween size="xs">
+          <div>This is a demo application. Never use long-term AWS credentials in production applications or store them client-side.</div>
+          <div>• Use temporary credentials with limited permissions</div>
+          <div>• Consider using AWS STS AssumeRole for temporary access</div>
+          <div>• Never share or commit credentials to version control</div>
+        </SpaceBetween>
+      </Alert>
+      
+      <Box margin={{ top: 'l' }}>
         <FormField label="AWS Access Key ID" required>
           <Input
             value={accessKey}
@@ -161,6 +172,7 @@ const CredentialsForm = () => {
           accept="*"
           style={{ display: 'none' }}
         />
+      </Box>
       </Form>
       
       <Box margin={{ top: 's' }} color="text-status-info">
@@ -176,6 +188,12 @@ const CredentialsForm = () => {
       
       <Box margin={{ top: 'l' }} padding={{ top: 's' }} color="text-status-inactive" fontSize="body-s">
         <div style={{ borderTop: '1px solid #e9ebed', paddingTop: '12px' }}>
+          <div><strong>IMPORTANT DISCLAIMERS:</strong></div>
+          <div>• This is a sample application for demonstration purposes only</div>
+          <div>• Should not be used as-is in production environments</div>
+          <div>• Credentials are stored in browser session storage only</div>
+          <div>• Use at your own risk - review security implications</div>
+          <br />
           <div>Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.</div>
           <div>This sample application is licensed under the MIT-0 License.</div>
           <div><strong>This application is only used for Sandbox testing purposes.</strong></div>
