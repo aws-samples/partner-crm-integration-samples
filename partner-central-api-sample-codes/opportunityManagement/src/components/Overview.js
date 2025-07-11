@@ -6,7 +6,6 @@ import {
   StatusIndicator,
   Box,
   Link,
-  Button,
 } from "@cloudscape-design/components";
 
 function Overview({ opportunity }) {

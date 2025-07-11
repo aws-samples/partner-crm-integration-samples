@@ -14,7 +14,6 @@ import {
   ColumnLayout
 } from "@cloudscape-design/components";
 import { hasCredentials, getEngagementInvitationId } from '../utils/sessionStorage';
-import EngagementInvitationDetails from './EngagementInvitationDetails';
 
 function GetEngagementInvitation() {
   const navigate = useNavigate();
@@ -52,34 +51,10 @@ function GetEngagementInvitation() {
     }
 
     setError(null);
-    setShowDetails(true);
+    navigate(`/engagement-invitation/${encodeURIComponent(invitationId.trim())}`);
   };
 
-  if (showDetails) {
-    return (
-      <Container>
-        <SpaceBetween size="l">
-          <Header
-            variant="h1"
-            actions={
-              <SpaceBetween direction="horizontal" size="xs">
-                <Button onClick={() => {
-                  setShowDetails(false);
-                  setError(null);
-                }}>Search Another</Button>
-                <Button onClick={() => navigate('/engagement-invitations')}>Back to Engagement Invitations</Button>
-              </SpaceBetween>
-            }
-          >
-            Get Engagement Invitation
-          </Header>
-          
-          {/* Use the existing EngagementInvitationDetails component */}
-          <EngagementInvitationDetails invitationId={invitationId} />
-        </SpaceBetween>
-      </Container>
-    );
-  }
+
 
   return (
     <Container>

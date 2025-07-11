@@ -5,7 +5,6 @@ import {
   ColumnLayout,
   Box,
   Link,
-  Button,
 } from "@cloudscape-design/components";
 
 function ProjectDetails({ opportunity }) {

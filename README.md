@@ -1,6 +1,6 @@
 # AWS Partner CRM Integration Samples
 
-Welcome to the AWS Partner CRM Integration Samples repository. This repository contains a collection of sample files and code snippets designed to assist AWS partners in building custom integration solutions with AWS services. The samples are specifically tailored for integrating with Customer Relationship Management (CRM) systems. You can explore a live demo of the [AWS Partner Central API Opportunity Management application in Sandbox Environemnt](https://aws-samples.github.io/partner-crm-integration-samples/) showcasing AWS Partner Central API integration.
+Welcome to the AWS Partner CRM Integration Samples repository. This repository contains a collection of sample files and code snippets designed to assist AWS partners in building custom integration solutions with AWS services. The samples are specifically tailored for integrating with Customer Relationship Management (CRM) systems. You can explore a live demo of the [AWS Partner Central API Opportunity Management application in Sandbox Environemnt](https://aws-samples.github.io/partner-crm-integration-samples/) showcasing AWS Partner Central API integration. You can also see a [video demo](https://partnercentral.awspartner.com/partnercentral2/s/resources?Id=a1Gaq000001UYjeEAG) of the application (Parnter Central Login is required),
 
 ## Repository Structure
 

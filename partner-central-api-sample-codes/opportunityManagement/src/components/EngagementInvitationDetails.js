@@ -35,7 +35,8 @@ function EngagementInvitationDetails({ invitationId: propInvitationId }) {
       return;
     }
     
-    console.log('Using ID directly for API call:', id);
+    const decodedId = decodeURIComponent(id);
+    console.log('Using decoded ID for API call:', decodedId);
     
     const fetchInvitationDetails = async () => {
       try {
@@ -59,7 +60,7 @@ function EngagementInvitationDetails({ invitationId: propInvitationId }) {
         // Prepare the payload
         const payload = {
           Catalog: "Sandbox",
-          Identifier: id
+          Identifier: decodedId
         };
         
         console.log('GetEngagementInvitation payload:', payload);

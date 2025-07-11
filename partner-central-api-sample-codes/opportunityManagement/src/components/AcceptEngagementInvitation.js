@@ -129,7 +129,6 @@ function AcceptEngagementInvitation() {
                 if (item.key === 'OpportunityId' && item.rawValue) {
                   return (
                     <Link 
-                      href="#" 
                       onClick={(e) => {
                         e.preventDefault();
                         navigate(`/opportunity/${item.rawValue}`);

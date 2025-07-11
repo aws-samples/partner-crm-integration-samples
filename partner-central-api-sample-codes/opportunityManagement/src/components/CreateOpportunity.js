@@ -110,7 +110,14 @@ function CreateOpportunity() {
     SalesActivities: ["Conducted POC / Demo"],
     Title: generateRandomTitle(), // Use the random title generator
     ApnPrograms: [],
-    PartnerOpportunityIdentifier: null
+    PartnerOpportunityIdentifier: null,
+    
+    // Software Revenue
+    SoftwareDeliveryModel: "Pay-as-you-go",
+    SoftwareEffectiveDate: new Date().toISOString().split('T')[0], // Today's date
+    SoftwareExpirationDate: new Date(new Date().setFullYear(new Date().getFullYear() + 1)).toISOString().split('T')[0], // One year from today
+    SoftwareAmount: "6000",
+    SoftwareCurrencyCode: "USD"
   });
   
   // Options for select components
@@ -278,6 +285,16 @@ function CreateOpportunity() {
     { value: "VR & AR", label: "VR & AR" }
   ];
 
+  const softwareDeliveryModelOptions = [
+    { value: "Pay-as-you-go", label: "Pay-as-you-go" },
+    { value: "Contract", label: "Contract" },
+    { value: "Subscription", label: "Subscription" }
+  ];
+
+  const currencyOptions = [
+    { value: "USD", label: "USD" }, { value: "EUR", label: "EUR" }, { value: "GBP", label: "GBP" }, { value: "JPY", label: "JPY" }, { value: "CAD", label: "CAD" }, { value: "AUD", label: "AUD" }, { value: "CHF", label: "CHF" }, { value: "CNY", label: "CNY" }, { value: "SEK", label: "SEK" }, { value: "NZD", label: "NZD" }, { value: "MXN", label: "MXN" }, { value: "SGD", label: "SGD" }, { value: "HKD", label: "HKD" }, { value: "NOK", label: "NOK" }, { value: "KRW", label: "KRW" }, { value: "TRY", label: "TRY" }, { value: "RUB", label: "RUB" }, { value: "INR", label: "INR" }, { value: "BRL", label: "BRL" }, { value: "ZAR", label: "ZAR" }, { value: "SVC", label: "SVC" }, { value: "FJD", label: "FJD" }, { value: "DJF", label: "DJF" }, { value: "CHE", label: "CHE" }, { value: "AED", label: "AED" }, { value: "TWD", label: "TWD" }, { value: "RWF", label: "RWF" }, { value: "MZN", label: "MZN" }, { value: "MWK", label: "MWK" }, { value: "JMD", label: "JMD" }, { value: "ISK", label: "ISK" }, { value: "HRK", label: "HRK" }, { value: "ERN", label: "ERN" }, { value: "ALL", label: "ALL" }, { value: "SCR", label: "SCR" }, { value: "QAR", label: "QAR" }, { value: "ARS", label: "ARS" }, { value: "RSD", label: "RSD" }, { value: "ZMW", label: "ZMW" }, { value: "XUA", label: "XUA" }, { value: "TTD", label: "TTD" }, { value: "SAR", label: "SAR" }, { value: "KMF", label: "KMF" }, { value: "GTQ", label: "GTQ" }, { value: "DKK", label: "DKK" }, { value: "COP", label: "COP" }, { value: "BBD", label: "BBD" }, { value: "UYI", label: "UYI" }, { value: "SZL", label: "SZL" }, { value: "SRD", label: "SRD" }, { value: "LSL", label: "LSL" }, { value: "KZT", label: "KZT" }, { value: "DOP", label: "DOP" }, { value: "CDF", label: "CDF" }, { value: "YER", label: "YER" }, { value: "XDR", label: "XDR" }, { value: "UGX", label: "UGX" }, { value: "MYR", label: "MYR" }, { value: "MKD", label: "MKD" }, { value: "HNL", label: "HNL" }, { value: "MGA", label: "MGA" }, { value: "CLP", label: "CLP" }, { value: "MVR", label: "MVR" }, { value: "IRR", label: "IRR" }, { value: "COU", label: "COU" }, { value: "BOV", label: "BOV" }, { value: "BGN", label: "BGN" }, { value: "AFN", label: "AFN" }, { value: "TND", label: "TND" }, { value: "SYP", label: "SYP" }, { value: "MUR", label: "MUR" }, { value: "MXV", label: "MXV" }, { value: "MMK", label: "MMK" }, { value: "FKP", label: "FKP" }, { value: "VND", label: "VND" }, { value: "BZD", label: "BZD" }, { value: "TZS", label: "TZS" }, { value: "STN", label: "STN" }, { value: "XPF", label: "XPF" }, { value: "UZS", label: "UZS" }, { value: "THB", label: "THB" }, { value: "MOP", label: "MOP" }, { value: "GIP", label: "GIP" }, { value: "GEL", label: "GEL" }, { value: "EGP", label: "EGP" }, { value: "DZD", label: "DZD" }, { value: "BAM", label: "BAM" }, { value: "ZWL", label: "ZWL" }, { value: "XOF", label: "XOF" }, { value: "USN", label: "USN" }, { value: "SSP", label: "SSP" }, { value: "NPR", label: "NPR" }, { value: "MRU", label: "MRU" }, { value: "MAD", label: "MAD" }, { value: "ILS", label: "ILS" }, { value: "UYU", label: "UYU" }, { value: "RON", label: "RON" }, { value: "PAB", label: "PAB" }, { value: "NAD", label: "NAD" }, { value: "CUC", label: "CUC" }, { value: "AWG", label: "AWG" }, { value: "PLN", label: "PLN" }, { value: "KPW", label: "KPW" }, { value: "GYD", label: "GYD" }, { value: "GHS", label: "GHS" }, { value: "CVE", label: "CVE" }, { value: "CHW", label: "CHW" }, { value: "BDT", label: "BDT" }, { value: "SLL", label: "SLL" }, { value: "MNT", label: "MNT" }, { value: "LKR", label: "LKR" }, { value: "ETB", label: "ETB" }, { value: "BSD", label: "BSD" }, { value: "AOA", label: "AOA" }, { value: "PGK", label: "PGK" }, { value: "OMR", label: "OMR" }, { value: "NIO", label: "NIO" }, { value: "CZK", label: "CZK" }, { value: "CRC", label: "CRC" }, { value: "TOP", label: "TOP" }, { value: "SBD", label: "SBD" }, { value: "NGN", label: "NGN" }, { value: "MDL", label: "MDL" }, { value: "KHR", label: "KHR" }, { value: "BOB", label: "BOB" }, { value: "AZN", label: "AZN" }, { value: "SDG", label: "SDG" }, { value: "LAK", label: "LAK" }, { value: "KYD", label: "KYD" }, { value: "VUV", label: "VUV" }, { value: "VEF", label: "VEF" }, { value: "SOS", label: "SOS" }, { value: "PKR", label: "PKR" }, { value: "LYD", label: "LYD" }, { value: "KGS", label: "KGS" }, { value: "IDR", label: "IDR" }, { value: "BYN", label: "BYN" }, { value: "WST", label: "WST" }, { value: "PHP", label: "PHP" }, { value: "KWD", label: "KWD" }, { value: "BND", label: "BND" }, { value: "AMD", label: "AMD" }, { value: "XCD", label: "XCD" }, { value: "PEN", label: "PEN" }, { value: "KES", label: "KES" }, { value: "HUF", label: "HUF" }, { value: "BMD", label: "BMD" }, { value: "XSU", label: "XSU" }, { value: "LBP", label: "LBP" }, { value: "ANG", label: "ANG" }, { value: "TMT", label: "TMT" }, { value: "SHP", label: "SHP" }, { value: "HTG", label: "HTG" }, { value: "BWP", label: "BWP" }, { value: "UAH", label: "UAH" }, { value: "IQD", label: "IQD" }, { value: "BTN", label: "BTN" }, { value: "XAF", label: "XAF" }, { value: "TJS", label: "TJS" }, { value: "CLF", label: "CLF" }, { value: "PYG", label: "PYG" }, { value: "LRD", label: "LRD" }, { value: "GMD", label: "GMD" }, { value: "CUP", label: "CUP" }, { value: "BHD", label: "BHD" }, { value: "JOD", label: "JOD" }, { value: "GNF", label: "GNF" }, { value: "BIF", label: "BIF" }
+  ];
+
   // Handle form field changes
   const handleChange = (field, value) => {
     setFormData({
@@ -374,7 +391,15 @@ function CreateOpportunity() {
         SalesActivities: formData.SalesActivities,
         Title: formData.Title
       },
-      SoftwareRevenue: {}
+      SoftwareRevenue: {
+        DeliveryModel: formData.SoftwareDeliveryModel,
+        EffectiveDate: formData.SoftwareEffectiveDate,
+        ExpirationDate: formData.SoftwareExpirationDate,
+        Value: {
+          Amount: formData.SoftwareAmount,
+          CurrencyCode: formData.SoftwareCurrencyCode
+        }
+      }
     };
     
     try {
@@ -953,6 +978,56 @@ function CreateOpportunity() {
           </Form>
         </Container>
         
+        {/* Software Revenue */}
+        <Container>
+          <Header variant="h2">Software Revenue</Header>
+          <Form>
+            <SpaceBetween size="l">
+              <FormField label="Delivery Model">
+                <Select
+                  selectedOption={formData.SoftwareDeliveryModel ? { value: formData.SoftwareDeliveryModel, label: formData.SoftwareDeliveryModel } : null}
+                  onChange={({ detail }) => handleChange('SoftwareDeliveryModel', detail.selectedOption?.value || '')}
+                  options={softwareDeliveryModelOptions}
+                  placeholder="Select delivery model"
+                />
+              </FormField>
+              
+              <FormField label="Effective Date">
+                <DatePicker
+                  value={formData.SoftwareEffectiveDate}
+                  onChange={({ detail }) => handleChange('SoftwareEffectiveDate', detail.value)}
+                  placeholder="YYYY-MM-DD"
+                />
+              </FormField>
+              
+              <FormField label="Expiration Date">
+                <DatePicker
+                  value={formData.SoftwareExpirationDate}
+                  onChange={({ detail }) => handleChange('SoftwareExpirationDate', detail.value)}
+                  placeholder="YYYY-MM-DD"
+                />
+              </FormField>
+              
+              <FormField label="Amount">
+                <Input
+                  value={formData.SoftwareAmount}
+                  onChange={({ detail }) => handleChange('SoftwareAmount', detail.value)}
+                  placeholder="Enter amount"
+                />
+              </FormField>
+              
+              <FormField label="Currency Code">
+                <Select
+                  selectedOption={formData.SoftwareCurrencyCode ? { value: formData.SoftwareCurrencyCode, label: formData.SoftwareCurrencyCode } : null}
+                  onChange={({ detail }) => handleChange('SoftwareCurrencyCode', detail.selectedOption?.value || '')}
+                  options={currencyOptions}
+                  placeholder="Select currency"
+                />
+              </FormField>
+            </SpaceBetween>
+          </Form>
+        </Container>
+        
         {/* JSON Payload Preview */}
         <Container>
             <Header variant="h2">JSON Payload Preview</Header>
@@ -1047,7 +1122,15 @@ function CreateOpportunity() {
                     SalesActivities: formData.SalesActivities,
                     Title: formData.Title
                     },
-                    SoftwareRevenue: {}
+                    SoftwareRevenue: {
+                      DeliveryModel: formData.SoftwareDeliveryModel,
+                      EffectiveDate: formData.SoftwareEffectiveDate,
+                      ExpirationDate: formData.SoftwareExpirationDate,
+                      Value: {
+                        Amount: formData.SoftwareAmount,
+                        CurrencyCode: formData.SoftwareCurrencyCode
+                      }
+                    }
                 }, null, 2)}
                 </pre>
             </Box>
