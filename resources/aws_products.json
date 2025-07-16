@@ -183,7 +183,7 @@
     "Identifier": "AWSCloudWAN",
     "Name": "AWS Cloud WAN",
     "Family": "Networking & Content Delivery",
-    "Description": "AWSCloudWAN"
+    "Description": "null"
   },
   {
     "Identifier": "AWSCodeArtifact",
@@ -1602,6 +1602,12 @@
     "Description": "High performance for ML training and HPC applications in the cloud powered by Latest Blackwell GPUs from NVIDIA"
   },
   {
+    "Identifier": "AmazonEC2P6B200",
+    "Name": "Amazon EC2 P6-B200",
+    "Family": "Compute",
+    "Description": "High performance for AI training, inference, and HPC workloads"
+  },
+  {
     "Identifier": "AmazonEC2RHEL",
     "Name": "Amazon EC2 - RHEL",
     "Family": "Compute",
@@ -1800,22 +1806,28 @@
     "Description": "Detect more online fraud faster using machine learning"
   },
   {
-    "Identifier": "AmazonGameCast",
-    "Name": "Amazon GameCast",
-    "Family": "Game Tech",
-    "Description": "Available under NDA - Amazon GameCast enables customers to build low-latency streaming services for 3D games/experiences"
-  },
-  {
-    "Identifier": "AmazonGameLift",
-    "Name": "Amazon GameLift",
+    "Identifier": "AmazonGameLiftServers",
+    "Name": "Amazon GameLift Servers",
     "Family": "Game Tech",
     "Description": "Deploy and Scale Session-based Multiplayer Games"
   },
   {
-    "Identifier": "AmazonGameLiftFlexMatch",
-    "Name": "Amazon GameLift FlexMatch",
+    "Identifier": "AmazonGameLiftServersFleetIQ",
+    "Name": "Amazon GameLift Servers FleetIQ",
+    "Family": "Game Tech",
+    "Description": "Optimizes the use of low-cost Spot Instances for cloud-based game hosting with Amazon EC2"
+  },
+  {
+    "Identifier": "AmazonGameLiftServersFlexMatch",
+    "Name": "Amazon GameLift Servers FlexMatch",
     "Family": "Game Tech",
     "Description": "Customizable matchmaking service for multiplayer games"
+  },
+  {
+    "Identifier": "AmazonGameLiftStreams",
+    "Name": "Amazon GameLift Streams",
+    "Family": "Game Tech",
+    "Description": "Enables customers to build low-latency streaming services for 3D games/experiences"
   },
   {
     "Identifier": "AmazonGameSparks",
@@ -2548,12 +2560,6 @@
     "Name": "FreeRTOS (IoT)",
     "Family": "Internet of Things",
     "Description": "Real-time operating system for microcontrollers"
-  },
-  {
-    "Identifier": "GameLiftFleetIQ",
-    "Name": "GameLift FleetIQ",
-    "Family": "Game Tech",
-    "Description": "Optimizes the use of low-cost Spot Instances for cloud-based game hosting with Amazon EC2"
   },
   {
     "Identifier": "GatewayLoadBalancer",
