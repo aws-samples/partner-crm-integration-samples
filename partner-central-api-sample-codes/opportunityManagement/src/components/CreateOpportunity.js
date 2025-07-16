@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { useNavigate } from 'react-router-dom';
-import { saveOpportunityId, hasCredentials } from '../utils/sessionStorage';
+import { saveOpportunityId, hasCredentials, getCredentials } from '../utils/sessionStorage';
 import {
   Container,
   Header,
@@ -45,7 +45,7 @@ function CreateOpportunity() {
   const [formData, setFormData] = useState({
     // System fields
     ClientToken: clientToken,
-    Catalog: "Sandbox",
+    Catalog: getCredentials().catalog || "Sandbox",
     Origin: "Partner Referral",
     
     // Customer Account
@@ -309,10 +309,14 @@ function CreateOpportunity() {
     setLoading(true);
     setError(null);
     
+    // Get credentials for catalog
+    const { getCredentials } = await import('../utils/sessionStorage');
+    const credentials = getCredentials();
+    
     // Construct the payload
     const payload = {
       ClientToken: formData.ClientToken,
-      Catalog: formData.Catalog,
+      Catalog: credentials.catalog || "Sandbox",
       Origin: formData.Origin,
       Customer: {
         Account: {
@@ -1043,7 +1047,7 @@ function CreateOpportunity() {
                 }}>
                 {JSON.stringify({
                     ClientToken: formData.ClientToken,
-                    Catalog: formData.Catalog,
+                    Catalog: getCredentials().catalog || "Sandbox",
                     Origin: formData.Origin,
                     Customer: {
                     Account: {

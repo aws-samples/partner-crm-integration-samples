@@ -14,7 +14,7 @@ import {
   Table,
   Link
 } from "@cloudscape-design/components";
-import { hasCredentials, getEngagementInvitationId, saveOpportunityId } from '../utils/sessionStorage';
+import { hasCredentials, getEngagementInvitationId, saveOpportunityId, getCredentials } from '../utils/sessionStorage';
 
 function AcceptEngagementInvitation() {
   const navigate = useNavigate();
@@ -73,7 +73,7 @@ function AcceptEngagementInvitation() {
       
       // Prepare the payload
       const payload = {
-        Catalog: "Sandbox",
+        Catalog: credentials.catalog || "Sandbox",
         Identifier: invitationId.trim(),
         ClientToken: clientToken
       };
@@ -204,7 +204,7 @@ function AcceptEngagementInvitation() {
               fontSize: '12px'
             }}>
               {JSON.stringify({
-                Catalog: "Sandbox",
+                Catalog: getCredentials().catalog || "Sandbox",
                 Identifier: invitationId.trim(),
                 ClientToken: clientToken
               }, null, 2)}
