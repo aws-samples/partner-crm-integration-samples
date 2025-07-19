@@ -59,7 +59,7 @@ function EngagementInvitationDetails({ invitationId: propInvitationId }) {
         
         // Prepare the payload
         const payload = {
-          Catalog: "Sandbox",
+          Catalog: credentials.catalog || "Sandbox",
           Identifier: decodedId
         };
         

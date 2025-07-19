@@ -13,7 +13,7 @@ import {
   Spinner,
   ColumnLayout
 } from "@cloudscape-design/components";
-import { hasCredentials, getOpportunityId } from '../utils/sessionStorage';
+import { hasCredentials, getOpportunityId, getCredentials } from '../utils/sessionStorage';
 import { decodeHtmlEntities } from '../utils/commonUtils';
 import Overview from './Overview';
 import NextSteps from './NextSteps';
@@ -72,7 +72,7 @@ function GetOpportunity() {
       
       // Prepare the payload
       const payload = {
-        Catalog: "Sandbox",
+        Catalog: credentials.catalog || "Sandbox",
         Identifier: opportunityId.trim()
       };
       
@@ -208,7 +208,7 @@ function GetOpportunity() {
               fontSize: '12px'
             }}>
               {JSON.stringify({
-                Catalog: "Sandbox",
+                Catalog: getCredentials().catalog || "Sandbox",
                 Identifier: opportunityId.trim()
               }, null, 2)}
             </pre>

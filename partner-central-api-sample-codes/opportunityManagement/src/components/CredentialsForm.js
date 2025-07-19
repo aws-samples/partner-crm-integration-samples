@@ -9,9 +9,11 @@ import {
   Input,
   Button,
   Alert,
-  Box
+  Box,
+  Select
 } from '@cloudscape-design/components';
 import { storeCredentials, hasCredentials, getCredentials } from '../utils/sessionStorage';
+import { config, CATALOG_OPTIONS } from '../config/config';
 
 const CredentialsForm = () => {
   const navigate = useNavigate();
@@ -19,6 +21,8 @@ const CredentialsForm = () => {
   const [secretKey, setSecretKey] = useState('');
   const [sessionToken, setSessionToken] = useState('');
   const [region, setRegion] = useState('us-east-1');
+  const [endpointUrl, setEndpointUrl] = useState('https://partnercentral-selling.us-east-1.api.aws');
+  const [catalog, setCatalog] = useState(CATALOG_OPTIONS[1].value);
   const [error, setError] = useState('');
   const fileInputRef = useRef(null);
   
@@ -30,6 +34,8 @@ const CredentialsForm = () => {
       setSecretKey(credentials.secretKey || '');
       setSessionToken(credentials.sessionToken || '');
       setRegion(credentials.region || 'us-east-1');
+      setEndpointUrl(credentials.endpointUrl || 'https://partnercentral-selling.us-east-1.api.aws');
+      setCatalog(credentials.catalog || CATALOG_OPTIONS[1].value);
     }
   }, []);
   
@@ -43,7 +49,8 @@ const CredentialsForm = () => {
     
     try {
       console.log('Storing credentials...');
-      storeCredentials(accessKey, secretKey, sessionToken, region);
+      const additionalConfig = config.Internal ? { endpointUrl, catalog } : {};
+      storeCredentials(accessKey, secretKey, sessionToken, region, additionalConfig);
       console.log('Credentials stored successfully');
       console.log('Navigating to /opportunities...');
       navigate('/opportunities');
@@ -89,6 +96,8 @@ const CredentialsForm = () => {
         setSecretKey(awsSecretKey);
         setSessionToken(awsSessionToken);
         setRegion(awsRegion || 'us-east-1');
+        setEndpointUrl('https://partnercentral-selling.us-east-1.api.aws');
+        setCatalog(CATALOG_OPTIONS[1].value);
         setError('');
         
       } catch (error) {
@@ -164,6 +173,27 @@ const CredentialsForm = () => {
             placeholder="us-east-1"
           />
         </FormField>
+        
+        {config.Internal && (
+          <>
+            <FormField label="Endpoint URL">
+              <Input
+                value={endpointUrl}
+                onChange={({ detail }) => setEndpointUrl(detail.value)}
+                placeholder="https://partnercentral-selling.us-east-1.api.aws"
+              />
+            </FormField>
+            
+            <FormField label="Catalog">
+              <Select
+                selectedOption={CATALOG_OPTIONS.find(option => option.value === catalog) ? { value: catalog, label: CATALOG_OPTIONS.find(option => option.value === catalog).name } : null}
+                onChange={({ detail }) => setCatalog(detail.selectedOption?.value || CATALOG_OPTIONS[1].value)}
+                options={CATALOG_OPTIONS.map(option => ({ value: option.value, label: option.name }))}
+                placeholder="Select catalog"
+              />
+            </FormField>
+          </>
+        )}
         
         <input
           type="file"

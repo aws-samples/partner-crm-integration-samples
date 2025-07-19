@@ -65,7 +65,7 @@ function SimulateReview() {
       
       // Fetch opportunity details
       const command = new GetOpportunityCommand({
-        Catalog: "Sandbox",
+        Catalog: credentials.catalog || "Sandbox",
         Identifier: opportunityId
       });
       
@@ -145,7 +145,7 @@ function SimulateReview() {
       
       // Fetch updated opportunity details
       const getCommand = new GetOpportunityCommand({
-        Catalog: "Sandbox",
+        Catalog: credentials.catalog || "Sandbox",
         Identifier: id
       });
       

@@ -73,4 +73,5 @@ ENV/
 
 # Local configuration
 local_config.json
-
+partner-central-api-sample-codes/opportunityManagement/scripts/
+partner-central-api-sample-codes/opportunityManagement/harmony.json

@@ -6,14 +6,29 @@ import { getCredentials } from '../utils/sessionStorage';
 const createPartnerCentralClient = () => {
   const credentials = getCredentials();
   
-  return new PartnerCentralSellingClient({
+  const clientConfig = {
     region: credentials.region || 'us-east-1',
     credentials: {
       accessKeyId: credentials.accessKey,
       secretAccessKey: credentials.secretKey,
       sessionToken: credentials.sessionToken
     }
-  });
+  };
+  
+  // Use CSP-allowed endpoint for harmony environment, direct endpoint otherwise
+  // if (window.location.hostname.includes('harmony.a2z.com')) {
+  //   // Use the opportunity-management endpoint that's explicitly allowed in CSP
+  //   clientConfig.endpoint = 'https://opportunity-management.us-east-1.beta.api.harmony.a2z.com';
+  // } else {
+    // Use direct endpoint for local development
+    if (credentials.endpointUrl && credentials.endpointUrl.trim()) {
+      clientConfig.endpoint = credentials.endpointUrl.trim();
+    }
+ // }
+  
+  console.log("endpoint", clientConfig.endpoint);
+
+  return new PartnerCentralSellingClient(clientConfig);
 };
 
 // List opportunities
@@ -21,9 +36,10 @@ export const listOpportunities = async () => {
   try {
     console.log('Listing opportunities...');
     
+    const credentials = getCredentials();
     const client = createPartnerCentralClient();
     const command = new ListOpportunitiesCommand({
-      Catalog: "Sandbox"
+      Catalog: credentials.catalog || "Sandbox"
     });
     
     const response = await client.send(command);
@@ -42,9 +58,10 @@ export const getOpportunity = async (opportunityId) => {
   try {
     console.log(`Getting opportunity details for ${opportunityId}...`);
     
+    const credentials = getCredentials();
     const client = createPartnerCentralClient();
     const command = new GetOpportunityCommand({
-      Catalog: "Sandbox",
+      Catalog: credentials.catalog || "Sandbox",
       Identifier: opportunityId
     });
     
@@ -63,9 +80,10 @@ export const getAwsOpportunitySummary = async (opportunityId) => {
   try {
     console.log(`Getting AWS opportunity summary for ${opportunityId}...`);
     
+    const credentials = getCredentials();
     const client = createPartnerCentralClient();
     const command = new GetAwsOpportunitySummaryCommand({
-      Catalog: "Sandbox",
+      Catalog: credentials.catalog || "Sandbox",
       RelatedOpportunityIdentifier: opportunityId
     });
     

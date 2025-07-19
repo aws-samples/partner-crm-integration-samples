@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { useNavigate } from 'react-router-dom';
-import { hasCredentials } from '../utils/sessionStorage';
+import { hasCredentials, getCredentials } from '../utils/sessionStorage';
 import {
   Container,
   Header,
@@ -206,7 +206,7 @@ function CreateAwsOpportunity() {
   const [formData, setFormData] = useState({
     // System fields
     ClientToken: clientToken,
-    Catalog: "Sandbox",
+    Catalog: getCredentials().catalog || "Sandbox",
     Origin: "AWS Referral", // Changed from "Partner Referral"
     
     // Customer Account
@@ -295,10 +295,14 @@ function CreateAwsOpportunity() {
     setLoading(true);
     setError(null);
     
+    // Get credentials for catalog
+    const { getCredentials } = await import('../utils/sessionStorage');
+    const credentials = getCredentials();
+    
     // Construct the payload
     const payload = {
       ClientToken: formData.ClientToken,
-      Catalog: formData.Catalog,
+      Catalog: credentials.catalog || "Sandbox",
       Origin: formData.Origin,
       Customer: {
         Account: {
@@ -1010,7 +1014,7 @@ function CreateAwsOpportunity() {
                 }}>
                 {JSON.stringify({
                     ClientToken: formData.ClientToken,
-                    Catalog: formData.Catalog,
+                    Catalog: getCredentials().catalog || "Sandbox",
                     Origin: formData.Origin,
                     Customer: {
                     Account: {

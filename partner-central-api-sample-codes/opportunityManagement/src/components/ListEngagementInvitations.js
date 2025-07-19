@@ -22,6 +22,7 @@ function ListEngagementInvitations() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [invitations, setInvitations] = useState([]);
+  const [detailedInvitations, setDetailedInvitations] = useState([]);
 
 
   useEffect(() => {
@@ -78,6 +79,36 @@ function ListEngagementInvitations() {
         if (invitationsList.length > 0) {
           saveEngagementInvitationId(invitationsList[0].Arn);
         }
+        
+        // Import GetEngagementInvitation command
+        const { GetEngagementInvitationCommand } = await import("@aws-sdk/client-partnercentral-selling");
+        
+        // Fetch details for each invitation
+        const detailedInvitationsPromises = invitationsList.map(async (invitation) => {
+          try {
+            const detailCommand = new GetEngagementInvitationCommand({
+              Catalog: "Sandbox",
+              Identifier: invitation.Id
+            });
+            
+            const detailResponse = await client.send(detailCommand);
+            const countryCode = detailResponse?.Payload?.OpportunityInvitation?.Customer?.CountryCode || '-';
+            
+            return {
+              ...invitation,
+              countryCode
+            };
+          } catch (error) {
+            console.error(`Error fetching details for invitation ${invitation.Id}:`, error);
+            return {
+              ...invitation,
+              countryCode: '-'
+            };
+          }
+        });
+        
+        const detailedResults = await Promise.all(detailedInvitationsPromises);
+        setDetailedInvitations(detailedResults);
         
       } catch (error) {
         console.error('Error fetching engagement invitations:', error);
@@ -142,6 +173,11 @@ function ListEngagementInvitations() {
         }
         return '-';
       }
+    },
+    {
+      id: "countryCode",
+      header: "Country Code",
+      cell: item => item.countryCode || '-'
     }
   ];
 
@@ -186,7 +222,7 @@ function ListEngagementInvitations() {
 
         <Table
           columnDefinitions={columnDefinitions}
-          items={invitations}
+          items={detailedInvitations.length > 0 ? detailedInvitations : invitations}
 
           loading={loading}
           loadingText="Loading invitations"

@@ -57,7 +57,7 @@ function EditOpportunity() {
         
         // Fetch opportunity details
         const command = new GetOpportunityCommand({
-          Catalog: "Sandbox",
+          Catalog: credentials.catalog || "Sandbox",
           Identifier: id
         });
         
