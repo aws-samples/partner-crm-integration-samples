@@ -19,9 +19,14 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "GENERATE_SOURCEMAP=false react-scripts build",
+    "build:harmony": "GENERATE_SOURCEMAP=false PUBLIC_URL=/opportunity-management react-scripts build",
+    "build:github": "GENERATE_SOURCEMAP=false PUBLIC_URL=https://aws-samples.github.io/partner-crm-integration-samples react-scripts build",
+    "build-harmony-app": "node scripts/build-harmony.js",
+    "restore-package": "node scripts/restore-package.js",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "predeploy": "npm run build",
+    "predeploy": "npm run build:github",
+    "postdeploy": "npm run restore-package",
     "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
@@ -51,5 +56,16 @@
     "postcss": "^8.4.31",
     "webpack-dev-server": "^4.15.2",
     "nth-check": "^2.1.1"
+  },
+  "displayName": "Partner Central API",
+  "bindleId": "amzn1.bindle.resource.wywxxqwcubux7smhqf5q",
+  "harmony": {
+    "appName": "opportunity-management",
+    "headers": [
+      {
+        "name": "Content-Security-Policy",
+        "value": "connect-src 'self' https://partnercentral-selling.us-east-1.api.aws https://partnercentral-selling-beta.us-east-1.api.aws/ https://partnercentral-selling-pre-prod.us-east-1.api.aws/ https://partnercentral-selling-gamma.us-east-1.api.aws https://partnercentral-selling-alpha.us-east-1.api.aws https://*.us-east-1.elb.amazonaws.com https://*.us-west-2.amazon.com http://localhost:8080 midway-auth.amazon.com;"
+      }
+    ]
   }
 }
