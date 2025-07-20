@@ -13,11 +13,34 @@ import {
   Spinner,
   ColumnLayout
 } from "@cloudscape-design/components";
-import { hasCredentials, getOpportunityId, getCredentials } from '../utils/sessionStorage';
+import { hasCredentials, getOpportunityId, getCredentials, saveOpportunityId } from '../utils/sessionStorage';
 import { decodeHtmlEntities } from '../utils/commonUtils';
+import { getAwsOpportunitySummary } from '../services/api';
+import { cleanOpportunityData, enhanceWithAwsSummary } from '../utils/opportunityUtils';
+import { PartnerCentralSellingClient, GetOpportunityCommand } from "@aws-sdk/client-partnercentral-selling";
 import Overview from './Overview';
 import NextSteps from './NextSteps';
 import TabsSection from './TabsSection';
+
+// Helper function to clean the response by removing __type attributes
+const cleanResponse = (obj) => {
+  if (!obj) return obj;
+  
+  if (typeof obj !== 'object') return obj;
+  
+  if (Array.isArray(obj)) {
+    return obj.map(item => cleanResponse(item));
+  }
+  
+  const result = {};
+  for (const key in obj) {
+    if (key !== '__type') {
+      result[key] = cleanResponse(obj[key]);
+    }
+  }
+  
+  return result;
+};
 
 function GetOpportunity() {
   const navigate = useNavigate();
@@ -26,6 +49,7 @@ function GetOpportunity() {
   const [opportunityId, setOpportunityId] = useState('');
   const [opportunity, setOpportunity] = useState(null);
   const [awsOpportunity, setAwsOpportunity] = useState(null);
+  const [rawResponse, setRawResponse] = useState(null);
 
   useEffect(() => {
     // Check if credentials exist
@@ -53,12 +77,9 @@ function GetOpportunity() {
     setError(null);
     setOpportunity(null);
     setAwsOpportunity(null);
+    setRawResponse(null);
 
     try {
-      // Import AWS SDK
-      const { PartnerCentralSellingClient, GetOpportunityCommand } = await import("@aws-sdk/client-partnercentral-selling");
-      const { getCredentials } = await import('../utils/sessionStorage');
-      
       const credentials = getCredentials();
       
       const client = new PartnerCentralSellingClient({
@@ -82,34 +103,92 @@ function GetOpportunity() {
       const command = new GetOpportunityCommand(payload);
       const response = await client.send(command);
       
-      console.log('GetOpportunity response:', response);
+      // Log the raw response for debugging
+      console.log('GetOpportunity raw response:', response);
+      
+      // Specifically log the ExpectedCustomerSpend section
+      if (response.Project?.ExpectedCustomerSpend) {
+        console.log('Raw ExpectedCustomerSpend:', response.Project.ExpectedCustomerSpend);
+        
+        // Log each item in the ExpectedCustomerSpend array
+        response.Project.ExpectedCustomerSpend.forEach((item, index) => {
+          console.log(`ExpectedCustomerSpend item ${index}:`, item);
+          console.log(`ExpectedCustomerSpend item ${index} keys:`, Object.keys(item));
+          console.log(`ExpectedCustomerSpend item ${index} __type:`, item.__type);
+          console.log(`ExpectedCustomerSpend item ${index} EstimationUrl:`, item.EstimationUrl);
+        });
+      }
+      
+      // Clean the opportunity data using the shared utility function
+      const responseClone = cleanOpportunityData(response);
+      
+      // Log the cleaned response for debugging
+      console.log('Cleaned response:', responseClone);
+      
+      // Log the ExpectedCustomerSpend section after cleaning
+      if (responseClone.Project?.ExpectedCustomerSpend) {
+        console.log('Cleaned ExpectedCustomerSpend:', responseClone.Project.ExpectedCustomerSpend);
+      }
+      
+      // Create the rawResponse object from the cleaned response
+      const newRawResponse = {
+        Arn: responseClone.Arn,
+        Catalog: responseClone.Catalog,
+        CreatedDate: responseClone.CreatedDate,
+        Customer: responseClone.Customer,
+        Id: responseClone.Id,
+        LastModifiedDate: responseClone.LastModifiedDate,
+        LifeCycle: responseClone.LifeCycle,
+        Marketing: responseClone.Marketing,
+        NationalSecurity: responseClone.NationalSecurity,
+        OpportunityTeam: responseClone.OpportunityTeam,
+        OpportunityType: responseClone.OpportunityType,
+        PartnerOpportunityIdentifier: responseClone.PartnerOpportunityIdentifier,
+        PrimaryNeedsFromAws: responseClone.PrimaryNeedsFromAws,
+        Project: responseClone.Project,
+        RelatedEntityIdentifiers: responseClone.RelatedEntityIdentifiers,
+        SoftwareRevenue: responseClone.SoftwareRevenue
+      };
+      
+      // Log the final rawResponse object
+      console.log('Final rawResponse object:', newRawResponse);
+      
+      // Specifically check if __type is still present in ExpectedCustomerSpend
+      if (newRawResponse.Project?.ExpectedCustomerSpend) {
+        console.log('Final ExpectedCustomerSpend in rawResponse:', newRawResponse.Project.ExpectedCustomerSpend);
+        
+        // Log each item in the ExpectedCustomerSpend array
+        newRawResponse.Project.ExpectedCustomerSpend.forEach((item, index) => {
+          console.log(`Final ExpectedCustomerSpend item ${index}:`, item);
+          console.log(`Final ExpectedCustomerSpend item ${index} keys:`, Object.keys(item));
+        });
+      }
+      
+      setRawResponse(newRawResponse);
       
       // Store opportunity ID in session storage
-      const { saveOpportunityId } = await import('../utils/sessionStorage');
       saveOpportunityId(opportunityId.trim());
       
-      // Try to fetch AWS opportunity summary for additional data
-      try {
-        const { getAwsOpportunitySummary } = await import('../services/api');
-        const awsSummary = await getAwsOpportunitySummary(opportunityId.trim());
-        setAwsOpportunity(awsSummary);
-        
-        // Merge the data with correct field mappings
+      // Only call GetAwsOpportunitySummary for approved opportunities
+      if (responseClone.LifeCycle?.ReviewStatus === 'Approved') {
+        try {
+          const awsSummary = await getAwsOpportunitySummary(opportunityId.trim());
+          setAwsOpportunity(awsSummary);
+          
+          // Enhance the opportunity data with AWS summary
+          setOpportunity(enhanceWithAwsSummary(responseClone, awsSummary));
+        } catch (awsErr) {
+          // If there's an error, just use the basic opportunity data
+          console.log('Skipping AWS opportunity summary for approved opportunity due to error:', awsErr.message);
+          setOpportunity({
+            ...responseClone,
+            Origin: 'Partner referral' // Default value
+          });
+        }
+      } else {
+        // For non-approved opportunities, just use the basic data
         setOpportunity({
-          ...response,
-          Origin: awsSummary.Origin || 'Partner referral',
-          EngagementScore: awsSummary.Insights?.EngagementScore || '-',
-          NextBestActions: awsSummary.Insights?.NextBestActions || '-',
-          InvolvementType: awsSummary.InvolvementType || '-',
-          AwsProducts: awsSummary.RelatedEntityIds?.AwsProducts || [],
-          Solutions: awsSummary.RelatedEntityIds?.Solutions || [],
-          ExpectedCustomerSpend: awsSummary.Project?.ExpectedCustomerSpend || []
-        });
-      } catch (awsErr) {
-        console.error('Error fetching AWS opportunity summary:', awsErr);
-        // Still use the basic opportunity data
-        setOpportunity({
-          ...response,
+          ...responseClone,
           Origin: 'Partner referral' // Default value
         });
       }
@@ -134,6 +213,7 @@ function GetOpportunity() {
                 <Button onClick={() => {
                   setOpportunity(null);
                   setAwsOpportunity(null);
+                  setRawResponse(null);
                   setError(null);
                 }}>Search Another</Button>
                 <Button onClick={() => navigate('/opportunities')}>Back to Opportunities</Button>
@@ -163,7 +243,28 @@ function GetOpportunity() {
             maxHeight: '400px',
             fontSize: '12px'
           }}>
-            {decodeHtmlEntities(JSON.stringify(opportunity, null, 2))}
+            {(() => {
+              // Create a clean copy of the opportunity object for display
+              const displayData = JSON.parse(JSON.stringify(rawResponse));
+              
+              // Remove $metadata if it exists
+              if (displayData.$metadata) {
+                delete displayData.$metadata;
+              }
+              
+              // Ensure ExpectedCustomerSpend is properly formatted
+              if (displayData.Project?.ExpectedCustomerSpend) {
+                displayData.Project.ExpectedCustomerSpend = displayData.Project.ExpectedCustomerSpend.map(spend => ({
+                  Amount: spend.Amount,
+                  CurrencyCode: spend.CurrencyCode,
+                  EstimationUrl: null,
+                  Frequency: spend.Frequency,
+                  TargetCompany: spend.TargetCompany
+                }));
+              }
+              
+              return decodeHtmlEntities(JSON.stringify(displayData, null, 4));
+            })()}
           </pre>
         </SpaceBetween>
       </Container>

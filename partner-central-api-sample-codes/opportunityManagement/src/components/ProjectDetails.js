@@ -22,7 +22,7 @@ function ProjectDetails({ opportunity }) {
           {/* Left Column */}
           <div>
             <Box variant="awsui-key-label">Partner primary need</Box>
-            <Box>{opportunity?.PrimaryNeedsFromAws?.[0] || '-'}</Box>
+            <Box>{opportunity?.PrimaryNeedsFromAws?.join(', ') || '-'}</Box>
 
             <Box variant="awsui-key-label">Partner project title</Box>
             <Box>{opportunity?.Project?.Title || '-'}</Box>
@@ -40,7 +40,7 @@ function ProjectDetails({ opportunity }) {
               Delivery model{" "}
               <Link variant="info" href="#">Info</Link>
             </Box>
-            <Box>{opportunity?.Project?.DeliveryModels?.[0] || '-'}</Box>
+            <Box>{opportunity?.Project?.DeliveryModels?.join(', ') || '-'}</Box>
 
             <Box variant="awsui-key-label">Target close date</Box>
             <Box>{opportunity?.LifeCycle?.TargetCloseDate || '-'}</Box>
@@ -49,13 +49,13 @@ function ProjectDetails({ opportunity }) {
           {/* Right Column */}
           <div>
             <Box variant="awsui-key-label">Co-sell needs</Box>
-            <Box>{opportunity?.PrimaryNeedsFromAws?.[0] || '-'}</Box>
+            <Box>{opportunity?.PrimaryNeedsFromAws?.join(', ') || '-'}</Box>
 
             <Box variant="awsui-key-label">Opportunity type</Box>
             <Box>{opportunity?.OpportunityType || '-'}</Box>
 
             <Box variant="awsui-key-label">Sales activities</Box>
-            <Box>{opportunity?.Project?.SalesActivities?.[0] || '-'}</Box>
+            <Box>{opportunity?.Project?.SalesActivities?.join(', ') || '-'}</Box>
 
             <Box variant="awsui-key-label">Solutions offered</Box>
             <Box>{opportunity?.RelatedEntityIdentifiers?.Solutions?.join(', ') || '-'}</Box>

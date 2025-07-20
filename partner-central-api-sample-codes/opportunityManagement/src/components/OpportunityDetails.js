@@ -10,6 +10,7 @@ import {
   Spinner
 } from "@cloudscape-design/components";
 import { getOpportunity, getAwsOpportunitySummary } from '../services/api';
+import { cleanOpportunityData, enhanceWithAwsSummary } from '../utils/opportunityUtils';
 import { hasCredentials } from '../utils/sessionStorage';
 import { decodeHtmlEntities } from '../utils/commonUtils';
 import Overview from './Overview';
@@ -38,27 +39,29 @@ function OpportunityDetails() {
         setLoading(true);
         
         // Fetch basic opportunity data
-        const opportunityData = await getOpportunity(id);
+        const rawOpportunityData = await getOpportunity(id);
         
-        // Try to fetch AWS opportunity summary for additional data
-        try {
-          const awsSummary = await getAwsOpportunitySummary(id);
-          setAwsOpportunity(awsSummary);
-          
-          // Merge the data with correct field mappings
-          setOpportunity({
-            ...opportunityData,
-            Origin: awsSummary.Origin || 'Partner referral',
-            EngagementScore: awsSummary.Insights?.EngagementScore || '-',
-            NextBestActions: awsSummary.Insights?.NextBestActions || '-',
-            InvolvementType: awsSummary.InvolvementType || '-',
-            AwsProducts: awsSummary.RelatedEntityIds?.AwsProducts || [],
-            Solutions: awsSummary.RelatedEntityIds?.Solutions || [],
-            ExpectedCustomerSpend: awsSummary.Project?.ExpectedCustomerSpend || []
-          });
-        } catch (awsErr) {
-          console.error('Error fetching AWS opportunity summary:', awsErr);
-          // Still use the basic opportunity data
+        // Clean the opportunity data
+        const opportunityData = cleanOpportunityData(rawOpportunityData);
+        
+        // Only call getAwsOpportunitySummary for approved opportunities
+        if (opportunityData.LifeCycle?.ReviewStatus === 'Approved') {
+          try {
+            const awsSummary = await getAwsOpportunitySummary(id);
+            setAwsOpportunity(awsSummary);
+            
+            // Enhance the opportunity data with AWS summary
+            setOpportunity(enhanceWithAwsSummary(opportunityData, awsSummary));
+          } catch (awsErr) {
+            console.log('Skipping AWS opportunity summary for approved opportunity due to error:', awsErr.message);
+            // Still use the basic opportunity data
+            setOpportunity({
+              ...opportunityData,
+              Origin: 'Partner referral' // Default value
+            });
+          }
+        } else {
+          // For non-approved opportunities, just use the basic data
           setOpportunity({
             ...opportunityData,
             Origin: 'Partner referral' // Default value
@@ -144,7 +147,28 @@ function OpportunityDetails() {
           maxHeight: '400px',
           fontSize: '12px'
         }}>
-          {decodeHtmlEntities(JSON.stringify(opportunity, null, 2))}
+          {(() => {
+            // Create a clean copy of the opportunity object for display
+            const displayData = JSON.parse(JSON.stringify(opportunity));
+            
+            // Remove $metadata if it exists
+            if (displayData.$metadata) {
+              delete displayData.$metadata;
+            }
+            
+            // Ensure ExpectedCustomerSpend is properly formatted
+            if (displayData.Project?.ExpectedCustomerSpend) {
+              displayData.Project.ExpectedCustomerSpend = displayData.Project.ExpectedCustomerSpend.map(spend => ({
+                Amount: spend.Amount,
+                CurrencyCode: spend.CurrencyCode,
+                EstimationUrl: null,
+                Frequency: spend.Frequency,
+                TargetCompany: spend.TargetCompany
+              }));
+            }
+            
+            return decodeHtmlEntities(JSON.stringify(displayData, null, 2));
+          })()}
         </pre>
       </SpaceBetween>
     </Container>

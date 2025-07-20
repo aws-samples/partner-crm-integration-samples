@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { useNavigate } from 'react-router-dom';
 import { saveOpportunityId, hasCredentials, getCredentials } from '../utils/sessionStorage';
@@ -15,7 +15,8 @@ import {
   RadioGroup,
   DatePicker,
   Box,
-  Alert
+  Alert,
+  Checkbox
 } from "@cloudscape-design/components";
 import axios from 'axios';
 
@@ -23,6 +24,8 @@ function CreateOpportunity() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [uploadedJson, setUploadedJson] = useState(null);
+  const fileInputRef = useRef(null);
   
   useEffect(() => {
     // Check if credentials exist
@@ -211,6 +214,37 @@ function CreateOpportunity() {
     { value: 'TT', label: 'TT' }, { value: 'SS', label: 'SS' }, { value: 'MM', label: 'MM' }, { value: 'GG', label: 'GG' }, { value: 'EE', label: 'EE' }, { value: 'CC', label: 'CC' }, { value: 'BB', label: 'BB' }, { value: 'RS', label: 'RS' }, { value: 'ST', label: 'ST' }, { value: 'NO', label: 'NO' }, { value: 'MN', label: 'MN' }, { value: 'GH', label: 'GH' }, { value: 'DE', label: 'DE' }, { value: 'CD', label: 'CD' }, { value: 'TV', label: 'TV' }, { value: 'PR', label: 'PR' }, { value: 'NP', label: 'NP' }, { value: 'MO', label: 'MO' }, { value: 'GI', label: 'GI' }, { value: 'EG', label: 'EG' }, { value: 'KM', label: 'KM' }, { value: 'BD', label: 'BD' }, { value: 'EH', label: 'EH' }, { value: 'TW', label: 'TW' }, { value: 'KN', label: 'KN' }, { value: 'RU', label: 'RU' }, { value: 'PS', label: 'PS' }, { value: 'MP', label: 'MP' }, { value: 'JM', label: 'JM' }, { value: 'IL', label: 'IL' }, { value: 'HK', label: 'HK' }, { value: 'FI', label: 'FI' }, { value: 'SV', label: 'SV' }, { value: 'CF', label: 'CF' }, { value: 'BE', label: 'BE' }, { value: 'AD', label: 'AD' }, { value: 'UY', label: 'UY' }, { value: 'AE', label: 'AE' }, { value: 'PT', label: 'PT' }, { value: 'NR', label: 'NR' }, { value: 'MQ', label: 'MQ' }, { value: 'IM', label: 'IM' }, { value: 'FJ', label: 'FJ' }, { value: 'CG', label: 'CG' }, { value: 'BF', label: 'BF' }, { value: 'UZ', label: 'UZ' }, { value: 'CH', label: 'CH' }, { value: 'SX', label: 'SX' }, { value: 'RW', label: 'RW' }, { value: 'MR', label: 'MR' }, { value: 'JO', label: 'JO' }, { value: 'IN', label: 'IN' }, { value: 'HM', label: 'HM' }, { value: 'GL', label: 'GL' }, { value: 'FK', label: 'FK' }, { value: 'BG', label: 'BG' }, { value: 'AF', label: 'AF' }, { value: 'TZ', label: 'TZ' }, { value: 'SY', label: 'SY' }, { value: 'MS', label: 'MS' }, { value: 'LR', label: 'LR' }, { value: 'JP', label: 'JP' }, { value: 'HN', label: 'HN' }, { value: 'GM', label: 'GM' }, { value: 'DJ', label: 'DJ' }, { value: 'CI', label: 'CI' }, { value: 'IO', label: 'IO' }, { value: 'BH', label: 'BH' }, { value: 'AG', label: 'AG' }, { value: 'SZ', label: 'SZ' }, { value: 'ZA', label: 'ZA' }, { value: 'PW', label: 'PW' }, { value: 'NU', label: 'NU' }, { value: 'FM', label: 'FM' }, { value: 'MT', label: 'MT' }, { value: 'LS', label: 'LS' }, { value: 'KR', label: 'KR' }, { value: 'GN', label: 'GN' }, { value: 'DK', label: 'DK' }, { value: 'BI', label: 'BI' }, { value: 'MU', label: 'MU' }, { value: 'LT', label: 'LT' }, { value: 'IQ', label: 'IQ' }, { value: 'CK', label: 'CK' }, { value: 'BJ', label: 'BJ' }, { value: 'AI', label: 'AI' }, { value: 'PY', label: 'PY' }, { value: 'MV', label: 'MV' }, { value: 'LU', label: 'LU' }, { value: 'IR', label: 'IR' }, { value: 'GP', label: 'GP' }, { value: 'FO', label: 'FO' }, { value: 'DM', label: 'DM' }, { value: 'CL', label: 'CL' }, { value: 'BL', label: 'BL' }, { value: 'MW', label: 'MW' }, { value: 'LV', label: 'LV' }, { value: 'IS', label: 'IS' }, { value: 'GQ', label: 'GQ' }, { value: 'HR', label: 'HR' }, { value: 'CM', label: 'CM' }, { value: 'MX', label: 'MX' }, { value: 'IT', label: 'IT' }, { value: 'VA', label: 'VA' }, { value: 'GR', label: 'GR' }, { value: 'DO', label: 'DO' }, { value: 'CN', label: 'CN' }, { value: 'BM', label: 'BM' }, { value: 'AL', label: 'AL' }, { value: 'YE', label: 'YE' }, { value: 'UA', label: 'UA' }, { value: 'GS', label: 'GS' }, { value: 'NZ', label: 'NZ' }, { value: 'MY', label: 'MY' }, { value: 'KW', label: 'KW' }, { value: 'HT', label: 'HT' }, { value: 'FR', label: 'FR' }, { value: 'CO', label: 'CO' }, { value: 'BN', label: 'BN' }, { value: 'AM', label: 'AM' }, { value: 'VC', label: 'VC' }, { value: 'AN', label: 'AN' }, { value: 'MZ', label: 'MZ' }, { value: 'LY', label: 'LY' }, { value: 'HU', label: 'HU' }, { value: 'GT', label: 'GT' }, { value: 'ER', label: 'ER' }, { value: 'BO', label: 'BO' }, { value: 'ES', label: 'ES' }, { value: 'SA', label: 'SA' }, { value: 'GU', label: 'GU' }, { value: 'KY', label: 'KY' }, { value: 'AO', label: 'AO' }, { value: 'WF', label: 'WF' }, { value: 'VE', label: 'VE' }, { value: 'TC', label: 'TC' }, { value: 'SB', label: 'SB' }, { value: 'KZ', label: 'KZ' }, { value: 'ET', label: 'ET' }, { value: 'CR', label: 'CR' }, { value: 'BQ', label: 'BQ' }, { value: 'SC', label: 'SC' }, { value: 'QA', label: 'QA' }, { value: 'GW', label: 'GW' }, { value: 'TD', label: 'TD' }, { value: 'BR', label: 'BR' }, { value: 'AQ', label: 'AQ' }, { value: 'VG', label: 'VG' }, { value: 'SD', label: 'SD' }, { value: 'PA', label: 'PA' }, { value: 'BS', label: 'BS' }, { value: 'AR', label: 'AR' }, { value: 'UG', label: 'UG' }, { value: 'SE', label: 'SE' }, { value: 'GY', label: 'GY' }, { value: 'TF', label: 'TF' }, { value: 'CU', label: 'CU' }, { value: 'BT', label: 'BT' }, { value: 'AS', label: 'AS' }, { value: 'ZM', label: 'ZM' }, { value: 'VI', label: 'VI' }, { value: 'TG', label: 'TG' }, { value: 'RE', label: 'RE' }, { value: 'NA', label: 'NA' }, { value: 'CV', label: 'CV' }, { value: 'AT', label: 'AT' }, { value: 'TH', label: 'TH' }, { value: 'SG', label: 'SG' }, { value: 'MA', label: 'MA' }, { value: 'CW', label: 'CW' }, { value: 'BV', label: 'BV' }, { value: 'AU', label: 'AU' }, { value: 'SH', label: 'SH' }, { value: 'PE', label: 'PE' }, { value: 'NC', label: 'NC' }, { value: 'LA', label: 'LA' }, { value: 'CX', label: 'CX' }, { value: 'BW', label: 'BW' }, { value: 'TJ', label: 'TJ' }, { value: 'SI', label: 'SI' }, { value: 'MC', label: 'MC' }, { value: 'LB', label: 'LB' }, { value: 'PF', label: 'PF' }, { value: 'CY', label: 'CY' }, { value: 'AW', label: 'AW' }, { value: 'DZ', label: 'DZ' }, { value: 'TK', label: 'TK' }, { value: 'SJ', label: 'SJ' }, { value: 'LC', label: 'LC' }, { value: 'PG', label: 'PG' }, { value: 'NE', label: 'NE' }, { value: 'MD', label: 'MD' }, { value: 'CZ', label: 'CZ' }, { value: 'BY', label: 'BY' }, { value: 'AX', label: 'AX' }, { value: 'VN', label: 'VN' }, { value: 'UM', label: 'UM' }, { value: 'TL', label: 'TL' }, { value: 'SK', label: 'SK' }, { value: 'PH', label: 'PH' }, { value: 'NF', label: 'NF' }, { value: 'ME', label: 'ME' }, { value: 'BZ', label: 'BZ' }, { value: 'TM', label: 'TM' }, { value: 'SL', label: 'SL' }, { value: 'MF', label: 'MF' }, { value: 'NG', label: 'NG' }, { value: 'AZ', label: 'AZ' }, { value: 'TN', label: 'TN' }, { value: 'SM', label: 'SM' }, { value: 'MG', label: 'MG' }, { value: 'KE', label: 'KE' }, { value: 'GA', label: 'GA' }, { value: 'GB', label: 'GB' }, { value: 'TO', label: 'TO' }, { value: 'SN', label: 'SN' }, { value: 'PK', label: 'PK' }, { value: 'NI', label: 'NI' }, { value: 'YT', label: 'YT' }, { value: 'MH', label: 'MH' }, { value: 'JE', label: 'JE' }, { value: 'ID', label: 'ID' }, { value: 'SO', label: 'SO' }, { value: 'WS', label: 'WS' }, { value: 'PL', label: 'PL' }, { value: 'KG', label: 'KG' }, { value: 'IE', label: 'IE' }, { value: 'ZW', label: 'ZW' }, { value: 'PM', label: 'PM' }, { value: 'RO', label: 'RO' }, { value: 'LI', label: 'LI' }, { value: 'GD', label: 'GD' }, { value: 'KH', label: 'KH' }, { value: 'TR', label: 'TR' }, { value: 'PN', label: 'PN' }, { value: 'OM', label: 'OM' }, { value: 'NL', label: 'NL' }, { value: 'MK', label: 'MK' }, { value: 'KI', label: 'KI' }, { value: 'GE', label: 'GE' }, { value: 'EC', label: 'EC' }, { value: 'CA', label: 'CA' }, { value: 'US', label: 'US' }, { value: 'VU', label: 'VU' }, { value: 'SR', label: 'SR' }, { value: 'LK', label: 'LK' }, { value: 'ML', label: 'ML' }, { value: 'GF', label: 'GF' }, { value: 'BA', label: 'BA' }
   ];
 
+  const industryOptions = [
+    { value: 'Aerospace', label: 'Aerospace' },
+    { value: 'Agriculture', label: 'Agriculture' },
+    { value: 'Automotive', label: 'Automotive' },
+    { value: 'Computers and Electronics', label: 'Computers and Electronics' },
+    { value: 'Consumer Goods', label: 'Consumer Goods' },
+    { value: 'Education', label: 'Education' },
+    { value: 'Energy - Oil and Gas', label: 'Energy - Oil and Gas' },
+    { value: 'Energy - Power and Utilities', label: 'Energy - Power and Utilities' },
+    { value: 'Financial Services', label: 'Financial Services' },
+    { value: 'Gaming', label: 'Gaming' },
+    { value: 'Government', label: 'Government' },
+    { value: 'Healthcare', label: 'Healthcare' },
+    { value: 'Hospitality', label: 'Hospitality' },
+    { value: 'Life Sciences', label: 'Life Sciences' },
+    { value: 'Manufacturing', label: 'Manufacturing' },
+    { value: 'Marketing and Advertising', label: 'Marketing and Advertising' },
+    { value: 'Media and Entertainment', label: 'Media and Entertainment' },
+    { value: 'Mining', label: 'Mining' },
+    { value: 'Non-Profit Organization', label: 'Non-Profit Organization' },
+    { value: 'Professional Services', label: 'Professional Services' },
+    { value: 'Real Estate and Construction', label: 'Real Estate and Construction' },
+    { value: 'Retail', label: 'Retail' },
+    { value: 'Software and Internet', label: 'Software and Internet' },
+    { value: 'Telecommunications', label: 'Telecommunications' },
+    { value: 'Transportation and Logistics', label: 'Transportation and Logistics' },
+    { value: 'Travel', label: 'Travel' },
+    { value: 'Wholesale and Distribution', label: 'Wholesale and Distribution' },
+    { value: 'Other', label: 'Other' }
+  ];
+
   const stateOptions = [
     { value: '', label: 'Select state or region' },
     { value: 'Alabama', label: 'Alabama' }, { value: 'Alaska', label: 'Alaska' }, { value: 'American Samoa', label: 'American Samoa' }, { value: 'APO/AE', label: 'APO/AE' }, { value: 'Arizona', label: 'Arizona' }, { value: 'Arkansas', label: 'Arkansas' }, { value: 'California', label: 'California' }, { value: 'Colorado', label: 'Colorado' }, { value: 'Connecticut', label: 'Connecticut' }, { value: 'Delaware', label: 'Delaware' }, { value: 'Dist. of Columbia', label: 'Dist. of Columbia' }, { value: 'Federated States of Micronesia', label: 'Federated States of Micronesia' }, { value: 'Florida', label: 'Florida' }, { value: 'FPO, AP', label: 'FPO, AP' }, { value: 'Georgia', label: 'Georgia' }, { value: 'Guam', label: 'Guam' }, { value: 'Hawaii', label: 'Hawaii' }, { value: 'Idaho', label: 'Idaho' }, { value: 'Illinois', label: 'Illinois' }, { value: 'Indiana', label: 'Indiana' }, { value: 'Iowa', label: 'Iowa' }, { value: 'Kansas', label: 'Kansas' }, { value: 'Kentucky', label: 'Kentucky' }, { value: 'Louisiana', label: 'Louisiana' }, { value: 'Maine', label: 'Maine' }, { value: 'Marshall Islands', label: 'Marshall Islands' }, { value: 'Maryland', label: 'Maryland' }, { value: 'Massachusetts', label: 'Massachusetts' }, { value: 'Michigan', label: 'Michigan' }, { value: 'Minnesota', label: 'Minnesota' }, { value: 'Mississippi', label: 'Mississippi' }, { value: 'Missouri', label: 'Missouri' }, { value: 'Montana', label: 'Montana' }, { value: 'Nebraska', label: 'Nebraska' }, { value: 'Nevada', label: 'Nevada' }, { value: 'New Hampshire', label: 'New Hampshire' }, { value: 'New Jersey', label: 'New Jersey' }, { value: 'New Mexico', label: 'New Mexico' }, { value: 'New York', label: 'New York' }, { value: 'North Carolina', label: 'North Carolina' }, { value: 'North Dakota', label: 'North Dakota' }, { value: 'Ohio', label: 'Ohio' }, { value: 'Oklahoma', label: 'Oklahoma' }, { value: 'Oregon', label: 'Oregon' }, { value: 'Palau', label: 'Palau' }, { value: 'Pennsylvania', label: 'Pennsylvania' }, { value: 'Puerto Rico', label: 'Puerto Rico' }, { value: 'Rhode Island', label: 'Rhode Island' }, { value: 'South Carolina', label: 'South Carolina' }, { value: 'South Dakota', label: 'South Dakota' }, { value: 'Tennessee', label: 'Tennessee' }, { value: 'Texas', label: 'Texas' }, { value: 'Utah', label: 'Utah' }, { value: 'Vermont', label: 'Vermont' }, { value: 'Virginia', label: 'Virginia' }, { value: 'Virgin Islands', label: 'Virgin Islands' }, { value: 'Washington', label: 'Washington' }, { value: 'West Virginia', label: 'West Virginia' }, { value: 'Wisconsin', label: 'Wisconsin' }, { value: 'Wyoming', label: 'Wyoming' }
@@ -295,6 +329,184 @@ function CreateOpportunity() {
     { value: "USD", label: "USD" }, { value: "EUR", label: "EUR" }, { value: "GBP", label: "GBP" }, { value: "JPY", label: "JPY" }, { value: "CAD", label: "CAD" }, { value: "AUD", label: "AUD" }, { value: "CHF", label: "CHF" }, { value: "CNY", label: "CNY" }, { value: "SEK", label: "SEK" }, { value: "NZD", label: "NZD" }, { value: "MXN", label: "MXN" }, { value: "SGD", label: "SGD" }, { value: "HKD", label: "HKD" }, { value: "NOK", label: "NOK" }, { value: "KRW", label: "KRW" }, { value: "TRY", label: "TRY" }, { value: "RUB", label: "RUB" }, { value: "INR", label: "INR" }, { value: "BRL", label: "BRL" }, { value: "ZAR", label: "ZAR" }, { value: "SVC", label: "SVC" }, { value: "FJD", label: "FJD" }, { value: "DJF", label: "DJF" }, { value: "CHE", label: "CHE" }, { value: "AED", label: "AED" }, { value: "TWD", label: "TWD" }, { value: "RWF", label: "RWF" }, { value: "MZN", label: "MZN" }, { value: "MWK", label: "MWK" }, { value: "JMD", label: "JMD" }, { value: "ISK", label: "ISK" }, { value: "HRK", label: "HRK" }, { value: "ERN", label: "ERN" }, { value: "ALL", label: "ALL" }, { value: "SCR", label: "SCR" }, { value: "QAR", label: "QAR" }, { value: "ARS", label: "ARS" }, { value: "RSD", label: "RSD" }, { value: "ZMW", label: "ZMW" }, { value: "XUA", label: "XUA" }, { value: "TTD", label: "TTD" }, { value: "SAR", label: "SAR" }, { value: "KMF", label: "KMF" }, { value: "GTQ", label: "GTQ" }, { value: "DKK", label: "DKK" }, { value: "COP", label: "COP" }, { value: "BBD", label: "BBD" }, { value: "UYI", label: "UYI" }, { value: "SZL", label: "SZL" }, { value: "SRD", label: "SRD" }, { value: "LSL", label: "LSL" }, { value: "KZT", label: "KZT" }, { value: "DOP", label: "DOP" }, { value: "CDF", label: "CDF" }, { value: "YER", label: "YER" }, { value: "XDR", label: "XDR" }, { value: "UGX", label: "UGX" }, { value: "MYR", label: "MYR" }, { value: "MKD", label: "MKD" }, { value: "HNL", label: "HNL" }, { value: "MGA", label: "MGA" }, { value: "CLP", label: "CLP" }, { value: "MVR", label: "MVR" }, { value: "IRR", label: "IRR" }, { value: "COU", label: "COU" }, { value: "BOV", label: "BOV" }, { value: "BGN", label: "BGN" }, { value: "AFN", label: "AFN" }, { value: "TND", label: "TND" }, { value: "SYP", label: "SYP" }, { value: "MUR", label: "MUR" }, { value: "MXV", label: "MXV" }, { value: "MMK", label: "MMK" }, { value: "FKP", label: "FKP" }, { value: "VND", label: "VND" }, { value: "BZD", label: "BZD" }, { value: "TZS", label: "TZS" }, { value: "STN", label: "STN" }, { value: "XPF", label: "XPF" }, { value: "UZS", label: "UZS" }, { value: "THB", label: "THB" }, { value: "MOP", label: "MOP" }, { value: "GIP", label: "GIP" }, { value: "GEL", label: "GEL" }, { value: "EGP", label: "EGP" }, { value: "DZD", label: "DZD" }, { value: "BAM", label: "BAM" }, { value: "ZWL", label: "ZWL" }, { value: "XOF", label: "XOF" }, { value: "USN", label: "USN" }, { value: "SSP", label: "SSP" }, { value: "NPR", label: "NPR" }, { value: "MRU", label: "MRU" }, { value: "MAD", label: "MAD" }, { value: "ILS", label: "ILS" }, { value: "UYU", label: "UYU" }, { value: "RON", label: "RON" }, { value: "PAB", label: "PAB" }, { value: "NAD", label: "NAD" }, { value: "CUC", label: "CUC" }, { value: "AWG", label: "AWG" }, { value: "PLN", label: "PLN" }, { value: "KPW", label: "KPW" }, { value: "GYD", label: "GYD" }, { value: "GHS", label: "GHS" }, { value: "CVE", label: "CVE" }, { value: "CHW", label: "CHW" }, { value: "BDT", label: "BDT" }, { value: "SLL", label: "SLL" }, { value: "MNT", label: "MNT" }, { value: "LKR", label: "LKR" }, { value: "ETB", label: "ETB" }, { value: "BSD", label: "BSD" }, { value: "AOA", label: "AOA" }, { value: "PGK", label: "PGK" }, { value: "OMR", label: "OMR" }, { value: "NIO", label: "NIO" }, { value: "CZK", label: "CZK" }, { value: "CRC", label: "CRC" }, { value: "TOP", label: "TOP" }, { value: "SBD", label: "SBD" }, { value: "NGN", label: "NGN" }, { value: "MDL", label: "MDL" }, { value: "KHR", label: "KHR" }, { value: "BOB", label: "BOB" }, { value: "AZN", label: "AZN" }, { value: "SDG", label: "SDG" }, { value: "LAK", label: "LAK" }, { value: "KYD", label: "KYD" }, { value: "VUV", label: "VUV" }, { value: "VEF", label: "VEF" }, { value: "SOS", label: "SOS" }, { value: "PKR", label: "PKR" }, { value: "LYD", label: "LYD" }, { value: "KGS", label: "KGS" }, { value: "IDR", label: "IDR" }, { value: "BYN", label: "BYN" }, { value: "WST", label: "WST" }, { value: "PHP", label: "PHP" }, { value: "KWD", label: "KWD" }, { value: "BND", label: "BND" }, { value: "AMD", label: "AMD" }, { value: "XCD", label: "XCD" }, { value: "PEN", label: "PEN" }, { value: "KES", label: "KES" }, { value: "HUF", label: "HUF" }, { value: "BMD", label: "BMD" }, { value: "XSU", label: "XSU" }, { value: "LBP", label: "LBP" }, { value: "ANG", label: "ANG" }, { value: "TMT", label: "TMT" }, { value: "SHP", label: "SHP" }, { value: "HTG", label: "HTG" }, { value: "BWP", label: "BWP" }, { value: "UAH", label: "UAH" }, { value: "IQD", label: "IQD" }, { value: "BTN", label: "BTN" }, { value: "XAF", label: "XAF" }, { value: "TJS", label: "TJS" }, { value: "CLF", label: "CLF" }, { value: "PYG", label: "PYG" }, { value: "LRD", label: "LRD" }, { value: "GMD", label: "GMD" }, { value: "CUP", label: "CUP" }, { value: "BHD", label: "BHD" }, { value: "JOD", label: "JOD" }, { value: "GNF", label: "GNF" }, { value: "BIF", label: "BIF" }
   ];
 
+  // Handle JSON file upload
+  const handleFileUpload = (event) => {
+    const file = event.target.files[0];
+    if (!file) return;
+    
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      try {
+        const jsonData = JSON.parse(e.target.result);
+        console.log('Full JSON payload:', JSON.stringify(jsonData, null, 2));
+        setUploadedJson(jsonData);
+        
+        // Update form data with values from JSON
+        const newFormData = { ...formData };
+        
+        // Map JSON fields to form fields
+        // Note: ClientToken, Origin, and Catalog are not overridden by uploaded JSON
+        // They use the default values: random UUID, "Partner Referral", and credentials.catalog
+        
+        // Customer Account
+        if (jsonData.Customer?.Account) {
+          if (jsonData.Customer.Account.CompanyName) newFormData.CompanyName = jsonData.Customer.Account.CompanyName;
+          if (jsonData.Customer.Account.Duns) newFormData.Duns = jsonData.Customer.Account.Duns;
+          if (jsonData.Customer.Account.Industry) newFormData.Industry = jsonData.Customer.Account.Industry;
+          if (jsonData.Customer.Account.OtherIndustry) newFormData.OtherIndustry = jsonData.Customer.Account.OtherIndustry;
+          if (jsonData.Customer.Account.WebsiteUrl) newFormData.WebsiteUrl = jsonData.Customer.Account.WebsiteUrl;
+          if (jsonData.Customer.Account.AwsAccountId) newFormData.AwsAccountId = jsonData.Customer.Account.AwsAccountId;
+          
+          // Address
+          if (jsonData.Customer.Account.Address) {
+            if (jsonData.Customer.Account.Address.CountryCode) newFormData.CountryCode = jsonData.Customer.Account.Address.CountryCode;
+            if (jsonData.Customer.Account.Address.PostalCode) newFormData.PostalCode = jsonData.Customer.Account.Address.PostalCode;
+            if (jsonData.Customer.Account.Address.StateOrRegion) newFormData.StateOrRegion = jsonData.Customer.Account.Address.StateOrRegion;
+            if (jsonData.Customer.Account.Address.City) newFormData.City = jsonData.Customer.Account.Address.City;
+            if (jsonData.Customer.Account.Address.StreetAddress) newFormData.StreetAddress = jsonData.Customer.Account.Address.StreetAddress;
+          }
+        }
+        
+        // Customer Contact
+        if (jsonData.Customer?.Contacts && jsonData.Customer.Contacts.length > 0) {
+          const contact = jsonData.Customer.Contacts[0];
+          if (contact.FirstName) newFormData.CustomerFirstName = contact.FirstName;
+          if (contact.LastName) newFormData.CustomerLastName = contact.LastName;
+          if (contact.BusinessTitle) newFormData.CustomerTitle = contact.BusinessTitle;
+          if (contact.Email) newFormData.CustomerEmail = contact.Email;
+          if (contact.Phone) newFormData.CustomerPhone = contact.Phone;
+        }
+        
+        // Lifecycle
+        if (jsonData.LifeCycle) {
+          if (jsonData.LifeCycle.ClosedLostReason) newFormData.ClosedLostReason = jsonData.LifeCycle.ClosedLostReason;
+          if (jsonData.LifeCycle.NextSteps) newFormData.NextSteps = jsonData.LifeCycle.NextSteps;
+          if (jsonData.LifeCycle.NextStepsHistory) newFormData.NextStepsHistory = jsonData.LifeCycle.NextStepsHistory;
+          if (jsonData.LifeCycle.ReviewComments) newFormData.ReviewComments = jsonData.LifeCycle.ReviewComments;
+          if (jsonData.LifeCycle.ReviewStatus) newFormData.ReviewStatus = jsonData.LifeCycle.ReviewStatus;
+          if (jsonData.LifeCycle.ReviewStatusReason) newFormData.ReviewStatusReason = jsonData.LifeCycle.ReviewStatusReason;
+          if (jsonData.LifeCycle.Stage) newFormData.Stage = jsonData.LifeCycle.Stage;
+          if (jsonData.LifeCycle.TargetCloseDate) newFormData.TargetCloseDate = jsonData.LifeCycle.TargetCloseDate;
+        }
+        
+        // Marketing
+        if (jsonData.Marketing) {
+          if (jsonData.Marketing.AwsFundingUsed) newFormData.AwsFundingUsed = jsonData.Marketing.AwsFundingUsed;
+          if (jsonData.Marketing.CampaignName) newFormData.CampaignName = jsonData.Marketing.CampaignName;
+          if (jsonData.Marketing.Channels) newFormData.MarketingChannels = jsonData.Marketing.Channels;
+          if (jsonData.Marketing.Source) newFormData.MarketingSource = jsonData.Marketing.Source;
+          if (jsonData.Marketing.UseCases) newFormData.MarketingUseCases = jsonData.Marketing.UseCases;
+        }
+        
+        // National Security
+        if (jsonData.NationalSecurity) newFormData.NationalSecurity = jsonData.NationalSecurity;
+        
+        // Opportunity Team
+        if (jsonData.OpportunityTeam && jsonData.OpportunityTeam.length > 0) {
+          const team = jsonData.OpportunityTeam[0];
+          if (team.BusinessTitle) newFormData.PartnerTitle = team.BusinessTitle;
+          if (team.FirstName) newFormData.PartnerFirstName = team.FirstName;
+          if (team.LastName) newFormData.PartnerLastName = team.LastName;
+          if (team.Email) newFormData.PartnerEmail = team.Email;
+          if (team.Phone) newFormData.PartnerPhone = team.Phone;
+        }
+        
+        // Opportunity
+        if (jsonData.OpportunityType) newFormData.OpportunityType = jsonData.OpportunityType;
+        if (jsonData.PrimaryNeedsFromAws) newFormData.PrimaryNeedsFromAws = jsonData.PrimaryNeedsFromAws;
+        if (jsonData.PartnerOpportunityIdentifier) newFormData.PartnerOpportunityIdentifier = jsonData.PartnerOpportunityIdentifier;
+        
+        // Project
+        if (jsonData.Project) {
+          console.log('Project data from JSON:', JSON.stringify(jsonData.Project, null, 2));
+          
+          if (jsonData.Project.CompetitorName) newFormData.CompetitorName = jsonData.Project.CompetitorName;
+          if (jsonData.Project.CustomerBusinessProblem) newFormData.CustomerBusinessProblem = jsonData.Project.CustomerBusinessProblem;
+          if (jsonData.Project.CustomerUseCase) newFormData.CustomerUseCase = jsonData.Project.CustomerUseCase;
+          if (jsonData.Project.DeliveryModels && Array.isArray(jsonData.Project.DeliveryModels)) {
+            // Ensure DeliveryModels is properly set as an array
+            newFormData.DeliveryModels = [...jsonData.Project.DeliveryModels];
+            console.log('Setting DeliveryModels from JSON:', newFormData.DeliveryModels);
+            
+            // Validate that all values in the array are valid options
+            const validValues = deliveryModelOptions.map(option => option.value);
+            newFormData.DeliveryModels = newFormData.DeliveryModels.filter(model => 
+              validValues.includes(model));
+            
+            console.log('Validated DeliveryModels:', newFormData.DeliveryModels);
+          }
+          if (jsonData.Project.AdditionalComments) newFormData.AdditionalComments = jsonData.Project.AdditionalComments;
+          if (jsonData.Project.OtherCompetitorNames) newFormData.OtherCompetitorNames = jsonData.Project.OtherCompetitorNames;
+          if (jsonData.Project.OtherSolutionDescription) newFormData.OtherSolutionDescription = jsonData.Project.OtherSolutionDescription;
+          if (jsonData.Project.RelatedOpportunityIdentifier) newFormData.RelatedOpportunityIdentifier = jsonData.Project.RelatedOpportunityIdentifier;
+          if (jsonData.Project.SalesActivities) newFormData.SalesActivities = jsonData.Project.SalesActivities;
+          if (jsonData.Project.Title) newFormData.Title = jsonData.Project.Title;
+          
+          // Check if ApnPrograms exists and log its type
+          console.log('ApnPrograms exists in JSON:', jsonData.Project.hasOwnProperty('ApnPrograms'));
+          console.log('ApnPrograms type:', jsonData.Project.ApnPrograms ? typeof jsonData.Project.ApnPrograms : 'undefined');
+          console.log('ApnPrograms value:', jsonData.Project.ApnPrograms);
+          
+          // Force ApnPrograms to be set with test values if it doesn't exist or is null
+          if (!jsonData.Project.ApnPrograms || jsonData.Project.ApnPrograms === null) {
+            console.log('ApnPrograms is missing or null, setting test values');
+            newFormData.ApnPrograms = ["P3", "Well-Architected"];
+          } else {
+            console.log('Original ApnPrograms from JSON:', jsonData.Project.ApnPrograms);
+            
+            // Handle both array and null cases
+            newFormData.ApnPrograms = Array.isArray(jsonData.Project.ApnPrograms) ? 
+              [...jsonData.Project.ApnPrograms] : 
+              (jsonData.Project.ApnPrograms ? [jsonData.Project.ApnPrograms] : []);
+            
+            console.log('ApnPrograms after array conversion:', newFormData.ApnPrograms);
+              
+            // Validate that all values in the array are valid options
+            const validValues = apnProgramOptions.map(option => option.value);
+            console.log('Valid ApnProgram values:', validValues);
+            
+            newFormData.ApnPrograms = newFormData.ApnPrograms.filter(program => {
+              const isValid = validValues.includes(program);
+              if (!isValid) {
+                console.log(`Filtering out invalid ApnProgram value: ${program}`);
+              }
+              return isValid;
+            });
+              
+            console.log('Validated ApnPrograms:', newFormData.ApnPrograms);
+          }
+          
+          // Expected Customer Spend
+          if (jsonData.Project.ExpectedCustomerSpend && jsonData.Project.ExpectedCustomerSpend.length > 0) {
+            const spend = jsonData.Project.ExpectedCustomerSpend[0];
+            if (spend.Amount) newFormData.ExpectedAmount = spend.Amount;
+            if (spend.CurrencyCode) newFormData.ExpectedCurrency = spend.CurrencyCode;
+            if (spend.EstimationUrl) newFormData.EstimationUrl = spend.EstimationUrl;
+            if (spend.Frequency) newFormData.ExpectedFrequency = spend.Frequency;
+            if (spend.TargetCompany) newFormData.ExpectedTargetCompany = spend.TargetCompany;
+          }
+        }
+        
+        // Software Revenue
+        if (jsonData.SoftwareRevenue) {
+          if (jsonData.SoftwareRevenue.DeliveryModel) newFormData.SoftwareDeliveryModel = jsonData.SoftwareRevenue.DeliveryModel;
+          if (jsonData.SoftwareRevenue.EffectiveDate) newFormData.SoftwareEffectiveDate = jsonData.SoftwareRevenue.EffectiveDate;
+          if (jsonData.SoftwareRevenue.ExpirationDate) newFormData.SoftwareExpirationDate = jsonData.SoftwareRevenue.ExpirationDate;
+          if (jsonData.SoftwareRevenue.Value) {
+            if (jsonData.SoftwareRevenue.Value.Amount) newFormData.SoftwareAmount = jsonData.SoftwareRevenue.Value.Amount;
+            if (jsonData.SoftwareRevenue.Value.CurrencyCode) newFormData.SoftwareCurrencyCode = jsonData.SoftwareRevenue.Value.CurrencyCode;
+          }
+        }
+        
+        setFormData(newFormData);
+        console.log('Form data after JSON upload:', newFormData);
+      } catch (err) {
+        setError(`Error parsing JSON file: ${err.message}`);
+      }
+    };
+    reader.readAsText(file);
+  };
+  
   // Handle form field changes
   const handleChange = (field, value) => {
     setFormData({
@@ -331,7 +543,7 @@ function CreateOpportunity() {
           CompanyName: formData.CompanyName,
           Duns: formData.Duns,
           Industry: formData.Industry,
-          OtherIndustry: null,
+          OtherIndustry: formData.OtherIndustry || null,try: null,
           WebsiteUrl: formData.WebsiteUrl
         },
         Contacts: [
@@ -345,12 +557,12 @@ function CreateOpportunity() {
         ]
       },
       LifeCycle: {
-        ClosedLostReason: null,
+        ClosedLostReason: formData.ClosedLostReason || null,
         NextSteps: formData.NextSteps,
-        NextStepsHistory: null,
-        ReviewComments: null,
+        NextStepsHistory: formData.NextStepsHistory || null,
+        ReviewComments: formData.ReviewComments || null,
         ReviewStatus: formData.ReviewStatus,
-        ReviewStatusReason: null,
+        ReviewStatusReason: formData.ReviewStatusReason || null,
         Stage: formData.Stage,
         TargetCloseDate: formData.TargetCloseDate
       },
@@ -375,24 +587,25 @@ function CreateOpportunity() {
       PartnerOpportunityIdentifier: formData.PartnerOpportunityIdentifier,
       PrimaryNeedsFromAws: formData.PrimaryNeedsFromAws,
       Project: {
-        AdditionalComments: null,
-        ApnPrograms: formData.ApnPrograms,
+        AdditionalComments: formData.AdditionalComments || null,
+        ApnPrograms: formData.ApnPrograms || [],
         CompetitorName: formData.CompetitorName,
         CustomerBusinessProblem: formData.CustomerBusinessProblem,
         CustomerUseCase: formData.CustomerUseCase,
-        DeliveryModels: formData.DeliveryModels,
+        DeliveryModels: formData.DeliveryModels || [],
         ExpectedCustomerSpend: [
           {
             Amount: formData.ExpectedAmount,
             CurrencyCode: formData.ExpectedCurrency,
+            EstimationUrl: formData.EstimationUrl || null,
             Frequency: formData.ExpectedFrequency,
             TargetCompany: formData.ExpectedTargetCompany
           }
         ],
-        OtherCompetitorNames: null,
-        OtherSolutionDescription: formData.OtherSolutionDescription,
-        RelatedOpportunityIdentifier: null,
-        SalesActivities: formData.SalesActivities,
+        OtherCompetitorNames: formData.OtherCompetitorNames || null,
+        OtherSolutionDescription: formData.OtherSolutionDescription || null,
+        RelatedOpportunityIdentifier: formData.RelatedOpportunityIdentifier || null,
+        SalesActivities: formData.SalesActivities || [],
         Title: formData.Title
       },
       SoftwareRevenue: {
@@ -460,6 +673,26 @@ function CreateOpportunity() {
       <SpaceBetween size="l">
         <Header variant="h1">Create Partner Originated Opportunity and Submit to AWS for review</Header>
         
+        {/* JSON Upload Section */}
+        <Container>
+          <Header variant="h2">Upload JSON Configuration</Header>
+          <SpaceBetween size="m">
+            <FormField label="Upload JSON file to populate form fields">
+              <SpaceBetween direction="horizontal" size="xs">
+                <input 
+                  type="file" 
+                  accept=".json" 
+                  onChange={handleFileUpload} 
+                  ref={fileInputRef} 
+                  style={{ display: 'none' }} 
+                />
+                <Button onClick={() => fileInputRef.current.click()}>Choose JSON File</Button>
+                {uploadedJson && <Alert type="success">JSON file loaded successfully! (Note: ClientToken, Origin, and Catalog values are not overridden)</Alert>}
+              </SpaceBetween>
+            </FormField>
+          </SpaceBetween>
+        </Container>
+        
         {/* System Fields */}
         <Container>
           <Header variant="h2">System Fields</Header>
@@ -503,9 +736,11 @@ function CreateOpportunity() {
                 </FormField>
                 
                 <FormField label="Industry">
-                  <Input
-                    value={formData.Industry}
-                    onChange={({ detail }) => handleChange('Industry', detail.value)}
+                  <Select
+                    selectedOption={formData.Industry ? { value: formData.Industry, label: formData.Industry } : null}
+                    onChange={({ detail }) => handleChange('Industry', detail.selectedOption?.value || '')}
+                    options={industryOptions}
+                    placeholder="Select industry"
                   />
                 </FormField>
                 
@@ -723,19 +958,31 @@ function CreateOpportunity() {
 
                 {/* Delivery model */}
                 <FormField label="Delivery model">
-                  <Select
-                    selectedOptions={
-                      formData.DeliveryModels && formData.DeliveryModels.length > 0 
-                        ? formData.DeliveryModels.map(model => ({ value: model, label: model }))
-                        : []
-                    }
-                    onChange={({ detail }) => 
-                      handleChange('DeliveryModels', detail.selectedOptions.map(option => option.value))
-                    }
-                    options={deliveryModelOptions}
-                    placeholder="Choose delivery models"
-                    multiselect
-                  />
+                  <SpaceBetween direction="vertical" size="xs">
+                    {deliveryModelOptions.map(option => (
+                      <Checkbox
+                        key={option.value}
+                        checked={formData.DeliveryModels && formData.DeliveryModels.includes(option.value)}
+                        onChange={({ detail }) => {
+                          const isChecked = detail.checked;
+                          const currentModels = formData.DeliveryModels || [];
+                          let newModels;
+                          
+                          if (isChecked) {
+                            // Add to array if checked
+                            newModels = [...currentModels, option.value];
+                          } else {
+                            // Remove from array if unchecked
+                            newModels = currentModels.filter(model => model !== option.value);
+                          }
+                          
+                          handleChange('DeliveryModels', newModels);
+                        }}
+                      >
+                        {option.label}
+                      </Checkbox>
+                    ))}
+                  </SpaceBetween>
                 </FormField>
 
                 {/* Estimated AWS monthly recurring revenue */}
@@ -759,18 +1006,37 @@ function CreateOpportunity() {
 
                 {/* APN programs */}
                 <FormField label="APN programs" optional={true}>
-                  <Select
-                    selectedOption={
-                      formData.ApnPrograms && formData.ApnPrograms.length > 0 
-                        ? { value: formData.ApnPrograms[0], label: formData.ApnPrograms[0] }
-                        : null
-                    }
-                    onChange={({ detail }) => 
-                      handleChange('ApnPrograms', detail.selectedOption ? [detail.selectedOption.value] : [])
-                    }
-                    options={apnProgramOptions}
-                    placeholder="Choose an option"
-                  />
+                  {console.log('Rendering APN Programs checkboxes with values:', formData.ApnPrograms)}
+                  <SpaceBetween direction="vertical" size="xs">
+                    {apnProgramOptions.map(option => {
+                      const isChecked = formData.ApnPrograms && formData.ApnPrograms.includes(option.value);
+                      console.log(`APN Program checkbox ${option.value} is ${isChecked ? 'checked' : 'unchecked'}`);
+                      return (
+                        <Checkbox
+                          key={option.value}
+                          checked={isChecked}
+                          onChange={({ detail }) => {
+                            const isChecked = detail.checked;
+                            const currentPrograms = formData.ApnPrograms || [];
+                            let newPrograms;
+                            
+                            if (isChecked) {
+                              // Add to array if checked
+                              newPrograms = [...currentPrograms, option.value];
+                            } else {
+                              // Remove from array if unchecked
+                              newPrograms = currentPrograms.filter(program => program !== option.value);
+                            }
+                            
+                            console.log(`Changing ${option.value} to ${isChecked}, new programs:`, newPrograms);
+                            handleChange('ApnPrograms', newPrograms);
+                          }}
+                        >
+                          {option.label}
+                        </Checkbox>
+                      );
+                    })}
+                  </SpaceBetween>
                 </FormField>
 
                 {/* Partner Opportunity Identifier */}
@@ -1045,7 +1311,7 @@ function CreateOpportunity() {
                 maxHeight: '400px',
                 fontSize: '12px'
                 }}>
-                {JSON.stringify({
+                {uploadedJson ? JSON.stringify(uploadedJson, null, 2) : JSON.stringify({
                     ClientToken: formData.ClientToken,
                     Catalog: getCredentials().catalog || "Sandbox",
                     Origin: formData.Origin,
