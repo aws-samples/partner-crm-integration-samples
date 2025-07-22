@@ -183,7 +183,7 @@
     "Identifier": "AWSCloudWAN",
     "Name": "AWS Cloud WAN",
     "Family": "Networking & Content Delivery",
-    "Description": "AWSCloudWAN"
+    "Description": "null"
   },
   {
     "Identifier": "AWSCodeArtifact",
