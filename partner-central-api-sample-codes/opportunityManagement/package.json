@@ -9,7 +9,7 @@
     "@cloudscape-design/components": "^3.0.0",
     "@cloudscape-design/global-styles": "^1.0.0",
     "aws-sdk": "^2.1400.0",
-    "axios": "^1.10.0",
+    "axios": "^1.11.0",
     "js-yaml": "^4.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
