@@ -7348,6 +7348,116 @@
 							"response": []
 						},
 						{
+							"name": "[Simulate] Approval from AWS - Notebook",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "d083d5cb-5484-4b42-b239-459d88e448b4",
+										"exec": [
+											"try {",
+											"    // Check the response status",
+											"    if (pm.response.code === 200) {",
+											"        // Log success and add a test for status 200",
+											"        console.log(`[Post-res ${pm.info.requestName}] UpdateOpportunity action succeeded.`);",
+											"        pm.test(`[Post-res ${pm.info.requestName}] Status code is 200`, function () {",
+											"            pm.response.to.have.status(200);",
+											"        });",
+											"    } else {",
+											"        // Log failure and add a test for non-200 status",
+											"        console.error(`[Post-res ${pm.info.requestName}] UpdateOpportunity action failed. Status Code: ${pm.response.code}`);",
+											"        pm.test(`[Post-res ${pm.info.requestName}] Status code is not 200`, function () {",
+											"            pm.response.to.not.have.status(200);",
+											"        });",
+											"    }",
+											"} catch (error) {",
+											"    // Handle any errors during response processing",
+											"    console.error(`[Post-res ${pm.info.requestName}] Error processing response:`, error);",
+											"",
+											"    // Add a test to capture the error",
+											"    pm.test(`[Post-res ${pm.info.requestName}] Error occurred while processing response`, function () {",
+											"        throw error; // Ensure the test fails if an error occurs",
+											"    });",
+											"}",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "04127e8e-4299-4a8b-84a0-aa8e1aa90973",
+										"exec": [
+											"try {",
+											"    // Retrieve the stored payload from the GetOpportunity action",
+											"    const getOpportunityPayload = pm.collectionVariables.get(\"getOpportunityPayload\") || pm.variables.get(\"getOpportunityPayload\");",
+											"",
+											"    if (getOpportunityPayload) {",
+											"        // Parse the stored payload",
+											"        const payload = JSON.parse(getOpportunityPayload);",
+											"",
+											"        // Transform the payload for UpdateOpportunity",
+											"        payload.Identifier = payload.Id; // Rename \"Id\" to \"Identifier\"",
+											"        delete payload.Id; // Remove the original \"Id\" field",
+											"        payload.LifeCycle.ReviewStatus = \"Approved\"; // Update to Approved",
+											"",
+											"        // Set the modified payload as the request body",
+											"        pm.request.body.raw = JSON.stringify(payload);",
+											"        console.log(`[Pre-req ${pm.info.requestName}] Transformed payload for UpdateOpportunity:`, payload);",
+											"",
+											"    } else {",
+											"        console.warn(`[Pre-req ${pm.info.requestName}] No payload found from GetOpportunity. Ensure the previous request executed successfully.`);",
+											"    }",
+											"",
+											"} catch (error) {",
+											"    // Handle any errors during payload transformation",
+											"    console.error(`[Pre-req ${pm.info.requestName}] Error preparing request payload:`, error);",
+											"    pm.test(`[Pre-req ${pm.info.requestName}] Error in pre-request script`, function () {",
+											"        pm.expect.fail(error.message);",
+											"    });",
+											"}",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"id": "8b220e3e-125b-4610-a9ab-a3d0fbaf6d0b",
+							"protocolProfileBehavior": {
+								"followRedirects": true,
+								"disableUrlEncoding": false,
+								"disableCookies": false,
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json, text/javascript, */*; q=0.01"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json; charset=UTF-8"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{{opportunityPayload}}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{BASE_URL}}/UpdateOpportunity"
+							},
+							"response": []
+						},
+						{
 							"name": "GetOpportunityToVerify",
 							"event": [
 								{
@@ -7840,6 +7950,116 @@
 									"body": "{\n    \"Id\": \"O5037173\",\n    \"LastModifiedDate\": \"2025-01-24T21:00:03Z\"\n}"
 								}
 							]
+						},
+						{
+							"name": "UpdateOpportunity - Notebook",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "d083d5cb-5484-4b42-b239-459d88e448b4",
+										"exec": [
+											"try {",
+											"    // Check the response status",
+											"    if (pm.response.code === 200) {",
+											"        // Log success and add a test for status 200",
+											"        console.log(`[Post-res ${pm.info.requestName}] UpdateOpportunity action succeeded.`);",
+											"        pm.test(`[Post-res ${pm.info.requestName}] Status code is 200`, function () {",
+											"            pm.response.to.have.status(200);",
+											"        });",
+											"    } else {",
+											"        // Log failure and add a test for non-200 status",
+											"        console.error(`[Post-res ${pm.info.requestName}] UpdateOpportunity action failed. Status Code: ${pm.response.code}`);",
+											"        pm.test(`[Post-res ${pm.info.requestName}] Status code is not 200`, function () {",
+											"            pm.response.to.not.have.status(200);",
+											"        });",
+											"    }",
+											"} catch (error) {",
+											"    // Handle any errors during response processing",
+											"    console.error(`[Post-res ${pm.info.requestName}] Error processing response:`, error);",
+											"",
+											"    // Add a test to capture the error",
+											"    pm.test(`[Post-res ${pm.info.requestName}] Error occurred while processing response`, function () {",
+											"        throw error; // Ensure the test fails if an error occurs",
+											"    });",
+											"}",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "04127e8e-4299-4a8b-84a0-aa8e1aa90973",
+										"exec": [
+											"try {",
+											"    // Retrieve the stored payload from the GetOpportunity action",
+											"    const getOpportunityPayload = pm.collectionVariables.get(\"getOpportunityPayload\") || pm.variables.get(\"getOpportunityPayload\");",
+											"",
+											"    if (getOpportunityPayload) {",
+											"        // Parse the stored payload",
+											"        const payload = JSON.parse(getOpportunityPayload);",
+											"",
+											"        // Transform the payload for UpdateOpportunity",
+											"        payload.Identifier = payload.Id; // Rename \"Id\" to \"Identifier\"",
+											"        delete payload.Id; // Remove the original \"Id\" field",
+											"        payload.LifeCycle.ReviewStatus = \"Approved\"; // Update to Approved",
+											"",
+											"        // Set the modified payload as the request body",
+											"        pm.request.body.raw = JSON.stringify(payload);",
+											"        console.log(`[Pre-req ${pm.info.requestName}] Transformed payload for UpdateOpportunity:`, payload);",
+											"",
+											"    } else {",
+											"        console.warn(`[Pre-req ${pm.info.requestName}] No payload found from GetOpportunity. Ensure the previous request executed successfully.`);",
+											"    }",
+											"",
+											"} catch (error) {",
+											"    // Handle any errors during payload transformation",
+											"    console.error(`[Pre-req ${pm.info.requestName}] Error preparing request payload:`, error);",
+											"    pm.test(`[Pre-req ${pm.info.requestName}] Error in pre-request script`, function () {",
+											"        pm.expect.fail(error.message);",
+											"    });",
+											"}",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"id": "5c056d04-28f1-4c8f-a6db-3c5128f2103f",
+							"protocolProfileBehavior": {
+								"followRedirects": true,
+								"disableUrlEncoding": false,
+								"disableCookies": false,
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json, text/javascript, */*; q=0.01"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json; charset=UTF-8"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{{opportunityPayload}}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{BASE_URL}}/UpdateOpportunity"
+							},
+							"response": []
 						},
 						{
 							"name": "GetOpportunity check stage",
