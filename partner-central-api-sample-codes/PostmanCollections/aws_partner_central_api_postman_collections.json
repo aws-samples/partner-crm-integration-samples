@@ -16131,8 +16131,8 @@
 	"auth": {
 		"type": "awsv4",
 		"awsv4": {
-			"accessKey": "",
-			"secretKey": "{{vault:aws-authorization-secret}}",
+			"secretKey": "{{vault:aws.secretKey.inviting}}",
+			"accessKey": "{{vault:aws.accessKey.inviting}}",
 			"service": "{{aws.partnercentral.service}}",
 			"region": "{{aws.region}}",
 			"sessionToken": "{{vault:aws.sessionToken.inviting}}"
