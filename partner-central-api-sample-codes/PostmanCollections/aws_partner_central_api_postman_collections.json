@@ -9825,6 +9825,177 @@
 					]
 				},
 				{
+					"name": "[Simulate] Approval from AWS for Inviting Partner Opportunity - Notebook",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "d083d5cb-5484-4b42-b239-459d88e448b4",
+								"exec": [
+									"try {",
+									"    // Check the response status",
+									"    if (pm.response.code === 200) {",
+									"        // Log success and add a test for status 200",
+									"        console.log(`[Post-res ${pm.info.requestName}] UpdateOpportunity action succeeded.`);",
+									"        pm.test(`[Post-res ${pm.info.requestName}] Status code is 200`, function () {",
+									"            pm.response.to.have.status(200);",
+									"        });",
+									"    } else {",
+									"        // Log failure and add a test for non-200 status",
+									"        console.error(`[Post-res ${pm.info.requestName}] UpdateOpportunity action failed. Status Code: ${pm.response.code}`);",
+									"        pm.test(`[Post-res ${pm.info.requestName}] Status code is not 200`, function () {",
+									"            pm.response.to.not.have.status(200);",
+									"        });",
+									"    }",
+									"} catch (error) {",
+									"    // Handle any errors during response processing",
+									"    console.error(`[Post-res ${pm.info.requestName}] Error processing response:`, error);",
+									"",
+									"    // Add a test to capture the error",
+									"    pm.test(`[Post-res ${pm.info.requestName}] Error occurred while processing response`, function () {",
+									"        throw error; // Ensure the test fails if an error occurs",
+									"    });",
+									"}",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "04127e8e-4299-4a8b-84a0-aa8e1aa90973",
+								"exec": [
+									"try {",
+									"    // Retrieve the stored payload from the GetOpportunity action",
+									"    const getOpportunityPayload = pm.collectionVariables.get(\"getOpportunityPayload\");",
+									"",
+									"    if (getOpportunityPayload) {",
+									"        // Parse the stored payload",
+									"        const payload = JSON.parse(getOpportunityPayload);",
+									"",
+									"        // Transform the payload for UpdateOpportunity",
+									"        payload.Identifier = payload.Id; // Rename \"Id\" to \"Identifier\"",
+									"        delete payload.Id; // Remove the original \"Id\" field",
+									"        payload.LifeCycle.ReviewStatus = \"Approved\"; // Update to Approved",
+									"",
+									"        // Set the modified payload as the request body",
+									"        pm.request.body.raw = JSON.stringify(payload);",
+									"        console.log(`[Pre-req ${pm.info.requestName}] Transformed payload for UpdateOpportunity:`, payload);",
+									"",
+									"    } else {",
+									"        console.warn(`[Pre-req ${pm.info.requestName}] No payload found from GetOpportunity. Ensure the previous request executed successfully.`);",
+									"    }",
+									"",
+									"} catch (error) {",
+									"    // Handle any errors during payload transformation",
+									"    console.error(`[Pre-req ${pm.info.requestName}] Error preparing request payload:`, error);",
+									"    pm.test(`[Pre-req ${pm.info.requestName}] Error in pre-request script`, function () {",
+									"        pm.expect.fail(error.message);",
+									"    });",
+									"}",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "dc3af656-3c06-4f26-b8c1-17a36d5d8d2c",
+					"protocolProfileBehavior": {
+						"followRedirects": true,
+						"disableUrlEncoding": false,
+						"disableCookies": false,
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json, text/javascript, */*; q=0.01"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json; charset=UTF-8"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"Catalog\": \"{{catalog}}\",\n  \"Customer\": {\n    \"Account\": {\n      \"Address\": {\n        \"City\": null,\n        \"CountryCode\": \"AL\",\n        \"PostalCode\": \"9931\",\n        \"StateOrRegion\": \"New York\",\n        \"StreetAddress\": null\n      },\n      \"AwsAccountId\": \"111111111111\",\n      \"CompanyName\": \"TestAssignEditable1\",\n      \"Duns\": \"111100111\",\n      \"Industry\": \"Financial Services\",\n      \"OtherIndustry\": null,\n      \"WebsiteUrl\": \"www.TestAssignEditable1.com\"\n    },\n    \"Contacts\": [\n      {\n        \"BusinessTitle\": \"Executive\",\n        \"Email\": \"testnamelast09@test.com\",\n        \"FirstName\": \"TestContact011\",\n        \"LastName\": \"MLastName001\",\n        \"Phone\": \"+14444444444\"\n      }\n    ]\n  },\n  \"Identifier\": \"{{opportunityId}}\",\n  \"LastModifiedDate\": \"{{lastModifiedDate}}\",\n  \"LifeCycle\": {\n    \"ClosedLostReason\": null,\n    \"NextSteps\": \"Next steps on the opportunity. TEST is used to communicate to AWS the next action required, please update.\",\n    \"NextStepsHistory\": null,\n    \"ReviewComments\": null,\n    \"ReviewStatus\": \"Approved\",\n    \"ReviewStatusReason\": null,\n    \"Stage\": \"Qualified\",\n    \"TargetCloseDate\": \"2029-10-05\"\n  },\n  \"Marketing\": {\n\t\t\"AwsFundingUsed\": null,\n\t\t\"CampaignName\": null,\n\t\t\"Channels\": null,\n\t\t\"Source\": \"None\",\n\t\t\"UseCases\": null\n  },\n  \"NationalSecurity\": \"No\",\n  \"OpportunityType\": \"Net New Business\",\n  \"PartnerOpportunityIdentifier\": null,\n  \"PrimaryNeedsFromAws\": [\n    \"Co-Sell - Architectural Validation\"\n  ],\n  \"Project\": {\n    \"AdditionalComments\": null,\n    \"ApnPrograms\": null,\n    \"CompetitorName\": \"On-Prem\",\n    \"CustomerBusinessProblem\": \"ProjectDescriptionBusinessNeedLengthGreaterThanFiftyCharacters\",\n    \"CustomerUseCase\": \"Security & Compliance\",\n    \"DeliveryModels\": [\n      \"SaaS or PaaS\"\n    ],\n    \"ExpectedCustomerSpend\": [\n      {\n        \"Amount\": \"12500\",\n        \"CurrencyCode\": \"USD\",\n        \"Frequency\": \"Monthly\",\n        \"TargetCompany\": \"AWS\"\n      }\n    ],\n    \"OtherCompetitorNames\": null,\n    \"OtherSolutionDescription\": \"TestSolution\",\n    \"RelatedOpportunityIdentifier\": null,\n    \"SalesActivities\": [\n      \"Conducted POC / Demo\"\n    ],\n    \"Title\": \"TestAssignEditable1\"\n  },\n  \"SoftwareRevenue\": {\n    \"DeliveryModel\": \"Pay-as-you-go\",\n    \"EffectiveDate\": \"2023-10-31\",\n    \"ExpirationDate\": \"2024-03-31\",\n    \"Value\": {\n      \"Amount\": \"10000.0\",\n      \"CurrencyCode\": \"USD\"\n    }\n  }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{BASE_URL}}/UpdateOpportunity"
+					},
+					"response": [
+						{
+							"id": "bf0699bc-3497-43e2-ad2e-a3a087cbabf3",
+							"name": "[Simulate] Approval from AWS for Inviting Partner Opportunity",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json, text/javascript, */*; q=0.01"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json; charset=UTF-8"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"Catalog\": \"{{catalog}}\",\n  \"Customer\": {\n    \"Account\": {\n      \"Address\": {\n        \"City\": null,\n        \"CountryCode\": \"AL\",\n        \"PostalCode\": \"9931\",\n        \"StateOrRegion\": \"New York\",\n        \"StreetAddress\": null\n      },\n      \"AwsAccountId\": \"111111111111\",\n      \"CompanyName\": \"TestAssignEditable1\",\n      \"Duns\": \"111100111\",\n      \"Industry\": \"Financial Services\",\n      \"OtherIndustry\": null,\n      \"WebsiteUrl\": \"www.TestAssignEditable1.com\"\n    },\n    \"Contacts\": [\n      {\n        \"BusinessTitle\": \"Executive\",\n        \"Email\": \"testnamelast09@test.com\",\n        \"FirstName\": \"TestContact011\",\n        \"LastName\": \"MLastName001\",\n        \"Phone\": \"+14444444444\"\n      }\n    ]\n  },\n  \"Identifier\": \"{{opportunityId}}\",\n  \"LastModifiedDate\": \"{{lastModifiedDate}}\",\n  \"LifeCycle\": {\n    \"ClosedLostReason\": null,\n    \"NextSteps\": \"Next steps on the opportunity. TEST is used to communicate to AWS the next action required, please update.\",\n    \"NextStepsHistory\": null,\n    \"ReviewComments\": null,\n    \"ReviewStatus\": \"Approved\",\n    \"ReviewStatusReason\": null,\n    \"Stage\": \"Qualified\",\n    \"TargetCloseDate\": \"2029-10-05\"\n  },\n  \"Marketing\": {\n\t\t\"AwsFundingUsed\": null,\n\t\t\"CampaignName\": null,\n\t\t\"Channels\": null,\n\t\t\"Source\": \"None\",\n\t\t\"UseCases\": null\n  },\n  \"NationalSecurity\": \"No\",\n  \"OpportunityType\": \"Net New Business\",\n  \"PartnerOpportunityIdentifier\": null,\n  \"PrimaryNeedsFromAws\": [\n    \"Co-Sell - Architectural Validation\"\n  ],\n  \"Project\": {\n    \"AdditionalComments\": null,\n    \"ApnPrograms\": null,\n    \"CompetitorName\": \"On-Prem\",\n    \"CustomerBusinessProblem\": \"ProjectDescriptionBusinessNeedLengthGreaterThanFiftyCharacters\",\n    \"CustomerUseCase\": \"Security & Compliance\",\n    \"DeliveryModels\": [\n      \"SaaS or PaaS\"\n    ],\n    \"ExpectedCustomerSpend\": [\n      {\n        \"Amount\": \"12500\",\n        \"CurrencyCode\": \"USD\",\n        \"Frequency\": \"Monthly\",\n        \"TargetCompany\": \"AWS\"\n      }\n    ],\n    \"OtherCompetitorNames\": null,\n    \"OtherSolutionDescription\": \"TestSolution\",\n    \"RelatedOpportunityIdentifier\": null,\n    \"SalesActivities\": [\n      \"Conducted POC / Demo\"\n    ],\n    \"Title\": \"TestAssignEditable1\"\n  },\n  \"SoftwareRevenue\": {\n    \"DeliveryModel\": \"Pay-as-you-go\",\n    \"EffectiveDate\": \"2023-10-31\",\n    \"ExpirationDate\": \"2024-03-31\",\n    \"Value\": {\n      \"Amount\": \"10000.0\",\n      \"CurrencyCode\": \"USD\"\n    }\n  }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{BASE_URL}}/UpdateOpportunity"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 12 Feb 2025 18:28:36 GMT",
+									"enabled": true
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"enabled": true
+								},
+								{
+									"key": "Content-Length",
+									"value": "59",
+									"enabled": true
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive",
+									"enabled": true
+								},
+								{
+									"key": "x-amzn-RequestId",
+									"value": "f3014d4b-fbc3-4ddd-8f6b-9cd5e6783385",
+									"enabled": true
+								}
+							],
+							"cookie": [],
+							"responseTime": null,
+							"body": "{\n    \"Id\": \"O5408941\",\n    \"LastModifiedDate\": \"2025-02-15T17:58:40Z\"\n}"
+						}
+					]
+				},
+				{
 					"name": "Inviting Partner - GetOpportunity check status",
 					"event": [
 						{
