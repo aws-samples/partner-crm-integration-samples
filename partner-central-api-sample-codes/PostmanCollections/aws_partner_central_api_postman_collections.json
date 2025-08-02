@@ -9567,17 +9567,6 @@
 						"disableBodyPruning": true
 					},
 					"request": {
-						"auth": {
-							"type": "awsv4",
-							"awsv4": {
-								"sessionToken": "",
-								"secretKey": "{{vault:aws.secretKey.inviting}}",
-								"accessKey": "{{vault:aws.accessKey.inviting}}",
-								"service": "partnercentral-selling",
-								"addAuthDataToQuery": false,
-								"region": "us-east-1"
-							}
-						},
 						"method": "POST",
 						"header": [
 							{
