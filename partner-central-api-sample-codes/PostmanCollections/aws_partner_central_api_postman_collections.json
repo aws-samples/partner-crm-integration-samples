@@ -8729,7 +8729,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"Catalog\": \"{{catalog}}\",\n    \"OpportunityIdentifier\": \"{{opportunityId}}\"\n}",
+							"raw": "{\n    \"Catalog\": \"{{catalog}}\",\n    \"OpportunityIdentifier\": [\"{{opportunityId}}\"]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
