@@ -183,7 +183,7 @@
     "Identifier": "AWSCloudWAN",
     "Name": "AWS Cloud WAN",
     "Family": "Networking & Content Delivery",
-    "Description": "null"
+    "Description": "AWSCloudWAN"
   },
   {
     "Identifier": "AWSCodeArtifact",
@@ -1086,6 +1086,54 @@
     "Description": "Amazon Bedrock models provided by AI21 Labs"
   },
   {
+    "Identifier": "AmazonBedrockAgentCore",
+    "Name": "Amazon Bedrock - AgentCore",
+    "Family": "AI/ML",
+    "Description": "Deploy and operate AI agents securely at scale - using any framework and model"
+  },
+  {
+    "Identifier": "AmazonBedrockAgentCoreBrowser",
+    "Name": "Amazon Bedrock - AgentCore Browser",
+    "Family": "Machine Learning",
+    "Description": "Provides a fast, secure, cloud-based browser runtime to enable AI agents to interact with websites at scale"
+  },
+  {
+    "Identifier": "AmazonBedrockAgentCoreCodeInterpreter",
+    "Name": "Amazon Bedrock - AgentCore Code Interpreter",
+    "Family": "Machine Learning",
+    "Description": "Enables AI agents to write and execute code securely in sandbox environments, enhancing their accuracy and expanding their ability to solve complex end-to-end tasks"
+  },
+  {
+    "Identifier": "AmazonBedrockAgentCoreGateway",
+    "Name": "Amazon Bedrock - AgentCore Gateway",
+    "Family": "Machine Learning",
+    "Description": "Provides a secure way for agents to discover and use tools along with easy transformation of APIs, Lambda functions, and existing services into agent-compatible tools"
+  },
+  {
+    "Identifier": "AmazonBedrockAgentCoreIdentity",
+    "Name": "Amazon Bedrock - AgentCore Identity",
+    "Family": "Machine Learning",
+    "Description": "Allows agents to securely access AWS resources and third-party tools and services on behalf of users or by themselves with pre-authorized user consent"
+  },
+  {
+    "Identifier": "AmazonBedrockAgentCoreMemory",
+    "Name": "Amazon Bedrock - AgentCore Memory",
+    "Family": "Machine Learning",
+    "Description": "Build context-aware agents by eliminating complex memory infrastructure management while providing full control over what the AI agent remembers"
+  },
+  {
+    "Identifier": "AmazonBedrockAgentCoreObservability",
+    "Name": "Amazon Bedrock - AgentCore Observability",
+    "Family": "Machine Learning",
+    "Description": "Gives complete visibility into agent workflows to trace, debug, and monitor AI agents' performance in production environments"
+  },
+  {
+    "Identifier": "AmazonBedrockAgentCoreRuntime",
+    "Name": "Amazon Bedrock - AgentCore Runtime",
+    "Family": "Machine Learning",
+    "Description": "A secure, serverless runtime purpose-built for deploying and scaling dynamic AI agents and tools"
+  },
+  {
     "Identifier": "AmazonBedrockAgents",
     "Name": "Amazon Bedrock - Agents",
     "Family": "Machine Learning",
@@ -1150,6 +1198,12 @@
     "Name": "Amazon Bedrock - Mistral AI Models",
     "Family": "Machine Learning",
     "Description": "Amazon Bedrock models provided by Mistral AI"
+  },
+  {
+    "Identifier": "AmazonBedrockOpenAIModels",
+    "Name": "Amazon Bedrock - OpenAI Models",
+    "Family": "AI/ML",
+    "Description": "Amazon Bedrock models provided by OpenAI"
   },
   {
     "Identifier": "AmazonBedrockStabilityAIModels",
@@ -1606,6 +1660,12 @@
     "Name": "Amazon EC2 P6-B200",
     "Family": "Compute",
     "Description": "High performance for AI training, inference, and HPC workloads"
+  },
+  {
+    "Identifier": "AmazonEC2P6eGB200",
+    "Name": "Amazon EC2 P6e-GB200",
+    "Family": "Compute",
+    "Description": "Provides the highest GPU performance for AI training and inference"
   },
   {
     "Identifier": "AmazonEC2RHEL",
@@ -2085,7 +2145,7 @@
     "Identifier": "AmazonQDeveloper",
     "Name": "Amazon Q Developer",
     "Family": "Developer Tools",
-    "Description": "A GenAI-powered assistant to help you build, deploy, operate, and maintain applications on AWS"
+    "Description": "GenAI-powered development tools to build, operate, and maintain applications"
   },
   {
     "Identifier": "AmazonQDeveloperforJavaTransformation",
@@ -2572,6 +2632,12 @@
     "Name": "GitLab Duo with Amazon Q",
     "Family": "Developer Tools",
     "Description": "Development teams using GitLab can enable advanced AI agent capabilities from Amazon Q Developer to accelerate GitLab workflows"
+  },
+  {
+    "Identifier": "Kiro",
+    "Name": "Kiro",
+    "Family": "Developer Tools",
+    "Description": "AI Integrated Development Environment (IDE) for prototype to production"
   },
   {
     "Identifier": "MigrationEvaluatorTSOLogic",
