@@ -1356,6 +1356,12 @@
     "Description": "Enable customers to start chatting with contact center agents from any business application, web, or mobile"
   },
   {
+    "Identifier": "AmazonConnectContactLensforexternalvoice",
+    "Name": "Amazon Connect Contact Lens for external voice",
+    "Family": "Customer Engagement",
+    "Description": "Amazon Connect integration with other voice systems for real-time and post-call analytics, and agent performance evaluation"
+  },
+  {
     "Identifier": "AmazonConnectCustomerProfiles",
     "Name": "Amazon Connect - Customer Profiles",
     "Family": "Customer Engagement",
@@ -2428,6 +2434,12 @@
     "Name": "Amazon SageMaker Unified Studio",
     "Family": "Machine Learning",
     "Description": "Build with all your data and tools for analytics and AI in a single development environment"
+  },
+  {
+    "Identifier": "AmazonSagemakerNovaCustomization",
+    "Name": "Amazon Sagemaker - Nova Customization",
+    "Family": "AI/ML",
+    "Description": "Optimize AI responses and power intelligent agents with a comprehensive suite of customization techniques"
   },
   {
     "Identifier": "AmazonSecurityLake",
