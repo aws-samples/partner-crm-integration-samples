@@ -2478,12 +2478,6 @@
     "Description": "Easily extract text and data from virtually any document"
   },
   {
-    "Identifier": "AmazonTimestreamforLiveAnalytics",
-    "Name": "Amazon Timestream for LiveAnalytics",
-    "Family": "Database",
-    "Description": "Amazon Timestream is a fast, scalable, and serverless time series database for IoT and operational applications."
-  },
-  {
     "Identifier": "AmazonTranscribe",
     "Name": "Amazon Transcribe",
     "Family": "Machine Learning",
