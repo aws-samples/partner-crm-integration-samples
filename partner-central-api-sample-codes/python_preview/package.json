@@ -4,7 +4,7 @@
     "@cloudscape-design/components": "^3.0.980",
     "@cloudscape-design/global-styles": "^1.0.44",
     "aws-sdk": "^2.1692.0",
-    "axios": "^1.9.0",
+    "axios": "^1.12.0",
     "react-router-dom": "^7.6.1"
   }
 }
