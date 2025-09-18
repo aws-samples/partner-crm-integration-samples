@@ -180,12 +180,6 @@
     "Description": "Track User Activity and API Usage"
   },
   {
-    "Identifier": "AWSCloudWAN",
-    "Name": "AWS Cloud WAN",
-    "Family": "Networking & Content Delivery",
-    "Description": "AWSCloudWAN"
-  },
-  {
     "Identifier": "AWSCodeArtifact",
     "Name": "AWS CodeArtifact",
     "Family": "Developer Tools",
@@ -1206,6 +1200,12 @@
     "Description": "Amazon Bedrock models provided by OpenAI"
   },
   {
+    "Identifier": "AmazonBedrockQwenModels",
+    "Name": "Amazon Bedrock - Qwen Models",
+    "Family": "AI/ML",
+    "Description": "Amazon Bedrock models provided by Qwen"
+  },
+  {
     "Identifier": "AmazonBedrockStabilityAIModels",
     "Name": "Amazon Bedrock - Stability AI Models",
     "Family": "Machine Learning",
@@ -2190,6 +2190,12 @@
     "Description": "Ask questions of your data and receive answers with relevant visualizations"
   },
   {
+    "Identifier": "AmazonQuickSuite",
+    "Name": "Amazon Quick Suite",
+    "Family": "AI/ML",
+    "Description": "An AI-powered assistant for enhanced productivity and data analysis"
+  },
+  {
     "Identifier": "AmazonRDSAuroraforMySQL",
     "Name": "Amazon RDS Aurora for MySQL",
     "Family": "Database",
@@ -2542,6 +2548,12 @@
     "Name": "Amazon WorkSpaces Pools",
     "Family": "End User Computing",
     "Description": "Create pools of virtual desktops to simplify management and reduce cost"
+  },
+  {
+    "Identifier": "AmazonWorkSpacesSecureBrowser",
+    "Name": "Amazon WorkSpaces Secure Browser",
+    "Family": "End User Computing",
+    "Description": "Provides a protected environment for users to access private websites, software-as-a-service (SaaS) applications, and the public internet"
   },
   {
     "Identifier": "AmazonWorkSpacesThinClient",
