@@ -1,0 +1,79 @@
+{
+  "Catalog": "Sandbox",
+  "PrimaryNeedsFromAws": [
+    "Co-Sell - Architectural Validation"
+  ],
+  "NationalSecurity": "No",
+  "Customer": {
+    "Account": {
+      "Industry": "Life Sciences",
+      "CompanyName": "ValidSandboxCreate6",
+      "WebsiteUrl": "www.testsite011.test.com",
+      "AwsAccountId": "111111111111",
+      "Address": {
+        "PostalCode": "10001",
+        "StateOrRegion": "New York",
+        "CountryCode": "US"
+      },
+      "Duns": "111100111"
+    },
+    "Contacts": [
+      {
+        "Email": "testnamelast09@test.com",
+        "FirstName": "TestContact011",
+        "LastName": "MLastName001",
+        "BusinessTitle": "Executive",
+        "Phone": "+14444444444"
+      }
+    ]
+  },
+  "Project": {
+    "DeliveryModels": [
+      "SaaS or PaaS"
+    ],
+    "ExpectedCustomerSpend": [
+      {
+        "Amount": "12500",
+        "CurrencyCode": "USD",
+        "Frequency": "Monthly",
+        "TargetCompany": "AWS"
+      }
+    ],
+    "Title": "New Business Deal - 6628",
+    "CustomerBusinessProblem": "A very important problem goes here ValidSandboxCreate",
+    "CustomerUseCase": "Security & Compliance",
+    "SalesActivities": [
+      "Conducted POC / Demo"
+    ],
+    "CompetitorName": "No Competition"
+  },
+  "OpportunityType": "Net New Business",
+  "Marketing": {
+    "CampaignName": "TestCampaignName01",
+    "Source": "Marketing Activity",
+    "UseCases": [
+      "Analytics"
+    ],
+    "Channels": [
+      "Content Syndication"
+    ],
+    "AwsFundingUsed": "Yes"
+  },
+  "SoftwareRevenue": {
+    "DeliveryModel": "Pay-as-you-go",
+    "Value": {
+      "Amount": "10000.0",
+      "CurrencyCode": "USD"
+    },
+    "EffectiveDate": "2023-10-31",
+    "ExpirationDate": "2024-03-31"
+  },
+  "LastModifiedDate": "2025-10-06 19:55:32.504000+00:00",
+  "LifeCycle": {
+    "Stage": "Prospect",
+    "NextSteps": "Next steps on the opportunity. TEST is used to communicate to AWS the next action required, please update.",
+    "TargetCloseDate": "2029-10-11",
+    "ReviewStatus": "Approved"
+  },
+  "Identifier": "O9913253"
+}

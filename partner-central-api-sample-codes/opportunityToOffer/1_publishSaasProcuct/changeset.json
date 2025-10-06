@@ -1,0 +1,276 @@
+{
+  "Catalog": "AWSMarketplace",
+  "ChangeSet": [
+    {
+      "ChangeType": "CreateProduct",
+      "Entity": {
+        "Type": "SaaSProduct@1.0"
+      },
+      "ChangeName": "CreateProductChange",
+      "DetailsDocument": {}
+    },
+    {
+      "ChangeType": "UpdateInformation",
+      "Entity": {
+        "Type": "SaaSProduct@1.0",
+        "Identifier": "$CreateProductChange.Entity.Identifier"
+      },
+      "DetailsDocument": {
+        "ProductTitle": "Sample Product 3264",
+        "ShortDescription": "Brief description",
+        "LongDescription": "Detailed description",
+        "SupportDescription": "Support details goes here.",
+        "Highlights": [
+          "Sample highlight"
+        ],
+        "SearchKeywords": [
+          "Sample keyword"
+        ],
+        "Categories": [
+          "Data Catalogs"
+        ],
+        "LogoUrl": "https://awsmp-logos.s3.amazonaws.com/ca60b754fe05a24257176cdbf31c4e0d",
+        "AdditionalResources": []
+      }
+    },
+    {
+      "ChangeType": "UpdateTargeting",
+      "Entity": {
+        "Type": "SaaSProduct@1.0",
+        "Identifier": "$CreateProductChange.Entity.Identifier"
+      },
+      "DetailsDocument": {
+        "PositiveTargeting": {
+          "BuyerAccounts": [
+            "{{BUYER_ID}}"
+          ]
+        }
+      }
+    },
+    {
+      "ChangeType": "AddDeliveryOptions",
+      "Entity": {
+        "Type": "SaaSProduct@1.0",
+        "Identifier": "$CreateProductChange.Entity.Identifier"
+      },
+      "DetailsDocument": {
+        "DeliveryOptions": [
+          {
+            "Details": {
+              "SaaSUrlDeliveryOptionDetails": {
+                "FulfillmentUrl": "https://sample.amazonaws.com/sample-saas-fulfillment-url"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "ChangeType": "AddDimensions",
+      "Entity": {
+        "Type": "SaaSProduct@1.0",
+        "Identifier": "$CreateProductChange.Entity.Identifier"
+      },
+      "DetailsDocument": [
+        {
+          "Name": "Dimension 1",
+          "Description": "Dimension 1 description goes here",
+          "Key": "dimension_1_id",
+          "Unit": "Units",
+          "Types": [
+            "Entitled"
+          ]
+        },
+        {
+          "Name": "Dimension 2",
+          "Description": "Dimension 2 description goes here",
+          "Key": "dimension_2_id",
+          "Unit": "Units",
+          "Types": [
+            "Entitled"
+          ]
+        },
+        {
+          "Name": "Dimension 3",
+          "Description": "Dimension 3 description goes here",
+          "Key": "dimension_3_id",
+          "Unit": "Units",
+          "Types": [
+            "Entitled"
+          ]
+        },
+        {
+          "Name": "metered 1",
+          "Description": "Metered dimension 1 desc goes here",
+          "Key": "metered_1_id",
+          "Unit": "Units",
+          "Types": [
+            "ExternallyMetered"
+          ]
+        },
+        {
+          "Name": "metered 2",
+          "Description": "Metered dimension 2 desc goes here",
+          "Key": "metered_2_id",
+          "Unit": "Units",
+          "Types": [
+            "ExternallyMetered"
+          ]
+        },
+        {
+          "Name": "metered 3",
+          "Description": "Metered dimension 3 desc goes here",
+          "Key": "metered_3_id",
+          "Unit": "Units",
+          "Types": [
+            "ExternallyMetered"
+          ]
+        }
+      ]
+    },
+    {
+      "ChangeType": "ReleaseProduct",
+      "Entity": {
+        "Type": "SaaSProduct@1.0",
+        "Identifier": "$CreateProductChange.Entity.Identifier"
+      },
+      "DetailsDocument": {}
+    },
+    {
+      "ChangeType": "CreateOffer",
+      "Entity": {
+        "Type": "Offer@1.0"
+      },
+      "ChangeName": "CreateOfferChange",
+      "DetailsDocument": {
+        "ProductId": "$CreateProductChange.Entity.Identifier"
+      }
+    },
+    {
+      "ChangeType": "UpdateInformation",
+      "Entity": {
+        "Type": "Offer@1.0",
+        "Identifier": "$CreateOfferChange.Entity.Identifier"
+      },
+      "DetailsDocument": {
+        "Name": "Test public offer for SaaSProduct using AWS Marketplace API Reference Code",
+        "Description": "Test public offer with contract pricing for SaaSProduct using AWS Marketplace API Reference Code"
+      }
+    },
+    {
+      "ChangeType": "UpdatePricingTerms",
+      "Entity": {
+        "Type": "Offer@1.0",
+        "Identifier": "$CreateOfferChange.Entity.Identifier"
+      },
+      "DetailsDocument": {
+        "PricingModel": "Contract",
+        "Terms": [
+          {
+            "Type": "ConfigurableUpfrontPricingTerm",
+            "CurrencyCode": "USD",
+            "RateCards": [
+              {
+                "Selector": {
+                  "Type": "Duration",
+                  "Value": "P1M"
+                },
+                "RateCard": [
+                  {
+                    "DimensionKey": "dimension_1_id",
+                    "Price": "20"
+                  },
+                  {
+                    "DimensionKey": "dimension_2_id",
+                    "Price": "25"
+                  }
+                ],
+                "Constraints": {
+                  "MultipleDimensionSelection": "Allowed",
+                  "QuantityConfiguration": "Allowed"
+                }
+              },
+              {
+                "Selector": {
+                  "Type": "Duration",
+                  "Value": "P12M"
+                },
+                "RateCard": [
+                  {
+                    "DimensionKey": "dimension_1_id",
+                    "Price": "150"
+                  },
+                  {
+                    "DimensionKey": "dimension_2_id",
+                    "Price": "300"
+                  }
+                ],
+                "Constraints": {
+                  "MultipleDimensionSelection": "Allowed",
+                  "QuantityConfiguration": "Allowed"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "ChangeType": "UpdateRenewalTerms",
+      "Entity": {
+        "Type": "Offer@1.0",
+        "Identifier": "$CreateOfferChange.Entity.Identifier"
+      },
+      "DetailsDocument": {
+        "Terms": [
+          {
+            "Type": "RenewalTerm"
+          }
+        ]
+      }
+    },
+    {
+      "ChangeType": "UpdateLegalTerms",
+      "Entity": {
+        "Type": "Offer@1.0",
+        "Identifier": "$CreateOfferChange.Entity.Identifier"
+      },
+      "DetailsDocument": {
+        "Terms": [
+          {
+            "Type": "LegalTerm",
+            "Documents": [
+              {
+                "Type": "StandardEula",
+                "Version": "2022-07-14"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "ChangeType": "UpdateSupportTerms",
+      "Entity": {
+        "Type": "Offer@1.0",
+        "Identifier": "$CreateOfferChange.Entity.Identifier"
+      },
+      "DetailsDocument": {
+        "Terms": [
+          {
+            "Type": "SupportTerm",
+            "RefundPolicy": "Absolutely no refund, period."
+          }
+        ]
+      }
+    },
+    {
+      "ChangeType": "ReleaseOffer",
+      "Entity": {
+        "Type": "Offer@1.0",
+        "Identifier": "$CreateOfferChange.Entity.Identifier"
+      },
+      "DetailsDocument": {}
+    }
+  ]
+}
