@@ -792,12 +792,6 @@
     "Description": "Establish private connectivity between VPCs and services hosted on AWS or on-premises, without exposing data to the internet"
   },
   {
-    "Identifier": "AWSProton",
-    "Name": "AWS Proton",
-    "Family": "Management & Governance",
-    "Description": "Manage your infrastructure so developers can focus on coding."
-  },
-  {
     "Identifier": "AWSResilienceHub",
     "Name": "AWS Resilience Hub",
     "Family": "Management & Governance",
@@ -1152,10 +1146,28 @@
     "Description": "Amazon Bedrock models provided by Cohere"
   },
   {
-    "Identifier": "AmazonBedrockDataAutomation",
-    "Name": "Amazon Bedrock - Data Automation",
-    "Family": "Machine Learning",
-    "Description": "Automate the generation of insights from unstructured multimodal content such as documents, images, audio, and video"
+    "Identifier": "AmazonBedrockDataAutomationAudio",
+    "Name": "Amazon Bedrock - Data Automation Audio",
+    "Family": "AI/ML",
+    "Description": "Automate the generation of useful insights from audio content for your AI-powered applications"
+  },
+  {
+    "Identifier": "AmazonBedrockDataAutomationDocuments",
+    "Name": "Amazon Bedrock - Data Automation Documents",
+    "Family": "AI/ML",
+    "Description": "Automate the generation of useful insights from documents for your AI-powered applications"
+  },
+  {
+    "Identifier": "AmazonBedrockDataAutomationImages",
+    "Name": "Amazon Bedrock - Data Automation Images",
+    "Family": "AI/ML",
+    "Description": "Automate the generation of useful insights from images for your AI-powered applications"
+  },
+  {
+    "Identifier": "AmazonBedrockDataAutomationVideo",
+    "Name": "Amazon Bedrock - Data Automation Video",
+    "Family": "AI/ML",
+    "Description": "Automate the generation of useful insights from video content for your AI-powered applications"
   },
   {
     "Identifier": "AmazonBedrockDeepSeekModels",
@@ -1246,12 +1258,6 @@
     "Name": "Amazon Chime Voice Connector",
     "Family": "Business Applications",
     "Description": "Cost-effective SIP trunking and advanced telephony features powered by AWS"
-  },
-  {
-    "Identifier": "AmazonCloudDirectory",
-    "Name": "Amazon Cloud Directory",
-    "Family": "Security, Identity & Compliance",
-    "Description": "Fully managed, hierarchical data store in AWS cloud"
   },
   {
     "Identifier": "AmazonCloudFront",
@@ -2193,7 +2199,7 @@
     "Identifier": "AmazonQuickSuite",
     "Name": "Amazon Quick Suite",
     "Family": "AI/ML",
-    "Description": "An AI-powered assistant for enhanced productivity and data analysis"
+    "Description": "Agentic AI-powered digital workspace"
   },
   {
     "Identifier": "AmazonRDSAuroraforMySQL",
@@ -2544,6 +2550,12 @@
     "Description": "Virtual desktop infrastructure APIs for customers\u2019 3rd party VDI software"
   },
   {
+    "Identifier": "AmazonWorkSpacesCoreManagedInstances",
+    "Name": "Amazon WorkSpaces Core Managed Instances",
+    "Family": "End User Computing",
+    "Description": "Offers managed virtual desktop infrastructure (VDI) designed to work with third-party VDI service from Citrix, Omnissa, Workspot, and Leostream"
+  },
+  {
     "Identifier": "AmazonWorkSpacesPools",
     "Name": "Amazon WorkSpaces Pools",
     "Family": "End User Computing",
@@ -2560,12 +2572,6 @@
     "Name": "Amazon WorkSpaces Thin Client",
     "Family": "End User Computing",
     "Description": "Reduce costs, simplify logistics, and accelerate deployment using virtual desktops"
-  },
-  {
-    "Identifier": "AmazonWorkSpacesWeb",
-    "Name": "Amazon WorkSpaces Web",
-    "Family": "End User Computing",
-    "Description": "Secure, browser-based access to internal websites and applications with zero administrative burden"
   },
   {
     "Identifier": "AmazonWorkspaces",
