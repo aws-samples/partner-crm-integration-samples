@@ -16274,50 +16274,41 @@
 	],
 	"variable": [
 		{
-			"id": "122085ab-6a36-436a-bb45-87510443ac1c",
 			"key": "catalog",
 			"value": "Sandbox",
 			"type": "string"
 		},
 		{
-			"id": "9e73a552-671e-4eeb-a6c2-9edd4685b801",
 			"key": "companyName",
 			"value": "companyName",
 			"type": "string"
 		},
 		{
-			"id": "33c1286f-d9c4-4b0b-8d1f-bcd81cd49771",
 			"key": "crm",
 			"value": "yourCRMName",
 			"type": "string"
 		},
 		{
-			"id": "0839f584-2d9f-460c-aee6-80430f515fc9",
 			"key": "rejectingEngagementInvitationID",
 			"value": ""
 		},
 		{
-			"id": "9c3d8562-adaf-4e97-9779-40a264d6d966",
 			"key": "acceptingEngagementInvitationID",
 			"value": ""
 		},
 		{
-			"id": "5e53032a-1554-4b02-b77c-0504b74d3f69",
 			"key": "acceptedEngagementOpportunityID",
 			"value": ""
 		},
 		{
-			"id": "31165e7d-0426-4186-b43c-c9372404e5f3",
 			"key": "opportunityId",
 			"value": ""
 		},
 		{
-			"id": "ddbeec43-f66d-4233-837e-34384507e2fb",
 			"key": "solutionID",
 			"value": ""
 		},
 		{
-			"id": "171c78a4-f325-4ffc-be2c-cc82f22727b6",
 			"key": "lastModifiedDate",
 			"value": ""
 		}
