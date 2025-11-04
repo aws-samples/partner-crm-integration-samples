@@ -16239,20 +16239,21 @@
 	"auth": {
 		"type": "awsv4",
 		"awsv4": {
-			"secretKey": "{{vault:aws.secretKey.inviting}}",
-			"accessKey": "{{vault:aws.accessKey.inviting}}",
+			"sessionToken": "{{vault:sessionToken}}",
 			"service": "{{aws.partnercentral.service}}",
 			"region": "{{aws.region}}",
-			"sessionToken": "{{vault:aws.sessionToken.inviting}}"
+			"secretKey": "{{vault:aws.secret-key}}",
+			"accessKey": "{{vault:aws.access-key}}"
 		}
 	},
 	"event": [
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "b15a2e18-c213-4213-b1cd-7eee2a58aebd",
+				"id": "8e189d2f-2da8-47e8-b07f-50afdbd5c76b",
 				"type": "text/javascript",
 				"packages": {},
+				"requests": {},
 				"exec": [
 					""
 				]
@@ -16261,9 +16262,10 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "9b4f06fa-fa01-4bbc-9934-a77bc8f3163e",
+				"id": "781887fc-f059-4573-8cb5-2b7f1fdb76b0",
 				"type": "text/javascript",
 				"packages": {},
+				"requests": {},
 				"exec": [
 					""
 				]
@@ -16272,60 +16274,51 @@
 	],
 	"variable": [
 		{
+			"id": "122085ab-6a36-436a-bb45-87510443ac1c",
 			"key": "catalog",
-			"value": "Sandbox"
+			"value": "Sandbox",
+			"type": "string"
 		},
 		{
+			"id": "9e73a552-671e-4eeb-a6c2-9edd4685b801",
+			"key": "companyName",
+			"value": "companyName",
+			"type": "string"
+		},
+		{
+			"id": "33c1286f-d9c4-4b0b-8d1f-bcd81cd49771",
+			"key": "crm",
+			"value": "yourCRMName",
+			"type": "string"
+		},
+		{
+			"id": "0839f584-2d9f-460c-aee6-80430f515fc9",
 			"key": "rejectingEngagementInvitationID",
 			"value": ""
 		},
 		{
+			"id": "9c3d8562-adaf-4e97-9779-40a264d6d966",
 			"key": "acceptingEngagementInvitationID",
 			"value": ""
 		},
 		{
+			"id": "5e53032a-1554-4b02-b77c-0504b74d3f69",
 			"key": "acceptedEngagementOpportunityID",
 			"value": ""
 		},
 		{
+			"id": "31165e7d-0426-4186-b43c-c9372404e5f3",
 			"key": "opportunityId",
 			"value": ""
 		},
 		{
-			"key": "opportunityID",
-			"value": ""
-		},
-		{
+			"id": "ddbeec43-f66d-4233-837e-34384507e2fb",
 			"key": "solutionID",
 			"value": ""
 		},
 		{
+			"id": "171c78a4-f325-4ffc-be2c-cc82f22727b6",
 			"key": "lastModifiedDate",
-			"value": ""
-		},
-		{
-			"key": "productId",
-			"value": ""
-		},
-		{
-			"key": "solutionId",
-			"value": ""
-		},
-		{
-			"key": "getOpportunityPayload",
-			"value": ""
-		},
-		{
-			"key": "companyName",
-			"value": "",
-			"type": "default"
-		},
-		{
-			"key": "engagementId",
-			"value": ""
-		},
-		{
-			"key": "taskId",
 			"value": ""
 		}
 	]
