@@ -30,9 +30,7 @@
          },
          "DetailsDocument":{
             "PositiveTargeting":{
-               "BuyerAccounts":[
-                  "{{BUYER_ID}}"
-               ]
+               "BuyerAccounts":"{{BUYER_IDS}}"
             }
          }
       },

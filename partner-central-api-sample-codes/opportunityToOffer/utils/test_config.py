@@ -52,7 +52,7 @@ def test_template_processing():
     
     # Test files to process
     test_files = [
-        ('1_publishSaasProcuct/changeset_template.json', 'SaaS Product Creation'),
+        ('1_publishSaasProcuct/changeset.json', 'SaaS Product Creation'),
         ('2_createPrivateOffer/changeset.json', 'Private Offer Creation')
     ]
     

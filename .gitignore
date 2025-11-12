@@ -25,6 +25,9 @@ python_preview.zip
 partner-central-api-sample-codes/java_preview/target/
 partner-central-api-sample-codes/java_preview/bin/
 partner-central-api-sample-codes/java_preview/libs/
+partner-central-api-sample-codes/java_preview/.settings/
+partner-central-api-sample-codes/java_preview/.classpath
+partner-central-api-sample-codes/java_preview/.project
 
 *.iml
 .idea/

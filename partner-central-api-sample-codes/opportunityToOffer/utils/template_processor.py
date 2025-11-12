@@ -29,8 +29,21 @@ def replace_template_variables(content, config_vars=None):
     
     # Replace template variables in the format {{VARIABLE_NAME}}
     for key, value in config_vars.items():
-        pattern = f"{{{{{key}}}}}"
-        content = content.replace(pattern, str(value))
+        # Handle quoted array placeholders like "{{BUYER_IDS}}"
+        quoted_pattern = f'"{{{{{key}}}}}"'
+        unquoted_pattern = f"{{{{{key}}}}}"
+        
+        if isinstance(value, list):
+            # For arrays, replace quoted placeholder with unquoted JSON array
+            json_array = json.dumps(value)
+            if quoted_pattern in content:
+                content = content.replace(quoted_pattern, json_array)
+            else:
+                content = content.replace(unquoted_pattern, json_array)
+        else:
+            # For non-arrays, just replace the placeholder
+            replacement = str(value)
+            content = content.replace(unquoted_pattern, replacement)
     
     return content
 

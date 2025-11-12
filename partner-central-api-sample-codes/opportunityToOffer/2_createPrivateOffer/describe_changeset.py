@@ -15,6 +15,13 @@ from datetime import datetime
 import boto3
 from botocore.exceptions import ClientError
 
+# Add parent directory to path to access utils
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+try:
+    import utils.config as config
+except ImportError:
+    config = None
+
 logger = logging.getLogger(__name__)
 
 
@@ -60,7 +67,32 @@ def format_changeset_details(response):
     Args:
         response: The response from describe_changeset
     """
-    print("=" * 88)
+    # Change set details first
+    change_set = response.get('ChangeSet', [])
+    if change_set:
+        print("=" * 88)
+        print("CHANGES IN CHANGESET")
+        print("=" * 88)
+        
+        for i, change in enumerate(change_set, 1):
+            print(f"\nChange {i}:")
+            print(f"  Change Type: {change.get('ChangeType', 'N/A')}")
+            print(f"  Change Name: {change.get('ChangeName', 'N/A')}")
+            
+            entity = change.get('Entity', {})
+            if entity:
+                print(f"  Entity Type: {entity.get('Type', 'N/A')}")
+                print(f"  Entity Identifier: {entity.get('Identifier', 'N/A')}")
+            
+            # Show error details if present
+            error_detail_list = change.get('ErrorDetailList', [])
+            if error_detail_list:
+                print("  Errors:")
+                for error in error_detail_list:
+                    print(f"    - Code: {error.get('ErrorCode', 'N/A')}")
+                    print(f"      Message: {error.get('ErrorMessage', 'N/A')}")
+    
+    print("\n" + "=" * 88)
     print("CHANGESET DETAILS")
     print("=" * 88)
     
@@ -92,31 +124,6 @@ def format_changeset_details(response):
             print(f"Failure Code: {failure_code}")
         if failure_description:
             print(f"Failure Description: {failure_description}")
-    
-    # Change set details
-    change_set = response.get('ChangeSet', [])
-    if change_set:
-        print("\n" + "-" * 40)
-        print("CHANGES IN CHANGESET")
-        print("-" * 40)
-        
-        for i, change in enumerate(change_set, 1):
-            print(f"\nChange {i}:")
-            print(f"  Change Type: {change.get('ChangeType', 'N/A')}")
-            print(f"  Change Name: {change.get('ChangeName', 'N/A')}")
-            
-            entity = change.get('Entity', {})
-            if entity:
-                print(f"  Entity Type: {entity.get('Type', 'N/A')}")
-                print(f"  Entity Identifier: {entity.get('Identifier', 'N/A')}")
-            
-            # Show error details if present
-            error_detail_list = change.get('ErrorDetailList', [])
-            if error_detail_list:
-                print("  Errors:")
-                for error in error_detail_list:
-                    print(f"    - Code: {error.get('ErrorCode', 'N/A')}")
-                    print(f"      Message: {error.get('ErrorMessage', 'N/A')}")
     
     print("\n" + "=" * 88)
 
@@ -170,8 +177,10 @@ def save_offer_info_to_shared_env(response):
             
             # Update with offer information
             env_data["OFFER_ID"] = offer_id
-            # Generate offer ARN (standard format)
-            env_data["OFFER_ARN"] = f"arn:aws:aws-marketplace:us-east-1:111111111111:AWSMarketplace/Offer/{offer_id}"
+            # Generate offer ARN using BUYER_ID from shared_env.json or config default
+            default_buyer_id = config.BUYER_ID if config else "222222222222"
+            buyer_id = env_data.get("BUYER_ID", default_buyer_id)
+            env_data["OFFER_ARN"] = f"arn:aws:aws-marketplace:us-east-1:{buyer_id}:AWSMarketplace/Offer/{offer_id}"
             
             # Write back to file
             with open(env_file_path, "w") as f:
@@ -194,14 +203,31 @@ def main():
     """
     logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
     
-    # Get changeset ID from command line argument or use default
+    # Get changeset ID with priority: command line -> shared_env.json
+    changeset_id = None
+    
+    # 1. Try command line argument
     if len(sys.argv) > 1:
         changeset_id = sys.argv[1]
+        print(f"Using changeset ID from command line: {changeset_id}")
     else:
-        # Use the changeset ID from the previous run as default
-        changeset_id = "2irc20n325n8znc4fi4q0o3bb"
-        print(f"No changeset ID provided. Using default: {changeset_id}")
-        print("Usage: python describe_changeset.py <changeset_id>")
+        # 2. Try shared_env.json
+        env_file_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "shared_env.json")
+        try:
+            with open(env_file_path, "r") as f:
+                env_data = json.load(f)
+                changeset_id = env_data.get("CHANGESET_ID")
+                if changeset_id:
+                    print(f"Using changeset ID from shared_env.json: {changeset_id}")
+        except:
+            pass
+        
+        # 3. Error if still not found
+        if not changeset_id:
+            print("ERROR: No changeset ID provided!")
+            print("Usage: python describe_changeset.py <changeset_id>")
+            print("Or set CHANGESET_ID in shared_env.json")
+            sys.exit(1)
         print()
     
     try:
@@ -220,10 +246,12 @@ def main():
         # Save offer information if changeset succeeded
         save_offer_info_to_shared_env(response)
         
-        # Optionally show the full JSON response
-        show_json = input("\nWould you like to see the full JSON response? (y/n): ").lower().strip()
-        if show_json in ['y', 'yes']:
-            pretty_print_json(response, "Full DescribeChangeSet Response")
+        # Optionally show the full JSON response (skip if running in automation)
+        # Check if stdin is a terminal (interactive) or not (automation)
+        if sys.stdin.isatty():
+            show_json = input("\nWould you like to see the full JSON response? (y/n): ").lower().strip()
+            if show_json in ['y', 'yes']:
+                pretty_print_json(response, "Full DescribeChangeSet Response")
         
         return response
         

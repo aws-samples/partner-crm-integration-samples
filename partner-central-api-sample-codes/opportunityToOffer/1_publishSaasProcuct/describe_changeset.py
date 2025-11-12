@@ -191,14 +191,30 @@ def main():
     """
     logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
     
-    # Get changeset ID from command line argument or use default
+    # Get changeset ID with priority: command line -> shared_env.json -> default
+    changeset_id = None
+    
+    # 1. Try command line argument
     if len(sys.argv) > 1:
         changeset_id = sys.argv[1]
+        print(f"Using changeset ID from command line: {changeset_id}")
     else:
-        # Use the changeset ID from the previous run as default
-        changeset_id = "2irc20n325n8znc4fi4q0o3bb"
-        print(f"No changeset ID provided. Using default: {changeset_id}")
-        print("Usage: python describe_changeset.py <changeset_id>")
+        # 2. Try shared_env.json
+        env_file_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "shared_env.json")
+        try:
+            with open(env_file_path, "r") as f:
+                env_data = json.load(f)
+                changeset_id = env_data.get("CHANGESET_ID")
+                if changeset_id:
+                    print(f"Using changeset ID from shared_env.json: {changeset_id}")
+        except:
+            pass
+        
+        # 3. Use default if still not found
+        if not changeset_id:
+            changeset_id = "2irc20n325n8znc4fi4q0o3bb"
+            print(f"Using default changeset ID: {changeset_id}")
+            print("Usage: python describe_changeset.py <changeset_id>")
         print()
     
     try:
@@ -217,10 +233,12 @@ def main():
         # Save product ID if changeset succeeded
         save_product_id_to_shared_env(response)
         
-        # Optionally show the full JSON response
-        show_json = input("\nWould you like to see the full JSON response? (y/n): ").lower().strip()
-        if show_json in ['y', 'yes']:
-            pretty_print_json(response, "Full DescribeChangeSet Response")
+        # Optionally show the full JSON response (skip if running in automation)
+        # Check if stdin is a terminal (interactive) or not (automation)
+        if sys.stdin.isatty():
+            show_json = input("\nWould you like to see the full JSON response? (y/n): ").lower().strip()
+            if show_json in ['y', 'yes']:
+                pretty_print_json(response, "Full DescribeChangeSet Response")
         
         return response
         

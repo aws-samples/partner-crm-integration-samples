@@ -1,33 +1,55 @@
 {
   "Catalog": "Sandbox",
-  "PrimaryNeedsFromAws": [
-    "Co-Sell - Architectural Validation"
-  ],
-  "NationalSecurity": "No",
   "Customer": {
     "Account": {
-      "Industry": "Life Sciences",
-      "CompanyName": "ValidSandboxCreate6",
-      "WebsiteUrl": "www.testsite011.test.com",
-      "AwsAccountId": "111111111111",
       "Address": {
+        "CountryCode": "US",
         "PostalCode": "10001",
-        "StateOrRegion": "New York",
-        "CountryCode": "US"
+        "StateOrRegion": "New York"
       },
-      "Duns": "111100111"
+      "AwsAccountId": "111111111111",
+      "CompanyName": "ValidSandboxCreate6",
+      "Duns": "111100111",
+      "Industry": "Life Sciences",
+      "WebsiteUrl": "www.testsite011.test.com"
     },
     "Contacts": [
       {
+        "BusinessTitle": "Executive",
         "Email": "testnamelast09@test.com",
         "FirstName": "TestContact011",
         "LastName": "MLastName001",
-        "BusinessTitle": "Executive",
         "Phone": "+14444444444"
       }
     ]
   },
+  "LastModifiedDate": "2025-11-10 20:52:42.827000+00:00",
+  "LifeCycle": {
+    "NextSteps": "Next steps on the opportunity. TEST is used to communicate to AWS the next action required, please update.",
+    "ReviewStatus": "Approved",
+    "Stage": "Committed",
+    "TargetCloseDate": "2029-10-11"
+  },
+  "Marketing": {
+    "AwsFundingUsed": "Yes",
+    "CampaignName": "TestCampaignName01",
+    "Channels": [
+      "Content Syndication"
+    ],
+    "Source": "Marketing Activity",
+    "UseCases": [
+      "Analytics"
+    ]
+  },
+  "NationalSecurity": "No",
+  "OpportunityType": "Net New Business",
+  "PrimaryNeedsFromAws": [
+    "Co-Sell - Architectural Validation"
+  ],
   "Project": {
+    "CompetitorName": "No Competition",
+    "CustomerBusinessProblem": "A very important problem goes here ValidSandboxCreate",
+    "CustomerUseCase": "Security & Compliance",
     "DeliveryModels": [
       "SaaS or PaaS"
     ],
@@ -39,41 +61,19 @@
         "TargetCompany": "AWS"
       }
     ],
-    "Title": "New Business Deal - 6628",
-    "CustomerBusinessProblem": "A very important problem goes here ValidSandboxCreate",
-    "CustomerUseCase": "Security & Compliance",
     "SalesActivities": [
       "Conducted POC / Demo"
     ],
-    "CompetitorName": "No Competition"
-  },
-  "OpportunityType": "Net New Business",
-  "Marketing": {
-    "CampaignName": "TestCampaignName01",
-    "Source": "Marketing Activity",
-    "UseCases": [
-      "Analytics"
-    ],
-    "Channels": [
-      "Content Syndication"
-    ],
-    "AwsFundingUsed": "Yes"
+    "Title": "New Business Deal - 3062"
   },
   "SoftwareRevenue": {
     "DeliveryModel": "Pay-as-you-go",
+    "EffectiveDate": "2023-10-31",
+    "ExpirationDate": "2024-03-31",
     "Value": {
       "Amount": "10000.0",
       "CurrencyCode": "USD"
-    },
-    "EffectiveDate": "2023-10-31",
-    "ExpirationDate": "2024-03-31"
+    }
   },
-  "LastModifiedDate": "2025-10-06 23:09:12.018000+00:00",
-  "LifeCycle": {
-    "Stage": "Committed",
-    "NextSteps": "Next steps on the opportunity. TEST is used to communicate to AWS the next action required, please update.",
-    "TargetCloseDate": "2029-10-11",
-    "ReviewStatus": "Approved"
-  },
-  "Identifier": "O9913253"
+  "Identifier": "O10708574"
 }
