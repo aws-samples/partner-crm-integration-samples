@@ -41,9 +41,7 @@
       },
       "DetailsDocument": {
         "PositiveTargeting": {
-          "BuyerAccounts": [
-            "{{BUYER_ID}}"
-          ]
+          "BuyerAccounts": "{{BUYER_IDS}}"
         }
       }
     },
@@ -193,7 +191,7 @@
               {
                 "Selector": {
                   "Type": "Duration",
-                  "Value": "P12M"
+                  "Value": "{{CONTRACT_DURATION_MONTHS}}"
                 },
                 "RateCard": [
                   {
@@ -209,6 +207,28 @@
                   "MultipleDimensionSelection": "Allowed",
                   "QuantityConfiguration": "Allowed"
                 }
+              }
+            ]
+          },
+          {
+            "Type": "UsageBasedPricingTerm",
+            "CurrencyCode": "USD",
+            "RateCards": [
+              {
+                "RateCard": [
+                  {
+                    "DimensionKey": "metered_1_id",
+                    "Price": "1.0"
+                  },
+                  {
+                    "DimensionKey": "metered_2_id",
+                    "Price": "2.0"
+                  },
+                  {
+                    "DimensionKey": "metered_3_id",
+                    "Price": "3.0"
+                  }
+                ]
               }
             ]
           }

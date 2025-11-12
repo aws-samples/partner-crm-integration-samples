@@ -1,0 +1,8 @@
+{
+  "catalog": "Sandbox",
+  "contract_duration_months": "P12M",
+  "contract_duration_days": "P365D",
+  "custom_eula_url": "https://s3.amazonaws.com/aws-mp-standard-contracts/Standard-Contact-for-AWS-Marketplace-2022-07-14.pdf",
+  "offer_name": "Demo Private Offer with Dynamic Pricing",
+  "offer_description": "Demo Private Offer with Rate Card Based Pricing"
+}

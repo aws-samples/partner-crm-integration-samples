@@ -24,7 +24,7 @@ event_pattern = {
 #lambda_arn = 'your_lambda_function_arn'
 target_id = 'OpportunityEventLambda_' + event_type
 lambda_arn = 'arn:aws:lambda:us-east-1:111111111111:function:event-bridge-lambda'
-lambda_arn = "arn:aws:lambda:us-east-1:691709974417:function:event-bridge-lambda"
+lambda_arn = "arn:aws:lambda:us-east-1:222222222222:function:event-bridge-lambda"
 
 response = eventbridge.put_rule(
     Name='MyOpportunityCreatedRule',

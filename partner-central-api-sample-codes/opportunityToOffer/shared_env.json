@@ -1,7 +1,9 @@
 {
-  "PRODUCT_ID": "prod-45becev5xgcru",
-  "OFFER_ID": "offer-w3wbewz2hy4dk",
-  "OFFER_ARN": "arn:aws:aws-marketplace:us-east-1:111111111111:AWSMarketplace/Offer/offer-plgm7e4l5wm6u",
-  "OPPORTUNITY_ID": "O9913253",
+  "PRODUCT_ID": "prod-lnjsznntonxi2",
+  "PRODUCT_CHANGESET_ID": "dtkkxeq7k0d40blrck9k27wm2",
+  "OFFER_ID": "offer-e7ovpstzsdrz6",
+  "OFFER_ARN": "arn:aws:aws-marketplace:us-east-1:222222222222:AWSMarketplace/Offer/offer-e7ovpstzsdrz6",
+  "OFFER_CHANGESET_ID": "9f4s4v7k7nfiz9p5pd6g3662y",
+  "OPPORTUNITY_ID": "O10708574",
   "SOLUTION_ID": "S-0059717"
 }

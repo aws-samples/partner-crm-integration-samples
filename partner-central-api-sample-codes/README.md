@@ -1,6 +1,6 @@
 # AWS Partner Central API for Selling Sample Codes Library
 
-AWS Partner Central API for Selling enables partners to create, update, view, and assign opportunities, as well as accept invitations to engage on AWS referrals. Additionally, partners can retrieve a list of their solutions on AWS Partner Central, and associate specific solutions, AWS products, or AWS Marketplace offers with opportunities as needed. More information about Partner Central API for Selling is available through [AWS Partner Central API reference guide](https://docs.aws.amazon.com/partner-central/latest/APIReference/aws-partner-central-api-reference-guide.html). 
+AWS Partner Central API for Selling enables partners to create, update, view, and assign opportunities, as well as accept invitations to engage on AWS referrals. Additionally, partners can retrieve a list of their solutions on AWS Partner Central, and associate specific solutions, AWS products, or AWS Marketplace private offers with opportunities as needed. More information about Partner Central API for Selling is available through [AWS Partner Central API reference guide](https://docs.aws.amazon.com/partner-central/latest/APIReference/aws-partner-central-api-reference-guide.html). 
 
 This repository hosts a variety of useful sample codes to help partners automate their workflows with the
 AWS Partner Central API. Sample codes found in this repository
