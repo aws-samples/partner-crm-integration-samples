@@ -1728,6 +1728,12 @@
     "Description": "Easily run containers on customer-managed infrastructure with ECS Anywhere"
   },
   {
+    "Identifier": "AmazonECSManagedInstances",
+    "Name": "Amazon ECS Managed Instances",
+    "Family": "Compute",
+    "Description": "AWS-managed compute option for containerized workloads"
+  },
+  {
     "Identifier": "AmazonECSonAWSFargate",
     "Name": "Amazon ECS on AWS Fargate",
     "Family": "Containers",
