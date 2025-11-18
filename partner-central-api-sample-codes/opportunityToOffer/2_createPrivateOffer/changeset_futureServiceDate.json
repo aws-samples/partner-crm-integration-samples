@@ -1,0 +1,170 @@
+{
+  "Catalog": "AWSMarketplace",
+  "ChangeSet": [
+    {
+      "ChangeName": "MyCreateOfferChange",
+      "ChangeType": "CreateOffer",
+      "Entity": {
+        "Type": "Offer@1.0"
+      },
+      "DetailsDocument": {
+        "ProductId": "{{PRODUCT_ID}}"
+      }
+    },
+    {
+      "ChangeType": "UpdateInformation",
+      "Entity": {
+        "Type": "Offer@1.0",
+        "Identifier": "$MyCreateOfferChange.Entity.Identifier"
+      },
+      "DetailsDocument": {
+        "Name": "Demo Private Offer",
+        "Description": "Demo Private Offer Description"
+      }
+    },
+    {
+      "ChangeType": "UpdateTargeting",
+      "Entity": {
+        "Type": "Offer@1.0",
+        "Identifier": "$MyCreateOfferChange.Entity.Identifier"
+      },
+      "DetailsDocument": {
+        "PositiveTargeting": {
+          "BuyerAccounts": ["{{BUYER_ID}}"]
+        }
+      }
+    },
+    {
+      "ChangeType": "UpdateAvailability",
+      "Entity": {
+        "Type": "Offer@1.0",
+        "Identifier": "$MyCreateOfferChange.Entity.Identifier"
+      },
+      "DetailsDocument": {
+        "AvailabilityEndDate": "{{EXPIRY_DATE}}"
+      }
+    },
+    {
+      "ChangeType": "UpdateLegalTerms",
+      "Entity": {
+        "Identifier": "$MyCreateOfferChange.Entity.Identifier",
+        "Type": "Offer@1.0"
+      },
+      "DetailsDocument": {
+        "Terms": [
+          {
+            "Type": "LegalTerm",
+            "Documents": [
+              {
+                "Type": "StandardEula",
+                "Version": "2022-07-14"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "ChangeType": "UpdatePricingTerms",
+      "Entity": {
+        "Type": "Offer@1.0",
+        "Identifier": "$MyCreateOfferChange.Entity.Identifier"
+      },
+      "DetailsDocument": {
+        "PricingModel": "Contract",
+        "Terms": [
+          {
+            "Type": "FixedUpfrontPricingTerm",
+            "CurrencyCode": "USD",
+            "Price": "0",
+            "Grants": [
+              {
+                "DimensionKey": "dimension_1_id",
+                "MaxQuantity": 22000
+              },
+              {
+                "DimensionKey": "dimension_2_id",
+                "MaxQuantity": 22000
+              },
+              {
+                "DimensionKey": "dimension_3_id",
+                "MaxQuantity": 22000
+              }
+            ]
+          },
+          {
+            "Type": "UsageBasedPricingTerm",
+            "CurrencyCode": "USD",
+            "RateCards": [
+              {
+                "RateCard": [
+                  {
+                    "DimensionKey": "metered_1_id",
+                    "Price": "0"
+                  },
+                  {
+                    "DimensionKey": "metered_2_id",
+                    "Price": "0"
+                  },
+                  {
+                    "DimensionKey": "metered_3_id",
+                    "Price": "0"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "ChangeType": "UpdatePaymentScheduleTerms",
+      "Entity": {
+        "Identifier": "$MyCreateOfferChange.Entity.Identifier",
+        "Type": "Offer@1.0"
+      },
+      "DetailsDocument": {
+        "Terms": [
+          {
+            "Type": "PaymentScheduleTerm",
+            "CurrencyCode": "USD",
+            "Schedule": [
+              {
+                "ChargeDate": "2026-02-12",
+                "ChargeAmount": "0"
+              },
+              {
+                "ChargeDate": "2026-03-12",
+                "ChargeAmount": "0"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "ChangeType": "UpdateValidityTerms",
+      "Entity": {
+        "Type": "Offer@1.0",
+        "Identifier": "$MyCreateOfferChange.Entity.Identifier"
+      },
+      "DetailsDocument": {
+        "Terms": [
+          {
+            "Type": "ValidityTerm",
+            "AgreementStartDate": "{{AGREEMENT_START_DATE}}",
+            "AgreementEndDate": "{{AGREEMENT_END_DATE}}"
+          }
+        ]
+      }
+    },
+    {
+      "ChangeType": "ReleaseOffer",
+      "DetailsDocument": {},
+      "Entity": {
+        "Type": "Offer@1.0",
+        "Identifier": "$MyCreateOfferChange.Entity.Identifier"
+      }
+    }
+  ]
+}
