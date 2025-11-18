@@ -28,3 +28,30 @@ workflow.*.log
 # OS
 .DS_Store
 Thumbs.db
+
+# .NET build artifacts
+bin/
+obj/
+*.dll
+*.exe
+*.pdb
+aws-pc-selling-sdk-assemblies/
+aws-sdk-assemblies/
+
+# Java build artifacts
+target/
+libs/
+.settings/
+
+# Go build artifacts
+*-demo
+
+# Python build artifacts
+build/
+dist/
+*.egg-info/
+pc-selling-boto3-preview/
+pcapi/
+
+# Node.js
+node_modules/
