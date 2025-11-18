@@ -1,0 +1,30 @@
+# Kiro IDE settings
+.kiro/
+
+# Virtual environments
+.venv/
+venv/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Sensitive configuration
+buyer_ids.txt
+shared_env.json
+config.json
+
+# Logs
+*.log
+workflow.*.log
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
