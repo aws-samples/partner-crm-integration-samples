@@ -1674,6 +1674,12 @@
     "Description": "High performance for AI training, inference, and HPC workloads"
   },
   {
+    "Identifier": "AmazonEC2P6B300",
+    "Name": "Amazon EC2 P6-B300",
+    "Family": "Compute",
+    "Description": "High performance for ML training and inference applications in the cloud powered by latest Blackwell Ultra GPUs from NVIDIA"
+  },
+  {
     "Identifier": "AmazonEC2P6eGB200",
     "Name": "Amazon EC2 P6e-GB200",
     "Family": "Compute",
