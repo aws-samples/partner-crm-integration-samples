@@ -180,6 +180,12 @@
     "Description": "Track User Activity and API Usage"
   },
   {
+    "Identifier": "AWSCloudWAN",
+    "Name": "AWS Cloud WAN",
+    "Family": "Networking & Content Delivery",
+    "Description": "AWSCloudWAN"
+  },
+  {
     "Identifier": "AWSCodeArtifact",
     "Name": "AWS CodeArtifact",
     "Family": "Developer Tools",
@@ -960,10 +966,22 @@
     "Description": "Easily manage and share data with simple, secure, and scalable file transfers"
   },
   {
+    "Identifier": "AWSTransformCustom",
+    "Name": "AWS Transform Custom",
+    "Family": "Developer Tools",
+    "Description": "Convert code from any programming language, to any programming language"
+  },
+  {
     "Identifier": "AWSTransformforNET",
     "Name": "AWS Transform for .NET",
     "Family": "Developer Tools",
     "Description": "Accelerate .NET application porting from Windows to Linux"
+  },
+  {
+    "Identifier": "AWSTransformforSQL",
+    "Name": "AWS Transform for SQL",
+    "Family": "Developer Tools",
+    "Description": "Accelerate SQL database migrations to modern DB services"
   },
   {
     "Identifier": "AWSTransformforVMware",
@@ -1344,6 +1362,12 @@
     "Description": "Extract information from unstructured medical text accurately and quickly"
   },
   {
+    "Identifier": "AmazonConnectAIAgents",
+    "Name": "Amazon Connect AI Agents",
+    "Family": "Customer Engagement",
+    "Description": "Transform customer service with agentic AI"
+  },
+  {
     "Identifier": "AmazonConnectAppleMessagesforBusiness",
     "Name": "Amazon Connect - Apple Messages for Business",
     "Family": "Customer Engagement",
@@ -1596,10 +1620,40 @@
     "Description": "High performance for ML inference and Graphic applications in the cloud powered by GPUs from NVIDIA"
   },
   {
+    "Identifier": "AmazonEC2G7e",
+    "Name": "Amazon EC2 - G7e",
+    "Family": "Compute",
+    "Description": "High performance GPU-based instance for AI inference, scientific computing and spatial computing workloads"
+  },
+  {
     "Identifier": "AmazonEC2Graviton",
     "Name": "Amazon EC2 - Graviton",
     "Family": "Compute",
     "Description": "Enable the best price performance and improved sustainability in Amazon EC2"
+  },
+  {
+    "Identifier": "AmazonEC2HPC6a",
+    "Name": "Amazon EC2 - HPC6a",
+    "Family": "Compute",
+    "Description": "High performance for tightly coupled, compute-intensive HPC workloads powered by 3rd Gen AMD EPYC processors"
+  },
+  {
+    "Identifier": "AmazonEC2HPC6id",
+    "Name": "Amazon EC2 - HPC6id",
+    "Family": "Compute",
+    "Description": "High performance for memory-bound and data-intensive HPC workloads powered by 3rd Generation Intel Xeon processors"
+  },
+  {
+    "Identifier": "AmazonEC2HPC7a",
+    "Name": "Amazon EC2 - HPC7a",
+    "Family": "Compute",
+    "Description": "High performance for compute-intensive, latency-sensitive HPC workloads powered by 4th Gen AMD EPYC processors"
+  },
+  {
+    "Identifier": "AmazonEC2HPC7g",
+    "Name": "Amazon EC2 - HPC7g",
+    "Family": "Compute",
+    "Description": "High performance for tightly coupled workloads that require highly parallelized, clustered compute resources powered by AWS Graviton 3E processors"
   },
   {
     "Identifier": "AmazonEC2Inf1",
@@ -2118,6 +2172,12 @@
     "Description": "Accelerate building a cloud-based content creation studio"
   },
   {
+    "Identifier": "AmazonNovaAct",
+    "Name": "Amazon Nova Act",
+    "Family": "AI/ML",
+    "Description": "Enables customers to build, deploy, and run reliable agents for autonomous workflows"
+  },
+  {
     "Identifier": "AmazonOmics",
     "Name": "Amazon Omics",
     "Family": "Machine Learning",
@@ -2176,12 +2236,6 @@
     "Name": "Amazon Q Developer for Java Transformation",
     "Family": "Developer Tools",
     "Description": "Accelerate Java application upgrades"
-  },
-  {
-    "Identifier": "AmazonQinConnect",
-    "Name": "Amazon Q in Connect",
-    "Family": "Customer Engagement",
-    "Description": "Deliver agents the responses, actions, and information they need to solve issues in real-time"
   },
   {
     "Identifier": "AmazonQuantumLedgerDatabaseQLDB",
