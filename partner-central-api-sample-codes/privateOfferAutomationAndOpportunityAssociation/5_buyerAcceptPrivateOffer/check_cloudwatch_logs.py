@@ -86,7 +86,7 @@ def search_cloudwatch_logs(logs_client, offer_id, hours_back=24):
     | sort @timestamp desc
     '''
     
-    print(f"Searching logs from {datetime.fromtimestamp(start_time/1000)} to {datetime.fromtimestamp(end_time/1000)}")
+    print(f"Searching logs from {datetime.utcfromtimestamp(start_time/1000)} UTC to {datetime.utcfromtimestamp(end_time/1000)} UTC")
     print(f"Query: {query}")
     print()
     

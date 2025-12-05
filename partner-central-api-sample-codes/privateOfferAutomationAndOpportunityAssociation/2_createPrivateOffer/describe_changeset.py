@@ -177,17 +177,12 @@ def save_offer_info_to_shared_env(response):
             
             # Update with offer information
             env_data["OFFER_ID"] = offer_id
-            # Generate offer ARN using BUYER_ID from shared_env.json or config default
-            default_buyer_id = config.BUYER_ID if config else "222222222222"
-            buyer_id = env_data.get("BUYER_ID", default_buyer_id)
-            env_data["OFFER_ARN"] = f"arn:aws:aws-marketplace:us-east-1:{buyer_id}:AWSMarketplace/Offer/{offer_id}"
             
             # Write back to file
             with open(env_file_path, "w") as f:
                 json.dump(env_data, f, indent=2)
             
             print(f"✓ Saved OFFER_ID={offer_id} to shared environment file")
-            print(f"✓ Saved OFFER_ARN={env_data['OFFER_ARN']} to shared environment file")
             return offer_id
         else:
             print("⚠ Could not extract offer ID from changeset")
