@@ -91,9 +91,9 @@
   },
   {
     "Identifier": "AWSBusinessSupport",
-    "Name": "AWS Business Support",
+    "Name": "AWS Business Support+",
     "Family": "Support",
-    "Description": "Recommended if you have production workloads in AWS. Includes 24/7 access to cloud experts, technical support, and architectural guidance to help optimize cloud operations and accelerate business outcomes."
+    "Description": "For developers and growing organizations, BS+ transforms cloud support by combining contextual AI-powered troubleshooting with expert guidance within 30 min for business-critical problems."
   },
   {
     "Identifier": "AWSCertificateManager",
@@ -306,10 +306,10 @@
     "Description": "Fully autonomous 1/18th scale race car, driven by machine learning"
   },
   {
-    "Identifier": "AWSDeveloperSupport",
-    "Name": "AWS Developer Support",
-    "Family": "Support",
-    "Description": "Recommended if you are experimenting or testing in AWS"
+    "Identifier": "AWSDevOpsAgent",
+    "Name": "AWS DevOps Agent",
+    "Family": "Developer Tools",
+    "Description": "Frontier agent that resolves and proactively prevents incidents, continuously improving reliability and performance of applications in AWS, multicloud, and hybrid environments"
   },
   {
     "Identifier": "AWSDeviceFarm",
@@ -412,6 +412,12 @@
     "Name": "AWS End-of-Support Migration Program (EMP)",
     "Family": "Migration & Transfer",
     "Description": "Future-proof your legacy Windows Server applications on AWS"
+  },
+  {
+    "Identifier": "AWSEnterpriseSupport",
+    "Name": "AWS Enterprise Support",
+    "Family": "Support",
+    "Description": "For customers with complex production workloads, ES provides a designated Technical Account Manager for strategic guidance, while AI agents provide instant troubleshooting assistance and engineers respond to business-critical issues within 15 minutes. Customers get automated security monitoring and responses, proactive analytics, and intelligent recommendations across cost, security, performance, and resilience."
   },
   {
     "Identifier": "AWSEnterpriseSupportPublicPricing",
@@ -822,6 +828,12 @@
     "Description": "Easily rotate, manage, and retrieve database credentials, API keys, and other secrets through their lifecycle"
   },
   {
+    "Identifier": "AWSSecurityAgent",
+    "Name": "AWS Security Agent",
+    "Family": "Security, Identity & Compliance",
+    "Description": "Proactively secure your applications throughout the development lifecycle with a frontier agent"
+  },
+  {
     "Identifier": "AWSSecurityHub",
     "Name": "AWS Security Hub",
     "Family": "Security, Identity & Compliance",
@@ -1002,6 +1014,12 @@
     "Description": "Easily connect Amazon VPCs, AWS accounts, and on-premises networks to a single gateway"
   },
   {
+    "Identifier": "AWSUnifiedOperations",
+    "Name": "AWS Unified Operations",
+    "Family": "Support",
+    "Description": "For customers with complex environments and mission-critical workloads, UOps provides a designated team of global AWS experts in a follow the sun support model for continuous coverage. Incident managers engage customers within 5 minutes for critical incidents using context-awareness to reduce resolution times. Support includes planned events, migrations, modernization, and launches, while proactive reviews and testing guidance identify risks and strengthen operational reliability. Continuous security monitoring detects and addresses threats throughout operations."
+  },
+  {
     "Identifier": "AWSVerifiedAccess",
     "Name": "AWS Verified Access",
     "Family": "Networking & Content Delivery",
@@ -1036,6 +1054,60 @@
     "Name": "AWS re:Post Private",
     "Family": "Support",
     "Description": "Knowledge service to accelerate cloud adoption and increase developer productivity"
+  },
+  {
+    "Identifier": "AgentCore",
+    "Name": "AgentCore",
+    "Family": "AI/ML",
+    "Description": "Deploy and operate AI agents securely at scale - using any framework and model"
+  },
+  {
+    "Identifier": "AgentCoreBrowser",
+    "Name": "AgentCore Browser",
+    "Family": "AI/ML",
+    "Description": "Provides a fast, secure, cloud-based browser runtime to enable AI agents to interact with websites at scale"
+  },
+  {
+    "Identifier": "AgentCoreCodeInterpreter",
+    "Name": "AgentCore Code Interpreter",
+    "Family": "AI/ML",
+    "Description": "Enables AI agents to write and execute code securely in sandbox environments, enhancing their accuracy and expanding their ability to solve complex end-to-end tasks"
+  },
+  {
+    "Identifier": "AgentCoreEvaluations",
+    "Name": "AgentCore Evaluations",
+    "Family": "AI/ML",
+    "Description": "Helps continuously inspect agent quality based on real-world behavior"
+  },
+  {
+    "Identifier": "AgentCoreGateway",
+    "Name": "AgentCore Gateway",
+    "Family": "AI/ML",
+    "Description": "Provides a secure way for agents to discover and use tools along with easy transformation of APIs, Lambda functions, and existing services into agent-compatible tools"
+  },
+  {
+    "Identifier": "AgentCoreIdentity",
+    "Name": "AgentCore Identity",
+    "Family": "AI/ML",
+    "Description": "Allows agents to securely access AWS resources and third-party tools and services on behalf of users or by themselves with pre-authorized user consent"
+  },
+  {
+    "Identifier": "AgentCoreMemory",
+    "Name": "AgentCore Memory",
+    "Family": "AI/ML",
+    "Description": "Build context-aware agents by eliminating complex memory infrastructure management while providing full control over what the AI agent remembers"
+  },
+  {
+    "Identifier": "AgentCoreObservability",
+    "Name": "AgentCore Observability",
+    "Family": "AI/ML",
+    "Description": "Gives complete visibility into agent workflows to trace, debug, and monitor AI agents' performance in production environments"
+  },
+  {
+    "Identifier": "AgentCoreRuntime",
+    "Name": "AgentCore Runtime",
+    "Family": "AI/ML",
+    "Description": "A secure, serverless runtime purpose-built for deploying and scaling dynamic AI agents and tools"
   },
   {
     "Identifier": "AlexaforBusiness",
@@ -1090,54 +1162,6 @@
     "Name": "Amazon Bedrock - AI21 Labs Models",
     "Family": "Machine Learning",
     "Description": "Amazon Bedrock models provided by AI21 Labs"
-  },
-  {
-    "Identifier": "AmazonBedrockAgentCore",
-    "Name": "Amazon Bedrock - AgentCore",
-    "Family": "AI/ML",
-    "Description": "Deploy and operate AI agents securely at scale - using any framework and model"
-  },
-  {
-    "Identifier": "AmazonBedrockAgentCoreBrowser",
-    "Name": "Amazon Bedrock - AgentCore Browser",
-    "Family": "Machine Learning",
-    "Description": "Provides a fast, secure, cloud-based browser runtime to enable AI agents to interact with websites at scale"
-  },
-  {
-    "Identifier": "AmazonBedrockAgentCoreCodeInterpreter",
-    "Name": "Amazon Bedrock - AgentCore Code Interpreter",
-    "Family": "Machine Learning",
-    "Description": "Enables AI agents to write and execute code securely in sandbox environments, enhancing their accuracy and expanding their ability to solve complex end-to-end tasks"
-  },
-  {
-    "Identifier": "AmazonBedrockAgentCoreGateway",
-    "Name": "Amazon Bedrock - AgentCore Gateway",
-    "Family": "Machine Learning",
-    "Description": "Provides a secure way for agents to discover and use tools along with easy transformation of APIs, Lambda functions, and existing services into agent-compatible tools"
-  },
-  {
-    "Identifier": "AmazonBedrockAgentCoreIdentity",
-    "Name": "Amazon Bedrock - AgentCore Identity",
-    "Family": "Machine Learning",
-    "Description": "Allows agents to securely access AWS resources and third-party tools and services on behalf of users or by themselves with pre-authorized user consent"
-  },
-  {
-    "Identifier": "AmazonBedrockAgentCoreMemory",
-    "Name": "Amazon Bedrock - AgentCore Memory",
-    "Family": "Machine Learning",
-    "Description": "Build context-aware agents by eliminating complex memory infrastructure management while providing full control over what the AI agent remembers"
-  },
-  {
-    "Identifier": "AmazonBedrockAgentCoreObservability",
-    "Name": "Amazon Bedrock - AgentCore Observability",
-    "Family": "Machine Learning",
-    "Description": "Gives complete visibility into agent workflows to trace, debug, and monitor AI agents' performance in production environments"
-  },
-  {
-    "Identifier": "AmazonBedrockAgentCoreRuntime",
-    "Name": "Amazon Bedrock - AgentCore Runtime",
-    "Family": "Machine Learning",
-    "Description": "A secure, serverless runtime purpose-built for deploying and scaling dynamic AI agents and tools"
   },
   {
     "Identifier": "AmazonBedrockAgents",
@@ -2176,6 +2200,12 @@
     "Name": "Amazon Nova Act",
     "Family": "AI/ML",
     "Description": "Enables customers to build, deploy, and run reliable agents for autonomous workflows"
+  },
+  {
+    "Identifier": "AmazonNovaForge",
+    "Name": "Amazon Nova Forge",
+    "Family": "AI/ML",
+    "Description": "Easiest and most cost-effective way for companies to build their own frontier model"
   },
   {
     "Identifier": "AmazonOmics",
