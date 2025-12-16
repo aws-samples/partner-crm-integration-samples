@@ -4688,6 +4688,1355 @@
 			"description": "Here are the list of actions offered by AWS Partner Central API for Selling:\n\n- [AssignOpportunity](https://docs.aws.amazon.com/partner-central/latest/APIReference/API_AssignOpportunity.html)\n    \n- [AssociateOpportunity](https://docs.aws.amazon.com/partner-central/latest/APIReference/API_AssociateOpportunity.html)\n    \n- [CreateOpportunity](https://docs.aws.amazon.com/partner-central/latest/APIReference/API_CreateOpportunity.html)\n    \n- [DisassociateOpportunity](https://docs.aws.amazon.com/partner-central/latest/APIReference/API_DisassociateOpportunity.html)\n    \n- [GetAwsOpportunitySummary](https://docs.aws.amazon.com/partner-central/latest/APIReference/API_GetAwsOpportunitySummary.html)\n    \n- [GetEngagementInvitation](https://docs.aws.amazon.com/partner-central/latest/APIReference/API_GetEngagementInvitation.html)\n    \n- [GetOpportunity](https://docs.aws.amazon.com/partner-central/latest/APIReference/API_GetOpportunity.html)\n    \n- [ListEngagementInvitations](https://docs.aws.amazon.com/partner-central/latest/APIReference/API_ListEngagementInvitations.html)\n    \n- [ListOpportunities](https://docs.aws.amazon.com/partner-central/latest/APIReference/API_ListOpportunities.html)\n    \n- [ListSolutions](https://docs.aws.amazon.com/partner-central/latest/APIReference/API_ListSolutions.html)\n    \n- [RejectEngagementInvitation](https://docs.aws.amazon.com/partner-central/latest/APIReference/API_RejectEngagementInvitation.html)\n    \n- [StartEngagementByAcceptingInvitationTask](https://docs.aws.amazon.com/partner-central/latest/APIReference/API_StartEngagementByAcceptingInvitationTask.html)\n    \n- [StartEngagementFromOpportunityTask](https://docs.aws.amazon.com/partner-central/latest/APIReference/API_StartEngagementFromOpportunityTask.html)\n    \n- [UpdateOpportunity](https://docs.aws.amazon.com/partner-central/latest/APIReference/API_UpdateOpportunity.html)"
 		},
 		{
+			"name": "LeadToOpportunity",
+			"item": [
+				{
+					"name": "CreateEngagement-Lead",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "cc5586a5-b29b-4024-a9d4-27f39447eacc",
+								"exec": [
+									"try {   ",
+									"    // Generate Opportunity Details",
+									"    const requestTitle = \"New Business Deal\"; // Base title for the opportunity",
+									"    ",
+									"    const randomSuffix = Math.floor(Math.random() * (9999 - 1000 + 1)) + 1000; ",
+									"    const opportunityTitle = `${requestTitle} - ${randomSuffix}`;",
+									"    ",
+									"    pm.variables.set('opportunityTitle', opportunityTitle);",
+									"    ",
+									"    const bank = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';",
+									"    const country = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';",
+									"    const location = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';",
+									"",
+									"    const rand = (chars, n) =>",
+									"      Array.from({ length: n }, () => chars[Math.floor(Math.random() * chars.length)]).join('');",
+									"    const randomBankAccountBic = rand(bank, 4) + rand(country, 2) + rand(location, 2);",
+									"    console.log(\"setting randomBankAccountBic = \" , randomBankAccountBic);",
+									"    pm.variables.set('randomBankAccountBic', randomBankAccountBic);",
+									"} catch (error) {",
+									"    // Handle any errors during token generation or opportunity detail generation",
+									"    console.error(`[${pm.info.requestName}] Error occurred:`, error);",
+									"}",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "275deb41-8ad8-4f09-9f19-cc408f89574d",
+								"exec": [
+									"pm.test('afterResponse', function () {",
+									"    const body = pm.response.json();",
+									"    if (body && body.Id) {",
+									"        pm.collectionVariables.set('engagementId', body.Id); ",
+									"        console.log('Saved engagementId:', body.Id);",
+									"    }",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"id": "431a9733-0f37-44e1-bf8c-331b4bba55a5",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true,
+						"followRedirects": true,
+						"disableUrlEncoding": false,
+						"disableCookies": false
+					},
+					"request": {
+						"auth": {
+							"type": "awsv4",
+							"awsv4": {
+								"secretKey": "{{vault:aws.secret-key}}",
+								"accessKey": "{{vault:aws.access-key}}",
+								"region": "{{aws.region}}",
+								"service": "{{aws.partnercentral.service}}",
+								"sessionToken": "",
+								"addAuthDataToQuery": false
+							}
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"ClientToken\": \"{{$randomUUID}}\",\n    \"Catalog\": \"{{catalog}}\",\n    \"Title\": \"{{opportunityTitle}} Initiative\",\n    \"Description\": \"Lead generated from recent campaign activities\",\n    \"Contexts\": [{\n        \"Type\": \"Lead\",\n        \"Payload\": {\n            \"Lead\": {\n                \"Customer\": {\n                    \"CompanyName\": \"Acme Corp\",\n                    \"Industry\": \"Aerospace\",\n                    \"Address\": {\n                        \"CountryCode\": \"US\"\n                    }\n                },\n                \"Interactions\": [{\n                        \"SourceType\": \"Campaign\",\n\t\t\t\t\t\t\t\t\t      \"CustomerAction\": \"Completed Form\",\n\t\t\t\t\t\t\t\t\t      \"SourceName\": \"{{$randomProductName}} Campaign - 2025\",\n                        \"SourceId\": \"{{randomBankAccountBic}}\",\n\t\t\t\t\t\t\"Contact\": {\n                            \"BusinessTitle\": \"{{$randomJobTitle}}\",\n                            \"Email\": \"test@test.com\",\n                            \"FirstName\": \"{{$randomFirstName}}\",\n                            \"LastName\": \"{{$randomLastName}}\"\n                        }\n                    }\n\n                ]\n            }\n        }\n    }]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{BASE_URL}}/CreateEngagement",
+						"description": "AWS creates lead engagement for a qualified lead"
+					},
+					"response": [
+						{
+							"id": "8e2bbf6a-db58-45f2-9e44-5a110be6e08b",
+							"name": "CreateEngagement-Lead",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"ClientToken\": \"{{$randomUUID}}\",\n    \"Catalog\": \"{{catalog}}\",\n    \"Title\": \"{{opportunityTitle}} Initiative\",\n    \"Description\": \"Lead generated from recent campaign activities\",\n    \"Contexts\": [{\n        \"Type\": \"Lead\",\n        \"Payload\": {\n            \"Lead\": {\n                \"Customer\": {\n                    \"CompanyName\": \"Acme Corp\",\n                    \"Industry\": \"Aerospace\",\n                    \"Address\": {\n                        \"CountryCode\": \"US\"\n                    }\n                },\n                \"Interactions\": [{\n                        \"SourceType\": \"Campaign\",\n\t\t\t\t\t\t\t\t\t      \"CustomerAction\": \"Completed Form\",\n\t\t\t\t\t\t\t\t\t      \"SourceName\": \"{{$randomProductName}} Campaign - 2025\",\n                        \"SourceId\": \"{{randomBankAccountBic}\",\n\t\t\t\t\t\t\"Contact\": {\n                            \"BusinessTitle\": \"{{$randomJobTitle}}\",\n                            \"Email\": \"test@test.com\",\n                            \"FirstName\": \"{{$randomFirstName}}\",\n                            \"LastName\": \"{{$randomLastName}}\"\n                        }\n                    }\n\n                ]\n            }\n        }\n    }]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{BASE_URL}}/CreateEngagement"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 15 Dec 2025 19:58:11 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "161"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "x-amzn-RequestId",
+									"value": "469fc780-daf4-4c2e-8d64-77c5c43288e0"
+								}
+							],
+							"cookie": [],
+							"responseTime": null,
+							"body": "{\n    \"Arn\": \"arn:aws:partnercentral:us-east-1::catalog/Sandbox/engagement/eng-m1l0v2mnccwtv4\",\n    \"Id\": \"eng-m1l0v2mnccwtv4\",\n    \"ModifiedAt\": \"2025-12-15T19:58:11.520786314Z\"\n}"
+						}
+					]
+				},
+				{
+					"name": "CreateEngagementInvitation",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "ac1d7a90-baa5-4651-bd3b-32119b3a113d",
+								"exec": [
+									"try {   ",
+									"    const bank = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';",
+									"    const country = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';",
+									"    const location = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';",
+									"",
+									"    const rand = (chars, n) =>",
+									"      Array.from({ length: n }, () => chars[Math.floor(Math.random() * chars.length)]).join('');",
+									"    const randomBankAccountBic = rand(bank, 4) + rand(country, 2) + rand(location, 2);",
+									"    console.log(\"setting randomBankAccountBic = \" , randomBankAccountBic);",
+									"    pm.variables.set('randomBankAccountBic', randomBankAccountBic);",
+									"    ",
+									"} catch (error) {",
+									"    // Handle any errors during token generation or opportunity detail generation",
+									"    console.error(`[${pm.info.requestName}] Error occurred:`, error);",
+									"}",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "b00a144f-a33f-49c1-8b32-14eaaabcc1a1",
+								"exec": [
+									"pm.test('afterResponse', function () {",
+									"    const body = pm.response.json();",
+									"    if (body && body.Id) {",
+									"        pm.collectionVariables.set('engagementInvitationId', body.Id); ",
+									"        console.log('Saved engagementInvitationId:', body.Id);",
+									"    }",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"id": "5ca5ff23-24f4-4a9e-9c71-dd510ba1a53e",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true,
+						"followRedirects": true,
+						"disableUrlEncoding": false,
+						"disableCookies": false
+					},
+					"request": {
+						"auth": {
+							"type": "awsv4",
+							"awsv4": {
+								"secretKey": "{{vault:aws.secret-key}}",
+								"accessKey": "{{vault:aws.access-key}}",
+								"region": "{{aws.region}}",
+								"service": "{{aws.partnercentral.service}}",
+								"sessionToken": "",
+								"addAuthDataToQuery": false
+							}
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"Catalog\": \"{{catalog}}\",\n  \"ClientToken\": \"{{$randomUUID}}\",\n  \"EngagementIdentifier\": \"{{engagementId}}\",\n  \"SenderAwsAccountId\": \"aws\",\n  \"SenderCompanyName\": \"AWS\",\n  \"Invitation\": {\n    \"Message\": \"We have a qualified lead from {{$randomCompanyName}} that matches your expertise. Would you like to collaborate?\",\n    \"Receiver\": {\n      \"Account\": {\n        \"AwsAccountId\": \"{{vault:aws.receiver.accountId}}\"\n      }\n    },\n    \"PayloadType\": \"LeadInvitation\",\n    \"Payload\": {\n      \"LeadInvitation\": {\n        \"Insights\": {\n          \"EngagementScore\": \"High\"\n        },\n        \"Customer\": {\n          \"CompanyName\": \"{{$randomCompanyName}}\",\n          \"Industry\": \"Software and Internet\",\n          \"CountryCode\": \"US\",\n          \"WebsiteUrl\": \"https://{{$randomDomainName}}\",\n          \"MarketSegment\": \"Enterprise\",\n          \"AwsMaturity\": \"Evaluating\"\n        },\n        \"Interaction\": {\n          \"SourceType\": \"Campaign\",\n          \"SourceId\": \"{{randomBankAccountBic}}\",\n          \"SourceName\": \"Partner Referral Program - 2025\",\n          \"ContactBusinessTitle\": \"{{$randomJobTitle}}\",\n          \"Usecase\": \"Database\"\n        }\n      }\n    }\n  },\n  \"Receiver\": {\n    \"Account\": {\n      \"AwsAccountId\": \"{{vault:aws.receiver.accountId}}\"\n    }\n  }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{BASE_URL}}/CreateEngagementInvitation",
+						"description": "AWS creates engagement invitation to invite partner to collaborate"
+					},
+					"response": [
+						{
+							"id": "7be2b1c6-20a4-4458-b59a-8ca922b122f1",
+							"name": "CreateEngagementInvitation",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"Catalog\": \"{{catalog}}\",\n  \"ClientToken\": \"{{$randomUUID}}\",\n  \"EngagementIdentifier\": \"{{engagementId}}\",\n  \"SenderAwsAccountId\": \"aws\",\n  \"SenderCompanyName\": \"AWS\",\n  \"Invitation\": {\n    \"Message\": \"We have a qualified lead from {{$randomCompanyName}} that matches your expertise. Would you like to collaborate?\",\n    \"Receiver\": {\n      \"Account\": {\n        \"AwsAccountId\": \"116669848322\"\n      }\n    },\n    \"PayloadType\": \"LeadInvitation\",\n    \"Payload\": {\n      \"LeadInvitation\": {\n        \"Insights\": {\n          \"EngagementScore\": \"High\"\n        },\n        \"Customer\": {\n          \"CompanyName\": \"{{$randomCompanyName}}\",\n          \"Industry\": \"Software and Internet\",\n          \"CountryCode\": \"US\",\n          \"WebsiteUrl\": \"https://{{$randomDomainName}}\",\n          \"MarketSegment\": \"Enterprise\",\n          \"AwsMaturity\": \"Evaluating\"\n        },\n        \"Interaction\": {\n          \"SourceType\": \"Campaign\",\n          \"SourceId\": \"{{randomBankAccountBic}}\",\n          \"SourceName\": \"Partner Referral Program - 2025\",\n          \"ContactBusinessTitle\": \"{{$randomJobTitle}}\",\n          \"Usecase\": \"Database\"\n        }\n      }\n    }\n  },\n  \"Receiver\": {\n    \"Account\": {\n      \"AwsAccountId\": \"116669848322\"\n    }\n  }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{BASE_URL}}/CreateEngagementInvitation"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 15 Dec 2025 19:58:48 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "126"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "x-amzn-RequestId",
+									"value": "1748c13a-a35b-45fa-8fb9-5a5f00ce7af0"
+								}
+							],
+							"cookie": [],
+							"responseTime": null,
+							"body": "{\n    \"Arn\": \"arn:aws:partnercentral:us-east-1::catalog/Sandbox/engagement-invitation/engi-5qdeajl1bg9bk\",\n    \"Id\": \"engi-5qdeajl1bg9bk\"\n}"
+						}
+					]
+				},
+				{
+					"name": "GetEngagementInvitation",
+					"id": "1fca6e9d-2a64-4678-8a95-771525ef27aa",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true,
+						"followRedirects": true,
+						"disableUrlEncoding": false,
+						"disableCookies": false
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"Catalog\": \"Sandbox\", \"Identifier\": \"{{engagementInvitationId}}\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{BASE_URL}}/GetEngagementInvitation",
+						"description": "Partner gets the engagement invitatin ID from AWS or from the Amazon EventBridge event"
+					},
+					"response": [
+						{
+							"id": "91c87793-78e4-4663-a9a0-ef177308dd61",
+							"name": "GetEngagementInvitation",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"Catalog\": \"Sandbox\", \"Identifier\": \"{{engagementInvitationId}}\"}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{BASE_URL}}/GetEngagementInvitation"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 15 Dec 2025 20:02:33 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1312"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "x-amzn-RequestId",
+									"value": "b606de09-a743-4ce0-b0b0-f630bc62cc44"
+								}
+							],
+							"cookie": [],
+							"responseTime": null,
+							"body": "{\n    \"Arn\": \"arn:aws:partnercentral:us-east-1::catalog/Sandbox/engagement-invitation/engi-5qdeajl1bg9bk\",\n    \"Catalog\": \"Sandbox\",\n    \"EngagementDescription\": \"Lead generated from recent campaign activities\",\n    \"EngagementId\": \"eng-m1l0v2mnccwtv4\",\n    \"EngagementTitle\": \"New Business Deal - 4974 Initiative\",\n    \"ExistingMembers\": [\n        {\n            \"CompanyName\": \"Test Partner Selling 30\",\n            \"WebsiteUrl\": \"https://www.google.com\"\n        },\n        {\n            \"CompanyName\": \"MingZ Test Account\",\n            \"WebsiteUrl\": \"null\"\n        }\n    ],\n    \"ExpirationDate\": null,\n    \"Id\": \"engi-5qdeajl1bg9bk\",\n    \"InvitationDate\": \"2025-12-15T19:58:48.669023715Z\",\n    \"InvitationMessage\": \"We have a qualified lead from Balistreri, Kerluke and Green that matches your expertise. Would you like to collaborate?\",\n    \"Payload\": {\n        \"LeadInvitation\": {\n            \"Customer\": {\n                \"AwsMaturity\": \"Evaluating\",\n                \"CompanyName\": \"Stroman, Littel and Champlin\",\n                \"CountryCode\": \"US\",\n                \"Industry\": \"Software and Internet\",\n                \"MarketSegment\": \"Enterprise\",\n                \"WebsiteUrl\": \"https://reese.biz\"\n            },\n            \"Interaction\": {\n                \"ContactBusinessTitle\": \"Corporate Program Agent\",\n                \"SourceId\": \"TFTRUZV3\",\n                \"SourceName\": \"Partner Referral Program - 2025\",\n                \"SourceType\": \"Campaign\",\n                \"Usecase\": \"Database\"\n            }\n        }\n    },\n    \"PayloadType\": \"LeadInvitation\",\n    \"Receiver\": {\n        \"Account\": {\n            \"Alias\": null,\n            \"AwsAccountId\": \"111111111111\"\n        }\n    },\n    \"RejectionReason\": null,\n    \"SenderAwsAccountId\": \"222222222222\",\n    \"SenderCompanyName\": \"MingZ Test Account\",\n    \"Status\": \"ACCEPTED\"\n}"
+						}
+					]
+				},
+				{
+					"name": "AcceptEngagementInvitation",
+					"id": "d80ebf33-f92c-4af6-9510-1ef2e1c88527",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true,
+						"followRedirects": true,
+						"disableUrlEncoding": false,
+						"disableCookies": false
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"Catalog\": \"{{catalog}}\",\n  \"Identifier\": \"{{engagementInvitationId}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{BASE_URL}}/AcceptEngagementInvitation",
+						"description": "Partner accepts the lead invitation"
+					},
+					"response": [
+						{
+							"id": "be8eabdd-141a-4be9-b7e0-b4db13fc57bf",
+							"name": "AcceptEngagementInvitation",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"Catalog\": \"{{catalog}}\",\n  \"Identifier\": \"{{engagementInvitationId}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{BASE_URL}}/AcceptEngagementInvitation"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 15 Dec 2025 19:58:55 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "0"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "x-amzn-RequestId",
+									"value": "d19cb801-cf17-4dc8-b914-38b75531ac29"
+								}
+							],
+							"cookie": [],
+							"responseTime": null,
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "GetEngagement",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "4879e970-b07b-438e-b5bb-2a10eb6e49d5",
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "d6269188-20ff-4292-9314-27ce63312c83",
+								"exec": [
+									"pm.test('afterResponse', function () {",
+									"    const body = pm.response.json();",
+									"    if (body && body.ModifiedAt) {",
+									"        pm.collectionVariables.set('EngagementLastModifiedAt', body.ModifiedAt);",
+									"        console.log('Saved EngagementLastModifiedAt:', body.ModifiedAt);",
+									"    }",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"id": "9b3cee32-b10e-4b0f-bd4d-7ccb470fa7e7",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true,
+						"followRedirects": true,
+						"disableUrlEncoding": false,
+						"disableCookies": false
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"Catalog\": \"{{catalog}}\",\n  \"Identifier\": \"{{engagementId}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{BASE_URL}}/GetEngagement",
+						"description": "Partner retrieves the engagement details"
+					},
+					"response": [
+						{
+							"id": "7bbc9d64-b4d3-4a30-a75c-38b9fe4b3ff1",
+							"name": "GetEngagement",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"Catalog\": \"{{catalog}}\",\n  \"Identifier\": \"{{engagementId}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{BASE_URL}}/GetEngagement"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 15 Dec 2025 23:32:25 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1065"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "x-amzn-RequestId",
+									"value": "c3e1dc93-7381-4918-ad05-9c7fb3d52165"
+								}
+							],
+							"cookie": [],
+							"responseTime": null,
+							"body": "{\n    \"Arn\": \"arn:aws:partnercentral:us-east-1::catalog/Sandbox/engagement/eng-m1l0v2mnccwtv4\",\n    \"Contexts\": [\n        {\n            \"Id\": \"1\",\n            \"Payload\": {\n                \"Lead\": {\n                    \"Customer\": {\n                        \"Address\": {\n                            \"City\": null,\n                            \"CountryCode\": \"US\",\n                            \"PostalCode\": null,\n                            \"StateOrRegion\": null\n                        },\n                        \"AwsMaturity\": null,\n                        \"CompanyName\": \"Acme Corp\",\n                        \"Industry\": \"Aerospace\",\n                        \"MarketSegment\": null,\n                        \"WebsiteUrl\": null\n                    },\n                    \"Interactions\": [\n                        {\n                            \"BusinessProblem\": null,\n                            \"Contact\": {\n                                \"BusinessTitle\": \"Global Data Officer\",\n                                \"Email\": \"test@test.com\",\n                                \"FirstName\": \"Sarina\",\n                                \"LastName\": \"Prosacco\",\n                                \"Phone\": null\n                            },\n                            \"CustomerAction\": \"Completed Form\",\n                            \"InteractionDate\": \"2025-12-15T19:58:11.517275706Z\",\n                            \"SourceId\": \"TERCRJPJ\",\n                            \"SourceName\": \"Handcrafted Granite Towels Campaign - 2025\",\n                            \"SourceType\": \"Campaign\",\n                            \"Usecase\": null\n                        }\n                    ],\n                    \"QualificationStatus\": null\n                }\n            },\n            \"Type\": \"Lead\"\n        }\n    ],\n    \"CreatedAt\": \"2025-12-15T19:58:11.520786314Z\",\n    \"CreatedBy\": \"111111111111\",\n    \"Description\": \"Lead generated from recent campaign activities\",\n    \"Id\": \"eng-m1l0v2mnccwtv4\",\n    \"MemberCount\": 2,\n    \"ModifiedAt\": \"2025-12-15T19:58:55.321394861Z\",\n    \"ModifiedBy\": \"222222222222\",\n    \"Title\": \"New Business Deal - 4974 Initiative\"\n}"
+						}
+					]
+				},
+				{
+					"name": "UpdateEngagementContext",
+					"id": "b44551ef-7dc8-41fa-b24d-1ce2fb191d69",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true,
+						"followRedirects": true,
+						"disableUrlEncoding": false,
+						"disableCookies": false
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"Catalog\": \"{{catalog}}\",\n    \"EngagementIdentifier\": \"{{engagementId}}\",\n\t\t\"ContextIdentifier\": \"1\",\n\t\t\"EngagementLastModifiedAt\":  \"{{EngagementLastModifiedAt}}\",\n    \"Type\": \"Lead\",\n    \"Payload\": {\n            \"Lead\": {\n                \"QualificationStatus\": \"Qualified\",\n                \"Customer\": {\n                    \"CompanyName\": \"{{$randomCompanyName}}\",\n                    \"Industry\": \"Software and Internet\",\n                    \"Address\": {\n                        \"CountryCode\": \"US\",\n                        \"StateOrRegion\": \"{{$randomCity}}\",\n                        \"City\": \"{{$randomCity}}\"\n                    },\n                    \"WebsiteUrl\": \"https://{{$randomDomainName}}\",\n                    \"MarketSegment\": \"Enterprise\",\n                    \"AwsMaturity\": \"Single-Account\"\n                },\n                \"Interaction\": {\n                        \"InteractionDate\": \"2025-09-08T13:26:51.645895823Z\",\n                        \"SourceType\": \"Campaign\",\n                        \"SourceId\": \"{% faker 'randomBankAccountBic' %}\",\n                        \"SourceName\": \"{{$randomProductName}} Campaign - 2025\",\n                        \"CustomerAction\": \"Completed Form\",\n                        \"BusinessProblem\": \"{{$randomLoremSentence}}\",\n                        \"Usecase\": \"Database\",\n                        \"Contact\": {\n                            \"BusinessTitle\": \"{{$randomJobTitle}}\",\n                            \"Email\": \"test@test.com\",\n                            \"FirstName\": \"{{$randomFirstName}}\",\n                            \"LastName\": \"{{$randomLastName}}\"\n                        }\n                    }\n            }\n\t\t}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{BASE_URL}}/UpdateEngagementContext",
+						"description": "Updates engagement context with additional qualification information"
+					},
+					"response": [
+						{
+							"id": "78d1983b-a728-4d88-9b5b-9811188f6606",
+							"name": "UpdateEngagementContext",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"Catalog\": \"{{catalog}}\",\n    \"EngagementIdentifier\": \"{{engagementId}}\",\n\t\t\"ContextIdentifier\": \"1\",\n\t\t\"EngagementLastModifiedAt\":  \"{{EngagementLastModifiedAt}}\",\n    \"Type\": \"Lead\",\n    \"Payload\": {\n            \"Lead\": {\n                \"QualificationStatus\": \"Qualified\",\n                \"Customer\": {\n                    \"CompanyName\": \"{{$randomCompanyName}}\",\n                    \"Industry\": \"Software and Internet\",\n                    \"Address\": {\n                        \"CountryCode\": \"US\",\n                        \"StateOrRegion\": \"{{$randomCity}}\",\n                        \"City\": \"{{$randomCity}}\"\n                    },\n                    \"WebsiteUrl\": \"https://{{$randomDomainName}}\",\n                    \"MarketSegment\": \"Enterprise\",\n                    \"AwsMaturity\": \"Single-Account\"\n                },\n                \"Interaction\": {\n                        \"InteractionDate\": \"2025-09-08T13:26:51.645895823Z\",\n                        \"SourceType\": \"Campaign\",\n                        \"SourceId\": \"{% faker 'randomBankAccountBic' %}\",\n                        \"SourceName\": \"{{$randomProductName}} Campaign - 2025\",\n                        \"CustomerAction\": \"Completed Form\",\n                        \"BusinessProblem\": \"{{$randomLoremSentence}}\",\n                        \"Usecase\": \"Database\",\n                        \"Contact\": {\n                            \"BusinessTitle\": \"{{$randomJobTitle}}\",\n                            \"Email\": \"test@test.com\",\n                            \"FirstName\": \"{{$randomFirstName}}\",\n                            \"LastName\": \"{{$randomLastName}}\"\n                        }\n                    }\n            }\n\t\t}\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{BASE_URL}}/UpdateEngagementContext"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 15 Dec 2025 23:33:00 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "211"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "x-amzn-RequestId",
+									"value": "7603abf5-2a1e-498e-95d6-636e17427a45"
+								}
+							],
+							"cookie": [],
+							"responseTime": null,
+							"body": "{\n    \"ContextId\": \"1\",\n    \"EngagementArn\": \"arn:aws:partnercentral:us-east-1::catalog/Sandbox/engagement/eng-m1l0v2mnccwtv4\",\n    \"EngagementId\": \"eng-m1l0v2mnccwtv4\",\n    \"EngagementLastModifiedAt\": \"2025-12-15T23:33:00.514936172Z\"\n}"
+						}
+					]
+				},
+				{
+					"name": "StartOpportunityFromEngagementTask",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "919d9a22-b882-4244-9f66-aed52149336f",
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "7bb65f0a-995b-437b-8221-e98dcde3382f",
+								"exec": [
+									"pm.test('afterResponse', function () {",
+									"    const body = pm.response.json();",
+									"    console.log('body is', body.EngagementId);",
+									"    if (body && body.OpportunityId) {",
+									"        pm.collectionVariables.set('opportunityId', body.OpportunityId);",
+									"        console.log('Saved opportunityId:', body.OpportunityId);",
+									"    }",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"id": "1c7b4625-21f9-479c-8dc7-e6808353c005",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true,
+						"followRedirects": true,
+						"disableUrlEncoding": false,
+						"disableCookies": false
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n   \"Catalog\":\"{{catalog}}\",\n   \"ClientToken\":\"{{$randomUUID}}\",\n   \"ContextIdentifier\": \"1\",\n   \"Identifier\":\"{{engagementId}}\",\n   \"Tags\":[\n      {\n         \"Key\":\"Source\",\n         \"Value\":\"LeadConversion\"\n      }\n   ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{BASE_URL}}/StartOpportunityFromEngagementTask",
+						"description": "Partner converts lead to opportunity"
+					},
+					"response": [
+						{
+							"id": "288f3a1f-9a7b-4eab-861f-723185449b60",
+							"name": "StartOpportunityFromEngagementTask",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n   \"Catalog\":\"{{catalog}}\",\n   \"ClientToken\":\"{{$randomUUID}}\",\n   \"ContextIdentifier\": \"1\",\n   \"Identifier\":\"{{engagementId}}\",\n   \"Tags\":[\n      {\n         \"Key\":\"Source\",\n         \"Value\":\"LeadConversion\"\n      }\n   ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{BASE_URL}}/StartOpportunityFromEngagementTask"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 15 Dec 2025 23:33:15 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "365"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "x-amzn-RequestId",
+									"value": "0cd4a1a5-8c67-4272-94c3-e0e5cfaa33f6"
+								}
+							],
+							"cookie": [],
+							"responseTime": null,
+							"body": "{\n    \"ContextId\": \"2\",\n    \"EngagementId\": \"eng-m1l0v2mnccwtv4\",\n    \"Message\": null,\n    \"OpportunityId\": \"O11478075\",\n    \"ReasonCode\": null,\n    \"ResourceSnapshotJobId\": \"job-h8dty68mz4dpm\",\n    \"StartTime\": \"2025-12-15T23:33:10.762Z\",\n    \"TaskArn\": \"arn:aws:partnercentral:us-east-1::catalog/Sandbox/opportunity-from-engagement-task/task-dpf02ig3g2uui\",\n    \"TaskId\": \"task-dpf02ig3g2uui\",\n    \"TaskStatus\": \"COMPLETE\"\n}"
+						}
+					]
+				},
+				{
+					"name": "ListSolutions",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "9e8f3378-1f07-48f1-a009-90b8508780bd",
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "651c080e-e8bb-4a9e-bf5d-ccf03be3a925",
+								"exec": [
+									"pm.test('afterResponse', function () {",
+									"    const body = pm.response.json();",
+									"    if (body && body.SolutionSummaries && body.SolutionSummaries.length > 0) {",
+									"        const id = body.SolutionSummaries[0].Id;",
+									"        pm.collectionVariables.set('solutionId', id);",
+									"        console.log('Saved solutionId:', id);",
+									"    }",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"id": "6dc4b439-ff7e-4ff7-bdd5-f1eed2bafea8",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true,
+						"followRedirects": true,
+						"disableUrlEncoding": false,
+						"disableCookies": false
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"MaxResults\": 2,\n    \"Catalog\" : \"{{catalog}}\",\n    \"Sort\": {\n        \"SortBy\": \"CreatedDate\",\n        \"SortOrder\": \"DESCENDING\"\n    },\n    \"Status\": [\"Active\"]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{BASE_URL}}/ListSolutions",
+						"description": "Partner lists available active solutions"
+					},
+					"response": [
+						{
+							"id": "1c79c009-73ff-4bd5-bcf0-b29a02285c97",
+							"name": "ListSolutions",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"MaxResults\": 2,\n    \"Catalog\" : \"{{catalog}}\",\n    \"Sort\": {\n        \"SortBy\": \"CreatedDate\",\n        \"SortOrder\": \"DESCENDING\"\n    },\n    \"Status\": [\"Active\"]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{BASE_URL}}/ListSolutions"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 15 Dec 2025 23:33:50 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "977"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "x-amzn-RequestId",
+									"value": "0f19adb2-815e-4b3b-b511-4fafd44ba58e"
+								}
+							],
+							"cookie": [],
+							"responseTime": null,
+							"body": "{\n    \"NextToken\": \"AAMA-EFRSURBSGpVUGtlZ1lUTmxTYWZyTWcydUdKdXJTNk9QQTRkRnFGeUJyUlBpTWJSMTBnR08va2ZVazlSRzMvdFpCdUg5WDhzNEFBQUFmakI4QmdrcWhraUc5dzBCQndhZ2J6QnRBZ0VBTUdnR0NTcUdTSWIzRFFFSEFUQWVCZ2xnaGtnQlpRTUVBUzR3RVFRTWFPNGhma2c4Q29JNXVyMHhBZ0VRZ0RzaGI4QngrcVhsQ01ZS1FQMmtsYnBDNnI4TC9WTnZvR2ZkWHNPbCs2WWgxU2NURmQyTU9BTElFZUNyc3NBVjFHZGtOd0JHanhpVG85cytSZz09X9BbBD3JQax0CeofAT3UUSGSXAOqSxLWRyZN7wm9RZ_LfOeRHaxxLl6MeKw5NDh9T81c8MekYLIBVJvYbs4FBERJNCCS02gfAmryq7kvxOX3cQaZlLiohiWqLpon\",\n    \"SolutionSummaries\": [\n        {\n            \"Arn\": \"arn:aws:partnercentral:us-east-1:116669848322:catalog/Sandbox/solution/S-0059631\",\n            \"Catalog\": \"Sandbox\",\n            \"Category\": \"Software Product\",\n            \"CreatedDate\": \"2024-08-02T19:27:57Z\",\n            \"Id\": \"S-0059631\",\n            \"Name\": \"TestSolution11hrash\",\n            \"Status\": \"Active\"\n        },\n        {\n            \"Arn\": \"arn:aws:partnercentral:us-east-1:116669848322:catalog/Sandbox/solution/S-0059627\",\n            \"Catalog\": \"Sandbox\",\n            \"Category\": \"Software Product\",\n            \"CreatedDate\": \"2024-08-02T19:27:57Z\",\n            \"Id\": \"S-0059627\",\n            \"Name\": \"TestSolution23\",\n            \"Status\": \"Active\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "AssociateOpportunity",
+					"id": "a980d8aa-c430-408c-8558-cd9c35c2bb48",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true,
+						"followRedirects": true,
+						"disableUrlEncoding": false,
+						"disableCookies": false
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n   \"Catalog\": \"AWS\",\n   \"OpportunityIdentifier\": \"{{opportunityId}}\",\n   \"RelatedEntityIdentifier\": \"{{solutionId}}\",\n   \"RelatedEntityType\": \"Solutions\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{BASE_URL}}/AssociateOpportunity",
+						"description": "Associates solution to opportunity"
+					},
+					"response": [
+						{
+							"id": "ca389987-01eb-47cf-8438-5c3dee54168c",
+							"name": "AssociateOpportunity",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n   \"Catalog\": \"{{catalog}}\",\n   \"OpportunityIdentifier\": \"{{opportunityId}}\",\n   \"RelatedEntityIdentifier\": \"{{solutionId}}\",\n   \"RelatedEntityType\": \"Solutions\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{BASE_URL}}/AssociateOpportunity"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 15 Dec 2025 23:34:17 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "0"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "x-amzn-RequestId",
+									"value": "cb137636-cd80-455e-a646-8296f2339957"
+								}
+							],
+							"cookie": [],
+							"responseTime": null,
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "GetOpportunity",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "456c5ccd-8cb6-4797-865f-0afa7200696e",
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "83a9e550-c86b-490d-b8cb-23229760ed6d",
+								"exec": [
+									"pm.test('afterResponse', function () {",
+									"    const body = pm.response.json();",
+									"    if (body && body.LastModifiedDate) {",
+									"        pm.collectionVariables.set('OpportunityLastModifiedAt', body.LastModifiedDate);",
+									"        console.log('Saved OpportunityLastModifiedAt:', body.LastModifiedDate);",
+									"    }",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"id": "d85b0d93-194b-40f1-92a9-695e34444446",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true,
+						"followRedirects": true,
+						"disableUrlEncoding": false,
+						"disableCookies": false
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n   \"Catalog\": \"{{catalog}}\",\n   \"Identifier\": \"{{opportunityId}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{BASE_URL}}/GetOpportunity",
+						"description": "Get opportunity details"
+					},
+					"response": [
+						{
+							"id": "ec5479a6-27f2-4387-ad98-78a116becc8d",
+							"name": "GetOpportunity",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n   \"Catalog\": \"{{catalog}}\",\n   \"Identifier\": \"{{opportunityId}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{BASE_URL}}/GetOpportunity"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 15 Dec 2025 23:35:09 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1655"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "x-amzn-RequestId",
+									"value": "30842671-5870-4332-ad41-a6e8c9b968bc"
+								}
+							],
+							"cookie": [],
+							"responseTime": null,
+							"body": "{\n    \"Arn\": \"arn:aws:partnercentral:us-east-1:222222222222:catalog/Sandbox/opportunity/O11478075\",\n    \"Catalog\": \"Sandbox\",\n    \"CreatedDate\": \"2025-12-15T23:33:13Z\",\n    \"Customer\": {\n        \"Account\": {\n            \"Address\": {\n                \"City\": null,\n                \"CountryCode\": \"US\",\n                \"PostalCode\": null,\n                \"StateOrRegion\": null,\n                \"StreetAddress\": null\n            },\n            \"AwsAccountId\": null,\n            \"CompanyName\": \"Hyatt, Wunsch and Fisher\",\n            \"Duns\": null,\n            \"Industry\": \"Software and Internet\",\n            \"OtherIndustry\": null,\n            \"WebsiteUrl\": \"https://gardner.name\"\n        },\n        \"Contacts\": []\n    },\n    \"Id\": \"O11478075\",\n    \"LastModifiedDate\": \"2025-12-15T23:33:13.149Z\",\n    \"LifeCycle\": {\n        \"ClosedLostReason\": null,\n        \"NextSteps\": null,\n        \"NextStepsHistory\": null,\n        \"ReviewComments\": null,\n        \"ReviewStatus\": \"Pending Submission\",\n        \"ReviewStatusReason\": null,\n        \"Stage\": \"Prospect\",\n        \"TargetCloseDate\": \"2026-03-15\"\n    },\n    \"Marketing\": {\n        \"AwsFundingUsed\": null,\n        \"CampaignName\": null,\n        \"Channels\": null,\n        \"Source\": \"None\",\n        \"UseCases\": null\n    },\n    \"NationalSecurity\": \"No\",\n    \"OpportunityTeam\": [\n        {\n            \"BusinessTitle\": \"OpportunityOwner\",\n            \"Email\": \"partner-umlohric75c52@example.com\",\n            \"FirstName\": \"ACECRMI\",\n            \"LastName\": \"PartnerCentral\",\n            \"Phone\": null\n        }\n    ],\n    \"OpportunityType\": \"Net New Business\",\n    \"PartnerOpportunityIdentifier\": null,\n    \"PrimaryNeedsFromAws\": null,\n    \"Project\": {\n        \"AdditionalComments\": null,\n        \"ApnPrograms\": null,\n        \"AwsPartition\": null,\n        \"CompetitorName\": null,\n        \"CustomerBusinessProblem\": \"Labore voluptatibus dolores et.\",\n        \"CustomerUseCase\": null,\n        \"DeliveryModels\": null,\n        \"ExpectedCustomerSpend\": [],\n        \"OtherCompetitorNames\": null,\n        \"OtherSolutionDescription\": null,\n        \"RelatedOpportunityIdentifier\": null,\n        \"SalesActivities\": null,\n        \"Title\": \"Converted from Lead\"\n    },\n    \"RelatedEntityIdentifiers\": {\n        \"AwsMarketplaceOfferSets\": [],\n        \"AwsMarketplaceOffers\": [],\n        \"AwsProducts\": [],\n        \"Solutions\": [\n            \"S-0059631\"\n        ]\n    },\n    \"SoftwareRevenue\": null\n}"
+						}
+					]
+				},
+				{
+					"name": "UpdateOpportunity",
+					"id": "2673fc06-0291-4d57-acf0-66448596b8d3",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true,
+						"followRedirects": true,
+						"disableUrlEncoding": false,
+						"disableCookies": false
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"Catalog\": \"{{catalog}}\",\n\t\"Customer\": {\n\t\t\"Account\": {\n\t\t\t\"Address\": {\n\t\t\t\t\"City\": null,\n\t\t\t\t\"CountryCode\": \"US\",\n\t\t\t\t\"PostalCode\": \"85401\",\n\t\t\t\t\"StateOrRegion\": \"Arizona\",\n\t\t\t\t\"StreetAddress\": null\n\t\t\t},\n\t\t\t\"AwsAccountId\": null,\n\t\t\t\"CompanyName\": \"Boehm, Heaney and Dickinson\",\n\t\t\t\"Duns\": null,\n\t\t\t\"Industry\": \"Software and Internet\",\n\t\t\t\"OtherIndustry\": null,\n\t\t\t\"WebsiteUrl\": \"https://frivolous-defendant.org\"\n\t\t},\n\t\t\"Contacts\": []\n\t},\n\t\"Identifier\": \"{{opportunityId}}\",\n\t\"LastModifiedDate\": \"{{OpportunityLastModifiedAt}}\",\n\t\"LifeCycle\": {\n\t\t\"ClosedLostReason\": null,\n\t\t\"NextSteps\": null,\n\t\t\"NextStepsHistory\": null,\n\t\t\"ReviewComments\": null,\n\t\t\"ReviewStatus\": \"Pending Submission\",\n\t\t\"ReviewStatusReason\": null,\n\t\t\"Stage\": \"Prospect\",\n\t\t\"TargetCloseDate\": \"2026-01-15\"\n\t},\n\t\"Marketing\": {\n\t\t\"AwsFundingUsed\": null,\n\t\t\"CampaignName\": null,\n\t\t\"Channels\": null,\n\t\t\"Source\": \"None\",\n\t\t\"UseCases\": null\n\t},\n\t\"NationalSecurity\": \"No\",\n\t\"OpportunityTeam\": [],\n\t\"OpportunityType\": \"Net New Business\",\n\t\"PartnerOpportunityIdentifier\": null,\n\t\"PrimaryNeedsFromAws\": null,\n\t\"Project\": {\n\t\t\"AdditionalComments\": null,\n\t\t\"ApnPrograms\": null,\n\t\t\"CompetitorName\": null,\n\t\t\"CustomerBusinessProblem\": \"Ducimus despecto sponte quas deduco.\",\n\t\t\"CustomerUseCase\": \"Security & Compliance\",\n\t\t\"DeliveryModels\": [\n            \"SaaS or PaaS\"\n    ],\n    \"ExpectedCustomerSpend\": [\n            {\n                \"Amount\": \"12900\",\n                \"CurrencyCode\": \"USD\",\n                \"EstimationUrl\": null,\n                \"Frequency\": \"Monthly\",\n                \"TargetCompany\": \"AWS\"\n            }\n    ],\n\t\t\"OtherCompetitorNames\": null,\n\t\t\"OtherSolutionDescription\": null,\n\t\t\"RelatedOpportunityIdentifier\": null,\n\t\t\"SalesActivities\": null,\n\t\t\"Title\": \"Converted from Lead\"\n\t},\n\t\"RelatedEntityIdentifiers\": {\n\t\t\"AwsMarketplaceOffers\": [],\n\t\t\"AwsProducts\": [],\n\t\t\"Solutions\": [\n\t\t\t\"S-0052021\"\n\t\t]\n\t},\n\t\"SoftwareRevenue\": null\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{BASE_URL}}/UpdateOpportunity",
+						"description": "Add more fields to the opportuntiy to submit to AWS for review"
+					},
+					"response": [
+						{
+							"id": "6e49c2b4-8e4e-4e08-9381-608be7be2d7a",
+							"name": "UpdateOpportunity",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"Catalog\": \"{{catalog}}\",\n\t\"Customer\": {\n\t\t\"Account\": {\n\t\t\t\"Address\": {\n\t\t\t\t\"City\": null,\n\t\t\t\t\"CountryCode\": \"US\",\n\t\t\t\t\"PostalCode\": \"85718\",\n\t\t\t\t\"StateOrRegion\": \"Arizona\",\n\t\t\t\t\"StreetAddress\": null\n\t\t\t},\n\t\t\t\"AwsAccountId\": null,\n\t\t\t\"CompanyName\": \"Boehm, Heaney and Dickinson\",\n\t\t\t\"Duns\": null,\n\t\t\t\"Industry\": \"Software and Internet\",\n\t\t\t\"OtherIndustry\": null,\n\t\t\t\"WebsiteUrl\": \"https://frivolous-defendant.org\"\n\t\t},\n\t\t\"Contacts\": []\n\t},\n\t\"Identifier\": \"{{opportunityId}}\",\n\t\"LastModifiedDate\": \"{{OpportunityLastModifiedAt}}\",\n\t\"LifeCycle\": {\n\t\t\"ClosedLostReason\": null,\n\t\t\"NextSteps\": null,\n\t\t\"NextStepsHistory\": null,\n\t\t\"ReviewComments\": null,\n\t\t\"ReviewStatus\": \"Pending Submission\",\n\t\t\"ReviewStatusReason\": null,\n\t\t\"Stage\": \"Prospect\",\n\t\t\"TargetCloseDate\": \"2026-01-15\"\n\t},\n\t\"Marketing\": {\n\t\t\"AwsFundingUsed\": null,\n\t\t\"CampaignName\": null,\n\t\t\"Channels\": null,\n\t\t\"Source\": \"None\",\n\t\t\"UseCases\": null\n\t},\n\t\"NationalSecurity\": \"No\",\n\t\"OpportunityTeam\": [],\n\t\"OpportunityType\": \"Net New Business\",\n\t\"PartnerOpportunityIdentifier\": null,\n\t\"PrimaryNeedsFromAws\": null,\n\t\"Project\": {\n\t\t\"AdditionalComments\": null,\n\t\t\"ApnPrograms\": null,\n\t\t\"CompetitorName\": null,\n\t\t\"CustomerBusinessProblem\": \"Ducimus despecto sponte quas deduco.\",\n\t\t\"CustomerUseCase\": \"Security & Compliance\",\n\t\t\"DeliveryModels\": [\n            \"SaaS or PaaS\"\n    ],\n    \"ExpectedCustomerSpend\": [\n            {\n                \"Amount\": \"12900\",\n                \"CurrencyCode\": \"USD\",\n                \"EstimationUrl\": null,\n                \"Frequency\": \"Monthly\",\n                \"TargetCompany\": \"AWS\"\n            }\n    ],\n\t\t\"OtherCompetitorNames\": null,\n\t\t\"OtherSolutionDescription\": null,\n\t\t\"RelatedOpportunityIdentifier\": null,\n\t\t\"SalesActivities\": null,\n\t\t\"Title\": \"Converted from Lead\"\n\t},\n\t\"RelatedEntityIdentifiers\": {\n\t\t\"AwsMarketplaceOffers\": [],\n\t\t\"AwsProducts\": [],\n\t\t\"Solutions\": [\n\t\t\t\"S-0052021\"\n\t\t]\n\t},\n\t\"SoftwareRevenue\": null\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{BASE_URL}}/UpdateOpportunity"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 15 Dec 2025 23:36:17 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "64"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "x-amzn-RequestId",
+									"value": "e17c82a1-df32-4159-90f2-d7c0a623fe0d"
+								}
+							],
+							"cookie": [],
+							"responseTime": null,
+							"body": "{\n    \"Id\": \"O11478075\",\n    \"LastModifiedDate\": \"2025-12-15T23:36:17.505Z\"\n}"
+						}
+					]
+				},
+				{
+					"name": "StartEngagementFromOpportunityTask",
+					"id": "bdfe5ad9-f7ed-4f73-97dc-0b36ec7e7bc6",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true,
+						"followRedirects": true,
+						"disableUrlEncoding": false,
+						"disableCookies": false
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"Catalog\": \"{{catalog}}\",\n    \"Identifier\": \"{{opportunityId}}\",\n    \"ClientToken\": \"{{$randomUUID}}\",\n    \"AwsSubmission\": {\n        \"InvolvementType\": \"For Visibility Only\",\n        \"Visibility\": \"Full\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{BASE_URL}}/StartEngagementFromOpportunityTask",
+						"description": "Submits to AWS for review"
+					},
+					"response": [
+						{
+							"id": "a164f6d9-6dad-47f4-b6f0-123967ee9ae9",
+							"name": "StartEngagementFromOpportunityTask",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"Catalog\": \"{{catalog}}\",\n    \"Identifier\": \"{{opportunityId}}\",\n    \"ClientToken\": \"{{$randomUUID}}\",\n    \"AwsSubmission\": {\n        \"InvolvementType\": \"For Visibility Only\",\n        \"Visibility\": \"Full\"\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{BASE_URL}}/StartEngagementFromOpportunityTask"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 15 Dec 2025 23:37:02 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "395"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "x-amzn-RequestId",
+									"value": "182ef9e2-965d-4da3-8160-94d25cf8ac0a"
+								}
+							],
+							"cookie": [],
+							"responseTime": null,
+							"body": "{\n    \"EngagementId\": \"eng-m1l0v2mnccwtv4\",\n    \"EngagementInvitationId\": \"engi-wvmcystci78iz\",\n    \"Message\": null,\n    \"OpportunityId\": \"O11478075\",\n    \"ReasonCode\": null,\n    \"ResourceSnapshotJobId\": \"job-nwmx3mdh1b3u5\",\n    \"StartTime\": \"2025-12-15T23:36:57.996Z\",\n    \"TaskArn\": \"arn:aws:partnercentral:us-east-1::catalog/Sandbox/engagement-from-opportunity-task/task-dsn0t8q26od6x\",\n    \"TaskId\": \"task-dsn0t8q26od6x\",\n    \"TaskStatus\": \"COMPLETE\"\n}"
+						}
+					]
+				},
+				{
+					"name": "GetOpportunity",
+					"id": "fbf05337-9fce-41c4-843f-c1ca8667fe98",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true,
+						"followRedirects": true,
+						"disableUrlEncoding": false,
+						"disableCookies": false
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n   \"Catalog\": \"{{catalog}}\",\n   \"Identifier\": \"{{opportunityId}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{BASE_URL}}/GetOpportunity",
+						"description": "Retrieves opportunity details"
+					},
+					"response": [
+						{
+							"id": "ff405d54-469e-48c2-8f12-e5897b22f112",
+							"name": "GetOpportunity",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n   \"Catalog\": \"{{catalog}}\",\n   \"Identifier\": \"{{opportunityId}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{BASE_URL}}/GetOpportunity"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 15 Dec 2025 23:37:50 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1846"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "x-amzn-RequestId",
+									"value": "9648bd9a-6bed-4ede-8aea-8171011cbb4d"
+								}
+							],
+							"cookie": [],
+							"responseTime": null,
+							"body": "{\n    \"Arn\": \"arn:aws:partnercentral:us-east-1:111111111111:catalog/Sandbox/opportunity/O11478075\",\n    \"Catalog\": \"Sandbox\",\n    \"CreatedDate\": \"2025-12-15T23:33:13Z\",\n    \"Customer\": {\n        \"Account\": {\n            \"Address\": {\n                \"City\": null,\n                \"CountryCode\": \"US\",\n                \"PostalCode\": \"85401\",\n                \"StateOrRegion\": \"Arizona\",\n                \"StreetAddress\": null\n            },\n            \"AwsAccountId\": null,\n            \"CompanyName\": \"Boehm, Heaney and Dickinson\",\n            \"Duns\": null,\n            \"Industry\": \"Software and Internet\",\n            \"OtherIndustry\": null,\n            \"WebsiteUrl\": \"https://frivolous-defendant.org\"\n        },\n        \"Contacts\": []\n    },\n    \"Id\": \"O11478075\",\n    \"LastModifiedDate\": \"2025-12-15T23:37:01.591Z\",\n    \"LifeCycle\": {\n        \"ClosedLostReason\": null,\n        \"NextSteps\": null,\n        \"NextStepsHistory\": null,\n        \"ReviewComments\": null,\n        \"ReviewStatus\": \"Submitted\",\n        \"ReviewStatusReason\": null,\n        \"Stage\": \"Prospect\",\n        \"TargetCloseDate\": \"2026-01-15\"\n    },\n    \"Marketing\": {\n        \"AwsFundingUsed\": null,\n        \"CampaignName\": null,\n        \"Channels\": null,\n        \"Source\": \"None\",\n        \"UseCases\": null\n    },\n    \"NationalSecurity\": \"No\",\n    \"OpportunityTeam\": [\n        {\n            \"BusinessTitle\": \"OpportunityOwner\",\n            \"Email\": \"partner-umlohric75c52@example.com\",\n            \"FirstName\": \"ACECRMI\",\n            \"LastName\": \"PartnerCentral\",\n            \"Phone\": null\n        }\n    ],\n    \"OpportunityType\": \"Net New Business\",\n    \"PartnerOpportunityIdentifier\": null,\n    \"PrimaryNeedsFromAws\": [\n        \"Do Not Need Support from AWS Sales Rep\"\n    ],\n    \"Project\": {\n        \"AdditionalComments\": null,\n        \"ApnPrograms\": null,\n        \"AwsPartition\": null,\n        \"CompetitorName\": null,\n        \"CustomerBusinessProblem\": \"Ducimus despecto sponte quas deduco.\",\n        \"CustomerUseCase\": \"Security & Compliance\",\n        \"DeliveryModels\": [\n            \"SaaS or PaaS\"\n        ],\n        \"ExpectedCustomerSpend\": [\n            {\n                \"Amount\": \"12900\",\n                \"CurrencyCode\": \"USD\",\n                \"EstimationUrl\": null,\n                \"Frequency\": \"Monthly\",\n                \"TargetCompany\": \"AWS\"\n            }\n        ],\n        \"OtherCompetitorNames\": null,\n        \"OtherSolutionDescription\": null,\n        \"RelatedOpportunityIdentifier\": null,\n        \"SalesActivities\": null,\n        \"Title\": \"Converted from Lead\"\n    },\n    \"RelatedEntityIdentifiers\": {\n        \"AwsMarketplaceOfferSets\": [],\n        \"AwsMarketplaceOffers\": [],\n        \"AwsProducts\": [],\n        \"Solutions\": [\n            \"S-0059631\"\n        ]\n    },\n    \"SoftwareRevenue\": null\n}"
+						}
+					]
+				}
+			],
+			"id": "d2d1764f-78e1-40c4-b208-d1c407e26eae",
+			"description": "### AWS Partner Central Selling API - Lead to Opportunity Workflow\n\nThis collection provides a complete implementation of the Lead to Opportunity workflow using the AWS Partner Central Selling API. It demonstrates how AWS Partners can collaborate on leads and convert them into opportunities through a structured, multi-step process.\n\nThe Lead to Opportunity workflow enables AWS Partners to work with leads provided by AWS and collaborate with other partners on business opportunities.\n\n**Official Documentation:**\n\n- [Working with Your Leads](https://docs.aws.amazon.com/partner-central/latest/APIReference/working-with-your-leads.html) - Complete API documentation for lead management\n    \n- [Partner Central Events](https://docs.aws.amazon.com/partner-central/latest/APIReference/partner-central-events.html) - EventBridge integration and event types\n    \n\n**Key Workflow Steps:**\n\n1. **Lead Receipt**: AWS provides qualified leads to partners through the Partner Central system\n    \n2. **Lead Engagement**: AWS creates lead engagements and engagement invitations; partners can only accept engagement invitations\n    \n3. **Lead Qualification**: Partners update engagement context with additional qualification information\n    \n4. **Opportunity Conversion**: Qualified leads are converted into opportunities for AWS review\n    \n5. **Partner Collaboration**: Once converted to opportunities, partners can invite other partners to collaborate\n    \n6. **Opportunity Management**: Partners associate solutions, update opportunity details, and submit for AWS co-sell\n    \n\n**Important**: Leads originate from AWS and are distributed to partners. Partner collaboration (inviting other partners) can only occur after the lead is converted to an opportunity, not at the lead stage.",
+			"auth": {
+				"type": "awsv4",
+				"awsv4": {
+					"sessionToken": "{{vault:aws.sessionToken.receiving}}",
+					"service": "{{aws.partnercentral.service}}",
+					"region": "{{aws.region}}",
+					"secretKey": "{{vault:aws.secretKey.receiving}}",
+					"accessKey": "{{vault:aws.accessKey.receiving}}"
+				}
+			}
+		},
+		{
 			"name": "Working with AWS-originated Opportunities",
 			"item": [
 				{
