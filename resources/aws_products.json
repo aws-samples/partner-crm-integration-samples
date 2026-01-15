@@ -1,5 +1,11 @@
 [
   {
+    "Identifier": "AWSAIFactories",
+    "Name": "AWS AI Factories",
+    "Family": "AI/ML",
+    "Description": "Managed AI infrastructure in your data centers"
+  },
+  {
     "Identifier": "AWSAmplify",
     "Name": "AWS Amplify",
     "Family": "Front-End Web & Mobile",
@@ -180,12 +186,6 @@
     "Description": "Track User Activity and API Usage"
   },
   {
-    "Identifier": "AWSCloudWAN",
-    "Name": "AWS Cloud WAN",
-    "Family": "Networking & Content Delivery",
-    "Description": "AWSCloudWAN"
-  },
-  {
     "Identifier": "AWSCodeArtifact",
     "Name": "AWS CodeArtifact",
     "Family": "Developer Tools",
@@ -274,6 +274,12 @@
     "Name": "AWS Deadline Cloud",
     "Family": "Media Services",
     "Description": "Fully managed service that simplifies render management for teams creating computer-generated 2D/3D graphics and visual effects"
+  },
+  {
+    "Identifier": "AWSDedicatedLocalZones",
+    "Name": "AWS Dedicated Local Zones",
+    "Family": "Compute",
+    "Description": "Cloud infrastructure built specifically for you to help address regulatory and digital sovereignty needs"
   },
   {
     "Identifier": "AWSDeepComposer",
@@ -586,6 +592,12 @@
     "Name": "AWS Lambda",
     "Family": "Compute",
     "Description": "Run code without thinking about servers or clusters"
+  },
+  {
+    "Identifier": "AWSLambdaManagedInstances",
+    "Name": "AWS Lambda Managed Instances",
+    "Family": "Compute",
+    "Description": "Extend Lambda\u2019s operational simplicity on EC2 compute"
   },
   {
     "Identifier": "AWSLicenseManager",
@@ -1104,6 +1116,12 @@
     "Description": "Gives complete visibility into agent workflows to trace, debug, and monitor AI agents' performance in production environments"
   },
   {
+    "Identifier": "AgentCorePolicy",
+    "Name": "AgentCore Policy",
+    "Family": "AI/ML",
+    "Description": "Provides comprehensive control over actions agents take"
+  },
+  {
     "Identifier": "AgentCoreRuntime",
     "Name": "AgentCore Runtime",
     "Family": "AI/ML",
@@ -1218,6 +1236,12 @@
     "Description": "Amazon Bedrock models provided by DeepSeek"
   },
   {
+    "Identifier": "AmazonBedrockGoogleModels",
+    "Name": "Amazon Bedrock - Google Models",
+    "Family": "AI/ML",
+    "Description": "Amazon Bedrock models provided by Google"
+  },
+  {
     "Identifier": "AmazonBedrockGuardrails",
     "Name": "Amazon Bedrock - Guardrails",
     "Family": "Machine Learning",
@@ -1242,10 +1266,28 @@
     "Description": "Amazon Bedrock models provided by Meta (Llama)"
   },
   {
+    "Identifier": "AmazonBedrockMiniMaxAIModels",
+    "Name": "Amazon Bedrock - MiniMax AI Models",
+    "Family": "AI/ML",
+    "Description": "Amazon Bedrock models provided by MiniMax AI"
+  },
+  {
     "Identifier": "AmazonBedrockMistralAIModels",
     "Name": "Amazon Bedrock - Mistral AI Models",
     "Family": "Machine Learning",
     "Description": "Amazon Bedrock models provided by Mistral AI"
+  },
+  {
+    "Identifier": "AmazonBedrockMoonshotAIModels",
+    "Name": "Amazon Bedrock - Moonshot AI Models",
+    "Family": "AI/ML",
+    "Description": "Amazon Bedrock models provided by Moonshot AI"
+  },
+  {
+    "Identifier": "AmazonBedrockNVIDIAModels",
+    "Name": "Amazon Bedrock - NVIDIA Models",
+    "Family": "AI/ML",
+    "Description": "Amazon Bedrock models provided by NVIDIA"
   },
   {
     "Identifier": "AmazonBedrockOpenAIModels",
@@ -1788,6 +1830,12 @@
     "Description": "Trainium2-powered Trn2 instances are designed for training and deploying large GenAI models with up to trillion+ parameters"
   },
   {
+    "Identifier": "AmazonEC2Trn3",
+    "Name": "Amazon EC2 - Trn3",
+    "Family": "Compute",
+    "Description": "Purpose-built to deliver the best token economics for next gen agentic, reasoning, and video generation applications"
+  },
+  {
     "Identifier": "AmazonEC2VT1",
     "Name": "Amazon EC2 - VT1",
     "Family": "Compute",
@@ -2220,10 +2268,16 @@
     "Description": "Amazon One uses palm biometrics to securely authenticate payments and access, offering fast, contactless convenience"
   },
   {
-    "Identifier": "AmazonOpenSearchService",
-    "Name": "Amazon OpenSearch Service",
+    "Identifier": "AmazonOpenSearchforSearchvectors",
+    "Name": "Amazon OpenSearch for Search/vectors",
     "Family": "Analytics",
-    "Description": "Run and Scale OpenSearch and Elasticsearch Clusters"
+    "Description": "Build contextual AI experiences \u2014 from vector search and RAG to agentic workflows with Agentic memory and native agents"
+  },
+  {
+    "Identifier": "AmazonOpenSearchforlogsAnalytics",
+    "Name": "Amazon OpenSearch for logs/Analytics",
+    "Family": "Analytics",
+    "Description": "Centralized log aggregation and real-time monitoring by ingesting and analyzing data at petabyte scale"
   },
   {
     "Identifier": "AmazonPersonalize",
@@ -2436,6 +2490,18 @@
     "Description": "Amazon S3 Glacier Instant Retrieval is durable, low-cost archive storage with milliseconds retrieval"
   },
   {
+    "Identifier": "AmazonS3Tables",
+    "Name": "Amazon S3 Tables",
+    "Family": "Storage",
+    "Description": "Provides fully managed storage for Apache Iceberg Tables, optimized for analytics and machine learning workloads"
+  },
+  {
+    "Identifier": "AmazonS3Vectors",
+    "Name": "Amazon S3 Vectors",
+    "Family": "Storage",
+    "Description": "Provides cost-optimized native support to store and query vectors at scale"
+  },
+  {
     "Identifier": "AmazonSQS",
     "Name": "Amazon SQS",
     "Family": "Application Integration",
@@ -2524,6 +2590,12 @@
     "Name": "Amazon SageMaker Processing",
     "Family": "Machine Learning",
     "Description": "Easily run pre-processing, post-processing, and model evaluation workloads on fully managed infrastructure"
+  },
+  {
+    "Identifier": "AmazonSageMakerServerlessModelCustomization",
+    "Name": "Amazon SageMaker Serverless Model Customization",
+    "Family": "AI/ML",
+    "Description": "Accelerate AI model customization with serverless tuning (RFT, SFT, DPO) and an agent-guided workflow"
   },
   {
     "Identifier": "AmazonSageMakerStudio",
