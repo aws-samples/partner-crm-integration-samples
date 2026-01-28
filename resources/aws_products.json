@@ -2472,12 +2472,6 @@
     "Description": "Object storage built to store and retrieve any amount of data from anywhere"
   },
   {
-    "Identifier": "AmazonS3ExpressOneZone",
-    "Name": "Amazon S3 Express One Zone",
-    "Family": "Storage",
-    "Description": "Fastest cloud object storage for latency sensitive, performance-critical applications"
-  },
-  {
     "Identifier": "AmazonS3Glacier",
     "Name": "Amazon S3 Glacier",
     "Family": "Storage",
@@ -2872,6 +2866,12 @@
     "Name": "Research and Engineering Studio (RES)",
     "Family": "High Performance Computing (HPC)",
     "Description": "Open-source product that helps research and engineering orgs create and manage virtual desktops on AWS"
+  },
+  {
+    "Identifier": "S3ExpressOneZone",
+    "Name": "S3 Express One Zone",
+    "Family": "Storage",
+    "Description": "Fastest cloud object storage for latency sensitive, performance-critical applications"
   },
   {
     "Identifier": "S3GlacierDeepArchive",
