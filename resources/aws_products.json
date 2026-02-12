@@ -510,12 +510,6 @@
     "Description": "Support for planning and running business critical events"
   },
   {
-    "Identifier": "AWSIoTAnalytics",
-    "Name": "AWS IoT Analytics",
-    "Family": "Internet of Things",
-    "Description": "Analytics for IoT devices"
-  },
-  {
     "Identifier": "AWSIoTCore",
     "Name": "AWS IoT Core",
     "Family": "Internet of Things",
