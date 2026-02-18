@@ -1,0 +1,36 @@
+{
+    "Catalog": "{{CATALOG}}",
+    "ClientToken": "{{CLIENT_TOKEN}}",
+    "Title": "{{ENGAGEMENT_TITLE}}",
+    "Description": "Lead generated from recent campaign activities",
+    "Contexts": [
+        {
+            "Type": "Lead",
+            "Payload": {
+                "Lead": {
+                    "Customer": {
+                        "CompanyName": "Acme Corp",
+                        "Industry": "Aerospace",
+                        "Address": {
+                            "CountryCode": "US"
+                        }
+                    },
+                    "Interactions": [
+                        {
+                            "SourceType": "Campaign",
+                            "CustomerAction": "Completed Form",
+                            "SourceName": "Recycled Wooden Shirt Campaign - 2025",
+                            "SourceId": "SQFONL7I",
+                            "Contact": {
+                                "BusinessTitle": "Investor Implementation Officer",
+                                "Email": "test@test.com",
+                                "FirstName": "Torey",
+                                "LastName": "Orn"
+                            }
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}

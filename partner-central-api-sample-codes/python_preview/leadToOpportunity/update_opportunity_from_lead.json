@@ -1,0 +1,79 @@
+{
+  "Catalog": "Sandbox",
+  "NationalSecurity": "No",
+  "Customer": {
+    "Account": {
+      "Industry": "Software and Internet",
+      "CompanyName": "Acme Corp",
+      "WebsiteUrl": "https://acmecorp-updated.example.com",
+      "Address": {
+        "CountryCode": "US",
+        "PostalCode": "10001",
+        "StateOrRegion": "New York"
+      },
+      "AwsAccountId": "111111111111",
+      "Duns": "111100111"
+    },
+    "Contacts": [
+      {
+        "BusinessTitle": "Executive",
+        "Email": "testnamelast09@test.com",
+        "FirstName": "TestContact011",
+        "LastName": "MLastName001",
+        "Phone": "+14444444444"
+      }
+    ]
+  },
+  "Project": {
+    "ExpectedCustomerSpend": [
+      {
+        "Amount": "12500",
+        "CurrencyCode": "USD",
+        "Frequency": "Monthly",
+        "TargetCompany": "AWS"
+      }
+    ],
+    "Title": "Converted from Lead",
+    "CustomerBusinessProblem": "Need to modernize legacy database infrastructure for better scalability",
+    "CompetitorName": "No Competition",
+    "CustomerUseCase": "Security & Compliance",
+    "DeliveryModels": [
+      "SaaS or PaaS"
+    ],
+    "SalesActivities": [
+      "Conducted POC / Demo"
+    ]
+  },
+  "OpportunityType": "Net New Business",
+  "Marketing": {
+    "AwsFundingUsed": "Yes",
+    "CampaignName": "TestCampaignName01",
+    "Channels": [
+      "Content Syndication"
+    ],
+    "Source": "Marketing Activity",
+    "UseCases": [
+      "Analytics"
+    ]
+  },
+  "LastModifiedDate": "2026-02-18 18:32:24.559000+00:00",
+  "LifeCycle": {
+    "Stage": "Prospect",
+    "TargetCloseDate": "2026-05-19",
+    "ReviewStatus": "Pending Submission",
+    "NextSteps": "Next steps on the opportunity. TEST is used to communicate to AWS the next action required, please update."
+  },
+  "Identifier": "O12419820",
+  "PrimaryNeedsFromAws": [
+    "Co-Sell - Architectural Validation"
+  ],
+  "SoftwareRevenue": {
+    "DeliveryModel": "Pay-as-you-go",
+    "EffectiveDate": "2023-10-31",
+    "ExpirationDate": "2024-03-31",
+    "Value": {
+      "Amount": "10000.0",
+      "CurrencyCode": "USD"
+    }
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "Catalog": "{{CATALOG}}",
+  "EngagementIdentifier": "{{ENGAGEMENT_ID}}",
+  "ContextIdentifier": "1",
+  "EngagementLastModifiedAt": "{{ENGAGEMENT_LAST_MODIFIED_AT}}",
+  "Type": "Lead",
+  "Payload": {
+    "Lead": {
+      "QualificationStatus": "Qualified",
+      "Customer": {
+        "CompanyName": "{{COMPANY_NAME}}",
+        "Industry": "Software and Internet",
+        "Address": {
+          "CountryCode": "{{COUNTRY_CODE}}",
+          "StateOrRegion": "California",
+          "City": "San Francisco"
+        },
+        "WebsiteUrl": "https://acmecorp-updated.example.com",
+        "MarketSegment": "Enterprise",
+        "AwsMaturity": "Single-Account"
+      },
+      "Interaction": {
+        "InteractionDate": "{{INTERACTION_DATE}}",
+        "SourceType": "{{SOURCE_TYPE}}",
+        "SourceId": "{{SOURCE_ID}}",
+        "SourceName": "{{SOURCE_NAME}}",
+        "CustomerAction": "Completed Form",
+        "BusinessProblem": "Need to modernize legacy database infrastructure for better scalability",
+        "Usecase": "Database",
+        "Contact": {
+          "BusinessTitle": "{{CONTACT_BUSINESS_TITLE}}",
+          "Email": "test@test.com",
+          "FirstName": "{{CONTACT_FIRST_NAME}}",
+          "LastName": "{{CONTACT_LAST_NAME}}"
+        }
+      }
+    }
+  }
+}

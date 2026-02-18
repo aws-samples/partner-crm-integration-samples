@@ -1,0 +1,32 @@
+{
+  "Catalog": "{{CATALOG}}",
+  "ClientToken": "{{CLIENT_TOKEN}}",
+  "EngagementIdentifier": "{{ENGAGEMENT_ID}}",
+  "Invitation": {
+    "Message": "We have a qualified lead from Acme Corp that matches your expertise. Would you like to collaborate?",
+    "Receiver": {
+      "Account": {
+        "AwsAccountId": "{{RECEIVING_AWS_ACCOUNT_ID}}"
+      }
+    },
+    "Payload": {
+      "LeadInvitation": {
+        "Customer": {
+          "CompanyName": "Acme Corp",
+          "Industry": "Aerospace",
+          "CountryCode": "US",
+          "WebsiteUrl": "https://acmecorp.example.com",
+          "MarketSegment": "Enterprise",
+          "AwsMaturity": "Evaluating"
+        },
+        "Interaction": {
+          "SourceType": "Campaign",
+          "SourceId": "SQFONL7I",
+          "SourceName": "Recycled Wooden Shirt Campaign - 2025",
+          "ContactBusinessTitle": "Investor Implementation Officer",
+          "Usecase": "Database"
+        }
+      }
+    }
+  }
+}

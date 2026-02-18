@@ -1,0 +1,9 @@
+{
+  "accounts": {
+    "inviting_partner": "111111111111",
+    "receiving_partner": "222222222222"
+  },
+  "catalog": "Sandbox",
+  "endpoint_url": "https://partnercentral-selling.us-east-1.api.aws",
+  "region": "us-east-1"
+}
