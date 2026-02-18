@@ -32,13 +32,13 @@ Create required configuration files:
 }
 ```
 
-**buyer_ids.txt:**
+**buyer_ids.txt(replace with your own buyer IDs):**
 ```
 222222222222
 111111111111
 ```
 
-**shared_env.json:**
+**shared_env.json (If you alreayd had a product ID to use, replace the value here):**
 ```json
 {
   "PRODUCT_ID": "prod-xxxxxxxxxxxxx"
