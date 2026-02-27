@@ -186,6 +186,12 @@
     "Description": "Track User Activity and API Usage"
   },
   {
+    "Identifier": "AWSCloudWAN",
+    "Name": "AWS Cloud WAN",
+    "Family": "Networking & Content Delivery",
+    "Description": "AWSCloudWAN"
+  },
+  {
     "Identifier": "AWSCodeArtifact",
     "Name": "AWS CodeArtifact",
     "Family": "Developer Tools",
@@ -358,6 +364,12 @@
     "Name": "AWS Elastic Disaster Recovery",
     "Family": "Storage",
     "Description": "Scalable, cost-effective application recovery to AWS"
+  },
+  {
+    "Identifier": "AWSElementalInference",
+    "Name": "AWS Elemental Inference",
+    "Family": "Media Services",
+    "Description": "AWS Elemental Inference applies AI capabilities to live and on-demand video in real-time to automatically transform broadcasts into vertical video content for any format, enabling broadcasters and streamers to reach audiences everywhere without manual work or AI expertise."
   },
   {
     "Identifier": "AWSElementalMediaConnect",
@@ -1716,6 +1728,12 @@
     "Description": "High performance for tightly coupled workloads that require highly parallelized, clustered compute resources powered by AWS Graviton 3E processors"
   },
   {
+    "Identifier": "AmazonEC2HPC8a",
+    "Name": "Amazon EC2 - HPC8a",
+    "Family": "Compute",
+    "Description": "For tightly coupled HPC workloads, providing up to 25% better price performance compared to previous-generation Hpc7a instances"
+  },
+  {
     "Identifier": "AmazonEC2Inf1",
     "Name": "Amazon EC2 - Inf1",
     "Family": "Compute",
@@ -2884,6 +2902,12 @@
     "Name": "SAP on AWS - General",
     "Family": "Compute",
     "Description": "AWS infrastructure (EC2, Storage) to run SAP on AWS"
+  },
+  {
+    "Identifier": "SecurityHubExtended",
+    "Name": "Security Hub Extended",
+    "Family": "Security, Identity & Compliance",
+    "Description": "Delivers curated enterprise security solutions from AWS and partners with simplified purchasing."
   },
   {
     "Identifier": "SnowballDataTransfer",
