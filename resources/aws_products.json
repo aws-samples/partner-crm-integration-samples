@@ -882,6 +882,12 @@
     "Description": "Managed DDoS protection"
   },
   {
+    "Identifier": "AWSShieldnetworksecuritydirector",
+    "Name": "AWS Shield network security director",
+    "Family": "Security, Identity & Compliance",
+    "Description": "AWS Shield network security director (in preview) performs an analysis of your resources to help you visualize your network topology, identify configuration issues, and receive actionable remediation recommendations."
+  },
+  {
     "Identifier": "AWSSimSpaceWeaver",
     "Name": "AWS SimSpace Weaver",
     "Family": "Compute",
@@ -1668,6 +1674,12 @@
     "Description": "Enable faster FPGA accelerator development and deployment in the cloud powered by Virtex UltraScale+ FPGAs from Xilinx"
   },
   {
+    "Identifier": "AmazonEC2F2",
+    "Name": "Amazon EC2 - F2",
+    "Family": "Compute",
+    "Description": "Amazon EC2 F2 instances, the second-generation FPGA-powered instances"
+  },
+  {
     "Identifier": "AmazonEC2G4",
     "Name": "Amazon EC2 - G4",
     "Family": "Compute",
@@ -2374,12 +2386,6 @@
     "Name": "Amazon RDS Aurora for PostgreSQL",
     "Family": "Database",
     "Description": "PostgreSQL-compatible relational database built for the cloud"
-  },
-  {
-    "Identifier": "AmazonRDSCustomForOracle",
-    "Name": "Amazon RDS Custom For Oracle",
-    "Family": "Database",
-    "Description": "Managed database services for applications that require operating system and database customization"
   },
   {
     "Identifier": "AmazonRDSCustomforSQLServer",
