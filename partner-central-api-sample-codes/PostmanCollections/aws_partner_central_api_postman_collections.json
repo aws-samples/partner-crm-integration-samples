@@ -15696,48 +15696,15 @@
 									"script": {
 										"id": "369ddc8f-9c2e-4abe-b586-c1872793c0f5",
 										"exec": [
-											"try {",
-											"    // Retrieve the opportunityId from Postman collection variables",
-											"    const opportunityId = pm.collectionVariables.get(\"opportunityId\");",
+											"// Parse the JSON response",
+											"const response = pm.response.json();",
 											"",
-											"    // Check the response status and log accordingly",
-											"    if (pm.response.code === 200) {",
-											"        pm.test(`[Post-res ${pm.info.requestName}] Successfully retrieved Opportunity with ID: ${opportunityId}`, function () {",
-											"            pm.response.to.have.status(200);",
-											"        });",
-											"",
-											"        // Parse the response body",
-											"        const responseBody = pm.response.json();",
-											"",
-											"        // Perform basic validation on the response",
-											"        pm.test(\"Response has the correct structure\", function () {",
-											"            pm.expect(responseBody).to.be.an('object');",
-											"            pm.expect(responseBody).to.have.property('Id');",
-											"        });",
-											"",
-											"        // Store the complete response in a collection variable",
-											"        pm.collectionVariables.set(\"getOpportunityPayload\", JSON.stringify(responseBody));",
-											"        console.log(`[Post-res ${pm.info.requestName}] Stored response payload for ID: ${responseBody.Id}`);",
-											"",
-											"    } else {",
-											"        console.error(`[Post-res ${pm.info.requestName}] Failed to retrieve Opportunity with ID: ${opportunityId}. Status Code: ${pm.response.code}`);",
-											"",
-											"        pm.test(`[Post-res ${pm.info.requestName}] Retrieval failed`, function () {",
-											"            pm.expect.fail(`Received status code ${pm.response.code}`);",
-											"        });",
-											"    }",
-											"",
-											"} catch (error) {",
-											"    // Handle any errors during response processing",
-											"    console.error(`[Post-res ${pm.info.requestName}] Error processing response:`, error);",
-											"    pm.test(`[Post-res ${pm.info.requestName}] Error in test execution`, function () {",
-											"        pm.expect.fail(error.message);",
-											"    });",
-											"}",
-											""
+											"// Save RuleArn to a collection variable",
+											"pm.collectionVariables.set(\"RuleArn\", response.RuleArn);"
 										],
 										"type": "text/javascript",
-										"packages": {}
+										"packages": {},
+										"requests": {}
 									}
 								},
 								{
@@ -15745,14 +15712,11 @@
 									"script": {
 										"id": "2e20de5e-447e-48a1-b53d-d7811c1d0814",
 										"exec": [
-											"// Parse the request payload to extract the Identifier",
-											"const opportunityId = pm.collectionVariables.get(\"opportunityId\");",
-											"",
-											"// Log the start of the action with the Identifier",
-											"console.log(`[Pre-req ${pm.info.requestName}] Starting ${pm.info.requestName} action for Identifier: ${opportunityId}`);"
+											""
 										],
 										"type": "text/javascript",
-										"packages": {}
+										"packages": {},
+										"requests": {}
 									}
 								}
 							],
@@ -15992,48 +15956,11 @@
 									"script": {
 										"id": "369ddc8f-9c2e-4abe-b586-c1872793c0f5",
 										"exec": [
-											"try {",
-											"    // Retrieve the opportunityId from Postman collection variables",
-											"    const opportunityId = pm.collectionVariables.get(\"opportunityId\");",
-											"",
-											"    // Check the response status and log accordingly",
-											"    if (pm.response.code === 200) {",
-											"        pm.test(`[Post-res ${pm.info.requestName}] Successfully retrieved Opportunity with ID: ${opportunityId}`, function () {",
-											"            pm.response.to.have.status(200);",
-											"        });",
-											"",
-											"        // Parse the response body",
-											"        const responseBody = pm.response.json();",
-											"",
-											"        // Perform basic validation on the response",
-											"        pm.test(\"Response has the correct structure\", function () {",
-											"            pm.expect(responseBody).to.be.an('object');",
-											"            pm.expect(responseBody).to.have.property('Id');",
-											"        });",
-											"",
-											"        // Store the complete response in a collection variable",
-											"        pm.collectionVariables.set(\"getOpportunityPayload\", JSON.stringify(responseBody));",
-											"        console.log(`[Post-res ${pm.info.requestName}] Stored response payload for ID: ${responseBody.Id}`);",
-											"",
-											"    } else {",
-											"        console.error(`[Post-res ${pm.info.requestName}] Failed to retrieve Opportunity with ID: ${opportunityId}. Status Code: ${pm.response.code}`);",
-											"",
-											"        pm.test(`[Post-res ${pm.info.requestName}] Retrieval failed`, function () {",
-											"            pm.expect.fail(`Received status code ${pm.response.code}`);",
-											"        });",
-											"    }",
-											"",
-											"} catch (error) {",
-											"    // Handle any errors during response processing",
-											"    console.error(`[Post-res ${pm.info.requestName}] Error processing response:`, error);",
-											"    pm.test(`[Post-res ${pm.info.requestName}] Error in test execution`, function () {",
-											"        pm.expect.fail(error.message);",
-											"    });",
-											"}",
 											""
 										],
 										"type": "text/javascript",
-										"packages": {}
+										"packages": {},
+										"requests": {}
 									}
 								},
 								{
@@ -16041,14 +15968,11 @@
 									"script": {
 										"id": "2e20de5e-447e-48a1-b53d-d7811c1d0814",
 										"exec": [
-											"// Parse the request payload to extract the Identifier",
-											"const opportunityId = pm.collectionVariables.get(\"opportunityId\");",
-											"",
-											"// Log the start of the action with the Identifier",
-											"console.log(`[Pre-req ${pm.info.requestName}] Starting ${pm.info.requestName} action for Identifier: ${opportunityId}`);"
+											""
 										],
 										"type": "text/javascript",
-										"packages": {}
+										"packages": {},
+										"requests": {}
 									}
 								}
 							],
