@@ -4980,6 +4980,209 @@
 					]
 				},
 				{
+					"name": "CheckForEngagementInvitationFromLogGroup",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "369ddc8f-9c2e-4abe-b586-c1872793c0f5",
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "2e20de5e-447e-48a1-b53d-d7811c1d0814",
+								"exec": [
+									"// --- Helper: convert yyyy-mm-dd → epoch ms ---",
+									"function dateToEpochMs(dateString) {",
+									"    return new Date(dateString + \"T00:00:00Z\").getTime();",
+									"}",
+									"",
+									"function dateToEpochMsEndOfDay(dateString) {",
+									"    return new Date(dateString + \"T23:59:59.999Z\").getTime();",
+									"}",
+									"",
+									"// --- Helper: convert epoch → human readable (optional logging) ---",
+									"function toHumanTime(epochMs) {",
+									"    let d = new Date(epochMs);",
+									"    let yyyy = d.getUTCFullYear();",
+									"    let mm = String(d.getUTCMonth() + 1).padStart(2, \"0\");",
+									"    let dd = String(d.getUTCDate()).padStart(2, \"0\");",
+									"    let HH = String(d.getUTCHours()).padStart(2, \"0\");",
+									"    let MM = String(d.getUTCMinutes()).padStart(2, \"0\");",
+									"    return `${yyyy}-${mm}-${dd} ${HH}:${MM} UTC`;",
+									"}",
+									"",
+									"// ---------------------------------------------------------------------",
+									"// LOG START TIME (24h ago if not stored)",
+									"// ---------------------------------------------------------------------",
+									"let storedStart = pm.collectionVariables.get(\"log_start_time\");",
+									"let finalStartMs;",
+									"",
+									"if (storedStart) {",
+									"    if (/^\\d{4}-\\d{2}-\\d{2}$/.test(storedStart)) {",
+									"        // yyyy-mm-dd → epoch ms",
+									"        finalStartMs = dateToEpochMs(storedStart);",
+									"        console.log(\"Using stored log_start_time (date):\", storedStart, \"->\", finalStartMs, toHumanTime(finalStartMs));",
+									"    } else {",
+									"        // existing epoch ms",
+									"        finalStartMs = Number(storedStart);",
+									"        console.log(\"Using stored log_start_time (epoch):\", finalStartMs, toHumanTime(finalStartMs));",
+									"    }",
+									"} else {",
+									"    // Default: now - 24 hours",
+									"    finalStartMs = Date.now() - (86400 * 1000);",
+									"    pm.collectionVariables.set(\"log_start_time\", finalStartMs);",
+									"    console.log(\"Created new log_start_time (24h ago):\", finalStartMs, toHumanTime(finalStartMs));",
+									"}",
+									"",
+									"// Always expose to current request",
+									"pm.variables.set(\"log_start_time\", finalStartMs);",
+									"",
+									"// ---------------------------------------------------------------------",
+									"// LOG END TIME (now if not stored)",
+									"// ---------------------------------------------------------------------",
+									"let storedEnd = pm.collectionVariables.get(\"log_end_time\");",
+									"let finalEndMs;",
+									"",
+									"if (storedEnd) {",
+									"    if (/^\\d{4}-\\d{2}-\\d{2}$/.test(storedEnd)) {",
+									"        finalEndMs = dateToEpochMsEndOfDay(storedEnd);",
+									"        console.log(\"Using stored log_end_time (date):\", storedEnd, \"->\", finalEndMs, toHumanTime(finalEndMs));",
+									"    } else {",
+									"        finalEndMs = Number(storedEnd);",
+									"        console.log(\"Using stored log_end_time (epoch):\", finalEndMs, toHumanTime(finalEndMs));",
+									"    }",
+									"} else {",
+									"    // Default: now",
+									"    finalEndMs = Date.now();",
+									"    pm.collectionVariables.set(\"log_end_time\", finalEndMs);",
+									"    console.log(\"Created new log_end_time (now):\", finalEndMs, toHumanTime(finalEndMs));",
+									"}",
+									"",
+									"// Always expose to current request",
+									"pm.variables.set(\"log_end_time\", finalEndMs);"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"id": "d06fbd1a-95d7-4635-8d0e-1b211f947417",
+					"protocolProfileBehavior": {
+						"followRedirects": true,
+						"disableUrlEncoding": false,
+						"disableCookies": false,
+						"disableBodyPruning": true,
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "awsv4",
+							"awsv4": {
+								"sessionToken": "{{vault:aws.sessionToken.receiving}}",
+								"secretKey": "{{vault:aws.secretKey.receiving}}",
+								"accessKey": "{{vault:aws.accessKey.receiving}}",
+								"region": "{{aws.region}}",
+								"service": "{{aws.logs.service}}",
+								"addAuthDataToQuery": false
+							}
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json, text/javascript, */*; q=0.01"
+							},
+							{
+								"key": "X-Amz-Target",
+								"value": "Logs_20140328.FilterLogEvents"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/x-amz-json-1.1"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"logGroupName\": \"{{CLOUDWATCH_LOG_GROUP}}\",\n  \"startTime\": {{log_start_time}},\n  \"endTime\": {{log_end_time}},\n  \"filterPattern\": \"\\\"Engagement Invitation Created\\\"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "https://logs.us-east-1.amazonaws.com",
+						"description": "Use FilterLogEvents API action to find the log entries for the engagement invitation from AWS. You can set log_start_time and log_end_time in the collection variable in yyyy-mm-dd format. If you don't set it, the value will be automatically calculated as 24-hr ago in the number of milliseconds after Jan 1, 1970 00:00:00 UTC. log_end_time is set to current time and log_end_time is set to 24 hours ago. You also need to set the {{CLOUDWATCH_LOG_GROUP}} variable which is used in the request payload."
+					},
+					"response": [
+						{
+							"id": "967b5728-f7ff-42ed-a705-630c75e73a22",
+							"name": "CheckForEngagementInvitationFromLogGroup",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json, text/javascript, */*; q=0.01"
+									},
+									{
+										"key": "X-Amz-Target",
+										"value": "Logs_20140328.FilterLogEvents"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/x-amz-json-1.1"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"logGroupName\": \"{{CLOUDWATCH_LOG_GROUP}}\",\n  \"startTime\": {{log_start_time}},\n  \"endTime\": {{log_end_time}},\n  \"filterPattern\": \"\\\"Engagement Invitation Created\\\"\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "https://logs.us-east-1.amazonaws.com"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "x-amzn-RequestId",
+									"value": "cf8a722d-1bc2-4c1d-8ad5-bb549ebf78af"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/x-amz-json-1.1"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1493"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 09 Mar 2026 21:15:06 GMT"
+								}
+							],
+							"cookie": [],
+							"responseTime": null,
+							"body": "{\n    \"events\": [\n        {\n            \"eventId\": \"39541222706575617756982692165757659845046056272482992128\",\n            \"ingestionTime\": 1773089749920,\n            \"logStreamName\": \"04558373-93ea-3665-b79d-d83554559b0f\",\n            \"message\": \"{\\\"version\\\":\\\"0\\\",\\\"id\\\":\\\"884794a9-f5f6-cfd1-0aa8-cf9d30f6b12f\\\",\\\"detail-type\\\":\\\"Engagement Invitation Created\\\",\\\"source\\\":\\\"aws.partnercentral-selling\\\",\\\"account\\\":\\\"222222222222\\\",\\\"time\\\":\\\"2026-03-09T01:50:25Z\\\",\\\"region\\\":\\\"us-east-1\\\",\\\"resources\\\":[\\\"arn:aws:partnercentral:us-east-1::catalog/Sandbox/engagement-invitation/engi-dansn8enotil9\\\"],\\\"detail\\\":{\\\"catalog\\\":\\\"Sandbox\\\",\\\"schemaVersion\\\":\\\"1.0\\\",\\\"engagementInvitation\\\":{\\\"arn\\\":\\\"arn:aws:partnercentral:us-east-1::catalog/Sandbox/engagement-invitation/engi-dansn8enotil9\\\",\\\"id\\\":\\\"engi-dansn8enotil9\\\",\\\"engagementId\\\":\\\"eng-xjn5vr10vyjm1t\\\",\\\"senderAccountId\\\":\\\"111111111111\\\",\\\"receiverAccountId\\\":\\\"222222222222\\\",\\\"senderCompanyName\\\":\\\"MingZ Test Account\\\",\\\"expirationDate\\\":\\\"2031-03-08T01:50:25.685385312Z\\\",\\\"participantType\\\":\\\"RECEIVER\\\",\\\"payloadType\\\":\\\"LeadInvitation\\\"}}}\",\n            \"timestamp\": 1773089749000\n        }\n    ],\n    \"nextToken\": \"Bxkq6kVGFtq2y_MoigeqscPOdhXVbhiVtLoAmXb5jCqdvNUxceCCkYWgticNDzmkkjDzxhiTonpVVXVddbdVyYO-5YF_WVD19bjtXKGsLAyO-t7QKhsSdutvbhsrOjTTf0U6TWajrkA4SLNIQOYIPiUYTpzKJ-JDhMvJn9SGtutylEY3SBofUAgtAalYOxiPjO_B23lIn7dC_IUBwwtsgqDThUTyy62jMAklh5uXqT6tkQXDLf633PsUiPeuTSh7oj6v4YlT_OAIrv1pMKn__THfCBpDVO3DOLwM-Z8Snj8\",\n    \"searchStatistics\": {\n        \"approximateTotalLogStreamCount\": 0,\n        \"completedLogStreamCount\": 0\n    },\n    \"searchedLogStreams\": []\n}"
+						}
+					]
+				},
+				{
 					"name": "GetEngagementInvitation",
 					"id": "1fca6e9d-2a64-4678-8a95-771525ef27aa",
 					"protocolProfileBehavior": {
