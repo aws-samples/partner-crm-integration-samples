@@ -9335,6 +9335,108 @@
 							"response": []
 						},
 						{
+							"name": "GetOpportunity Copy",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "e4ecb04c-f901-41b2-a9a9-d0cd50c2b469",
+										"exec": [
+											"try {",
+											"    // Retrieve the opportunityId from Postman collection variables",
+											"    const opportunityId = pm.collectionVariables.get(\"opportunityId\");",
+											"",
+											"    // Check the response status and log accordingly",
+											"    if (pm.response.code === 200) {",
+											"        pm.test(`[Post-res ${pm.info.requestName}] Successfully retrieved Opportunity with ID: ${opportunityId}`, function () {",
+											"            pm.response.to.have.status(200);",
+											"        });",
+											"",
+											"        // Parse the response body",
+											"        const responseBody = pm.response.json();",
+											"",
+											"        // Perform basic validation on the response",
+											"        pm.test(\"Response has the correct structure\", function () {",
+											"            pm.expect(responseBody).to.be.an('object');",
+											"            pm.expect(responseBody).to.have.property('Id');",
+											"            pm.expect(responseBody).to.have.property('LifeCycle');",
+											"        });",
+											"",
+											"        // Store the complete response in a collection variable",
+											"        pm.collectionVariables.set(\"getOpportunityPayload\", JSON.stringify(responseBody));",
+											"        console.log(`[Post-res ${pm.info.requestName}] Stored response payload for ID: ${responseBody.Id}`);",
+											"",
+											"    } else {",
+											"        console.error(`[Post-res ${pm.info.requestName}] Failed to retrieve Opportunity with ID: ${opportunityId}. Status Code: ${pm.response.code}`);",
+											"",
+											"        pm.test(`[Post-res ${pm.info.requestName}] Retrieval failed`, function () {",
+											"            pm.expect.fail(`Received status code ${pm.response.code}`);",
+											"        });",
+											"    }",
+											"",
+											"} catch (error) {",
+											"    // Handle any errors during response processing",
+											"    console.error(`[Post-res ${pm.info.requestName}] Error processing response:`, error);",
+											"    pm.test(`[Post-res ${pm.info.requestName}] Error in test execution`, function () {",
+											"        pm.expect.fail(error.message);",
+											"    });",
+											"}",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "b15cc49a-c66b-418d-9c96-f49e9da4ca00",
+										"exec": [
+											"// Parse the request payload to extract the Identifier",
+											"const opportunityId = pm.collectionVariables.get(\"opportunityId\");",
+											"",
+											"// Log the start of the action with the Identifier",
+											"console.log(`[Pre-req ${pm.info.requestName}] Starting ${pm.info.requestName} action for Identifier: ${opportunityId}`);"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"id": "064fddb9-34f4-41ed-837a-b147180dd377",
+							"protocolProfileBehavior": {
+								"followRedirects": true,
+								"disableUrlEncoding": false,
+								"disableCookies": false,
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json, text/javascript, */*; q=0.01"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json; charset=UTF-8"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"Catalog\": \"{{catalog}}\",\n    \"Identifier\": \"{{opportunityId}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{BASE_URL}}/GetOpportunity",
+								"description": "[https://docs.aws.amazon.com/partner-central/latest/APIReference/API_GetOpportunity.html](https://docs.aws.amazon.com/partner-central/latest/APIReference/API_GetOpportunity.html)"
+							},
+							"response": []
+						},
+						{
 							"name": "UpdateOpportunity",
 							"event": [
 								{
