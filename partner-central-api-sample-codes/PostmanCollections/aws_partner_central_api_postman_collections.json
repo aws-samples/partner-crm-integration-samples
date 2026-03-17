@@ -17717,7 +17717,7 @@
 	"auth": {
 		"type": "awsv4",
 		"awsv4": {
-			"sessionToken": "{{vault:sessionToken}}",
+			"sessionToken": "",
 			"service": "{{aws.partnercentral.service}}",
 			"region": "{{aws.region}}",
 			"secretKey": "{{vault:aws.secret-key}}",
@@ -17728,7 +17728,7 @@
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "8e189d2f-2da8-47e8-b07f-50afdbd5c76b",
+				"id": "b5e14f87-d58c-4622-8990-23b281288abb",
 				"type": "text/javascript",
 				"packages": {},
 				"requests": {},
@@ -17740,7 +17740,7 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "781887fc-f059-4573-8cb5-2b7f1fdb76b0",
+				"id": "670409fa-bd28-4da5-b8c7-5433d2b89c05",
 				"type": "text/javascript",
 				"packages": {},
 				"requests": {},
@@ -17753,18 +17753,15 @@
 	"variable": [
 		{
 			"key": "catalog",
-			"value": "Sandbox",
-			"type": "string"
+			"value": "Sandbox"
 		},
 		{
 			"key": "companyName",
-			"value": "companyName",
-			"type": "string"
+			"value": "companyName"
 		},
 		{
 			"key": "crm",
-			"value": "yourCRMName",
-			"type": "string"
+			"value": "yourCRMName"
 		},
 		{
 			"key": "rejectingEngagementInvitationID",
@@ -17788,6 +17785,10 @@
 		},
 		{
 			"key": "lastModifiedDate",
+			"value": ""
+		},
+		{
+			"key": "getOpportunityPayload",
 			"value": ""
 		}
 	]
