@@ -822,6 +822,12 @@
     "Description": "Establish private connectivity between VPCs and services hosted on AWS or on-premises, without exposing data to the internet"
   },
   {
+    "Identifier": "AWSRTBFabric",
+    "Name": "AWS RTB Fabric",
+    "Family": "Networking & Content Delivery",
+    "Description": "Run real-time bidding workloads with your AdTech partners on a dedicated network in the cloud"
+  },
+  {
     "Identifier": "AWSResilienceHub",
     "Name": "AWS Resilience Hub",
     "Family": "Management & Governance",
