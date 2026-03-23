@@ -2,7 +2,7 @@
   {
     "Identifier": "AWSAIFactories",
     "Name": "AWS AI Factories",
-    "Family": "AI/ML",
+    "Family": "Compute",
     "Description": "Managed AI infrastructure in your data centers"
   },
   {
@@ -1834,6 +1834,12 @@
     "Name": "Amazon EC2 P6e-GB200",
     "Family": "Compute",
     "Description": "Provides the highest GPU performance for AI training and inference"
+  },
+  {
+    "Identifier": "AmazonEC2P6eGB300",
+    "Name": "Amazon EC2 P6e-GB300",
+    "Family": "Compute",
+    "Description": "NVIDIA GB300-based GPU platform in EC2 for AI/ML training and inference"
   },
   {
     "Identifier": "AmazonEC2RHEL",
