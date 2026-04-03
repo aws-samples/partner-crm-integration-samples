@@ -1332,6 +1332,12 @@
     "Description": "Amazon Bedrock models provided by TwelveLabs"
   },
   {
+    "Identifier": "AmazonBedrockUndisclosedModelProvider",
+    "Name": "Amazon Bedrock - Undisclosed Model Provider",
+    "Family": "AI/ML",
+    "Description": "Large Language Model(LLM) Providers for AWS Bedrock Service"
+  },
+  {
     "Identifier": "AmazonBedrockWriterModels",
     "Name": "Amazon Bedrock - Writer Models",
     "Family": "Machine Learning",
@@ -1510,6 +1516,12 @@
     "Name": "Amazon Connect Guides",
     "Family": "Business Applications",
     "Description": "Help agents resolve issues quickly with programmatic step-by-step guidance"
+  },
+  {
+    "Identifier": "AmazonConnectHealthPointofCare",
+    "Name": "Amazon Connect Health - Point of Care",
+    "Family": "Healthcare AI",
+    "Description": "Point-of-care agents integrate directly into existing clinical workflows, reducing administrative overhead so clinicians can focus on patient care"
   },
   {
     "Identifier": "AmazonConnectHighVolumeOutboundCommunications",
