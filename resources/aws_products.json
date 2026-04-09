@@ -954,6 +954,12 @@
     "Description": "Mitigate risks and lower costs with an ML-powered supply chain application."
   },
   {
+    "Identifier": "AWSSupplyChainBetaService",
+    "Name": "AWS Supply Chain Beta Service",
+    "Family": "AI/ML",
+    "Description": "The AWS Supply Chain Beta Service is an agentic supply chain planning and intelligence solution."
+  },
+  {
     "Identifier": "AWSSupplyChainDemandPlanning",
     "Name": "AWS Supply Chain Demand Planning",
     "Family": "Business Applications",
@@ -1350,6 +1356,12 @@
     "Description": "Amazon Bedrock models provided by poolside"
   },
   {
+    "Identifier": "AmazonBioDiscovery",
+    "Name": "Amazon Bio Discovery",
+    "Family": "Healthcare AI",
+    "Description": "Amazon Bio Discovery is an agentic AI application that provides AI-guided drug design integrated\r\nwith physical lab testing, creating lab-in-the-loop experimentation."
+  },
+  {
     "Identifier": "AmazonBraket",
     "Name": "Amazon Braket",
     "Family": "Quantum Technologies",
@@ -1516,6 +1528,12 @@
     "Name": "Amazon Connect Guides",
     "Family": "Business Applications",
     "Description": "Help agents resolve issues quickly with programmatic step-by-step guidance"
+  },
+  {
+    "Identifier": "AmazonConnectHealthPatientEngagement",
+    "Name": "Amazon Connect Health - Patient Engagement",
+    "Family": "Business Applications",
+    "Description": "A complete AI-powered solution for delivering personalized customer experiences at scale"
   },
   {
     "Identifier": "AmazonConnectHealthPointofCare",
@@ -2928,10 +2946,34 @@
     "Description": "Automates storage cost savings by moving data when access patterns change"
   },
   {
+    "Identifier": "SAPonAWSBDC",
+    "Name": "SAP on AWS \u2013 BDC",
+    "Family": "Compute",
+    "Description": "SAP BDC brings together applications, data and AI in a SaaS experience"
+  },
+  {
+    "Identifier": "SAPonAWSBTP",
+    "Name": "SAP on AWS \u2013 BTP",
+    "Family": "Compute",
+    "Description": "SAP Business Technology Platform (BTP) on AWS is the innovation layer for SAP, enabling customers to extend, integrate, and innovate while keeping their core clean"
+  },
+  {
+    "Identifier": "SAPonAWSGROW",
+    "Name": "SAP on AWS \u2013 GROW",
+    "Family": "Compute",
+    "Description": "SSAP GROW provides a predictable, trusted path to SAP S4/HANA Cloud (Public Edition) on a highly scalable and flexible cloud computing environments."
+  },
+  {
     "Identifier": "SAPonAWSGeneral",
     "Name": "SAP on AWS - General",
     "Family": "Compute",
     "Description": "AWS infrastructure (EC2, Storage) to run SAP on AWS"
+  },
+  {
+    "Identifier": "SAPonAWSLOB",
+    "Name": "SAP on AWS \u2013 LOB",
+    "Family": "Compute",
+    "Description": "SAP structures its enterprise software portfolio around specific Lines of Business (LOB) Applications to address key functional areas within an organization.\r\nProduct Category: Compute"
   },
   {
     "Identifier": "SecurityHubExtended",
