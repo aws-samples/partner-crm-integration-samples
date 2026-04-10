@@ -6,6 +6,12 @@
     "Description": "Managed AI infrastructure in your data centers"
   },
   {
+    "Identifier": "AWSAgentRegistry",
+    "Name": "AWS Agent Registry",
+    "Family": "AI/ML",
+    "Description": "A single place to discover, share, and reuse AI agents, tools, and agent skills across your enterprise"
+  },
+  {
     "Identifier": "AWSAmplify",
     "Name": "AWS Amplify",
     "Family": "Front-End Web & Mobile",
