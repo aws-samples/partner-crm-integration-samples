@@ -1347,7 +1347,7 @@
     "Identifier": "AmazonBedrockUndisclosedModelProvider",
     "Name": "Amazon Bedrock - Undisclosed Model Provider",
     "Family": "AI/ML",
-    "Description": "Large Language Model(LLM) Providers for AWS Bedrock Service"
+    "Description": "Select this only when the customer chooses not to disclose which model provider they are using or testing"
   },
   {
     "Identifier": "AmazonBedrockWriterModels",
