@@ -22,6 +22,7 @@ import GetEngagementInvitation from './components/GetEngagementInvitation';
 import AcceptEngagementInvitation from './components/AcceptEngagementInvitation';
 import RejectEngagementInvitation from './components/RejectEngagementInvitation';
 import SimulateReview from './components/SimulateReview';
+import AgentChat from './components/AgentChat';
 import { clearCredentials } from './utils/sessionStorage';
 
 function App() {
@@ -57,6 +58,7 @@ function App() {
                 <Route path="/reject-engagement-invitation" element={<RejectEngagementInvitation />} />
                 <Route path="/simulate-review" element={<SimulateReview />} />
                 <Route path="/simulate-review/:id" element={<SimulateReview />} />
+                <Route path="/agent-chat" element={<AgentChat />} />
               </Routes>
             </ContentLayout>
           }

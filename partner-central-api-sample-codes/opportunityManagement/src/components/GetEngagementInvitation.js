@@ -13,7 +13,7 @@ import {
   Spinner,
   ColumnLayout
 } from "@cloudscape-design/components";
-import { hasCredentials, getEngagementInvitationId } from '../utils/sessionStorage';
+import { hasCredentials, getEngagementInvitationId, getCredentials } from '../utils/sessionStorage';
 
 function GetEngagementInvitation() {
   const navigate = useNavigate();
@@ -94,7 +94,7 @@ function GetEngagementInvitation() {
               fontSize: '12px'
             }}>
               {JSON.stringify({
-                Catalog: "Sandbox",
+                Catalog: getCredentials().catalog || "Sandbox",
                 Identifier: invitationId.trim()
               }, null, 2)}
             </pre>

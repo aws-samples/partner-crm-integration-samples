@@ -11,7 +11,8 @@ import {
   Box,
   Alert,
   Spinner,
-  ColumnLayout
+  ColumnLayout,
+  ExpandableSection
 } from "@cloudscape-design/components";
 import { hasCredentials, getOpportunityId, getCredentials, saveOpportunityId } from '../utils/sessionStorage';
 import { decodeHtmlEntities } from '../utils/commonUtils';
@@ -21,6 +22,7 @@ import { PartnerCentralSellingClient, GetOpportunityCommand } from "@aws-sdk/cli
 import Overview from './Overview';
 import NextSteps from './NextSteps';
 import TabsSection from './TabsSection';
+import AgentChat from './AgentChat';
 
 // Helper function to clean the response by removing __type attributes
 const cleanResponse = (obj) => {
@@ -232,6 +234,15 @@ function GetOpportunity() {
 
           {/* Tabs Section */}
           <TabsSection opportunity={opportunity} awsOpportunity={awsOpportunity} />
+
+          {/* Agent Chat scoped to this opportunity */}
+          <ExpandableSection
+            variant="container"
+            headerText="Ask the agent about this opportunity"
+            headerDescription="Ask questions, check funding eligibility, or get next-step recommendations. Writes still require approval."
+          >
+            <AgentChat compact initialOpportunityId={opportunity.Id || opportunityId} />
+          </ExpandableSection>
 
           <Header variant="h2">Complete JSON Payload</Header>
           <pre style={{ 

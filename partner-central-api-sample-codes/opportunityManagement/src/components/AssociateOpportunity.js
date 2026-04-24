@@ -16,15 +16,16 @@ import {
   ColumnLayout,
   Checkbox
 } from "@cloudscape-design/components";
+import { getCredentials } from '../utils/sessionStorage';
 
 function AssociateOpportunity() {
   const { id } = useParams();
   const location = useLocation();
   const navigate = useNavigate();
-  
+
   // Get state from location or use defaults
   const opportunityId = location.state?.opportunityId || id;
-  const catalog = location.state?.catalog || 'Sandbox';
+  const catalog = location.state?.catalog || getCredentials().catalog || 'Sandbox';
   
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);

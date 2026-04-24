@@ -11,7 +11,7 @@ import {
   Box,
   Alert
 } from "@cloudscape-design/components";
-import { hasCredentials, getEngagementInvitationId } from '../utils/sessionStorage';
+import { hasCredentials, getEngagementInvitationId, getCredentials } from '../utils/sessionStorage';
 
 function RejectEngagementInvitation() {
   const navigate = useNavigate();
@@ -75,7 +75,7 @@ function RejectEngagementInvitation() {
       
       // Prepare the payload
       const payload = {
-        Catalog: "Sandbox",
+        Catalog: credentials.catalog || "Sandbox",
         Identifier: invitationArn.trim(),
         RejectionReason: rejectionReason.trim()
       };
@@ -163,7 +163,7 @@ function RejectEngagementInvitation() {
               fontSize: '12px'
             }}>
               {JSON.stringify({
-                Catalog: "Sandbox",
+                Catalog: getCredentials().catalog || "Sandbox",
                 Identifier: invitationArn.trim(),
                 RejectionReason: rejectionReason.trim()
               }, null, 2)}
