@@ -5,7 +5,7 @@
   "private": true,
   "homepage": "https://aws-samples.github.io/partner-crm-integration-samples",
   "dependencies": {
-    "@aws-sdk/client-partnercentral-selling": "^3.821.0",
+    "@aws-sdk/client-partnercentral-selling": "^3.1036.0",
     "@cloudscape-design/components": "^3.0.0",
     "@cloudscape-design/global-styles": "^1.0.0",
     "aws-sdk": "^2.1400.0",
