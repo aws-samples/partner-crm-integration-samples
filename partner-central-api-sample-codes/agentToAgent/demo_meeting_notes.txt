@@ -1,0 +1,45 @@
+Acme Corp - AWS Cost Optimization & MAP Migration Planning
+Date: March 15, 2026 | 2:00 PM - 2:45 PM EST
+
+Attendees:
+- Alex Johnson (VP of Engineering, Acme Corp)
+- Sam Chen (Alliance Lead, AWS Partner)
+- Jordan Smith (Partner Account Manager)
+
+Meeting Summary:
+Discussed Acme Corp's cloud optimization initiative and MAP migration planning. The customer's SaaS platform is experiencing rapid growth with monthly AWS spend around $25,000. They need better cost visibility and want to modernize their infrastructure.
+
+Current Infrastructure:
+- EC2 instances (mix of on-demand, some oversized)
+- RDS databases (PostgreSQL)
+- Lambda functions for event processing
+- S3 for data storage
+
+Key Discussion Points:
+
+1. Cost Optimization Opportunities
+   - Identified 30% potential savings through right-sizing EC2 instances
+   - Recommended Reserved Instances for predictable workloads
+   - Suggested implementing cost allocation tags for better visibility
+
+2. MAP Migration Activities
+   - Customer qualifies for Migration Acceleration Program
+   - Focus on modernizing legacy EC2 workloads to containers (ECS/EKS)
+   - Plan to migrate some RDS workloads to Aurora Serverless
+
+3. Technical Architecture Review
+   - AWS Solutions Architect to conduct Well-Architected Review
+   - Need architectural validation for new microservices design
+   - Pricing assistance requested for reserved capacity planning
+
+Action Items:
+- Schedule Well-Architected Review with AWS SA team
+- Prepare cost optimization report with specific recommendations
+- Submit MAP funding request for migration tooling
+- Set up cost allocation tags in customer's AWS account
+- Demo AWS Cost Explorer and Budgets to customer team
+
+Timeline:
+- Cost optimization phase: Complete by end of March
+- MAP migration kickoff: April 2026
+- Target completion: Q3 2026
