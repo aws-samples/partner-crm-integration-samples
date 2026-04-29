@@ -4939,7 +4939,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"Catalog\": \"{{catalog}}\",\n  \"ClientToken\": \"{{$randomUUID}}\",\n  \"EngagementIdentifier\": \"{{engagementId}}\",\n  \"SenderAwsAccountId\": \"aws\",\n  \"SenderCompanyName\": \"AWS\",\n  \"Invitation\": {\n    \"Message\": \"We have a qualified lead from {{$randomCompanyName}} that matches your expertise. Would you like to collaborate?\",\n    \"Receiver\": {\n      \"Account\": {\n        \"AwsAccountId\": \"116669848322\"\n      }\n    },\n    \"PayloadType\": \"LeadInvitation\",\n    \"Payload\": {\n      \"LeadInvitation\": {\n        \"Insights\": {\n          \"EngagementScore\": \"High\"\n        },\n        \"Customer\": {\n          \"CompanyName\": \"{{$randomCompanyName}}\",\n          \"Industry\": \"Software and Internet\",\n          \"CountryCode\": \"US\",\n          \"WebsiteUrl\": \"https://{{$randomDomainName}}\",\n          \"MarketSegment\": \"Enterprise\",\n          \"AwsMaturity\": \"Evaluating\"\n        },\n        \"Interaction\": {\n          \"SourceType\": \"Campaign\",\n          \"SourceId\": \"{{randomBankAccountBic}}\",\n          \"SourceName\": \"Partner Referral Program - 2025\",\n          \"ContactBusinessTitle\": \"{{$randomJobTitle}}\",\n          \"Usecase\": \"Database\"\n        }\n      }\n    }\n  },\n  \"Receiver\": {\n    \"Account\": {\n      \"AwsAccountId\": \"116669848322\"\n    }\n  }\n}",
+									"raw": "{\n  \"Catalog\": \"{{catalog}}\",\n  \"ClientToken\": \"{{$randomUUID}}\",\n  \"EngagementIdentifier\": \"{{engagementId}}\",\n  \"SenderAwsAccountId\": \"aws\",\n  \"SenderCompanyName\": \"AWS\",\n  \"Invitation\": {\n    \"Message\": \"We have a qualified lead from {{$randomCompanyName}} that matches your expertise. Would you like to collaborate?\",\n    \"Receiver\": {\n      \"Account\": {\n        \"AwsAccountId\": \"222222222222\"\n      }\n    },\n    \"PayloadType\": \"LeadInvitation\",\n    \"Payload\": {\n      \"LeadInvitation\": {\n        \"Insights\": {\n          \"EngagementScore\": \"High\"\n        },\n        \"Customer\": {\n          \"CompanyName\": \"{{$randomCompanyName}}\",\n          \"Industry\": \"Software and Internet\",\n          \"CountryCode\": \"US\",\n          \"WebsiteUrl\": \"https://{{$randomDomainName}}\",\n          \"MarketSegment\": \"Enterprise\",\n          \"AwsMaturity\": \"Evaluating\"\n        },\n        \"Interaction\": {\n          \"SourceType\": \"Campaign\",\n          \"SourceId\": \"{{randomBankAccountBic}}\",\n          \"SourceName\": \"Partner Referral Program - 2025\",\n          \"ContactBusinessTitle\": \"{{$randomJobTitle}}\",\n          \"Usecase\": \"Database\"\n        }\n      }\n    }\n  },\n  \"Receiver\": {\n    \"Account\": {\n      \"AwsAccountId\": \"222222222222\"\n    }\n  }\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -4976,6 +4976,209 @@
 							"cookie": [],
 							"responseTime": null,
 							"body": "{\n    \"Arn\": \"arn:aws:partnercentral:us-east-1::catalog/Sandbox/engagement-invitation/engi-5qdeajl1bg9bk\",\n    \"Id\": \"engi-5qdeajl1bg9bk\"\n}"
+						}
+					]
+				},
+				{
+					"name": "CheckForEngagementInvitationFromLogGroup",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "369ddc8f-9c2e-4abe-b586-c1872793c0f5",
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "2e20de5e-447e-48a1-b53d-d7811c1d0814",
+								"exec": [
+									"// --- Helper: convert yyyy-mm-dd → epoch ms ---",
+									"function dateToEpochMs(dateString) {",
+									"    return new Date(dateString + \"T00:00:00Z\").getTime();",
+									"}",
+									"",
+									"function dateToEpochMsEndOfDay(dateString) {",
+									"    return new Date(dateString + \"T23:59:59.999Z\").getTime();",
+									"}",
+									"",
+									"// --- Helper: convert epoch → human readable (optional logging) ---",
+									"function toHumanTime(epochMs) {",
+									"    let d = new Date(epochMs);",
+									"    let yyyy = d.getUTCFullYear();",
+									"    let mm = String(d.getUTCMonth() + 1).padStart(2, \"0\");",
+									"    let dd = String(d.getUTCDate()).padStart(2, \"0\");",
+									"    let HH = String(d.getUTCHours()).padStart(2, \"0\");",
+									"    let MM = String(d.getUTCMinutes()).padStart(2, \"0\");",
+									"    return `${yyyy}-${mm}-${dd} ${HH}:${MM} UTC`;",
+									"}",
+									"",
+									"// ---------------------------------------------------------------------",
+									"// LOG START TIME (24h ago if not stored)",
+									"// ---------------------------------------------------------------------",
+									"let storedStart = pm.collectionVariables.get(\"log_start_time\");",
+									"let finalStartMs;",
+									"",
+									"if (storedStart) {",
+									"    if (/^\\d{4}-\\d{2}-\\d{2}$/.test(storedStart)) {",
+									"        // yyyy-mm-dd → epoch ms",
+									"        finalStartMs = dateToEpochMs(storedStart);",
+									"        console.log(\"Using stored log_start_time (date):\", storedStart, \"->\", finalStartMs, toHumanTime(finalStartMs));",
+									"    } else {",
+									"        // existing epoch ms",
+									"        finalStartMs = Number(storedStart);",
+									"        console.log(\"Using stored log_start_time (epoch):\", finalStartMs, toHumanTime(finalStartMs));",
+									"    }",
+									"} else {",
+									"    // Default: now - 24 hours",
+									"    finalStartMs = Date.now() - (86400 * 1000);",
+									"    pm.collectionVariables.set(\"log_start_time\", finalStartMs);",
+									"    console.log(\"Created new log_start_time (24h ago):\", finalStartMs, toHumanTime(finalStartMs));",
+									"}",
+									"",
+									"// Always expose to current request",
+									"pm.variables.set(\"log_start_time\", finalStartMs);",
+									"",
+									"// ---------------------------------------------------------------------",
+									"// LOG END TIME (now if not stored)",
+									"// ---------------------------------------------------------------------",
+									"let storedEnd = pm.collectionVariables.get(\"log_end_time\");",
+									"let finalEndMs;",
+									"",
+									"if (storedEnd) {",
+									"    if (/^\\d{4}-\\d{2}-\\d{2}$/.test(storedEnd)) {",
+									"        finalEndMs = dateToEpochMsEndOfDay(storedEnd);",
+									"        console.log(\"Using stored log_end_time (date):\", storedEnd, \"->\", finalEndMs, toHumanTime(finalEndMs));",
+									"    } else {",
+									"        finalEndMs = Number(storedEnd);",
+									"        console.log(\"Using stored log_end_time (epoch):\", finalEndMs, toHumanTime(finalEndMs));",
+									"    }",
+									"} else {",
+									"    // Default: now",
+									"    finalEndMs = Date.now();",
+									"    pm.collectionVariables.set(\"log_end_time\", finalEndMs);",
+									"    console.log(\"Created new log_end_time (now):\", finalEndMs, toHumanTime(finalEndMs));",
+									"}",
+									"",
+									"// Always expose to current request",
+									"pm.variables.set(\"log_end_time\", finalEndMs);"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"id": "d06fbd1a-95d7-4635-8d0e-1b211f947417",
+					"protocolProfileBehavior": {
+						"followRedirects": true,
+						"disableUrlEncoding": false,
+						"disableCookies": false,
+						"disableBodyPruning": true,
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "awsv4",
+							"awsv4": {
+								"sessionToken": "{{vault:aws.sessionToken.receiving}}",
+								"secretKey": "{{vault:aws.secretKey.receiving}}",
+								"accessKey": "{{vault:aws.accessKey.receiving}}",
+								"region": "{{aws.region}}",
+								"service": "{{aws.logs.service}}",
+								"addAuthDataToQuery": false
+							}
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json, text/javascript, */*; q=0.01"
+							},
+							{
+								"key": "X-Amz-Target",
+								"value": "Logs_20140328.FilterLogEvents"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/x-amz-json-1.1"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"logGroupName\": \"{{CLOUDWATCH_LOG_GROUP}}\",\n  \"startTime\": {{log_start_time}},\n  \"endTime\": {{log_end_time}},\n  \"filterPattern\": \"\\\"Engagement Invitation Created\\\"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "https://logs.us-east-1.amazonaws.com",
+						"description": "Use FilterLogEvents API action to find the log entries for the engagement invitation from AWS. You can set log_start_time and log_end_time in the collection variable in yyyy-mm-dd format. If you don't set it, the value will be automatically calculated as 24-hr ago in the number of milliseconds after Jan 1, 1970 00:00:00 UTC. log_end_time is set to current time and log_end_time is set to 24 hours ago. You also need to set the {{CLOUDWATCH_LOG_GROUP}} variable which is used in the request payload."
+					},
+					"response": [
+						{
+							"id": "967b5728-f7ff-42ed-a705-630c75e73a22",
+							"name": "CheckForEngagementInvitationFromLogGroup",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json, text/javascript, */*; q=0.01"
+									},
+									{
+										"key": "X-Amz-Target",
+										"value": "Logs_20140328.FilterLogEvents"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/x-amz-json-1.1"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"logGroupName\": \"{{CLOUDWATCH_LOG_GROUP}}\",\n  \"startTime\": {{log_start_time}},\n  \"endTime\": {{log_end_time}},\n  \"filterPattern\": \"\\\"Engagement Invitation Created\\\"\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "https://logs.us-east-1.amazonaws.com"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "x-amzn-RequestId",
+									"value": "cf8a722d-1bc2-4c1d-8ad5-bb549ebf78af"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/x-amz-json-1.1"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1493"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 09 Mar 2026 21:15:06 GMT"
+								}
+							],
+							"cookie": [],
+							"responseTime": null,
+							"body": "{\n    \"events\": [\n        {\n            \"eventId\": \"39541222706575617756982692165757659845046056272482992128\",\n            \"ingestionTime\": 1773089749920,\n            \"logStreamName\": \"04558373-93ea-3665-b79d-d83554559b0f\",\n            \"message\": \"{\\\"version\\\":\\\"0\\\",\\\"id\\\":\\\"884794a9-f5f6-cfd1-0aa8-cf9d30f6b12f\\\",\\\"detail-type\\\":\\\"Engagement Invitation Created\\\",\\\"source\\\":\\\"aws.partnercentral-selling\\\",\\\"account\\\":\\\"222222222222\\\",\\\"time\\\":\\\"2026-03-09T01:50:25Z\\\",\\\"region\\\":\\\"us-east-1\\\",\\\"resources\\\":[\\\"arn:aws:partnercentral:us-east-1::catalog/Sandbox/engagement-invitation/engi-dansn8enotil9\\\"],\\\"detail\\\":{\\\"catalog\\\":\\\"Sandbox\\\",\\\"schemaVersion\\\":\\\"1.0\\\",\\\"engagementInvitation\\\":{\\\"arn\\\":\\\"arn:aws:partnercentral:us-east-1::catalog/Sandbox/engagement-invitation/engi-dansn8enotil9\\\",\\\"id\\\":\\\"engi-dansn8enotil9\\\",\\\"engagementId\\\":\\\"eng-xjn5vr10vyjm1t\\\",\\\"senderAccountId\\\":\\\"111111111111\\\",\\\"receiverAccountId\\\":\\\"222222222222\\\",\\\"senderCompanyName\\\":\\\"MingZ Test Account\\\",\\\"expirationDate\\\":\\\"2031-03-08T01:50:25.685385312Z\\\",\\\"participantType\\\":\\\"RECEIVER\\\",\\\"payloadType\\\":\\\"LeadInvitation\\\"}}}\",\n            \"timestamp\": 1773089749000\n        }\n    ],\n    \"nextToken\": \"Bxkq6kVGFtq2y_MoigeqscPOdhXVbhiVtLoAmXb5jCqdvNUxceCCkYWgticNDzmkkjDzxhiTonpVVXVddbdVyYO-5YF_WVD19bjtXKGsLAyO-t7QKhsSdutvbhsrOjTTf0U6TWajrkA4SLNIQOYIPiUYTpzKJ-JDhMvJn9SGtutylEY3SBofUAgtAalYOxiPjO_B23lIn7dC_IUBwwtsgqDThUTyy62jMAklh5uXqT6tkQXDLf633PsUiPeuTSh7oj6v4YlT_OAIrv1pMKn__THfCBpDVO3DOLwM-Z8Snj8\",\n    \"searchStatistics\": {\n        \"approximateTotalLogStreamCount\": 0,\n        \"completedLogStreamCount\": 0\n    },\n    \"searchedLogStreams\": []\n}"
 						}
 					]
 				},
@@ -5058,7 +5261,7 @@
 							],
 							"cookie": [],
 							"responseTime": null,
-							"body": "{\n    \"Arn\": \"arn:aws:partnercentral:us-east-1::catalog/Sandbox/engagement-invitation/engi-5qdeajl1bg9bk\",\n    \"Catalog\": \"Sandbox\",\n    \"EngagementDescription\": \"Lead generated from recent campaign activities\",\n    \"EngagementId\": \"eng-m1l0v2mnccwtv4\",\n    \"EngagementTitle\": \"New Business Deal - 4974 Initiative\",\n    \"ExistingMembers\": [\n        {\n            \"CompanyName\": \"Test Partner Selling 30\",\n            \"WebsiteUrl\": \"https://www.google.com\"\n        },\n        {\n            \"CompanyName\": \"MingZ Test Account\",\n            \"WebsiteUrl\": \"null\"\n        }\n    ],\n    \"ExpirationDate\": null,\n    \"Id\": \"engi-5qdeajl1bg9bk\",\n    \"InvitationDate\": \"2025-12-15T19:58:48.669023715Z\",\n    \"InvitationMessage\": \"We have a qualified lead from Balistreri, Kerluke and Green that matches your expertise. Would you like to collaborate?\",\n    \"Payload\": {\n        \"LeadInvitation\": {\n            \"Customer\": {\n                \"AwsMaturity\": \"Evaluating\",\n                \"CompanyName\": \"Stroman, Littel and Champlin\",\n                \"CountryCode\": \"US\",\n                \"Industry\": \"Software and Internet\",\n                \"MarketSegment\": \"Enterprise\",\n                \"WebsiteUrl\": \"https://reese.biz\"\n            },\n            \"Interaction\": {\n                \"ContactBusinessTitle\": \"Corporate Program Agent\",\n                \"SourceId\": \"TFTRUZV3\",\n                \"SourceName\": \"Partner Referral Program - 2025\",\n                \"SourceType\": \"Campaign\",\n                \"Usecase\": \"Database\"\n            }\n        }\n    },\n    \"PayloadType\": \"LeadInvitation\",\n    \"Receiver\": {\n        \"Account\": {\n            \"Alias\": null,\n            \"AwsAccountId\": \"111111111111\"\n        }\n    },\n    \"RejectionReason\": null,\n    \"SenderAwsAccountId\": \"222222222222\",\n    \"SenderCompanyName\": \"MingZ Test Account\",\n    \"Status\": \"ACCEPTED\"\n}"
+							"body": "{\n    \"Arn\": \"arn:aws:partnercentral:us-east-1::catalog/Sandbox/engagement-invitation/engi-5qdeajl1bg9bk\",\n    \"Catalog\": \"Sandbox\",\n    \"EngagementDescription\": \"Lead generated from recent campaign activities\",\n    \"EngagementId\": \"eng-m1l0v2mnccwtv4\",\n    \"EngagementTitle\": \"New Business Deal - 4974 Initiative\",\n    \"ExistingMembers\": [\n        {\n            \"CompanyName\": \"Test Partner Selling 30\",\n            \"WebsiteUrl\": \"https://www.google.com\"\n        },\n        {\n            \"CompanyName\": \"MingZ Test Account\",\n            \"WebsiteUrl\": \"null\"\n        }\n    ],\n    \"ExpirationDate\": null,\n    \"Id\": \"engi-5qdeajl1bg9bk\",\n    \"InvitationDate\": \"2025-12-15T19:58:48.669023715Z\",\n    \"InvitationMessage\": \"We have a qualified lead from Balistreri, Kerluke and Green that matches your expertise. Would you like to collaborate?\",\n    \"Payload\": {\n        \"LeadInvitation\": {\n            \"Customer\": {\n                \"AwsMaturity\": \"Evaluating\",\n                \"CompanyName\": \"Stroman, Littel and Champlin\",\n                \"CountryCode\": \"US\",\n                \"Industry\": \"Software and Internet\",\n                \"MarketSegment\": \"Enterprise\",\n                \"WebsiteUrl\": \"https://reese.biz\"\n            },\n            \"Interaction\": {\n                \"ContactBusinessTitle\": \"Corporate Program Agent\",\n                \"SourceId\": \"TFTRUZV3\",\n                \"SourceName\": \"Partner Referral Program - 2025\",\n                \"SourceType\": \"Campaign\",\n                \"Usecase\": \"Database\"\n            }\n        }\n    },\n    \"PayloadType\": \"LeadInvitation\",\n    \"Receiver\": {\n        \"Account\": {\n            \"Alias\": null,\n            \"AwsAccountId\": \"111111111111\"\n        }\n    },\n    \"RejectionReason\": null,\n    \"SenderAwsAccountId\": \"222222222222\",\n    \"SenderCompanyName\": \"MingZ Test Account\",\n    \"Status\": \"PENDING\"\n}"
 						}
 					]
 				},
@@ -9099,6 +9302,108 @@
 								}
 							],
 							"id": "2df816d1-9a7d-414a-930a-e9f4aad44d86",
+							"protocolProfileBehavior": {
+								"followRedirects": true,
+								"disableUrlEncoding": false,
+								"disableCookies": false,
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json, text/javascript, */*; q=0.01"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json; charset=UTF-8"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"Catalog\": \"{{catalog}}\",\n    \"Identifier\": \"{{opportunityId}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{BASE_URL}}/GetOpportunity",
+								"description": "[https://docs.aws.amazon.com/partner-central/latest/APIReference/API_GetOpportunity.html](https://docs.aws.amazon.com/partner-central/latest/APIReference/API_GetOpportunity.html)"
+							},
+							"response": []
+						},
+						{
+							"name": "GetOpportunity Copy",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "e4ecb04c-f901-41b2-a9a9-d0cd50c2b469",
+										"exec": [
+											"try {",
+											"    // Retrieve the opportunityId from Postman collection variables",
+											"    const opportunityId = pm.collectionVariables.get(\"opportunityId\");",
+											"",
+											"    // Check the response status and log accordingly",
+											"    if (pm.response.code === 200) {",
+											"        pm.test(`[Post-res ${pm.info.requestName}] Successfully retrieved Opportunity with ID: ${opportunityId}`, function () {",
+											"            pm.response.to.have.status(200);",
+											"        });",
+											"",
+											"        // Parse the response body",
+											"        const responseBody = pm.response.json();",
+											"",
+											"        // Perform basic validation on the response",
+											"        pm.test(\"Response has the correct structure\", function () {",
+											"            pm.expect(responseBody).to.be.an('object');",
+											"            pm.expect(responseBody).to.have.property('Id');",
+											"            pm.expect(responseBody).to.have.property('LifeCycle');",
+											"        });",
+											"",
+											"        // Store the complete response in a collection variable",
+											"        pm.collectionVariables.set(\"getOpportunityPayload\", JSON.stringify(responseBody));",
+											"        console.log(`[Post-res ${pm.info.requestName}] Stored response payload for ID: ${responseBody.Id}`);",
+											"",
+											"    } else {",
+											"        console.error(`[Post-res ${pm.info.requestName}] Failed to retrieve Opportunity with ID: ${opportunityId}. Status Code: ${pm.response.code}`);",
+											"",
+											"        pm.test(`[Post-res ${pm.info.requestName}] Retrieval failed`, function () {",
+											"            pm.expect.fail(`Received status code ${pm.response.code}`);",
+											"        });",
+											"    }",
+											"",
+											"} catch (error) {",
+											"    // Handle any errors during response processing",
+											"    console.error(`[Post-res ${pm.info.requestName}] Error processing response:`, error);",
+											"    pm.test(`[Post-res ${pm.info.requestName}] Error in test execution`, function () {",
+											"        pm.expect.fail(error.message);",
+											"    });",
+											"}",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "b15cc49a-c66b-418d-9c96-f49e9da4ca00",
+										"exec": [
+											"// Parse the request payload to extract the Identifier",
+											"const opportunityId = pm.collectionVariables.get(\"opportunityId\");",
+											"",
+											"// Log the start of the action with the Identifier",
+											"console.log(`[Pre-req ${pm.info.requestName}] Starting ${pm.info.requestName} action for Identifier: ${opportunityId}`);"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"id": "064fddb9-34f4-41ed-837a-b147180dd377",
 							"protocolProfileBehavior": {
 								"followRedirects": true,
 								"disableUrlEncoding": false,
@@ -13667,6 +13972,876 @@
 			"id": "315c3d47-b860-4e67-b2d4-b56dac666ac2"
 		},
 		{
+			"name": "Working with deal sizing insights",
+			"item": [
+				{
+					"name": "CreateOpportunity-Amount",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "c810ef7b-ecaa-43cd-a6e7-559315346ce9",
+								"exec": [
+									"try {",
+									"   ",
+									"    const requestTitle = \"New Business Deal\"; // Base title for the opportunity",
+									"    const opportunityAmount = Math.floor(Math.random() * (32000 - 12000 + 1)) + 12000; // Random amount between 12000 and 32000",
+									"    const randomSuffix = Math.floor(Math.random() * (9999 - 1000 + 1)) + 1000; // Random 4-digit number",
+									"    const opportunityTitle = `${requestTitle} - ${randomSuffix}`;",
+									"    console.log(`amount ${opportunityAmount} random suffix ${randomSuffix} opportunity title ${opportunityTitle}`);",
+									"",
+									"    // Save the generated opportunity details as local variables",
+									"    pm.variables.set('opportunityTitle', opportunityTitle);",
+									"    pm.variables.set('opportunityAmount', opportunityAmount);",
+									"    console.log(`[${pm.info.requestName}] Generated Opportunity Title: ${opportunityTitle}`);",
+									"    console.log(`[${pm.info.requestName}] Generated Opportunity Amount: ${opportunityAmount}`);",
+									"",
+									"    // Calculate target close date (one year from today)",
+									"    const today = new Date();",
+									"    const oneYearFromToday = new Date(today.getFullYear() + 1, today.getMonth(), today.getDate());",
+									"    const year = oneYearFromToday.getFullYear();",
+									"    const month = String(oneYearFromToday.getMonth() + 1).padStart(2, '0');",
+									"    const day = String(oneYearFromToday.getDate()).padStart(2, '0');",
+									"    const targetCloseDate = `${year}-${month}-${day}`;",
+									"    ",
+									"    pm.variables.set('targetCloseDate', targetCloseDate);",
+									"    console.log(`[${pm.info.requestName}] Generated Target Close Date: ${targetCloseDate}`);",
+									"",
+									"} catch (error) {",
+									"    // Handle any errors during token generation or opportunity detail generation",
+									"    console.error(`[${pm.info.requestName}] Error occurred:`, error);",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "13a38821-c74a-4908-b9da-2b64631e6d53",
+								"exec": [
+									"try {",
+									"     opportunityId = pm.response.json().Id;",
+									"",
+									"    // Save the opportunityId to a collection variable",
+									"    pm.collectionVariables.set('opportunityId', opportunityId);",
+									"",
+									"    // Log the opportunity creation",
+									"    console.log(`Created opportunity with ID ${opportunityId}`);",
+									"",
+									"    // Add a test to validate the opportunityId extraction",
+									"    pm.test(`[Post-res ${pm.info.requestName}] Validate opportunity ID extraction`, function () {",
+									"        pm.response.to.have.status(200); // Ensure the response status is 200",
+									"        pm.expect(opportunityId).to.exist; // Ensure opportunityId exists",
+									"        pm.expect(opportunityId).to.not.be.empty; // Ensure opportunityId is not empty",
+									"        console.log(`[Post-res ${pm.info.requestName}] Opportunity ID ${opportunityId} successfully extracted and stored.`);",
+									"    });",
+									"",
+									"} catch (error) {",
+									"    // Handle any additional errors",
+									"    console.error(`[${pm.info.requestName}] Failed to extract response data:`, error);",
+									"",
+									"    // Add a test to capture the error",
+									"    pm.test(`[Post-res ${pm.info.requestName}] Error occurred while processing response`, function () {",
+									"        throw error; // Fail the test if an error occurs",
+									"    });",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"id": "b3525270-aa29-49ad-9364-9a4694bcd810",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true,
+						"followRedirects": true,
+						"disableUrlEncoding": false,
+						"disableCookies": false
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"ClientToken\": \"{{$guid}}\",\n  \"Catalog\": \"{{catalog}}\",\n  \"TagKeys\": [\n    \"MAP\",\n    \"CostOptimization\"\n  ],\n  \"CreatedDate\": \"2026-02-03T21:30:00Z\",\n  \"Origin\": \"Partner Referral\",\n  \"Customer\": {\n    \"Account\": {\n      \"Address\": {\n        \"PostalCode\": \"10003\",\n        \"City\": \"New York\",\n        \"StateOrRegion\": \"New York\",\n        \"CountryCode\": \"US\",\n        \"StreetAddress\": null\n      },\n      \"CompanyName\": \"{{$randomCompanyName}}\",\n      \"Duns\": \"111100111\",\n      \"Industry\": \"Marketing and Advertising\",\n      \"OtherIndustry\": null,\n      \"WebsiteUrl\": \"https://www.abc.com\"\n    },\n    \"Contacts\": [\n      {\n        \"BusinessTitle\": \"VP of Engineering\",\n        \"Email\": \"test@mail.com\",\n        \"FirstName\": \"{{$randomFirstName}}\",\n        \"LastName\": \"{{$randomLastName}}\",\n        \"Phone\": \"+14164208519\"\n      }\n    ]\n  },\n  \"LifeCycle\": {\n    \"ClosedLostReason\": null,\n    \"NextSteps\": \"Implement identified EC2 and RDS cost optimizations and begin MAP migration activities\",\n    \"NextStepsHistory\": null,\n    \"ReviewComments\": null,\n    \"ReviewStatus\": \"Pending Submission\",\n    \"ReviewStatusReason\": null,\n    \"Stage\": \"Prospect\",\n    \"TargetCloseDate\": \"{{targetCloseDate}}\"\n  },\n  \"Marketing\": {\n    \"AwsFundingUsed\": \"Yes\",\n    \"CampaignName\": \"MAP-Cost-Optimization-Engagement\",\n    \"Channels\": [],\n    \"Source\": \"Marketing Activity\",\n    \"UseCases\": [\n      \"Migration & Transfer\",\n      \"Business Applications\"\n    ]\n  },\n  \"NationalSecurity\": \"No\",\n  \"OpportunityTeam\": [\n    {\n      \"BusinessTitle\": \"PartnerAccountManager\",\n      \"Email\": \"test@mail.com\",\n      \"FirstName\": \"{{$randomFirstName}}\",\n      \"LastName\": \"{{$randomLastName}}\",\n      \"Phone\": \"+14164208510\"\n    }\n  ],\n  \"OpportunityType\": \"Expansion\",\n  \"PartnerId\": \"dsbfghf\",\n  \"PartnerOpportunityIdentifier\": null,\n  \"PrimaryNeedsFromAws\": [\n    \"Co-Sell - Architectural Validation\",\n    \"Co-Sell - Pricing Assistance\"\n  ],\n  \"Project\": {\n    \"AdditionalComments\": \"Engagement focuses on MAP-eligible workloads, improved cost allocation tagging, and modernization to managed and cloud-native services.\",\n    \"ApnPrograms\": [\n      \"Migration Acceleration Program\"\n    ],\n    \"CustomerUseCase\": \"Cloud Management Tools & DevOps with Continuous Integration & Continuous Delivery (CICD)\",\n    \"CompetitorName\": null,\n    \"CustomerBusinessProblem\": \"The customer operates a growing SaaS platform with workloads on EC2, RDS, Lambda, and S3. Rapid growth led to rising monthly spend and limited cost visibility. The customer seeks to optimize infrastructure costs, improve cost allocation, and modernize toward managed and cloud-native AWS services while maintaining scalability.\",\n    \"ExpectedCustomerSpend\": [\n      {\n        \"Amount\": \"25000.00\",\n        \"CurrencyCode\": \"USD\",\n        \"Frequency\": \"Monthly\",\n        \"TargetCompany\": \"AWS\"\n      }\n    ],\n    \"DeliveryModels\": [\n      \"SaaS or PaaS\"\n    ],\n    \"OtherCompetitorNames\": null,\n    \"OtherSolutionDescription\": \"OtherSolnDesc\",\n    \"RelatedOpportunityIdentifier\": null,\n    \"SalesActivities\": [\n      \"Conducted POC / Demo\",\n      \"In evaluation / planning stage\",\n      \"Customer has shown interest in solution\"\n    ],\n    \"Title\": \"{{opportunityTitle}}\"\n  }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{BASE_URL}}/CreateOpportunity",
+						"description": "### Providing Manual MRR Estimates\n\nPartners can manually enter MRR estimates using the `Project.ExpectedCustomerSpend[].Amount` field,\n\nThis field is available to all Partners and can be used to accept AI forecasts by setting the same value or to override with Partner-provided values."
+					},
+					"response": [
+						{
+							"id": "c6c25d87-398d-4760-9fdd-766d6e15dd0d",
+							"name": "CreateOpportunity-Amount",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"ClientToken\": \"{{$guid}}\",\n  \"Catalog\": \"{{catalog}}\",\n  \"TagKeys\": [\n    \"MAP\",\n    \"CostOptimization\"\n  ],\n  \"CreatedDate\": \"2026-02-03T21:30:00Z\",\n  \"Origin\": \"Partner Referral\",\n  \"Customer\": {\n    \"Account\": {\n      \"Address\": {\n        \"PostalCode\": \"10003\",\n        \"City\": \"New York\",\n        \"StateOrRegion\": \"New York\",\n        \"CountryCode\": \"US\",\n        \"StreetAddress\": null\n      },\n      \"CompanyName\": \"{{$randomCompanyName}}\",\n      \"Duns\": \"111100111\",\n      \"Industry\": \"Marketing and Advertising\",\n      \"OtherIndustry\": null,\n      \"WebsiteUrl\": \"https://www.abc.com\"\n    },\n    \"Contacts\": [\n      {\n        \"BusinessTitle\": \"VP of Engineering\",\n        \"Email\": \"test@mail.com\",\n        \"FirstName\": \"{{$randomFirstName}}\",\n        \"LastName\": \"{{$randomLastName}}\",\n        \"Phone\": \"+14164208519\"\n      }\n    ]\n  },\n  \"LifeCycle\": {\n    \"ClosedLostReason\": null,\n    \"NextSteps\": \"Implement identified EC2 and RDS cost optimizations and begin MAP migration activities\",\n    \"NextStepsHistory\": null,\n    \"ReviewComments\": null,\n    \"ReviewStatus\": \"Pending Submission\",\n    \"ReviewStatusReason\": null,\n    \"Stage\": \"Prospect\",\n    \"TargetCloseDate\": \"{{targetCloseDate}}\"\n  },\n  \"Marketing\": {\n    \"AwsFundingUsed\": \"Yes\",\n    \"CampaignName\": \"MAP-Cost-Optimization-Engagement\",\n    \"Channels\": [],\n    \"Source\": \"Marketing Activity\",\n    \"UseCases\": [\n      \"Migration & Transfer\",\n      \"Business Applications\"\n    ]\n  },\n  \"NationalSecurity\": \"No\",\n  \"OpportunityTeam\": [\n    {\n      \"BusinessTitle\": \"PartnerAccountManager\",\n      \"Email\": \"test@mail.com\",\n      \"FirstName\": \"{{$randomFirstName}}\",\n      \"LastName\": \"{{$randomLastName}}\",\n      \"Phone\": \"+14164208510\"\n    }\n  ],\n  \"OpportunityType\": \"Expansion\",\n  \"PartnerId\": \"dsbfghf\",\n  \"PartnerOpportunityIdentifier\": null,\n  \"PrimaryNeedsFromAws\": [\n    \"Co-Sell - Architectural Validation\",\n    \"Co-Sell - Pricing Assistance\"\n  ],\n  \"Project\": {\n    \"AdditionalComments\": \"Engagement focuses on MAP-eligible workloads, improved cost allocation tagging, and modernization to managed and cloud-native services.\",\n    \"ApnPrograms\": [\n      \"Migration Acceleration Program\"\n    ],\n    \"CustomerUseCase\": \"Cloud Management Tools & DevOps with Continuous Integration & Continuous Delivery (CICD)\",\n    \"CompetitorName\": null,\n    \"CustomerBusinessProblem\": \"The customer operates a growing SaaS platform with workloads on EC2, RDS, Lambda, and S3. Rapid growth led to rising monthly spend and limited cost visibility. The customer seeks to optimize infrastructure costs, improve cost allocation, and modernize toward managed and cloud-native AWS services while maintaining scalability.\",\n    \"ExpectedCustomerSpend\": [\n      {\n        \"Amount\": \"25000.00\",\n        \"CurrencyCode\": \"USD\",\n        \"Frequency\": \"Monthly\",\n        \"TargetCompany\": \"AWS\"\n      }\n    ],\n    \"DeliveryModels\": [\n      \"SaaS or PaaS\"\n    ],\n    \"OtherCompetitorNames\": null,\n    \"OtherSolutionDescription\": \"OtherSolnDesc\",\n    \"RelatedOpportunityIdentifier\": null,\n    \"SalesActivities\": [\n      \"Conducted POC / Demo\",\n      \"In evaluation / planning stage\",\n      \"Customer has shown interest in solution\"\n    ],\n    \"Title\": \"{{opportunityTitle}}\"\n  }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{BASE_URL}}/CreateOpportunity"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 04 Feb 2026 05:18:26 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "100"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "x-amzn-RequestId",
+									"value": "ddc2e0a4-521c-4142-9087-3fa28eb52d42"
+								}
+							],
+							"cookie": [],
+							"responseTime": null,
+							"body": "{\n    \"Id\": \"O12220145\",\n    \"LastModifiedDate\": \"2026-02-04T05:18:25.803Z\",\n    \"PartnerOpportunityIdentifier\": null\n}"
+						}
+					]
+				},
+				{
+					"name": "CreateOpportunity-EstimationUrl",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "47795e57-3521-4a66-8632-0fc131a2a146",
+								"exec": [
+									"try {",
+									"   ",
+									"    const requestTitle = \"New Business Deal\"; // Base title for the opportunity",
+									"    const opportunityAmount = Math.floor(Math.random() * (32000 - 12000 + 1)) + 12000; // Random amount between 12000 and 32000",
+									"    const randomSuffix = Math.floor(Math.random() * (9999 - 1000 + 1)) + 1000; // Random 4-digit number",
+									"    const opportunityTitle = `${requestTitle} - ${randomSuffix}`;",
+									"    console.log(`amount ${opportunityAmount} random suffix ${randomSuffix} opportunity title ${opportunityTitle}`);",
+									"",
+									"    // Save the generated opportunity details as local variables",
+									"    pm.variables.set('opportunityTitle', opportunityTitle);",
+									"    pm.variables.set('opportunityAmount', opportunityAmount);",
+									"    console.log(`[${pm.info.requestName}] Generated Opportunity Title: ${opportunityTitle}`);",
+									"    console.log(`[${pm.info.requestName}] Generated Opportunity Amount: ${opportunityAmount}`);",
+									"",
+									"    // Calculate target close date (one year from today)",
+									"    const today = new Date();",
+									"    const oneYearFromToday = new Date(today.getFullYear() + 1, today.getMonth(), today.getDate());",
+									"    const year = oneYearFromToday.getFullYear();",
+									"    const month = String(oneYearFromToday.getMonth() + 1).padStart(2, '0');",
+									"    const day = String(oneYearFromToday.getDate()).padStart(2, '0');",
+									"    const targetCloseDate = `${year}-${month}-${day}`;",
+									"    ",
+									"    pm.variables.set('targetCloseDate', targetCloseDate);",
+									"    console.log(`[${pm.info.requestName}] Generated Target Close Date: ${targetCloseDate}`);",
+									"",
+									"} catch (error) {",
+									"    // Handle any errors during token generation or opportunity detail generation",
+									"    console.error(`[${pm.info.requestName}] Error occurred:`, error);",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "1686e96c-db2b-4848-9832-b41ca629d846",
+								"exec": [
+									"try {",
+									"     opportunityId = pm.response.json().Id;",
+									"",
+									"    // Save the opportunityId to a collection variable",
+									"    pm.collectionVariables.set('opportunityId', opportunityId);",
+									"",
+									"    // Log the opportunity creation",
+									"    console.log(`Created opportunity with ID ${opportunityId}`);",
+									"",
+									"    // Add a test to validate the opportunityId extraction",
+									"    pm.test(`[Post-res ${pm.info.requestName}] Validate opportunity ID extraction`, function () {",
+									"        pm.response.to.have.status(200); // Ensure the response status is 200",
+									"        pm.expect(opportunityId).to.exist; // Ensure opportunityId exists",
+									"        pm.expect(opportunityId).to.not.be.empty; // Ensure opportunityId is not empty",
+									"        console.log(`[Post-res ${pm.info.requestName}] Opportunity ID ${opportunityId} successfully extracted and stored.`);",
+									"    });",
+									"",
+									"} catch (error) {",
+									"    // Handle any additional errors",
+									"    console.error(`[${pm.info.requestName}] Failed to extract response data:`, error);",
+									"",
+									"    // Add a test to capture the error",
+									"    pm.test(`[Post-res ${pm.info.requestName}] Error occurred while processing response`, function () {",
+									"        throw error; // Fail the test if an error occurs",
+									"    });",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"id": "1473b53b-441c-4821-a09b-bd3d38a0ef30",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true,
+						"followRedirects": true,
+						"disableUrlEncoding": false,
+						"disableCookies": false
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"ClientToken\": \"{{$guid}}\",\n  \"Catalog\": \"{{catalog}}\",\n  \"TagKeys\": [\n    \"MAP\",\n    \"CostOptimization\"\n  ],\n  \"CreatedDate\": \"2026-02-03T21:30:00Z\",\n  \"Origin\": \"Partner Referral\",\n  \"Customer\": {\n    \"Account\": {\n      \"Address\": {\n        \"PostalCode\": \"10003\",\n        \"City\": \"New York\",\n        \"StateOrRegion\": \"New York\",\n        \"CountryCode\": \"US\",\n        \"StreetAddress\": null\n      },\n      \"CompanyName\": \"{{$randomCompanyName}}\",\n      \"Duns\": \"111100111\",\n      \"Industry\": \"Marketing and Advertising\",\n      \"OtherIndustry\": null,\n      \"WebsiteUrl\": \"https://www.abc.com\"\n    },\n    \"Contacts\": [\n      {\n        \"BusinessTitle\": \"VP of Engineering\",\n        \"Email\": \"test@mail.com\",\n        \"FirstName\": \"{{$randomFirstName}}\",\n        \"LastName\": \"{{$randomLastName}}\",\n        \"Phone\": \"+14164208519\"\n      }\n    ]\n  },\n  \"LifeCycle\": {\n    \"ClosedLostReason\": null,\n    \"NextSteps\": \"Implement identified EC2 and RDS cost optimizations and begin MAP migration activities\",\n    \"NextStepsHistory\": null,\n    \"ReviewComments\": null,\n    \"ReviewStatus\": \"Pending Submission\",\n    \"ReviewStatusReason\": null,\n    \"Stage\": \"Prospect\",\n    \"TargetCloseDate\": \"{{targetCloseDate}}\"\n  },\n  \"Marketing\": {\n    \"AwsFundingUsed\": \"Yes\",\n    \"CampaignName\": \"MAP-Cost-Optimization-Engagement\",\n    \"Channels\": [],\n    \"Source\": \"Marketing Activity\",\n    \"UseCases\": [\n      \"Migration & Transfer\",\n      \"Business Applications\"\n    ]\n  },\n  \"NationalSecurity\": \"No\",\n  \"OpportunityTeam\": [\n    {\n      \"BusinessTitle\": \"PartnerAccountManager\",\n      \"Email\": \"test@mail.com\",\n      \"FirstName\": \"{{$randomFirstName}}\",\n      \"LastName\": \"{{$randomLastName}}\",\n      \"Phone\": \"+14164208510\"\n    }\n  ],\n  \"OpportunityType\": \"Expansion\",\n  \"PartnerId\": \"dsbfghf\",\n  \"PartnerOpportunityIdentifier\": null,\n  \"PrimaryNeedsFromAws\": [\n    \"Co-Sell - Architectural Validation\",\n    \"Co-Sell - Pricing Assistance\"\n  ],\n  \"Project\": {\n    \"AdditionalComments\": \"Engagement focuses on MAP-eligible workloads, improved cost allocation tagging, and modernization to managed and cloud-native services.\",\n    \"ApnPrograms\": [\n      \"Migration Acceleration Program\"\n    ],\n    \"CustomerUseCase\": \"Cloud Management Tools & DevOps with Continuous Integration & Continuous Delivery (CICD)\",\n    \"CompetitorName\": null,\n    \"CustomerBusinessProblem\": \"The customer operates a growing SaaS platform with workloads on EC2, RDS, Lambda, and S3. Rapid growth led to rising monthly spend and limited cost visibility. The customer seeks to optimize infrastructure costs, improve cost allocation, and modernize toward managed and cloud-native AWS services while maintaining scalability.\",\n    \"ExpectedCustomerSpend\": [\n      {\n        \"Amount\": null,\n        \"CurrencyCode\": \"USD\",\n        \"EstimationUrl\": \"https://calculator.aws/#/estimate?id=da7fef3a28f8260602e29184b39a1a4abeacce4f\",\n        \"Frequency\": \"Monthly\",\n        \"TargetCompany\": \"AWS\"\n      }\n    ],\n    \"DeliveryModels\": [\n      \"SaaS or PaaS\"\n    ],\n    \"OtherCompetitorNames\": null,\n    \"OtherSolutionDescription\": \"OtherSolnDesc\",\n    \"RelatedOpportunityIdentifier\": null,\n    \"SalesActivities\": [\n      \"Conducted POC / Demo\",\n      \"In evaluation / planning stage\",\n      \"Customer has shown interest in solution\"\n    ],\n    \"Title\": \"{{opportunityTitle}}\"\n  }\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{BASE_URL}}/CreateOpportunity",
+						"description": "### Providing Pricing Calculator URLs\n\nPartners can optionally provide AWS Pricing Calculator URLs via the `Project.ExpectedCustomerSpend[].EstimationUrl` field to automatically import service configurations and receive enhanced insights including MAP eligibility indicators, optimization recommendations, and cost savings analysis.\n\nWhen a valid Pricing Calculator URL is provided, the system automatically calculates the MRR amount from the calculator configuration and populates both the Amount field and detailed product-level spend data in the Partner source of `AwsProductsSpendInsightsBySource`. Partners should set Amount to null when supplying an EstimationUrl - the system will calculate it automatically."
+					},
+					"response": [
+						{
+							"id": "d02165f8-fab9-413d-9d86-c89a67641e80",
+							"name": "CreateOpportunity-EstimationUrl",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"ClientToken\": \"{{$guid}}\",\n  \"Catalog\": \"{{catalog}}\",\n  \"TagKeys\": [\n    \"Unicorn\",\n    \"Manager\"\n  ],\n  \"CreatedDate\": \"2024-09-24T03:26:58Z\",\n  \"Origin\": \"Partner Referral\",\n  \"Customer\": {\n    \"Account\": {\n      \"Address\": {\n        \"PostalCode\": \"10003\",\n        \"City\": null,\n        \"StateOrRegion\": \"New York\",\n        \"CountryCode\": \"US\",\n        \"StreetAddress\": null\n      },\n      \"CompanyName\": \"{{$randomCompanyName}}\",\n      \"Duns\": \"111100111\",\n      \"Industry\": \"Other\",\n      \"OtherIndustry\": null,\n      \"WebsiteUrl\": \"www.abc.com\"\n    },\n    \"Contacts\": [\n      {\n        \"BusinessTitle\": \"Executive\",\n        \"Email\": \"test@mail.com\",\n        \"FirstName\": \"{{$randomFirstName}}\",\n        \"LastName\": \"{{$randomLastName}}\",\n        \"Phone\": \"+14164208519\"\n      }\n    ]\n  },\n  \"LifeCycle\": {\n    \"ClosedLostReason\": null,\n    \"NextSteps\": \"NS1\",\n    \"NextStepsHistory\": null,\n    \"ReviewComments\": null,\n    \"ReviewStatus\": \"Approved\",\n    \"ReviewStatusReason\": null,\n    \"Stage\": \"Prospect\",\n    \"TargetCloseDate\": \"{{targetCloseDate}}\"\n  },\n  \"Marketing\": {\n    \"AwsFundingUsed\": \"Yes\",\n    \"CampaignName\": \"TestCampaignName01\",\n    \"Channels\": [],\n    \"Source\": \"Marketing Activity\",\n    \"UseCases\": [\n      \"Analytics\"\n    ]\n  },\n  \"NationalSecurity\": \"No\",\n  \"OpportunityTeam\": [\n    {\n      \"BusinessTitle\": \"PartnerAccountManager\",\n      \"Email\": \"test@mail.com\",\n      \"FirstName\": \"{{$randomFirstName}}\",\n      \"LastName\": \"{{$randomLastName}}\",\n      \"Phone\": \"+14164208510\"\n    }\n  ],\n  \"OpportunityType\": \"Net New Business\",\n  \"PartnerId\": \"dsbfghf\",\n  \"PartnerOpportunityIdentifier\": null,\n  \"PrimaryNeedsFromAws\": [\n    \"Co-Sell - Pricing Assistance\"\n  ],\n  \"Project\": {\n    \"AdditionalComments\": null,\n    \"ApnPrograms\": [\n      \"Migration Acceleration Program\"\n    ],\n    \"CustomerUseCase\": \"AI Machine Learning and Analytics\",\n    \"CompetitorName\": \"Google Cloud Platform\",\n    \"CustomerBusinessProblem\": \"This specific use case represents an additional workload which will land on the Databricks platform running on AWS which will drive incremental revenue to AWS through additional consumption of EC2/S3/etc... It will not generate immediate SRRP contribution or a Marketplace transaction but will contribute to grow the future customer commitment (contract) to Databricks\",\n    \"ExpectedCustomerSpend\": [\n      {\n        \"Amount\": null,\n        \"CurrencyCode\": \"USD\",\n        \"EstimationUrl\": \"https://calculator.aws/#/estimate?id=966b45503f2d8e73b62f39eb0ef82abe635db3a0\",\n        \"Frequency\": \"Monthly\",\n        \"TargetCompany\": \"AWS\"\n      }\n    ],\n    \"DeliveryModels\": [\n      \"SaaS or PaaS\"\n    ],\n    \"OtherCompetitorNames\": null,\n    \"OtherSolutionDescription\": \"OtherSolnDesc\",\n    \"RelatedOpportunityIdentifier\": null,\n    \"SalesActivities\": [\n      \"Conducted POC / Demo\"\n    ],\n    \"Title\": \"{{opportunityTitle}}\"\n  }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{BASE_URL}}/CreateOpportunity"
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"responseTime": null,
+							"body": "{\n    \"Id\": \"O12220066\",\n    \"LastModifiedDate\": \"2026-02-04T05:10:17.833Z\",\n    \"PartnerOpportunityIdentifier\": null\n}"
+						}
+					]
+				},
+				{
+					"name": "CreateOpportunity-EstimationUrl-Amount",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "02a15cb4-18fe-4a41-b91d-51d4f7b187d1",
+								"exec": [
+									"try {",
+									"   ",
+									"    const requestTitle = \"New Business Deal\"; // Base title for the opportunity",
+									"    const opportunityAmount = Math.floor(Math.random() * (32000 - 12000 + 1)) + 12000; // Random amount between 12000 and 32000",
+									"    const randomSuffix = Math.floor(Math.random() * (9999 - 1000 + 1)) + 1000; // Random 4-digit number",
+									"    const opportunityTitle = `${requestTitle} - ${randomSuffix}`;",
+									"    console.log(`amount ${opportunityAmount} random suffix ${randomSuffix} opportunity title ${opportunityTitle}`);",
+									"",
+									"    // Save the generated opportunity details as local variables",
+									"    pm.variables.set('opportunityTitle', opportunityTitle);",
+									"    pm.variables.set('opportunityAmount', opportunityAmount);",
+									"    console.log(`[${pm.info.requestName}] Generated Opportunity Title: ${opportunityTitle}`);",
+									"    console.log(`[${pm.info.requestName}] Generated Opportunity Amount: ${opportunityAmount}`);",
+									"",
+									"    // Calculate target close date (one year from today)",
+									"    const today = new Date();",
+									"    const oneYearFromToday = new Date(today.getFullYear() + 1, today.getMonth(), today.getDate());",
+									"    const year = oneYearFromToday.getFullYear();",
+									"    const month = String(oneYearFromToday.getMonth() + 1).padStart(2, '0');",
+									"    const day = String(oneYearFromToday.getDate()).padStart(2, '0');",
+									"    const targetCloseDate = `${year}-${month}-${day}`;",
+									"    ",
+									"    pm.variables.set('targetCloseDate', targetCloseDate);",
+									"    console.log(`[${pm.info.requestName}] Generated Target Close Date: ${targetCloseDate}`);",
+									"",
+									"} catch (error) {",
+									"    // Handle any errors during token generation or opportunity detail generation",
+									"    console.error(`[${pm.info.requestName}] Error occurred:`, error);",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "1e191140-aa45-4d34-ba02-c5f4fd509650",
+								"exec": [
+									"try {",
+									"     opportunityId = pm.response.json().Id;",
+									"",
+									"    // Save the opportunityId to a collection variable",
+									"    pm.collectionVariables.set('opportunityId', opportunityId);",
+									"",
+									"    // Log the opportunity creation",
+									"    console.log(`Created opportunity with ID ${opportunityId}`);",
+									"",
+									"    // Add a test to validate the opportunityId extraction",
+									"    pm.test(`[Post-res ${pm.info.requestName}] Validate opportunity ID extraction`, function () {",
+									"        pm.response.to.have.status(200); // Ensure the response status is 200",
+									"        pm.expect(opportunityId).to.exist; // Ensure opportunityId exists",
+									"        pm.expect(opportunityId).to.not.be.empty; // Ensure opportunityId is not empty",
+									"        console.log(`[Post-res ${pm.info.requestName}] Opportunity ID ${opportunityId} successfully extracted and stored.`);",
+									"    });",
+									"",
+									"} catch (error) {",
+									"    // Handle any additional errors",
+									"    console.error(`[${pm.info.requestName}] Failed to extract response data:`, error);",
+									"",
+									"    // Add a test to capture the error",
+									"    pm.test(`[Post-res ${pm.info.requestName}] Error occurred while processing response`, function () {",
+									"        throw error; // Fail the test if an error occurs",
+									"    });",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"id": "3f646257-c7c0-4120-a279-38cee915cd94",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true,
+						"followRedirects": true,
+						"disableUrlEncoding": false,
+						"disableCookies": false
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"ClientToken\": \"{{$guid}}\",\n  \"Catalog\": \"{{catalog}}\",\n  \"TagKeys\": [\n    \"Unicorn\",\n    \"Manager\"\n  ],\n  \"CreatedDate\": \"2024-09-24T03:26:58Z\",\n  \"Origin\": \"Partner Referral\",\n  \"Customer\": {\n    \"Account\": {\n      \"Address\": {\n        \"PostalCode\": \"10003\",\n        \"City\": null,\n        \"StateOrRegion\": \"New York\",\n        \"CountryCode\": \"US\",\n        \"StreetAddress\": null\n      },\n      \"CompanyName\": \"{{$randomCompanyName}}\",\n      \"Duns\": \"111100111\",\n      \"Industry\": \"Other\",\n      \"OtherIndustry\": null,\n      \"WebsiteUrl\": \"www.abc.com\"\n    },\n    \"Contacts\": [\n      {\n        \"BusinessTitle\": \"Executive\",\n        \"Email\": \"test@mail.com\",\n        \"FirstName\": \"{{$randomFirstName}}\",\n        \"LastName\": \"{{$randomLastName}}\",\n        \"Phone\": \"+14164208519\"\n      }\n    ]\n  },\n  \"LifeCycle\": {\n    \"ClosedLostReason\": null,\n    \"NextSteps\": \"NS1\",\n    \"NextStepsHistory\": null,\n    \"ReviewComments\": null,\n    \"ReviewStatus\": \"Approved\",\n    \"ReviewStatusReason\": null,\n    \"Stage\": \"Prospect\",\n    \"TargetCloseDate\": \"{{targetCloseDate}}\"\n  },\n  \"Marketing\": {\n    \"AwsFundingUsed\": \"Yes\",\n    \"CampaignName\": \"TestCampaignName01\",\n    \"Channels\": [],\n    \"Source\": \"Marketing Activity\",\n    \"UseCases\": [\n      \"Analytics\"\n    ]\n  },\n  \"NationalSecurity\": \"No\",\n  \"OpportunityTeam\": [\n    {\n      \"BusinessTitle\": \"PartnerAccountManager\",\n      \"Email\": \"test@mail.com\",\n      \"FirstName\": \"{{$randomFirstName}}\",\n      \"LastName\": \"{{$randomLastName}}\",\n      \"Phone\": \"+14164208510\"\n    }\n  ],\n  \"OpportunityType\": \"Net New Business\",\n  \"PartnerId\": \"dsbfghf\",\n  \"PartnerOpportunityIdentifier\": null,\n  \"PrimaryNeedsFromAws\": [\n    \"Co-Sell - Pricing Assistance\"\n  ],\n  \"Project\": {\n    \"AdditionalComments\": null,\n    \"ApnPrograms\": [\n      \"Migration Acceleration Program\"\n    ],\n    \"CustomerUseCase\": \"AI Machine Learning and Analytics\",\n    \"CompetitorName\": \"Google Cloud Platform\",\n    \"CustomerBusinessProblem\": \"This specific use case represents an additional workload which will land on the Databricks platform running on AWS which will drive incremental revenue to AWS through additional consumption of EC2/S3/etc... It will not generate immediate SRRP contribution or a Marketplace transaction but will contribute to grow the future customer commitment (contract) to Databricks which will\",\n    \"ExpectedCustomerSpend\": [\n      {\n        \"Amount\": \"25000.00\",\n        \"CurrencyCode\": \"USD\",\n        \"Frequency\": \"Monthly\",\n        \"TargetCompany\": \"AWS\",\n        \"EstimationUrl\": \"https://calculator.aws/#/estimate?id=966b45503f2d8e73b62f39eb0ef82abe635db3a0\"\n      }\n    ],\n    \"DeliveryModels\": [\n      \"SaaS or PaaS\"\n    ],\n    \"OtherCompetitorNames\": null,\n    \"OtherSolutionDescription\": \"OtherSolnDesc\",\n    \"RelatedOpportunityIdentifier\": null,\n    \"SalesActivities\": [\n      \"Conducted POC / Demo\"\n    ],\n    \"Title\": \"{{opportunityTitle}}\"\n  }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{BASE_URL}}/CreateOpportunity",
+						"description": "#### Providing both Amount and EstimationUrl\n\nWhen you provide both fields, the API prioritizes ensuring that your opportunity is created successfully:\n\n1. If both values are unchanged – no update is performed on these fields\n    \n2. URL is invalid – The API saves your provided Amount and sets EstimationUrl to null, allowing your opportunity creation to proceed.\n    \n3. URL is valid and calculated amount matches your provided Amount – Both values are saved.\n    \n4. URL is valid but calculated amount doesn't match your provided Amount – The API saves your provided Amount and sets EstimationUrl to null without returning an error."
+					},
+					"response": [
+						{
+							"id": "dcddd83e-9129-4e21-8cde-50daa7600629",
+							"name": "CreateOpportunity-EstimationUrl-Amount",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"ClientToken\": \"{{$guid}}\",\n  \"Catalog\": \"{{catalog}}\",\n  \"TagKeys\": [\n    \"Unicorn\",\n    \"Manager\"\n  ],\n  \"CreatedDate\": \"2024-09-24T03:26:58Z\",\n  \"Origin\": \"Partner Referral\",\n  \"Customer\": {\n    \"Account\": {\n      \"Address\": {\n        \"PostalCode\": \"10003\",\n        \"City\": null,\n        \"StateOrRegion\": \"New York\",\n        \"CountryCode\": \"US\",\n        \"StreetAddress\": null\n      },\n      \"CompanyName\": \"{{$randomCompanyName}}\",\n      \"Duns\": \"111100111\",\n      \"Industry\": \"Other\",\n      \"OtherIndustry\": null,\n      \"WebsiteUrl\": \"www.abc.com\"\n    },\n    \"Contacts\": [\n      {\n        \"BusinessTitle\": \"Executive\",\n        \"Email\": \"test@mail.com\",\n        \"FirstName\": \"{{$randomFirstName}}\",\n        \"LastName\": \"{{$randomLastName}}\",\n        \"Phone\": \"+14164208519\"\n      }\n    ]\n  },\n  \"LifeCycle\": {\n    \"ClosedLostReason\": null,\n    \"NextSteps\": \"NS1\",\n    \"NextStepsHistory\": null,\n    \"ReviewComments\": null,\n    \"ReviewStatus\": \"Approved\",\n    \"ReviewStatusReason\": null,\n    \"Stage\": \"Prospect\",\n    \"TargetCloseDate\": \"{{targetCloseDate}}\"\n  },\n  \"Marketing\": {\n    \"AwsFundingUsed\": \"Yes\",\n    \"CampaignName\": \"TestCampaignName01\",\n    \"Channels\": [],\n    \"Source\": \"Marketing Activity\",\n    \"UseCases\": [\n      \"Analytics\"\n    ]\n  },\n  \"NationalSecurity\": \"No\",\n  \"OpportunityTeam\": [\n    {\n      \"BusinessTitle\": \"PartnerAccountManager\",\n      \"Email\": \"test@mail.com\",\n      \"FirstName\": \"{{$randomFirstName}}\",\n      \"LastName\": \"{{$randomLastName}}\",\n      \"Phone\": \"+14164208510\"\n    }\n  ],\n  \"OpportunityType\": \"Net New Business\",\n  \"PartnerId\": \"dsbfghf\",\n  \"PartnerOpportunityIdentifier\": null,\n  \"PrimaryNeedsFromAws\": [\n    \"Co-Sell - Pricing Assistance\"\n  ],\n  \"Project\": {\n    \"AdditionalComments\": null,\n    \"ApnPrograms\": [\n      \"Migration Acceleration Program\"\n    ],\n    \"CustomerUseCase\": \"AI Machine Learning and Analytics\",\n    \"CompetitorName\": \"Google Cloud Platform\",\n    \"CustomerBusinessProblem\": \"This specific use case represents an additional workload which will land on the Databricks platform running on AWS which will drive incremental revenue to AWS through additional consumption of EC2/S3/etc... It will not generate immediate SRRP contribution or a Marketplace transaction but will contribute to grow the future customer commitment (contract) to Databricks which will\",\n    \"ExpectedCustomerSpend\": [\n      {\n        \"Amount\": \"25000.00\",\n        \"CurrencyCode\": \"USD\",\n        \"Frequency\": \"Monthly\",\n        \"TargetCompany\": \"AWS\",\n        \"EstimationUrl\": \"https://calculator.aws/#/estimate?id=966b45503f2d8e73b62f39eb0ef82abe635db3a0\"\n      }\n    ],\n    \"DeliveryModels\": [\n      \"SaaS or PaaS\"\n    ],\n    \"OtherCompetitorNames\": null,\n    \"OtherSolutionDescription\": \"OtherSolnDesc\",\n    \"RelatedOpportunityIdentifier\": null,\n    \"SalesActivities\": [\n      \"Conducted POC / Demo\"\n    ],\n    \"Title\": \"{{opportunityTitle}}\"\n  }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{BASE_URL}}/CreateOpportunity"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 04 Feb 2026 04:35:37 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "100"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "x-amzn-RequestId",
+									"value": "c0c09e98-327f-4292-8e52-569c31cc4b4f"
+								}
+							],
+							"cookie": [],
+							"responseTime": null,
+							"body": "{\n    \"Id\": \"O12219759\",\n    \"LastModifiedDate\": \"2026-02-04T04:35:36.984Z\",\n    \"PartnerOpportunityIdentifier\": null\n}"
+						}
+					]
+				},
+				{
+					"name": "GetOpportunity",
+					"id": "926ab5bc-5fb5-4b2d-8ff1-a5992b40a069",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true,
+						"followRedirects": true,
+						"disableUrlEncoding": false,
+						"disableCookies": false
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"Catalog\": \"{{catalog}}\",\n\t\"Identifier\": \"O12220156\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{BASE_URL}}/GetOpportunity",
+						"description": "Use GetOpportunity API request to check the created opportunity."
+					},
+					"response": []
+				},
+				{
+					"name": "StartEngagementFromOpportunityTask",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "d31546f9-ca57-4de2-9ba2-53f074ca0fd5",
+								"exec": [
+									"try {",
+									"    // Step 1: Generate a truly unique Client Token",
+									"    const clientToken = `${Date.now()}-${Math.random().toString(36).substring(2, 15)}`;",
+									"",
+									"    // Save the generated client token as a local variable",
+									"    pm.variables.set('clientToken', clientToken);",
+									"    console.log(`[Pre-req ${pm.info.requestName}] Generated Client Token: ${clientToken}`);",
+									"",
+									"    // Step 2: Retrieve opportunityId for logging",
+									"    const opportunityId = pm.collectionVariables.get(\"opportunityId\");",
+									"",
+									"    if (opportunityId) {",
+									"        // Log the action details for starting the engagement",
+									"        console.log(`[Pre-req ${pm.info.requestName}] Starting engagement with AWS using opportunity: ${opportunityId}`);",
+									"    } else {",
+									"        console.warn(`[Pre-req ${pm.info.requestName}] No opportunityId found. Ensure it has been set before executing this action.`);",
+									"    }",
+									"",
+									"    // Log the action start",
+									"    console.log(`[Pre-req ${pm.info.requestName}] Starting ${pm.info.requestName} action.`);",
+									"",
+									"} catch (error) {",
+									"    // Handle any errors during client token generation or retrieving variables",
+									"    console.error(`[Pre-req ${pm.info.requestName}] Error occurred:`, error);",
+									"}",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"id": "a1679486-69d2-4e74-8f2c-f71bac00f91e",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true,
+						"followRedirects": true,
+						"disableUrlEncoding": false,
+						"disableCookies": false
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "User-Agent",
+								"value": "insomnia/11.0.1"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"Catalog\": \"{{catalog}}\",\n    \"Identifier\": \"O12220156\",\n    \"ClientToken\": \"{{clientToken}}\",\n    \"AwsSubmission\": {\n        \"InvolvementType\": \"Co-Sell\",\n        \"Visibility\": \"Full\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{BASE_URL}}/StartEngagementFromOpportunityTask",
+						"description": "Submit the opportunity to AWS for review."
+					},
+					"response": []
+				},
+				{
+					"name": "GetOpportunity-beforeUpdate",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "e4ecb04c-f901-41b2-a9a9-d0cd50c2b469",
+								"exec": [
+									"try {",
+									"    // Retrieve the opportunityId from Postman collection variables",
+									"    const opportunityId = pm.collectionVariables.get(\"opportunityId\");",
+									"",
+									"    // Check the response status and log accordingly",
+									"    if (pm.response.code === 200) {",
+									"        pm.test(`[Post-res ${pm.info.requestName}] Successfully retrieved Opportunity with ID: ${opportunityId}`, function () {",
+									"            pm.response.to.have.status(200);",
+									"        });",
+									"",
+									"        // Parse the response body",
+									"        const responseBody = pm.response.json();",
+									"",
+									"        // Perform basic validation on the response",
+									"        pm.test(\"Response has the correct structure\", function () {",
+									"            pm.expect(responseBody).to.be.an('object');",
+									"            pm.expect(responseBody).to.have.property('Id');",
+									"            pm.expect(responseBody).to.have.property('LifeCycle');",
+									"        });",
+									"",
+									"        // Store the complete response in a collection variable",
+									"        pm.collectionVariables.set(\"getOpportunityPayload\", JSON.stringify(responseBody));",
+									"        console.log(`[Post-res ${pm.info.requestName}] Stored response payload for ID: ${responseBody.Id}`);",
+									"",
+									"    } else {",
+									"        console.error(`[Post-res ${pm.info.requestName}] Failed to retrieve Opportunity with ID: ${opportunityId}. Status Code: ${pm.response.code}`);",
+									"",
+									"        pm.test(`[Post-res ${pm.info.requestName}] Retrieval failed`, function () {",
+									"            pm.expect.fail(`Received status code ${pm.response.code}`);",
+									"        });",
+									"    }",
+									"",
+									"} catch (error) {",
+									"    // Handle any errors during response processing",
+									"    console.error(`[Post-res ${pm.info.requestName}] Error processing response:`, error);",
+									"    pm.test(`[Post-res ${pm.info.requestName}] Error in test execution`, function () {",
+									"        pm.expect.fail(error.message);",
+									"    });",
+									"}",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "3e834d1d-4ddb-4682-b09e-22f7c05ad4eb",
+								"exec": [
+									"// Parse the request payload to extract the Identifier",
+									"const opportunityId = pm.collectionVariables.get(\"opportunityId\");",
+									"",
+									"// Log the start of the action with the Identifier",
+									"console.log(`[Pre-req ${pm.info.requestName}] Starting ${pm.info.requestName} action for Identifier: ${opportunityId}`);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "b28e4447-d53b-4b57-9b48-d4d6767d4134",
+					"protocolProfileBehavior": {
+						"followRedirects": true,
+						"disableUrlEncoding": false,
+						"disableCookies": false,
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json, text/javascript, */*; q=0.01"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json; charset=UTF-8"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n   \"Catalog\": \"{{catalog}}\",\n   \"Identifier\": \"{{opportunityId}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{BASE_URL}}/GetOpportunity",
+						"description": "Before simulation of approval from AWS (update opportunity review status to Approved), always try to get opportunity first."
+					},
+					"response": []
+				},
+				{
+					"name": "[Simulate] Approval from AWS",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "d083d5cb-5484-4b42-b239-459d88e448b4",
+								"exec": [
+									"try {",
+									"    // Check the response status",
+									"    if (pm.response.code === 200) {",
+									"        // Log success and add a test for status 200",
+									"        console.log(`[Post-res ${pm.info.requestName}] UpdateOpportunity action succeeded.`);",
+									"        pm.test(`[Post-res ${pm.info.requestName}] Status code is 200`, function () {",
+									"            pm.response.to.have.status(200);",
+									"        });",
+									"    } else {",
+									"        // Log failure and add a test for non-200 status",
+									"        console.error(`[Post-res ${pm.info.requestName}] UpdateOpportunity action failed. Status Code: ${pm.response.code}`);",
+									"        pm.test(`[Post-res ${pm.info.requestName}] Status code is not 200`, function () {",
+									"            pm.response.to.not.have.status(200);",
+									"        });",
+									"    }",
+									"} catch (error) {",
+									"    // Handle any errors during response processing",
+									"    console.error(`[Post-res ${pm.info.requestName}] Error processing response:`, error);",
+									"",
+									"    // Add a test to capture the error",
+									"    pm.test(`[Post-res ${pm.info.requestName}] Error occurred while processing response`, function () {",
+									"        throw error; // Ensure the test fails if an error occurs",
+									"    });",
+									"}",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "04127e8e-4299-4a8b-84a0-aa8e1aa90973",
+								"exec": [
+									"try {",
+									"    // Retrieve the stored payload from the GetOpportunity action",
+									"    const getOpportunityPayload = pm.collectionVariables.get(\"getOpportunityPayload\") || pm.variables.get(\"getOpportunityPayload\");",
+									"",
+									"    if (getOpportunityPayload) {",
+									"        // Parse the stored payload",
+									"        const payload = JSON.parse(getOpportunityPayload);",
+									"",
+									"        // Transform the payload for UpdateOpportunity",
+									"        payload.Identifier = payload.Id; // Rename \"Id\" to \"Identifier\"",
+									"        delete payload.Id; // Remove the original \"Id\" field",
+									"        payload.LifeCycle.ReviewStatus = \"Approved\"; // Update to Approved",
+									"",
+									"        // Set the modified payload as the request body",
+									"        pm.request.body.raw = JSON.stringify(payload);",
+									"        console.log(`[Pre-req ${pm.info.requestName}] Transformed payload for UpdateOpportunity:`, payload);",
+									"",
+									"    } else {",
+									"        console.warn(`[Pre-req ${pm.info.requestName}] No payload found from GetOpportunity. Ensure the previous request executed successfully.`);",
+									"    }",
+									"",
+									"} catch (error) {",
+									"    // Handle any errors during payload transformation",
+									"    console.error(`[Pre-req ${pm.info.requestName}] Error preparing request payload:`, error);",
+									"    pm.test(`[Pre-req ${pm.info.requestName}] Error in pre-request script`, function () {",
+									"        pm.expect.fail(error.message);",
+									"    });",
+									"}",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "fbb88887-796a-4e7c-a30e-faff2b41b5cd",
+					"protocolProfileBehavior": {
+						"followRedirects": true,
+						"disableUrlEncoding": false,
+						"disableCookies": false,
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json, text/javascript, */*; q=0.01"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json; charset=UTF-8"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"Catalog\": \"{{catalog}}\",\n  \"Customer\": {\n    \"Account\": {\n      \"Address\": {\n        \"City\": null,\n        \"CountryCode\": \"AL\",\n        \"PostalCode\": \"9931\",\n        \"StateOrRegion\": \"New York\",\n        \"StreetAddress\": null\n      },\n      \"AwsAccountId\": \"111111111111\",\n      \"CompanyName\": \"TestAssignEditable1\",\n      \"Duns\": \"111100111\",\n      \"Industry\": \"Financial Services\",\n      \"OtherIndustry\": null,\n      \"WebsiteUrl\": \"www.TestAssignEditable1.com\"\n    },\n    \"Contacts\": [\n      {\n        \"BusinessTitle\": \"Executive\",\n        \"Email\": \"testnamelast09@test.com\",\n        \"FirstName\": \"TestContact011\",\n        \"LastName\": \"MLastName001\",\n        \"Phone\": \"+14444444444\"\n      }\n    ]\n  },\n  \"Identifier\": \"{{opportunityId}}\",\n  \"LastModifiedDate\": \"{{lastModifiedDate}}\",\n  \"LifeCycle\": {\n    \"ClosedLostReason\": null,\n    \"NextSteps\": \"Next steps on the opportunity. TEST is used to communicate to AWS the next action required, please update.\",\n    \"NextStepsHistory\": null,\n    \"ReviewComments\": null,\n    \"ReviewStatus\": \"Approved\",\n    \"ReviewStatusReason\": null,\n    \"Stage\": \"Qualified\",\n    \"TargetCloseDate\": \"2029-10-05\"\n  },\n  \"Marketing\": {\n\t\t\"AwsFundingUsed\": null,\n\t\t\"CampaignName\": null,\n\t\t\"Channels\": null,\n\t\t\"Source\": \"None\",\n\t\t\"UseCases\": null\n  },\n  \"NationalSecurity\": \"No\",\n  \"OpportunityType\": \"Net New Business\",\n  \"PartnerOpportunityIdentifier\": null,\n  \"PrimaryNeedsFromAws\": [\n    \"Co-Sell - Architectural Validation\"\n  ],\n  \"Project\": {\n    \"AdditionalComments\": null,\n    \"ApnPrograms\": null,\n    \"CompetitorName\": \"On-Prem\",\n    \"CustomerBusinessProblem\": \"ProjectDescriptionBusinessNeedLengthGreaterThanFiftyCharacters\",\n    \"CustomerUseCase\": \"Security & Compliance\",\n    \"DeliveryModels\": [\n      \"SaaS or PaaS\"\n    ],\n    \"ExpectedCustomerSpend\": [\n      {\n        \"Amount\": \"12500\",\n        \"CurrencyCode\": \"USD\",\n        \"Frequency\": \"Monthly\",\n        \"TargetCompany\": \"AWS\"\n      }\n    ],\n    \"OtherCompetitorNames\": null,\n    \"OtherSolutionDescription\": \"TestSolution\",\n    \"RelatedOpportunityIdentifier\": null,\n    \"SalesActivities\": [\n      \"Conducted POC / Demo\"\n    ],\n    \"Title\": \"TestAssignEditable1\"\n  },\n  \"SoftwareRevenue\": {\n    \"DeliveryModel\": \"Pay-as-you-go\",\n    \"EffectiveDate\": \"2023-10-31\",\n    \"ExpirationDate\": \"2024-03-31\",\n    \"Value\": {\n      \"Amount\": \"10000.0\",\n      \"CurrencyCode\": \"USD\"\n    }\n  }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{BASE_URL}}/UpdateOpportunity"
+					},
+					"response": []
+				},
+				{
+					"name": "GetAwsOpportunitySummary",
+					"id": "ac15f53d-0d9f-4f21-bd32-23ceb4501e77",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true,
+						"followRedirects": true,
+						"disableUrlEncoding": false,
+						"disableCookies": false
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"Catalog\": \"{{catalog}}\",\n\t\"RelatedOpportunityIdentifier\": \"O12230747\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{BASE_URL}}/GetAwsOpportunitySummary",
+						"description": "The `GetAwsOpportunitySummary` API action returns deal sizing insights through the new `Insights.AwsProductsSpendInsightsBySource` structure that provides comprehensive spend analysis with source attribution.\n\n### Source Separation: AWS vs Partner Data\n\nDeal Sizing separates insights by source to provide transparency and prevent double-counting:\n\n- **AWS Source:** AI product recommendations from AWS\n    \n- **Partner Source:** Spend data and product details imported from partner-provided Pricing Calculator URLs\n    \n\nOnly sources with available data are included in the response. New opportunities typically start with only the AWS source populated.\n\nThe response example demonstrates how both AWS recommendations and partner estimates appear together, enabling comparison. The response can also contain only AI recommendations and per-product spend amounts cannot yet be recommended."
+					},
+					"response": [
+						{
+							"id": "17b57bcb-0a88-4338-91d7-344c8fbec602",
+							"name": "GetAwsOpportunitySummaryl",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"Catalog\": \"{{catalog}}\",\n\t\"RelatedOpportunityIdentifier\": \"O12220066\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{BASE_URL}}/GetAwsOpportunitySummary"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 04 Feb 2026 05:14:44 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "3012"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "x-amzn-RequestId",
+									"value": "2783f986-0c04-4487-b08c-3fa6bed71886"
+								}
+							],
+							"cookie": [],
+							"responseTime": null,
+							"body": "{\n    \"Catalog\": \"Sandbox\",\n    \"Customer\": {\n        \"Contacts\": [\n            {\n                \"BusinessTitle\": \"VP of Engineering\",\n                \"Email\": \"test@mail.com\",\n                \"FirstName\": \"Eleonore\",\n                \"LastName\": \"Cormier\",\n                \"Phone\": \"+14164208519\"\n            }\n        ]\n    },\n    \"Insights\": {\n        \"AwsProductsSpendInsightsBySource\": {\n            \"AWS\": {\n                \"AwsProducts\": [\n                    {\n                        \"Amount\": null,\n                        \"Categories\": [],\n                        \"Optimizations\": [],\n                        \"OptimizedAmount\": null,\n                        \"PotentialSavingsAmount\": null,\n                        \"ProductCode\": \"AmazonEC2Linux\",\n                        \"ServiceCode\": null\n                    },\n                    {\n                        \"Amount\": null,\n                        \"Categories\": [],\n                        \"Optimizations\": [],\n                        \"OptimizedAmount\": null,\n                        \"PotentialSavingsAmount\": null,\n                        \"ProductCode\": \"AmazonBedrock\",\n                        \"ServiceCode\": null\n                    },\n                    {\n                        \"Amount\": null,\n                        \"Categories\": [],\n                        \"Optimizations\": [],\n                        \"OptimizedAmount\": null,\n                        \"PotentialSavingsAmount\": null,\n                        \"ProductCode\": \"AWSLambda\",\n                        \"ServiceCode\": null\n                    },\n                    {\n                        \"Amount\": null,\n                        \"Categories\": [],\n                        \"Optimizations\": [],\n                        \"OptimizedAmount\": null,\n                        \"PotentialSavingsAmount\": null,\n                        \"ProductCode\": \"AmazonSQS\",\n                        \"ServiceCode\": null\n                    }\n                ],\n                \"CurrencyCode\": \"USD\",\n                \"Frequency\": \"Monthly\",\n                \"TotalAmount\": \"0\",\n                \"TotalAmountByCategory\": {},\n                \"TotalOptimizedAmount\": \"0\",\n                \"TotalPotentialSavingsAmount\": \"0\"\n            },\n            \"Partner\": {\n                \"AwsProducts\": [\n                    {\n                        \"Amount\": \"4993.33\",\n                        \"Categories\": [\n                            \"MAP Eligible\",\n                            \"Pathway - Move to Cloud Native\"\n                        ],\n                        \"Optimizations\": [],\n                        \"OptimizedAmount\": \"4993.33\",\n                        \"PotentialSavingsAmount\": \"0.00\",\n                        \"ProductCode\": null,\n                        \"ServiceCode\": \"aWSLambda\"\n                    },\n                    {\n                        \"Amount\": \"8.39\",\n                        \"Categories\": [\n                            \"MAP Eligible\"\n                        ],\n                        \"Optimizations\": [],\n                        \"OptimizedAmount\": \"8.39\",\n                        \"PotentialSavingsAmount\": \"0.00\",\n                        \"ProductCode\": null,\n                        \"ServiceCode\": \"amazonElasticBlockStore\"\n                    },\n                    {\n                        \"Amount\": \"4834.00\",\n                        \"Categories\": [\n                            \"MAP Eligible\"\n                        ],\n                        \"Optimizations\": [],\n                        \"OptimizedAmount\": \"4834.00\",\n                        \"PotentialSavingsAmount\": \"0.00\",\n                        \"ProductCode\": null,\n                        \"ServiceCode\": \"amazonSimpleStorageServiceGroup\"\n                    },\n                    {\n                        \"Amount\": \"102.97\",\n                        \"Categories\": [\n                            \"MAP Eligible\"\n                        ],\n                        \"Optimizations\": [],\n                        \"OptimizedAmount\": \"102.97\",\n                        \"PotentialSavingsAmount\": \"0.00\",\n                        \"ProductCode\": null,\n                        \"ServiceCode\": \"ec2Enhancement\"\n                    },\n                    {\n                        \"Amount\": \"636.38\",\n                        \"Categories\": [\n                            \"MAP Eligible\",\n                            \"Pathway - Move to Open Source\",\n                            \"Pathway - Move to Managed DB\"\n                        ],\n                        \"Optimizations\": [\n                            {\n                                \"Description\": \"Use Reserved Instances or Savings Plans\",\n                                \"SavingsAmount\": \"85.41\"\n                            }\n                        ],\n                        \"OptimizedAmount\": \"550.97\",\n                        \"PotentialSavingsAmount\": \"85.41\",\n                        \"ProductCode\": null,\n                        \"ServiceCode\": \"amazonRDSPostgreSQLDB\"\n                    }\n                ],\n                \"CurrencyCode\": \"USD\",\n                \"Frequency\": \"Monthly\",\n                \"TotalAmount\": \"10575.07\",\n                \"TotalAmountByCategory\": {\n                    \"MAP Eligible\": \"10489.66\",\n                    \"Pathway - Move to Cloud Native\": \"4993.33\",\n                    \"Pathway - Move to Managed DB\": \"550.97\",\n                    \"Pathway - Move to Open Source\": \"550.97\"\n                },\n                \"TotalOptimizedAmount\": \"10489.66\",\n                \"TotalPotentialSavingsAmount\": \"85.41\"\n            }\n        },\n        \"EngagementScore\": null,\n        \"NextBestActions\": null\n    },\n    \"InvolvementType\": \"Co-Sell\",\n    \"InvolvementTypeChangeReason\": null,\n    \"LifeCycle\": null,\n    \"OpportunityTeam\": [\n        {\n            \"BusinessTitle\": \"PDM\",\n            \"Email\": \"pdm-35@sec.dmk.a1x8w00000tizy6uaa\",\n            \"FirstName\": \"NAMER\",\n            \"LastName\": \"SI Partner Manager\"\n        }\n    ],\n    \"Origin\": \"Partner Referral\",\n    \"Project\": {\n        \"AwsPartition\": null,\n        \"ExpectedCustomerSpend\": [\n            {\n                \"Amount\": \"12345.67\",\n                \"CurrencyCode\": \"USD\",\n                \"EstimationUrl\": null,\n                \"Frequency\": \"Monthly\",\n                \"TargetCompany\": \"AWS\"\n            }\n        ]\n    },\n    \"RelatedEntityIds\": {\n        \"AwsProducts\": [],\n        \"Solutions\": []\n    },\n    \"RelatedOpportunityId\": \"O12220066\",\n    \"Visibility\": \"Full\"\n}"
+						}
+					]
+				}
+			],
+			"id": "b274eb39-c8b6-421a-9666-03f8bc14e932",
+			"description": "# Working with deal sizing insights\n\nDeal Sizing is a capability within the APN Customer Engagements (ACE) Opportunities in AWS Partner Central that uses AI to provide automated deal size estimates and AWS service recommendations when Partners create or update opportunities.\n\nPartners provide inputs for Deal Sizing through the `CreateOpportunity` and `UpdateOpportunity` API actions. The system uses opportunity attributes to generate recommendations.\n\nFor details, refer to the [official documentation](https://docs.aws.amazon.com/partner-central/latest/APIReference/working-with-deal-sizing-insights.html)."
+		},
+		{
 			"name": "Other common opportunity actions",
 			"item": [
 				{
@@ -15696,48 +16871,15 @@
 									"script": {
 										"id": "369ddc8f-9c2e-4abe-b586-c1872793c0f5",
 										"exec": [
-											"try {",
-											"    // Retrieve the opportunityId from Postman collection variables",
-											"    const opportunityId = pm.collectionVariables.get(\"opportunityId\");",
+											"// Parse the JSON response",
+											"const response = pm.response.json();",
 											"",
-											"    // Check the response status and log accordingly",
-											"    if (pm.response.code === 200) {",
-											"        pm.test(`[Post-res ${pm.info.requestName}] Successfully retrieved Opportunity with ID: ${opportunityId}`, function () {",
-											"            pm.response.to.have.status(200);",
-											"        });",
-											"",
-											"        // Parse the response body",
-											"        const responseBody = pm.response.json();",
-											"",
-											"        // Perform basic validation on the response",
-											"        pm.test(\"Response has the correct structure\", function () {",
-											"            pm.expect(responseBody).to.be.an('object');",
-											"            pm.expect(responseBody).to.have.property('Id');",
-											"        });",
-											"",
-											"        // Store the complete response in a collection variable",
-											"        pm.collectionVariables.set(\"getOpportunityPayload\", JSON.stringify(responseBody));",
-											"        console.log(`[Post-res ${pm.info.requestName}] Stored response payload for ID: ${responseBody.Id}`);",
-											"",
-											"    } else {",
-											"        console.error(`[Post-res ${pm.info.requestName}] Failed to retrieve Opportunity with ID: ${opportunityId}. Status Code: ${pm.response.code}`);",
-											"",
-											"        pm.test(`[Post-res ${pm.info.requestName}] Retrieval failed`, function () {",
-											"            pm.expect.fail(`Received status code ${pm.response.code}`);",
-											"        });",
-											"    }",
-											"",
-											"} catch (error) {",
-											"    // Handle any errors during response processing",
-											"    console.error(`[Post-res ${pm.info.requestName}] Error processing response:`, error);",
-											"    pm.test(`[Post-res ${pm.info.requestName}] Error in test execution`, function () {",
-											"        pm.expect.fail(error.message);",
-											"    });",
-											"}",
-											""
+											"// Save RuleArn to a collection variable",
+											"pm.collectionVariables.set(\"RuleArn\", response.RuleArn);"
 										],
 										"type": "text/javascript",
-										"packages": {}
+										"packages": {},
+										"requests": {}
 									}
 								},
 								{
@@ -15745,14 +16887,11 @@
 									"script": {
 										"id": "2e20de5e-447e-48a1-b53d-d7811c1d0814",
 										"exec": [
-											"// Parse the request payload to extract the Identifier",
-											"const opportunityId = pm.collectionVariables.get(\"opportunityId\");",
-											"",
-											"// Log the start of the action with the Identifier",
-											"console.log(`[Pre-req ${pm.info.requestName}] Starting ${pm.info.requestName} action for Identifier: ${opportunityId}`);"
+											""
 										],
 										"type": "text/javascript",
-										"packages": {}
+										"packages": {},
+										"requests": {}
 									}
 								}
 							],
@@ -15992,48 +17131,11 @@
 									"script": {
 										"id": "369ddc8f-9c2e-4abe-b586-c1872793c0f5",
 										"exec": [
-											"try {",
-											"    // Retrieve the opportunityId from Postman collection variables",
-											"    const opportunityId = pm.collectionVariables.get(\"opportunityId\");",
-											"",
-											"    // Check the response status and log accordingly",
-											"    if (pm.response.code === 200) {",
-											"        pm.test(`[Post-res ${pm.info.requestName}] Successfully retrieved Opportunity with ID: ${opportunityId}`, function () {",
-											"            pm.response.to.have.status(200);",
-											"        });",
-											"",
-											"        // Parse the response body",
-											"        const responseBody = pm.response.json();",
-											"",
-											"        // Perform basic validation on the response",
-											"        pm.test(\"Response has the correct structure\", function () {",
-											"            pm.expect(responseBody).to.be.an('object');",
-											"            pm.expect(responseBody).to.have.property('Id');",
-											"        });",
-											"",
-											"        // Store the complete response in a collection variable",
-											"        pm.collectionVariables.set(\"getOpportunityPayload\", JSON.stringify(responseBody));",
-											"        console.log(`[Post-res ${pm.info.requestName}] Stored response payload for ID: ${responseBody.Id}`);",
-											"",
-											"    } else {",
-											"        console.error(`[Post-res ${pm.info.requestName}] Failed to retrieve Opportunity with ID: ${opportunityId}. Status Code: ${pm.response.code}`);",
-											"",
-											"        pm.test(`[Post-res ${pm.info.requestName}] Retrieval failed`, function () {",
-											"            pm.expect.fail(`Received status code ${pm.response.code}`);",
-											"        });",
-											"    }",
-											"",
-											"} catch (error) {",
-											"    // Handle any errors during response processing",
-											"    console.error(`[Post-res ${pm.info.requestName}] Error processing response:`, error);",
-											"    pm.test(`[Post-res ${pm.info.requestName}] Error in test execution`, function () {",
-											"        pm.expect.fail(error.message);",
-											"    });",
-											"}",
 											""
 										],
 										"type": "text/javascript",
-										"packages": {}
+										"packages": {},
+										"requests": {}
 									}
 								},
 								{
@@ -16041,14 +17143,11 @@
 									"script": {
 										"id": "2e20de5e-447e-48a1-b53d-d7811c1d0814",
 										"exec": [
-											"// Parse the request payload to extract the Identifier",
-											"const opportunityId = pm.collectionVariables.get(\"opportunityId\");",
-											"",
-											"// Log the start of the action with the Identifier",
-											"console.log(`[Pre-req ${pm.info.requestName}] Starting ${pm.info.requestName} action for Identifier: ${opportunityId}`);"
+											""
 										],
 										"type": "text/javascript",
-										"packages": {}
+										"packages": {},
+										"requests": {}
 									}
 								}
 							],
@@ -17590,7 +18689,7 @@
 	"auth": {
 		"type": "awsv4",
 		"awsv4": {
-			"sessionToken": "{{vault:sessionToken}}",
+			"sessionToken": "",
 			"service": "{{aws.partnercentral.service}}",
 			"region": "{{aws.region}}",
 			"secretKey": "{{vault:aws.secret-key}}",
@@ -17601,7 +18700,7 @@
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "8e189d2f-2da8-47e8-b07f-50afdbd5c76b",
+				"id": "b5e14f87-d58c-4622-8990-23b281288abb",
 				"type": "text/javascript",
 				"packages": {},
 				"requests": {},
@@ -17613,7 +18712,7 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "781887fc-f059-4573-8cb5-2b7f1fdb76b0",
+				"id": "670409fa-bd28-4da5-b8c7-5433d2b89c05",
 				"type": "text/javascript",
 				"packages": {},
 				"requests": {},
@@ -17626,18 +18725,15 @@
 	"variable": [
 		{
 			"key": "catalog",
-			"value": "Sandbox",
-			"type": "string"
+			"value": "Sandbox"
 		},
 		{
 			"key": "companyName",
-			"value": "companyName",
-			"type": "string"
+			"value": "companyName"
 		},
 		{
 			"key": "crm",
-			"value": "yourCRMName",
-			"type": "string"
+			"value": "yourCRMName"
 		},
 		{
 			"key": "rejectingEngagementInvitationID",
@@ -17661,6 +18757,10 @@
 		},
 		{
 			"key": "lastModifiedDate",
+			"value": ""
+		},
+		{
+			"key": "getOpportunityPayload",
 			"value": ""
 		}
 	]

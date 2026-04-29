@@ -1,11 +1,13 @@
 {
   "name": "opportunity-management",
   "description": "AWS Partner Central API Opportunity Management Sample",
-  "version": "0.2.4",
+  "version": "0.3.0",
   "private": true,
   "homepage": "https://aws-samples.github.io/partner-crm-integration-samples",
   "dependencies": {
+    "@aws-crypto/sha256-browser": "^5.2.0",
     "@aws-sdk/client-partnercentral-selling": "^3.821.0",
+    "@aws-sdk/signature-v4": "^3.374.0",
     "@cloudscape-design/components": "^3.0.0",
     "@cloudscape-design/global-styles": "^1.0.0",
     "aws-sdk": "^2.1400.0",

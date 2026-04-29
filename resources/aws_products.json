@@ -2,8 +2,14 @@
   {
     "Identifier": "AWSAIFactories",
     "Name": "AWS AI Factories",
-    "Family": "AI/ML",
+    "Family": "Compute",
     "Description": "Managed AI infrastructure in your data centers"
+  },
+  {
+    "Identifier": "AWSAgentRegistry",
+    "Name": "AWS Agent Registry",
+    "Family": "AI/ML",
+    "Description": "A single place to discover, share, and reuse AI agents, tools, and agent skills across your enterprise"
   },
   {
     "Identifier": "AWSAmplify",
@@ -186,6 +192,12 @@
     "Description": "Track User Activity and API Usage"
   },
   {
+    "Identifier": "AWSCloudWAN",
+    "Name": "AWS Cloud WAN",
+    "Family": "Networking & Content Delivery",
+    "Description": "AWSCloudWAN"
+  },
+  {
     "Identifier": "AWSCodeArtifact",
     "Name": "AWS CodeArtifact",
     "Family": "Developer Tools",
@@ -358,6 +370,12 @@
     "Name": "AWS Elastic Disaster Recovery",
     "Family": "Storage",
     "Description": "Scalable, cost-effective application recovery to AWS"
+  },
+  {
+    "Identifier": "AWSElementalInference",
+    "Name": "AWS Elemental Inference",
+    "Family": "Media Services",
+    "Description": "AWS Elemental Inference applies AI capabilities to live and on-demand video in real-time to automatically transform broadcasts into vertical video content for any format, enabling broadcasters and streamers to reach audiences everywhere without manual work or AI expertise."
   },
   {
     "Identifier": "AWSElementalMediaConnect",
@@ -810,6 +828,12 @@
     "Description": "Establish private connectivity between VPCs and services hosted on AWS or on-premises, without exposing data to the internet"
   },
   {
+    "Identifier": "AWSRTBFabric",
+    "Name": "AWS RTB Fabric",
+    "Family": "Networking & Content Delivery",
+    "Description": "Run real-time bidding workloads with your AdTech partners on a dedicated network in the cloud"
+  },
+  {
     "Identifier": "AWSResilienceHub",
     "Name": "AWS Resilience Hub",
     "Family": "Management & Governance",
@@ -870,6 +894,12 @@
     "Description": "Managed DDoS protection"
   },
   {
+    "Identifier": "AWSShieldnetworksecuritydirector",
+    "Name": "AWS Shield network security director",
+    "Family": "Security, Identity & Compliance",
+    "Description": "AWS Shield network security director (in preview) performs an analysis of your resources to help you visualize your network topology, identify configuration issues, and receive actionable remediation recommendations."
+  },
+  {
     "Identifier": "AWSSimSpaceWeaver",
     "Name": "AWS SimSpace Weaver",
     "Family": "Compute",
@@ -928,6 +958,12 @@
     "Name": "AWS Supply Chain",
     "Family": "Business Applications",
     "Description": "Mitigate risks and lower costs with an ML-powered supply chain application."
+  },
+  {
+    "Identifier": "AWSSupplyChainBetaService",
+    "Name": "AWS Supply Chain Beta Service",
+    "Family": "AI/ML",
+    "Description": "The AWS Supply Chain Beta Service is an agentic supply chain planning and intelligence solution."
   },
   {
     "Identifier": "AWSSupplyChainDemandPlanning",
@@ -1308,6 +1344,12 @@
     "Description": "Amazon Bedrock models provided by TwelveLabs"
   },
   {
+    "Identifier": "AmazonBedrockUndisclosedModelProvider",
+    "Name": "Amazon Bedrock - Undisclosed Model Provider",
+    "Family": "AI/ML",
+    "Description": "Select this only when the customer chooses not to disclose which model provider they are using or testing"
+  },
+  {
     "Identifier": "AmazonBedrockWriterModels",
     "Name": "Amazon Bedrock - Writer Models",
     "Family": "Machine Learning",
@@ -1318,6 +1360,12 @@
     "Name": "Amazon Bedrock - poolside Models",
     "Family": "Machine Learning",
     "Description": "Amazon Bedrock models provided by poolside"
+  },
+  {
+    "Identifier": "AmazonBioDiscovery",
+    "Name": "Amazon Bio Discovery",
+    "Family": "Healthcare AI",
+    "Description": "Amazon Bio Discovery is an agentic AI application that provides AI-guided drug design integrated\r\nwith physical lab testing, creating lab-in-the-loop experimentation."
   },
   {
     "Identifier": "AmazonBraket",
@@ -1488,6 +1536,18 @@
     "Description": "Help agents resolve issues quickly with programmatic step-by-step guidance"
   },
   {
+    "Identifier": "AmazonConnectHealthPatientEngagement",
+    "Name": "Amazon Connect Health - Patient Engagement",
+    "Family": "Business Applications",
+    "Description": "A complete AI-powered solution for delivering personalized customer experiences at scale"
+  },
+  {
+    "Identifier": "AmazonConnectHealthPointofCare",
+    "Name": "Amazon Connect Health - Point of Care",
+    "Family": "Healthcare AI",
+    "Description": "Point-of-care agents integrate directly into existing clinical workflows, reducing administrative overhead so clinicians can focus on patient care"
+  },
+  {
     "Identifier": "AmazonConnectHighVolumeOutboundCommunications",
     "Name": "Amazon Connect - High-Volume Outbound Communications",
     "Family": "Customer Engagement",
@@ -1656,6 +1716,12 @@
     "Description": "Enable faster FPGA accelerator development and deployment in the cloud powered by Virtex UltraScale+ FPGAs from Xilinx"
   },
   {
+    "Identifier": "AmazonEC2F2",
+    "Name": "Amazon EC2 - F2",
+    "Family": "Compute",
+    "Description": "Amazon EC2 F2 instances, the second-generation FPGA-powered instances"
+  },
+  {
     "Identifier": "AmazonEC2G4",
     "Name": "Amazon EC2 - G4",
     "Family": "Compute",
@@ -1714,6 +1780,12 @@
     "Name": "Amazon EC2 - HPC7g",
     "Family": "Compute",
     "Description": "High performance for tightly coupled workloads that require highly parallelized, clustered compute resources powered by AWS Graviton 3E processors"
+  },
+  {
+    "Identifier": "AmazonEC2HPC8a",
+    "Name": "Amazon EC2 - HPC8a",
+    "Family": "Compute",
+    "Description": "For tightly coupled HPC workloads, providing up to 25% better price performance compared to previous-generation Hpc7a instances"
   },
   {
     "Identifier": "AmazonEC2Inf1",
@@ -1798,6 +1870,12 @@
     "Name": "Amazon EC2 P6e-GB200",
     "Family": "Compute",
     "Description": "Provides the highest GPU performance for AI training and inference"
+  },
+  {
+    "Identifier": "AmazonEC2P6eGB300",
+    "Name": "Amazon EC2 P6e-GB300",
+    "Family": "Compute",
+    "Description": "NVIDIA GB300-based GPU platform in EC2 for AI/ML training and inference"
   },
   {
     "Identifier": "AmazonEC2RHEL",
@@ -2358,12 +2436,6 @@
     "Description": "PostgreSQL-compatible relational database built for the cloud"
   },
   {
-    "Identifier": "AmazonRDSCustomForOracle",
-    "Name": "Amazon RDS Custom For Oracle",
-    "Family": "Database",
-    "Description": "Managed database services for applications that require operating system and database customization"
-  },
-  {
     "Identifier": "AmazonRDSCustomforSQLServer",
     "Name": "Amazon RDS Custom for SQL Server",
     "Family": "Database",
@@ -2880,10 +2952,40 @@
     "Description": "Automates storage cost savings by moving data when access patterns change"
   },
   {
+    "Identifier": "SAPonAWSBDC",
+    "Name": "SAP on AWS \u2013 BDC",
+    "Family": "Compute",
+    "Description": "SAP BDC brings together applications, data and AI in a SaaS experience"
+  },
+  {
+    "Identifier": "SAPonAWSBTP",
+    "Name": "SAP on AWS \u2013 BTP",
+    "Family": "Compute",
+    "Description": "SAP Business Technology Platform (BTP) on AWS is the innovation layer for SAP, enabling customers to extend, integrate, and innovate while keeping their core clean"
+  },
+  {
+    "Identifier": "SAPonAWSGROW",
+    "Name": "SAP on AWS \u2013 GROW",
+    "Family": "Compute",
+    "Description": "SSAP GROW provides a predictable, trusted path to SAP S4/HANA Cloud (Public Edition) on a highly scalable and flexible cloud computing environments."
+  },
+  {
     "Identifier": "SAPonAWSGeneral",
     "Name": "SAP on AWS - General",
     "Family": "Compute",
     "Description": "AWS infrastructure (EC2, Storage) to run SAP on AWS"
+  },
+  {
+    "Identifier": "SAPonAWSLOB",
+    "Name": "SAP on AWS \u2013 LOB",
+    "Family": "Compute",
+    "Description": "SAP structures its enterprise software portfolio around specific Lines of Business (LOB) Applications to address key functional areas within an organization.\r\nProduct Category: Compute"
+  },
+  {
+    "Identifier": "SecurityHubExtended",
+    "Name": "Security Hub Extended",
+    "Family": "Security, Identity & Compliance",
+    "Description": "Delivers curated enterprise security solutions from AWS and partners with simplified purchasing."
   },
   {
     "Identifier": "SnowballDataTransfer",

@@ -12,7 +12,7 @@ import {
   Alert,
   Box
 } from "@cloudscape-design/components";
-import { hasCredentials, getOpportunityId } from '../utils/sessionStorage';
+import { hasCredentials, getOpportunityId, getCredentials } from '../utils/sessionStorage';
 
 function AssignOpportunity() {
   const navigate = useNavigate();
@@ -21,7 +21,7 @@ function AssignOpportunity() {
   const [response, setResponse] = useState(null);
   
   const [formData, setFormData] = useState({
-    Catalog: 'Sandbox',
+    Catalog: getCredentials().catalog || 'Sandbox',
     Identifier: '',
     BusinessTitle: '',
     Email: '',

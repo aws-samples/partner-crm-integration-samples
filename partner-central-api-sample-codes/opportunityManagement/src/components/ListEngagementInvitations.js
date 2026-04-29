@@ -53,7 +53,7 @@ function ListEngagementInvitations() {
         
         // Prepare the payload
         const payload = {
-          Catalog: "Sandbox",
+          Catalog: credentials.catalog || "Sandbox",
           MaxResults: 10,
           NextToken: null,
           ParticipantType: "RECEIVER",
@@ -87,7 +87,7 @@ function ListEngagementInvitations() {
         const detailedInvitationsPromises = invitationsList.map(async (invitation) => {
           try {
             const detailCommand = new GetEngagementInvitationCommand({
-              Catalog: "Sandbox",
+              Catalog: credentials.catalog || "Sandbox",
               Identifier: invitation.Id
             });
             
