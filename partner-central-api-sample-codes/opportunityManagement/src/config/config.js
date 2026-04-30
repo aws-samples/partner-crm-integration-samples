@@ -1,11 +1,11 @@
 // Configuration file for the application
 export const config = {
   // Internal flag to show additional configuration options
-  Internal: false
+  Internal: true
 };
 
-// Catalog options for internal use
+// Catalog options
 export const CATALOG_OPTIONS = [
-  { name: 'AWS', value: 'AWS' },
-  { name: 'Sandbox', value: 'Sandbox' }
+  { name: 'Sandbox', value: 'Sandbox' },
+  { name: 'AWS (Production)', value: 'AWS' },
 ];

@@ -61,6 +61,11 @@ const Navigation = () => {
       ]
     },
     {
+      type: "link",
+      text: "Agent Chat",
+      href: "/agent-chat"
+    },
+    {
       type: "section",
       text: "Engagements",
       items: [

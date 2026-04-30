@@ -2,6 +2,36 @@
 
 All notable changes to the AWS Partner CRM Integration Samples project will be documented in this file.
 
+## [opportunityManagement 0.3.0] - 2026-04-23
+
+Scope: `partner-central-api-sample-codes/opportunityManagement` sample app only. No schema or data-model changes.
+
+### Added
+
+- **Agent Chat.** New conversational UI (`Agent Chat` in the left nav) backed by the [Partner Central Agent MCP Server](https://docs.aws.amazon.com/partner-central/latest/APIReference/partner-central-mcp-server.html). Every write operation pauses for a human-in-the-loop approval card showing the proposed tool name and full parameter JSON.
+- **Opportunity-scoped chat panel.** Collapsed `Ask the agent about this opportunity` section on the *Get Opportunity* screen and the opportunity detail view. Automatically anchors follow-up messages to the opportunity in context.
+- **Catalog selector.** Explicit `Sandbox` / `AWS (Production)` picker on the login form (default: Sandbox), applied to every Partner Central API call.
+- **Test Sandbox Access** button on the login form — pre-flight `ListOpportunities` probe against Sandbox before committing to a session.
+- **STS identity display** and **catalog badge** in the Agent Chat header.
+- **Documented quirk mitigations** for the MCP server's classifier, including one-shot retries for short-affirmative, post-approval, and approval-echo cases; fallback to actionable rephrasing guidance when a retry still misfires.
+- **Client identification** (`_meta.integrator` / `_meta.sourceProduct` on every `tools/call`; `clientInfo.integrator` / `clientInfo.sourceProduct` on `initialize`) per MCP getting-started guidance.
+- **Debugging affordances.** `window.__lastMcpPayload` and `window.__lastMcpApprovalBody` globals, plus `[MCP]`-prefixed console logs on every round-trip.
+- New files: `src/components/AgentChat.js`, `src/services/mcpService.js`, `src/services/AGENT_CHAT_README.md`.
+
+### Changed
+
+- **Call-site hygiene.** Every `Catalog:` literal in the component tree now reads from session storage with a `"Sandbox"` fallback; the catalog selector governs all writes (not just the `api.js` helpers).
+- **SimulateReview flow.** Explicit `Catalog` on the simulated-review update payload; cleaner `Arn` / `ReviewStatus` handling.
+- **`package.json`**: version bumped to `0.3.0`.
+
+### Dependencies
+
+- Added: `@aws-sdk/signature-v4` ^3.374.0, `@aws-crypto/sha256-browser` ^5.2.0 (browser-side SigV4 for MCP requests).
+
+### Required IAM
+
+The Agent Chat feature requires `partnercentral:UseSession` on the calling identity, scoped via the `aws:IsMcpServiceAction` condition key. See the [MCP getting started](https://docs.aws.amazon.com/partner-central/latest/APIReference/mcp-getting-started.html) guide for the full policy and read-only variants.
+
 ## [14.3] - 2024-03-07
 - Five State values were missing on the CSV format of the field definitions but were available in the Excel. Corrected the CSV to add Palau, American Samoa, Northern Mariance Islands, Marshall Islands
 - Removed the Opportunity-Filed.xlsx and Opportunity-StandardValues.xlsx which were same as Opportunity-Filed.csv and Opportunity-StandardValues.csv. This is to reduce the discrepancies if any. Same with Lead-Fields.xlsx and Lead-StandardValues.xlsx. Going forward we will maintain the CSV files only.

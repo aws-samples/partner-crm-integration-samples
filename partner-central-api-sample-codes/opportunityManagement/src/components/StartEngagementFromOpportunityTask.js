@@ -13,7 +13,7 @@ import {
   Alert,
   Box
 } from "@cloudscape-design/components";
-import { hasCredentials, getOpportunityId } from '../utils/sessionStorage';
+import { hasCredentials, getOpportunityId, getCredentials } from '../utils/sessionStorage';
 
 function StartEngagementFromOpportunityTask() {
   const navigate = useNavigate();
@@ -23,7 +23,7 @@ function StartEngagementFromOpportunityTask() {
   const [clientToken] = useState(uuidv4());
   
   const [formData, setFormData] = useState({
-    Catalog: 'Sandbox',
+    Catalog: getCredentials().catalog || 'Sandbox',
     Identifier: '',
     InvolvementType: 'Co-Sell',
     Visibility: 'Full'

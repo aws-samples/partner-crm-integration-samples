@@ -1,0 +1,9 @@
+{
+  "catalog": "Sandbox",
+  "region": "us-east-1",
+  "endpoints": {
+    "partnercentral_selling": "https://partnercentral-selling.us-east-1.api.aws",
+    "partnercentral_mcp": "https://partnercentral-agents.us-east-1.api.aws/mcp"
+  },
+  "default_opportunity_id": "O12220145"
+}

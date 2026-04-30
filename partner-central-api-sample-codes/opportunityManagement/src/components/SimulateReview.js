@@ -83,16 +83,20 @@ function SimulateReview() {
         payload.Project.CustomerBusinessProblem = decodeHtmlEntities(payload.Project.CustomerBusinessProblem);
       }
       
+      // Explicitly set Catalog (not returned in GetOpportunity response)
+      payload.Catalog = credentials.catalog || "Sandbox";
+
       // Replace Id with Identifier
       payload.Identifier = payload.Id;
       delete payload.Id;
-      
+
       // Remove fields that should not be included
+      delete payload.Arn;               // Read-only, not accepted by UpdateOpportunity
       delete payload.CreatedDate;
       delete payload.OpportunityTeam;
       delete payload.RelatedEntityIdentifiers;
       delete payload.$metadata;
-      
+
       setUpdatePayload(payload);
     } catch (error) {
       console.error('Error fetching opportunity:', error);
@@ -106,30 +110,18 @@ function SimulateReview() {
   }, [opportunityId, navigate]);
 
   
-  // Update payload when review status changes
-  useEffect(() => {
-    if (updatePayload) {
-        const newPayload = { ...updatePayload };
-        if (newPayload.LifeCycle) {
-        newPayload.LifeCycle.ReviewStatus = reviewStatus;
-        }
-        setUpdatePayload(newPayload);
-    }
-  }, [reviewStatus, updatePayload]);
-
-  
   // Handle review submission
   const handleSubmit = async () => {
     try {
       setSubmitting(true);
       setError(null);
-      
+
       // Import AWS SDK
       const { PartnerCentralSellingClient, UpdateOpportunityCommand, GetOpportunityCommand } = await import("@aws-sdk/client-partnercentral-selling");
       const { getCredentials } = await import('../utils/sessionStorage');
-      
+
       const credentials = getCredentials();
-      
+
       const client = new PartnerCentralSellingClient({
         region: credentials.region || 'us-east-1',
         credentials: {
@@ -138,15 +130,21 @@ function SimulateReview() {
           sessionToken: credentials.sessionToken
         }
       });
-      
+
+      // Apply current reviewStatus into a copy of the payload at submit time
+      const finalPayload = { ...updatePayload };
+      if (finalPayload.LifeCycle) {
+        finalPayload.LifeCycle = { ...finalPayload.LifeCycle, ReviewStatus: reviewStatus };
+      }
+
       // Update opportunity with new review status
-      const updateCommand = new UpdateOpportunityCommand(updatePayload);
+      const updateCommand = new UpdateOpportunityCommand(finalPayload);
       await client.send(updateCommand);
-      
+
       // Fetch updated opportunity details
       const getCommand = new GetOpportunityCommand({
         Catalog: credentials.catalog || "Sandbox",
-        Identifier: id
+        Identifier: opportunityId
       });
       
       const updatedOpportunity = await client.send(getCommand);
@@ -254,7 +252,12 @@ function SimulateReview() {
             overflowX: 'auto',
             maxHeight: '400px'
           }}>
-            {decodeHtmlEntities(JSON.stringify(updatePayload, null, 2))}
+            {decodeHtmlEntities(JSON.stringify(
+              updatePayload && updatePayload.LifeCycle
+                ? { ...updatePayload, LifeCycle: { ...updatePayload.LifeCycle, ReviewStatus: reviewStatus } }
+                : updatePayload,
+              null, 2
+            ))}
           </pre>
         </Container>
         
