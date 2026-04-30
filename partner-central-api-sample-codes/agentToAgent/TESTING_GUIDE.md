@@ -43,8 +43,8 @@ python verify_setup.py
 ============================================================
 
 ✅ [PASS] AWS credentials configured
-   └─ Account: 691709974417
-   └─ ARN: arn:aws:sts::691709974417:assumed-role/Admin/your-user
+   └─ Account: 222222222222
+   └─ ARN: arn:aws:sts::222222222222:assumed-role/Admin/your-user
 
 ============================================================
   2. Amazon Bedrock Model Access
