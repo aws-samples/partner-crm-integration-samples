@@ -7,7 +7,8 @@ import {
   Box,
   Button,
   Alert,
-  Spinner
+  Spinner,
+  ExpandableSection
 } from "@cloudscape-design/components";
 import { getOpportunity, getAwsOpportunitySummary } from '../services/api';
 import { cleanOpportunityData, enhanceWithAwsSummary } from '../utils/opportunityUtils';
@@ -16,6 +17,7 @@ import { decodeHtmlEntities } from '../utils/commonUtils';
 import Overview from './Overview';
 import NextSteps from './NextSteps';
 import TabsSection from './TabsSection';
+import AgentChat from './AgentChat';
 
 function OpportunityDetails() {
   const { id } = useParams();
@@ -136,6 +138,15 @@ function OpportunityDetails() {
 
         {/* Tabs Section */}
         <TabsSection opportunity={opportunity} awsOpportunity={awsOpportunity} />
+
+        {/* Agent Chat scoped to this opportunity */}
+        <ExpandableSection
+          variant="container"
+          headerText="Ask the agent about this opportunity"
+          headerDescription="Ask questions, check funding eligibility, or get next-step recommendations. Writes still require approval."
+        >
+          <AgentChat compact initialOpportunityId={opportunity.Id || id} />
+        </ExpandableSection>
 
         <Header variant="h2">Complete JSON Payload</Header>
         <pre style={{ 

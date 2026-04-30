@@ -4,6 +4,8 @@ A React-based web application demonstrating AWS Partner Central API integration 
 
 ## Features
 
+- **Agent Chat (MCP)**: Natural-language chat against the Partner Central Agent MCP Server, with human-in-the-loop approval for every write. Available as a standalone `/agent-chat` surface and as an embedded, opportunity-scoped panel on the detail screens.
+- **Catalog selector**: Explicit Sandbox / AWS choice at login, applied to every API call with a visible catalog badge on mutating surfaces.
 - **Opportunity Management**: Create, view, edit, and list opportunities
 - **AWS Originated Opportunity Creation**: Specialized workflow for simulating AWS originated opportunities  
 - **Opportunity Association**: Associate solutions, AWS products, AWS Marketplace private offer to the opportunities
@@ -141,6 +143,25 @@ Built with:
 - **AWS SDK** - Partner Central API integration
 - **Cloudscape Design System** - AWS-native UI components
 - **React Router** - Client-side routing
+
+## Release notes
+
+See [`CHANGELOG.md`](../../CHANGELOG.md) at the repo root for the full changelog.
+
+### 0.3.0 — Agent Chat, HITL approvals, catalog selector
+
+- **Agent Chat (new).** Conversational access to the [Partner Central Agent MCP Server](https://docs.aws.amazon.com/partner-central/latest/APIReference/partner-central-mcp-server.html) from a new left-nav entry (Agent Chat). Ask natural-language questions about your pipeline, opportunities, funding eligibility, and next steps. Every write operation pauses for a human-in-the-loop **Approval card** showing the proposed tool name and full parameter payload — the agent plans, the human approves.
+- **Opportunity-scoped chat panel (new).** Both the *Get Opportunity* screen and the opportunity detail view now include a collapsed *Ask the agent about this opportunity* section below the tabs. Scoped to the opportunity you're viewing — funding, next-step, and summary prompts get context anchored automatically.
+- **Catalog selector (now prominent).** Explicit `Sandbox` / `AWS (Production)` choice on the login form, defaulting to Sandbox. A **Test Sandbox Access** button issues a one-row `ListOpportunities` against Sandbox as a pre-flight credential probe. The selected catalog threads through every Partner Central API call, is displayed as a colored badge (blue Sandbox, red AWS) in the Agent Chat header, and is cleared on sign-out.
+- **STS identity display.** The Agent Chat header shows the IAM ARN and account ID resolved from your credentials via `GetCallerIdentity` — quick visual confirmation of which identity is about to perform a write.
+- **Documented quirk mitigations.** Short affirmative replies (`yes`, `proceed`, …), top-level classifier misses, post-approval classifier drift, and approval-echo loops all get one targeted silent retry with the opportunity ID anchored, per the mitigations catalog in the upstream porting guide. If a retry still misfires, the chat surfaces actionable rephrasing guidance instead of the server's off-topic canned reply.
+- **Client identification.** Every `tools/call` sends an `_meta.integrator` / `_meta.sourceProduct` block, and `initialize` populates `clientInfo.integrator` / `clientInfo.sourceProduct`, per the [MCP getting started](https://docs.aws.amazon.com/partner-central/latest/APIReference/mcp-getting-started.html) recommendations.
+- **Write-operation call-site cleanup.** Every `Catalog:` literal in components that previously hard-coded `"Sandbox"` now reads from session storage with a `"Sandbox"` fallback, so the catalog selector actually governs all writes.
+- **Debugging affordances.** Every round-trip logs `[MCP] payload:` to console and stashes the unwrapped response on `window.__lastMcpPayload`; every approval submission stashes its body on `window.__lastMcpApprovalBody`.
+
+**Required IAM.** The `partnercentral:UseSession` action is required for the Agent Chat feature. See [MCP getting started](https://docs.aws.amazon.com/partner-central/latest/APIReference/mcp-getting-started.html) for the full IAM policy (including managed-policy and read-only variants).
+
+**New dependencies.** `@aws-sdk/signature-v4` and `@aws-crypto/sha256-browser` for browser-side SigV4 signing of MCP requests.
 
 ## License
 

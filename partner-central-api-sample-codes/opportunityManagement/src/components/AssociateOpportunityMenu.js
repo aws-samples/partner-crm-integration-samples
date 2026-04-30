@@ -15,14 +15,14 @@ import {
   Table,
   Checkbox
 } from "@cloudscape-design/components";
-import { hasCredentials, getOpportunityId } from '../utils/sessionStorage';
+import { hasCredentials, getOpportunityId, getCredentials } from '../utils/sessionStorage';
 
 function AssociateOpportunityMenu() {
   const navigate = useNavigate();
   
   // Get opportunity ID from session storage
   const [opportunityId, setOpportunityId] = useState(getOpportunityId() || '');
-  const catalog = 'Sandbox';
+  const catalog = getCredentials().catalog || 'Sandbox';
   
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
