@@ -204,11 +204,11 @@ curl -X POST https://partnercentral-account.us-east-1.api.aws/CreatePartner \
       "Email": "your-email@example.com",
       "BusinessTitle": "Your Title"
     },
-    "EmailVerificationCode": "your-verification-code"
+    "EmailVerificationCode": "123456"
   }'
 ```
 
-Note: You'll need to request an email verification code first before calling CreatePartner. The request must be signed with AWS SigV4.
+Note: For the Sandbox catalog, no actual email verification is required — any 6-digit value for `EmailVerificationCode` will work. The request must be signed with AWS SigV4.
 
 ### Environment Variables
 
