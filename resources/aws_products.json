@@ -780,12 +780,6 @@
     "Description": "Run AWS Outposts in locations with limited space or smaller capacity requirements"
   },
   {
-    "Identifier": "AWSPanorama",
-    "Name": "AWS Panorama",
-    "Family": "Machine Learning",
-    "Description": "Enabling computer vision applications at the edge"
-  },
-  {
     "Identifier": "AWSParallelCluster",
     "Name": "AWS ParallelCluster",
     "Family": "High Performance Computing (HPC)",
@@ -958,12 +952,6 @@
     "Name": "AWS Supply Chain",
     "Family": "Business Applications",
     "Description": "Mitigate risks and lower costs with an ML-powered supply chain application."
-  },
-  {
-    "Identifier": "AWSSupplyChainBetaService",
-    "Name": "AWS Supply Chain Beta Service",
-    "Family": "AI/ML",
-    "Description": "The AWS Supply Chain Beta Service is an agentic supply chain planning and intelligence solution."
   },
   {
     "Identifier": "AWSSupplyChainDemandPlanning",
@@ -1212,16 +1200,16 @@
     "Description": "Amazon Bedrock models provided by AI21 Labs"
   },
   {
-    "Identifier": "AmazonBedrockAgents",
-    "Name": "Amazon Bedrock - Agents",
-    "Family": "Machine Learning",
-    "Description": "Automate multistep tasks by connecting with APIs and data sources"
-  },
-  {
     "Identifier": "AmazonBedrockAmazonModels",
     "Name": "Amazon Bedrock - Amazon Models",
     "Family": "Machine Learning",
     "Description": "Amazon Bedrock models provided by Amazon (Nova, Titan)"
+  },
+  {
+    "Identifier": "AmazonBedrockAnthropicClaudeCode",
+    "Name": "Amazon Bedrock - Anthropic Claude Code",
+    "Family": "AI/ML",
+    "Description": "Anthropic's autonomous AI coding agent running natively on Bedrock with full AWS enterprise security controls."
   },
   {
     "Identifier": "AmazonBedrockAnthropicModels",
@@ -1290,6 +1278,12 @@
     "Description": "Amazon Bedrock models provided by Luma AI"
   },
   {
+    "Identifier": "AmazonBedrockManagedAgents",
+    "Name": "Amazon Bedrock - Managed Agents",
+    "Family": "AI/ML",
+    "Description": "Deploy and operate AI agents powered by OpenAI frontier models on AWS infrastructure"
+  },
+  {
     "Identifier": "AmazonBedrockMetaModels",
     "Name": "Amazon Bedrock - Meta Models",
     "Family": "Machine Learning",
@@ -1318,6 +1312,12 @@
     "Name": "Amazon Bedrock - NVIDIA Models",
     "Family": "AI/ML",
     "Description": "Amazon Bedrock models provided by NVIDIA"
+  },
+  {
+    "Identifier": "AmazonBedrockOpenAICodex",
+    "Name": "Amazon Bedrock - OpenAI Codex",
+    "Family": "AI/ML",
+    "Description": "OpenAI's AI coding agent running natively on Bedrock with AWS enterprise security and governance."
   },
   {
     "Identifier": "AmazonBedrockOpenAIModels",
@@ -1440,12 +1440,6 @@
     "Description": "Profile your applications in the cloud from a single, centralized dashboard"
   },
   {
-    "Identifier": "AmazonCodeGuruReviewer",
-    "Name": "Amazon CodeGuru Reviewer",
-    "Family": "Developer Tools",
-    "Description": "Automate code reviews and optimize application performance with ML-powered recommendations"
-  },
-  {
     "Identifier": "AmazonCodeGuruSecurity",
     "Name": "Amazon CodeGuru Security",
     "Family": "Security, Identity & Compliance",
@@ -1504,6 +1498,12 @@
     "Name": "Amazon Connect - Customer Profiles",
     "Family": "Customer Engagement",
     "Description": "Enable agents to deliver faster, more personalized customer service"
+  },
+  {
+    "Identifier": "AmazonConnectDecisions",
+    "Name": "Amazon Connect Decisions",
+    "Family": "AI/ML",
+    "Description": "The Amazon Connect Decisions is an agentic supply chain planning and intelligence solution."
   },
   {
     "Identifier": "AmazonConnectEmail",
@@ -1698,12 +1698,6 @@
     "Description": "Designed for compute-intensive workloads with cost-effective high performance"
   },
   {
-    "Identifier": "AmazonEC2CapacityBlocksforML",
-    "Name": "Amazon EC2 Capacity Blocks for ML",
-    "Family": "Compute",
-    "Description": "Reserve GPU instances in Amazon EC2 UltraClusters to run your ML workloads"
-  },
-  {
     "Identifier": "AmazonEC2DL1",
     "Name": "Amazon EC2 - DL1",
     "Family": "Compute",
@@ -1848,12 +1842,6 @@
     "Description": "High performance for ML training and HPC applications in the cloud powered by H200 GPUs from NVIDIA, and latest PCIe version"
   },
   {
-    "Identifier": "AmazonEC2P6",
-    "Name": "Amazon EC2 - P6",
-    "Family": "Compute",
-    "Description": "High performance for ML training and HPC applications in the cloud powered by Latest Blackwell GPUs from NVIDIA"
-  },
-  {
     "Identifier": "AmazonEC2P6B200",
     "Name": "Amazon EC2 P6-B200",
     "Family": "Compute",
@@ -1972,6 +1960,12 @@
     "Name": "Amazon EKS on Outpost",
     "Family": "Containers",
     "Description": "Deploy managed Amazon EKS clusters in on-premises environments"
+  },
+  {
+    "Identifier": "AmazonEVSWindowsServerLicensing",
+    "Name": "Amazon EVS Windows Server Licensing",
+    "Family": "Compute",
+    "Description": "Provides supported Windows Server entitlements to run your VMware workloads on Amazon Elastic VMware Service (EVS), enabled on demand per Virtual Machine and billed per vCPU-hour."
   },
   {
     "Identifier": "AmazonElastiCache",
@@ -2370,18 +2364,6 @@
     "Description": "The most capable generative AI-powered assistant for finding information, gaining insight, and taking action at work"
   },
   {
-    "Identifier": "AmazonQBusinessQembedded",
-    "Name": "Amazon Q Business - Q embedded",
-    "Family": "Machine Learning",
-    "Description": "Ability to embed Q business experience (with visual customizations) in applications and public webpages"
-  },
-  {
-    "Identifier": "AmazonQBusinessQindex",
-    "Name": "Amazon Q Business - Q index",
-    "Family": "Machine Learning",
-    "Description": "Ability for ISVs to pull data from a customer's Q index to enhance the ISV's existing GenAI features"
-  },
-  {
     "Identifier": "AmazonQDeveloper",
     "Name": "Amazon Q Developer",
     "Family": "Developer Tools",
@@ -2400,6 +2382,12 @@
     "Description": "Fully managed ledger database"
   },
   {
+    "Identifier": "AmazonQuick",
+    "Name": "Amazon Quick",
+    "Family": "AI/ML",
+    "Description": "Agentic AI-powered digital workspace"
+  },
+  {
     "Identifier": "AmazonQuickSight",
     "Name": "Amazon QuickSight",
     "Family": "Analytics",
@@ -2416,12 +2404,6 @@
     "Name": "Amazon QuickSight Q",
     "Family": "Analytics",
     "Description": "Ask questions of your data and receive answers with relevant visualizations"
-  },
-  {
-    "Identifier": "AmazonQuickSuite",
-    "Name": "Amazon Quick Suite",
-    "Family": "AI/ML",
-    "Description": "Agentic AI-powered digital workspace"
   },
   {
     "Identifier": "AmazonRDSAuroraforMySQL",
@@ -2638,6 +2620,12 @@
     "Name": "Amazon SageMaker Lakehouse",
     "Family": "Machine Learning",
     "Description": "Unify data access across Amazon S3 data lakes, Amazon Redshift, and other data sources"
+  },
+  {
+    "Identifier": "AmazonSageMakerManagedMLFLow",
+    "Name": "Amazon SageMaker Managed MLFLow",
+    "Family": "Compute",
+    "Description": "Accelerate GenAI by making it easier to track experiments and monitor performance of models using a single tool"
   },
   {
     "Identifier": "AmazonSageMakerNotebookInstances",
@@ -2934,10 +2922,22 @@
     "Description": "Open-source product that helps research and engineering orgs create and manage virtual desktops on AWS"
   },
   {
+    "Identifier": "Route53ResolverDNSFirewall",
+    "Name": "Route 53 Resolver DNS Firewall",
+    "Family": "Security, Identity & Compliance",
+    "Description": "Block DNS queries to malicious domains and allow queries to trusted domains."
+  },
+  {
     "Identifier": "S3ExpressOneZone",
     "Name": "S3 Express One Zone",
     "Family": "Storage",
     "Description": "Fastest cloud object storage for latency sensitive, performance-critical applications"
+  },
+  {
+    "Identifier": "S3Files",
+    "Name": "S3 Files",
+    "Family": "Storage",
+    "Description": "S3 Files is a shared file system that connects any AWS compute directly with your data in Amazon S3."
   },
   {
     "Identifier": "S3GlacierDeepArchive",
