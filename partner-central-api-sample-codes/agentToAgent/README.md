@@ -89,7 +89,7 @@ python -c "import boto3; print(f'boto3 version: {boto3.__version__}')"
 # Run CLI
 python orchestrator_agent.py \
   --opportunity-id O15081741 \
-  --upload ../notes/meeting.txt \
+  --upload demo_meeting_notes.txt \
   --prompt "Generate next steps based on meeting notes"
 
 # Or run as API server
@@ -101,7 +101,7 @@ python server.py
 
 ```bash
 # Basic usage with uploaded file
-python orchestrator_agent.py -o O15081741 -u meeting_notes.txt -p "What are the next steps?"
+python orchestrator_agent.py -o O15081741 -u demo_meeting_notes.txt -p "What are the next steps?"
 
 # With Slack channel
 python orchestrator_agent.py -o O15081741 -s partner-deals -p "Summarize recent discussions"
@@ -110,13 +110,13 @@ python orchestrator_agent.py -o O15081741 -s partner-deals -p "Summarize recent 
 python orchestrator_agent.py -o O15081741 -f ./deal-notes -p "Generate action items"
 
 # Dry run (don't update opportunity)
-python orchestrator_agent.py -o O15081741 -u notes.txt --dry-run
+python orchestrator_agent.py -o O15081741 -u demo_meeting_notes.txt --dry-run
 
 # Multiple sources
 python orchestrator_agent.py -o O15081741 \
   -s partner-deals \
   -f ./notes \
-  -u meeting.txt \
+  -u demo_meeting_notes.txt \
   -p "Create comprehensive next steps"
 ```
 
@@ -150,7 +150,7 @@ Generate with file uploads.
 curl -X POST http://localhost:8001/api/generate-with-files \
   -F "opportunity_id=O15081741" \
   -F "prompt=Generate next steps from meeting notes" \
-  -F "files=@meeting_notes.txt" \
+  -F "files=@demo_meeting_notes.txt" \
   -F "update_opportunity=true"
 ```
 
@@ -173,7 +173,7 @@ result = agent.run(
     prompt="What should be our next steps?",
     slack_channels=["partner-deals"],
     local_folders=["./notes"],
-    uploaded_files=["meeting.txt"],
+    uploaded_files=["demo_meeting_notes.txt"],
     update_opportunity=True
 )
 
