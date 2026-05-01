@@ -2,6 +2,8 @@
 
 An AI orchestrator agent that communicates with the AWS Partner Central MCP Agent to automate opportunity management.
 
+> 📘 **Looking to test the setup?** See [TESTING_GUIDE.md](./TESTING_GUIDE.md) for step-by-step testing instructions with expected outputs.
+
 ## Why Agent-to-Agent?
 
 This application demonstrates **agent-to-agent communication** - a pattern where one AI agent delegates specialized tasks to another AI agent rather than calling APIs directly.
