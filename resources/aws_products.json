@@ -66,6 +66,12 @@
     "Description": "AWS Application Migration Service (MGN) automates lift-and-shift migration"
   },
   {
+    "Identifier": "AWSAssurance",
+    "Name": "AWS Assurance",
+    "Family": "Security, Identity & Compliance",
+    "Description": "AI-powered continuous assurance \u2014 discover, prioritize, remediate, and report automatically."
+  },
+  {
     "Identifier": "AWSAuditManager",
     "Name": "AWS Audit Manager",
     "Family": "Security, Identity & Compliance",
@@ -822,6 +828,12 @@
     "Description": "Establish private connectivity between VPCs and services hosted on AWS or on-premises, without exposing data to the internet"
   },
   {
+    "Identifier": "AWSProgramManagementOffice",
+    "Name": "AWS Program Management Office",
+    "Family": "Support",
+    "Description": "Dedicated program management support for government agencies contracting directly with AWS to meet unique requirements"
+  },
+  {
     "Identifier": "AWSRTBFabric",
     "Name": "AWS RTB Fabric",
     "Family": "Networking & Content Delivery",
@@ -1144,6 +1156,12 @@
     "Name": "AgentCore Runtime",
     "Family": "AI/ML",
     "Description": "A secure, serverless runtime purpose-built for deploying and scaling dynamic AI agents and tools"
+  },
+  {
+    "Identifier": "AgentCorepayments",
+    "Name": "AgentCore payments",
+    "Family": "Compute",
+    "Description": "Enable AI agents to autonomously discover, authorize, and execute payments with a few lines of code"
   },
   {
     "Identifier": "AlexaforBusiness",
@@ -2830,6 +2848,18 @@
     "Name": "CloudTrail Lake",
     "Family": "Management & Governance",
     "Description": "Track user activity and API usage on AWS and in hybrid and multicloud environments"
+  },
+  {
+    "Identifier": "CloudWatchOmni",
+    "Name": "CloudWatch Omni",
+    "Family": "Management & Governance",
+    "Description": "See, understand, and act on application and infrastructure health across AWS, Azure, GCP, and on-premises"
+  },
+  {
+    "Identifier": "CloudWatchOmniforAgents",
+    "Name": "CloudWatch Omni for Agents",
+    "Family": "Management & Governance",
+    "Description": "Monitor, evaluate, and optimize AI agents from development to production at scale, wherever you run them."
   },
   {
     "Identifier": "ContactLensforAmazonConnect",
