@@ -1608,6 +1608,12 @@
     "Description": "Review agent interactions with customer for quality standards, compliance requirements and best practices to effectively evaluate agent performance"
   },
   {
+    "Identifier": "AmazonConnectTalent",
+    "Name": "Amazon Connect - Talent",
+    "Family": "Customer Engagement",
+    "Description": "Amazon Connect Talent is an agentic AI hiring solution built for talent acquisition leaders managing scaled hiring."
+  },
+  {
     "Identifier": "AmazonConnectTasks",
     "Name": "Amazon Connect - Tasks",
     "Family": "Customer Engagement",
@@ -2386,12 +2392,6 @@
     "Name": "Amazon Q Developer",
     "Family": "Developer Tools",
     "Description": "GenAI-powered development tools to build, operate, and maintain applications"
-  },
-  {
-    "Identifier": "AmazonQDeveloperforJavaTransformation",
-    "Name": "Amazon Q Developer for Java Transformation",
-    "Family": "Developer Tools",
-    "Description": "Accelerate Java application upgrades"
   },
   {
     "Identifier": "AmazonQuantumLedgerDatabaseQLDB",
