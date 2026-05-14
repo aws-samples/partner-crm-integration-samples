@@ -16,14 +16,5 @@
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
-    
-    <script>
-      // Suppress ResizeObserver loop errors (harmless warnings from UI components)
-      window.addEventListener('error', function(e) {
-        if (e.message && e.message.includes('ResizeObserver loop completed with undelivered notifications')) {
-          e.stopImmediatePropagation();
-        }
-      });
-    </script>
   </body>
 </html>

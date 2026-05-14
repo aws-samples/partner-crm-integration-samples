@@ -174,11 +174,6 @@ export const mcpSendApproval = async ({ sessionId, toolUseId, decision, message,
       _meta: { ...CLIENT_INFO },
     },
   };
-  // Dev aid: log what we're sending so we can diff against the spec.
-  try {
-    console.log('[MCP] sending approval:', { sessionId, toolUseId, decision, message, catalog });
-    if (typeof window !== 'undefined') window.__lastMcpApprovalBody = body;
-  } catch (_) {}
   return signedFetch(body);
 };
 
@@ -338,12 +333,6 @@ export const parseAgentResponse = (rpcResponse) => {
   }
 
   const payload = _unwrapResult(rpcResponse);
-  // Dev aid: log the unwrapped agent payload AND stash it on window so we can
-  // inspect the full object from DevTools even if the message gets truncated.
-  try {
-    console.log('[MCP] payload:', payload);
-    if (typeof window !== 'undefined') window.__lastMcpPayload = payload;
-  } catch (_) {}
 
   if (!payload) return { type: 'error', message: 'Empty response' };
 

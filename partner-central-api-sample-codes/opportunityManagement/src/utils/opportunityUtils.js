@@ -3,6 +3,34 @@
  */
 
 /**
+ * Recursively decodes HTML entities in all string values of an object.
+ * The Partner Central Selling API returns colons encoded as &colon; in HTTP responses
+ * to browser clients. This is a server-side encoding quirk (only affects ':').
+ * @param {*} value - Any value to decode
+ * @returns {*} - The value with &colon; decoded in all strings
+ */
+const decodeEntitiesInObject = (value) => {
+  if (typeof value === 'string') {
+    // Server returns &amp;colon; (double-encoded) for the : character
+    return value.replace(/&amp;colon;/g, ':');
+  }
+  if (value instanceof Date) {
+    return value;
+  }
+  if (Array.isArray(value)) {
+    return value.map(decodeEntitiesInObject);
+  }
+  if (value && typeof value === 'object') {
+    const result = {};
+    for (const [k, v] of Object.entries(value)) {
+      result[k] = decodeEntitiesInObject(v);
+    }
+    return result;
+  }
+  return value;
+};
+
+/**
  * Cleans an opportunity response by removing __type attributes and ensuring proper format
  * @param {Object} opportunityData - The raw opportunity data from API
  * @returns {Object} - Cleaned opportunity data
@@ -29,7 +57,8 @@ export const cleanOpportunityData = (opportunityData) => {
     }));
   }
   
-  return cleanedData;
+  // Decode HTML entities in all string values
+  return decodeEntitiesInObject(cleanedData);
 };
 
 /**

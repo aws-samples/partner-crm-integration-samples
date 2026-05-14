@@ -54,3 +54,11 @@ export const saveEngagementInvitationId = (id) => {
 export const getEngagementInvitationId = () => {
   return sessionStorage.getItem('engagementInvitationId');
 };
+
+export const saveChangeSetId = (id) => {
+  sessionStorage.setItem('changeSetId', id);
+};
+
+export const getChangeSetId = () => {
+  return sessionStorage.getItem('changeSetId');
+};
