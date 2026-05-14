@@ -13,7 +13,8 @@ A comprehensive React-based web application demonstrating AWS Partner Central AP
 - **🔄 Change Set Tracking**: Real-time monitoring of AWS Marketplace API operations with automatic status polling, retry logic, error handling, and success confirmation
 
 ### Advanced Features
-- **🔐 Auto-Login**: Secure credential management using React environment variables
+- **🤖 Agent Chat**: Conversational AI interface powered by the AWS Partner Central MCP Agent — ask questions about opportunities, get recommendations, and update opportunity fields with human-in-the-loop approval
+- **🔐 Credential Validation**: Login validates credentials against AWS before granting access
 - **⚡ Credentials Sync**: Automated sync from `~/.aws/credentials` to React environment
 - **🔄 Real-time Updates**: Automatic status polling for long-running operations
 - **📡 Comprehensive API Coverage**: Full AWS Marketplace Catalog and Partner Central API integration
@@ -341,7 +342,8 @@ src/
 ├── config/                         # Application configuration
 │   └── config.js
 ├── services/                       # API service layer
-│   └── api.js
+│   ├── api.js                     # Partner Central Selling API client
+│   └── mcpService.js              # Partner Central MCP Agent client (JSON-RPC 2.0 + SigV4)
 └── App.js                         # Main application router
 ```
 
@@ -544,6 +546,17 @@ Both apps share:
   - AWS Products
   - AWS Marketplace Private Offers (with correct `AwsMarketplaceOffers` entity type)
 
+### 🤖 Agent Chat - Partner Central MCP Agent
+
+An AI-powered conversational interface for managing opportunities through natural language:
+
+- **Natural Language Queries**: Ask questions like "What's the status of opportunity O1234?" or "List my open opportunities"
+- **Opportunity Updates**: Request changes to opportunity fields (next steps, stage, etc.) with human-in-the-loop approval workflow
+- **MCP Protocol**: Communicates with the AWS Partner Central MCP Agent via JSON-RPC 2.0 with SigV4 authentication
+- **Session Management**: Maintains conversation context across multiple turns
+- **Approval Workflow**: Write operations require explicit user approval before execution — review proposed changes, approve, reject, or override
+- **Sandbox/Production**: Supports both Sandbox and AWS (production) catalogs
+
 ### Engagements Section
 - **📋 List Engagement Invitations**: View all invitations
 - **👁️ Get Engagement Invitation**: Detailed invitation information
@@ -554,9 +567,10 @@ Both apps share:
 ### 📊 Agreements Section - AWS Marketplace Agreement Management
 
 #### **🔍 Search Agreements** - Advanced Agreement Discovery
-- **Custom Lambda API Integration**:
-  - **CORS Bypass**: Custom Lambda function at `https://5zu65cuqg2.execute-api.us-east-1.amazonaws.com/Prod/search-agreements`
-  - **Direct AWS Integration**: Lambda function calls AWS Marketplace Agreement API directly
+- **Local Server Proxy**:
+  - The Agreement API does not support CORS from browsers (uses `X-Amz-Target` header protocol)
+  - A local Express server on port 3001 proxies requests to the AWS Marketplace Agreement API
+  - Start with `npm run server` or `npm run dev` (starts both React app and server)
   - **Real-time Results**: Fast agreement search without browser CORS restrictions
   - **Secure Authentication**: Lambda handles AWS credentials and authentication
 
