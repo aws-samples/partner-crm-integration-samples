@@ -44,6 +44,7 @@ class GenerateRequest(BaseModel):
     """Request to generate next steps"""
     opportunity_id: str
     prompt: str = "Generate next steps based on the provided context"
+    notes: Optional[str] = None  # Paste meeting notes directly here
     slack_channels: Optional[List[str]] = None
     local_folders: Optional[List[str]] = None
     update_opportunity: bool = True
@@ -81,18 +82,40 @@ async def generate_next_steps(request: GenerateRequest):
     
     - **opportunity_id**: Partner Central opportunity ID (e.g., O15081741)
     - **prompt**: Custom prompt for AI generation
+    - **notes**: Paste meeting notes / context directly (alternative to file upload)
     - **slack_channels**: List of Slack channels to read
     - **local_folders**: List of local folders to scan
     - **update_opportunity**: Whether to update the opportunity via MCP
     """
     try:
+        # If notes are provided inline, write them to a temp file so the
+        # orchestrator can consume them as an uploaded file context source.
+        uploaded_files = []
+        temp_file = None
+        if request.notes:
+            import tempfile
+            temp_file = tempfile.NamedTemporaryFile(
+                mode='w', suffix='.txt', delete=False, prefix='notes_'
+            )
+            temp_file.write(request.notes)
+            temp_file.close()
+            uploaded_files.append(temp_file.name)
+
         result = agent.run(
             opportunity_id=request.opportunity_id,
             prompt=request.prompt,
             slack_channels=request.slack_channels,
             local_folders=request.local_folders,
+            uploaded_files=uploaded_files or None,
             update_opportunity=request.update_opportunity
         )
+
+        # Clean up temp file
+        if temp_file:
+            try:
+                os.remove(temp_file.name)
+            except OSError:
+                pass
         
         return GenerateResponse(
             success=result.success,
