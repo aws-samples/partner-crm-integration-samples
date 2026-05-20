@@ -48,6 +48,10 @@ class GenerateRequest(BaseModel):
     slack_channels: Optional[List[str]] = None
     local_folders: Optional[List[str]] = None
     update_opportunity: bool = True
+    # The REST API has no terminal to type 'y' at, so default to True.
+    # Callers can set this to False if they want a different approval flow
+    # (e.g., write the proposed change to a queue for a human to review).
+    auto_approve: bool = True
 
 
 class GenerateResponse(BaseModel):
@@ -107,7 +111,8 @@ async def generate_next_steps(request: GenerateRequest):
             slack_channels=request.slack_channels,
             local_folders=request.local_folders,
             uploaded_files=uploaded_files or None,
-            update_opportunity=request.update_opportunity
+            update_opportunity=request.update_opportunity,
+            auto_approve=request.auto_approve,
         )
 
         # Clean up temp file
@@ -136,6 +141,7 @@ async def generate_with_files(
     prompt: str = Form("Generate next steps based on the provided context"),
     slack_channels: Optional[str] = Form(None),
     update_opportunity: bool = Form(True),
+    auto_approve: bool = Form(True),
     files: List[UploadFile] = File(default=[])
 ):
     """
@@ -145,6 +151,10 @@ async def generate_with_files(
     - **prompt**: Custom prompt for AI generation
     - **slack_channels**: Comma-separated list of Slack channels
     - **update_opportunity**: Whether to update the opportunity via MCP
+    - **auto_approve**: Auto-approve the MCP write so no terminal prompt
+        is needed. Defaults to True for the REST endpoint since callers
+        are typically scripts/services. Set to False if you want the
+        endpoint to no-op the write step.
     - **files**: Files to upload as context
     """
     try:
@@ -171,7 +181,8 @@ async def generate_with_files(
             prompt=prompt,
             slack_channels=channels,
             uploaded_files=uploaded_paths,
-            update_opportunity=update_opportunity
+            update_opportunity=update_opportunity,
+            auto_approve=auto_approve,
         )
         
         # Cleanup temp files

@@ -96,7 +96,7 @@ def check_bedrock_model_access():
         if "Could not resolve" in error_msg or "EndpointConnectionError" in error_msg:
             print_status("Bedrock model access", False, "Network/endpoint error")
         else:
-            print_status("Bedrock model access", False, error_msg[:100])
+            print_status("Bedrock model access", False, error_msg[:200])
         return False
 
 
@@ -148,14 +148,14 @@ def check_partner_central_api(catalog: str):
             print(f"   └─ Found {count} opportunity(ies) in response")
             return True
         else:
-            error_msg = response.text[:100]
+            error_msg = response.text[:200]
             print_status(f"Partner Central API ({catalog} catalog)", False, f"HTTP {response.status_code}")
             print(f"   └─ {error_msg}")
             return False
         
     except Exception as e:
         error_msg = str(e)
-        print_status(f"Partner Central API ({catalog} catalog)", False, error_msg[:100])
+        print_status(f"Partner Central API ({catalog} catalog)", False, error_msg[:200])
         
         if "AccessDeniedException" in error_msg:
             print("\n   Fix: Attach 'AWSMcpServiceActionsFullAccess' managed policy")
@@ -258,7 +258,7 @@ def check_partner_central_mcp(catalog: str):
         
     except Exception as e:
         error_msg = str(e)
-        print_status("Partner Central MCP", False, error_msg[:100])
+        print_status("Partner Central MCP", False, error_msg[:200])
         
         if "AccessDeniedException" in error_msg or "403" in error_msg:
             print("\n   Fix: Ensure IAM policy includes partnercentral:UseSession")

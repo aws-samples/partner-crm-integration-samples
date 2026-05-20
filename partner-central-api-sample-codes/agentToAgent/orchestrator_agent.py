@@ -330,8 +330,23 @@ class PartnerCentralMCPClient:
             logger.error(f"Error fetching opportunity {opportunity_id}: {e}")
             return {}
     
-    def update_next_steps(self, opportunity_id: str, next_steps: str, interactive: bool = True) -> Dict:
-        """Update opportunity's NextSteps field via MCP"""
+    def update_next_steps(
+        self,
+        opportunity_id: str,
+        next_steps: str,
+        interactive: bool = True,
+        auto_approve: bool = False,
+    ) -> Dict:
+        """Update opportunity's NextSteps field via MCP.
+        
+        Args:
+            opportunity_id: ACE opportunity id (e.g., O15081741)
+            next_steps: text to write into LifeCycle.NextSteps
+            interactive: when True, prompts at the terminal for y/n approval
+            auto_approve: when True, automatically approves the update
+                without prompting. Use for non-interactive callers (REST
+                API, scheduled jobs). Has no effect if `interactive` is True.
+        """
         import boto3
         import requests
         from botocore.auth import SigV4Auth
@@ -390,14 +405,31 @@ Please update the LifeCycle.NextSteps field with this content."""
             # Check if approval is required
             if interactive:
                 result = self._handle_approval_flow(result, credentials, service_name)
+            elif auto_approve:
+                result = self._handle_approval_flow(
+                    result, credentials, service_name, auto_decision='approve'
+                )
             
             return result
         except Exception as e:
             logger.error(f"Error updating opportunity via MCP: {e}")
             return {"error": str(e)}
     
-    def _handle_approval_flow(self, mcp_response: Dict, credentials, service_name: str) -> Dict:
-        """Handle interactive approval flow"""
+    def _handle_approval_flow(
+        self,
+        mcp_response: Dict,
+        credentials,
+        service_name: str,
+        auto_decision: Optional[str] = None,
+    ) -> Dict:
+        """Handle approval flow.
+        
+        When `auto_decision` is None, this is the original interactive
+        flow — prompt at the terminal for y/n. When `auto_decision` is
+        'approve' or 'reject', skip the prompt and respond with that
+        decision. Used by non-interactive callers (REST API, scheduled
+        jobs) so there's no human waiting for a TTY.
+        """
         import requests
         from botocore.auth import SigV4Auth
         from botocore.awsrequest import AWSRequest
@@ -438,32 +470,39 @@ Please update the LifeCycle.NextSteps field with this content."""
                 logger.warning("No tool approval request found in response")
                 return mcp_response
             
-            # Display approval prompt
-            print("\n" + "="*60)
-            print("🔐 APPROVAL REQUIRED")
-            print("="*60)
-            print(f"Tool: {tool_name}")
-            print(f"Session: {session_id}")
-            if tool_input:
-                try:
-                    input_data = json.loads(tool_input) if isinstance(tool_input, str) else tool_input
-                    print(f"Action: Update NextSteps field")
-                    if 'NextSteps' in str(input_data):
-                        print(f"Content preview: {str(input_data)[:200]}...")
-                except:
-                    print(f"Input: {str(tool_input)[:200]}...")
-            print("="*60)
-            
-            # Get user input
-            while True:
-                choice = input("\nApprove this update? [y/n]: ").strip().lower()
-                if choice in ['y', 'yes']:
-                    decision = 'approve'
-                    break
-                elif choice in ['n', 'no']:
-                    decision = 'reject'
-                    break
-                print("Please enter 'y' or 'n'")
+            # Display approval prompt (skipped when auto_decision is set)
+            if auto_decision is None:
+                print("\n" + "="*60)
+                print("🔐 APPROVAL REQUIRED")
+                print("="*60)
+                print(f"Tool: {tool_name}")
+                print(f"Session: {session_id}")
+                if tool_input:
+                    try:
+                        input_data = json.loads(tool_input) if isinstance(tool_input, str) else tool_input
+                        print(f"Action: Update NextSteps field")
+                        if 'NextSteps' in str(input_data):
+                            print(f"Content preview: {str(input_data)[:200]}...")
+                    except:
+                        print(f"Input: {str(tool_input)[:200]}...")
+                print("="*60)
+                
+                # Get user input
+                while True:
+                    choice = input("\nApprove this update? [y/n]: ").strip().lower()
+                    if choice in ['y', 'yes']:
+                        decision = 'approve'
+                        break
+                    elif choice in ['n', 'no']:
+                        decision = 'reject'
+                        break
+                    print("Please enter 'y' or 'n'")
+            else:
+                # Non-interactive caller — apply the requested decision.
+                decision = auto_decision
+                logger.info(
+                    f"Auto-{decision} for tool {tool_name} (tool_use_id={tool_use_id})"
+                )
             
             # Send approval response
             mcp_endpoint = self.config['endpoints']['partnercentral_mcp']
@@ -535,12 +574,20 @@ Please update the LifeCycle.NextSteps field with this content."""
                         print("="*60)
                         print(f"Error: {update_error}")
                         print("="*60)
+                    elif final_status == 'complete' and decision == 'reject':
+                        print("\n❌ Update rejected by user.")
                     elif final_status == 'complete' and not update_error:
                         print("\n✅ Update approved and completed!")
-                    elif decision == 'reject':
-                        print("\n❌ Update rejected by user.")
             except Exception as parse_err:
                 logger.warning(f"Could not parse final status: {parse_err}")
+            
+            # Stamp the decision on the response so the outer caller (CLI
+            # summary, REST handler, etc.) knows whether to phrase the
+            # outcome as "completed" or "rejected" — `status: complete`
+            # alone is ambiguous because a successful rejection also
+            # comes back with that status.
+            if isinstance(final_result, dict):
+                final_result['_approval_decision'] = decision
             
             return final_result
             
@@ -598,7 +645,8 @@ class OrchestratorAgent:
         slack_channels: List[str] = None,
         local_folders: List[str] = None,
         uploaded_files: List[str] = None,
-        update_opportunity: bool = True
+        update_opportunity: bool = True,
+        auto_approve: bool = False,
     ) -> AgentResult:
         """
         Run the full agent workflow:
@@ -606,6 +654,11 @@ class OrchestratorAgent:
         2. Fetch current opportunity data
         3. Generate next steps using AI
         4. Update opportunity via MCP
+        
+        When `auto_approve` is True, the MCP update skips the interactive
+        y/n approval prompt and applies the change directly. Use this for
+        non-interactive callers (REST API, CI jobs, scheduled scripts)
+        where there's no human at a terminal to type 'y'.
         """
         try:
             logger.info(f"Starting orchestrator for opportunity: {opportunity_id}")
@@ -643,10 +696,17 @@ class OrchestratorAgent:
             mcp_response = None
             if update_opportunity:
                 logger.info(f"Updating opportunity {opportunity_id} via MCP...")
-                mcp_response = self.mcp_client.update_next_steps(opportunity_id, next_steps)
+                mcp_response = self.mcp_client.update_next_steps(
+                    opportunity_id,
+                    next_steps,
+                    interactive=not auto_approve,
+                    auto_approve=auto_approve,
+                )
                 
                 if "error" in mcp_response:
                     logger.warning(f"MCP update warning: {mcp_response['error']}")
+                elif mcp_response.get('_approval_decision') == 'reject':
+                    logger.info("Opportunity update rejected by user — no changes saved")
                 else:
                     logger.info("Opportunity updated successfully")
             
@@ -676,6 +736,10 @@ def main():
     parser.add_argument('--local-folder', '-f', action='append', help='Local folder(s) to scan')
     parser.add_argument('--upload', '-u', action='append', help='File(s) to upload as context')
     parser.add_argument('--dry-run', action='store_true', help='Generate but do not update opportunity')
+    parser.add_argument(
+        '--auto-approve', '-y', action='store_true',
+        help='Auto-approve the MCP write so no terminal prompt is needed (use for headless scripts/CI)'
+    )
     parser.add_argument('--config', '-c', help='Path to config.json')
     
     args = parser.parse_args()
@@ -688,7 +752,8 @@ def main():
         slack_channels=args.slack_channel,
         local_folders=args.local_folder,
         uploaded_files=args.upload,
-        update_opportunity=not args.dry_run
+        update_opportunity=not args.dry_run,
+        auto_approve=args.auto_approve,
     )
     
     print("\n" + "="*60)
@@ -705,9 +770,15 @@ def main():
             if content and content[0].get('type') == 'text':
                 inner = json.loads(content[0].get('text', '{}'))
                 status = inner.get('status', 'unknown')
+                # `_approval_decision` is stamped by _handle_approval_flow
+                # so we can distinguish "approved → complete" from
+                # "rejected → complete" (both show MCP status=complete).
+                decision = result.mcp_response.get('_approval_decision')
                 print(f"\nMCP Status: {status}")
                 if status == 'requires_approval':
                     print("⏳ Partner Central Agent is waiting for human approval to update the opportunity.")
+                elif decision == 'reject':
+                    print("❌ Opportunity not updated — change rejected by user.")
                 elif status == 'complete':
                     print("✅ Opportunity update completed.")
         except:
