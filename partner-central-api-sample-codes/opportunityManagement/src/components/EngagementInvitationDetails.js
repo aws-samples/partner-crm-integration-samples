@@ -11,12 +11,11 @@ import {
   ColumnLayout,
   FormField
 } from "@cloudscape-design/components";
-import { hasCredentials } from '../utils/sessionStorage';
 
 function EngagementInvitationDetails({ invitationId: propInvitationId }) {
   const { id } = useParams();
   const navigate = useNavigate();
-  const [invitationId, setInvitationId] = useState(null);
+  const [invitationId] = useState(null);
   const [invitation, setInvitation] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);

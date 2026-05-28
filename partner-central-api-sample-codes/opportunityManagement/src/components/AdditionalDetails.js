@@ -4,7 +4,6 @@ import {
   Header,
   ColumnLayout,
   Box,
-  Button,
 } from "@cloudscape-design/components";
 
 function AdditionalDetails({ opportunity, awsOpportunity }) {

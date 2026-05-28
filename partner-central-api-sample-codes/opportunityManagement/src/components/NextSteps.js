@@ -2,10 +2,8 @@ import React from 'react';
 import {
   Table,
   Header,
-  Button,
   Link,
   Box,
-  ButtonDropdown,
 } from "@cloudscape-design/components";
 
 function NextSteps({ opportunity }) {

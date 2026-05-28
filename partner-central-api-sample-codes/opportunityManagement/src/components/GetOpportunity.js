@@ -10,8 +10,6 @@ import {
   Button,
   Box,
   Alert,
-  Spinner,
-  ColumnLayout,
   ExpandableSection
 } from "@cloudscape-design/components";
 import { hasCredentials, getOpportunityId, getCredentials, saveOpportunityId } from '../utils/sessionStorage';
@@ -23,26 +21,6 @@ import Overview from './Overview';
 import NextSteps from './NextSteps';
 import TabsSection from './TabsSection';
 import AgentChat from './AgentChat';
-
-// Helper function to clean the response by removing __type attributes
-const cleanResponse = (obj) => {
-  if (!obj) return obj;
-  
-  if (typeof obj !== 'object') return obj;
-  
-  if (Array.isArray(obj)) {
-    return obj.map(item => cleanResponse(item));
-  }
-  
-  const result = {};
-  for (const key in obj) {
-    if (key !== '__type') {
-      result[key] = cleanResponse(obj[key]);
-    }
-  }
-  
-  return result;
-};
 
 function GetOpportunity() {
   const navigate = useNavigate();

@@ -127,6 +127,7 @@ function ListEngagementInvitations() {
       id: "id",
       header: "Invitation ID",
       cell: item => (
+        // eslint-disable-next-line jsx-a11y/anchor-is-valid
         <a 
           href="#" 
           onClick={(e) => {

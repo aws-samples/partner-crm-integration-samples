@@ -43,6 +43,7 @@ function CreateAwsOpportunity() {
   
   // Form state
   // Options arrays
+  // eslint-disable-next-line no-unused-vars
   const salesActivitiesOptions = [
     { value: "Conducted POC / Demo", label: "Conducted POC / Demo" },
     { value: "Customer has shown interest in solution", label: "Customer has shown interest in solution" },

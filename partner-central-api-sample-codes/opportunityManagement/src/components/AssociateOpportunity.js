@@ -13,7 +13,6 @@ import {
   Alert,
   Spinner,
   Table,
-  ColumnLayout,
   Checkbox
 } from "@cloudscape-design/components";
 import { getCredentials } from '../utils/sessionStorage';

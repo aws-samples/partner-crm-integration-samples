@@ -27,7 +27,7 @@ function EditOpportunity() {
   const [opportunity, setOpportunity] = useState(null);
   const [formData, setFormData] = useState({});
   const [jsonPayload, setJsonPayload] = useState('');
-  const [originalJsonPayload, setOriginalJsonPayload] = useState('');
+  const [, setOriginalJsonPayload] = useState('');
 
   useEffect(() => {
     // Check if credentials exist
