@@ -12,7 +12,6 @@ import {
   Box,
   Alert,
   Spinner,
-  Table,
   Checkbox
 } from "@cloudscape-design/components";
 import { hasCredentials, getOpportunityId, getCredentials } from '../utils/sessionStorage';
@@ -114,10 +113,7 @@ function AssociateOpportunityMenu() {
 
   // Update payloads whenever form data changes
   useEffect(() => {
-    // Import v4 from uuid
     const generatePayloads = async () => {
-        const { v4: uuidv4 } = await import('uuid');
-        
         // Generate associate payload based on selected entity type
         let entityIdentifier = '';
         let entityType = '';
@@ -289,6 +285,7 @@ function AssociateOpportunityMenu() {
             <Box margin={{ top: 'l' }}>
               <Box variant="awsui-key-label">Opportunity ID</Box>
               <Box variant="samp">
+                {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
                 <a 
                   href="#" 
                   onClick={(e) => {

@@ -80,6 +80,7 @@ const OpportunitiesList = () => {
       id: 'opportunityId',
       header: 'Opportunity ID',
       cell: item => (
+        // eslint-disable-next-line jsx-a11y/anchor-is-valid
         <a 
           href="#" 
           onClick={(e) => {

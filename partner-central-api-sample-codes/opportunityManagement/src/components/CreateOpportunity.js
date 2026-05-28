@@ -18,12 +18,11 @@ import {
   Alert,
   Checkbox
 } from "@cloudscape-design/components";
-import axios from 'axios';
 
 function CreateOpportunity() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [, setError] = useState(null);
   const [uploadedJson, setUploadedJson] = useState(null);
   const fileInputRef = useRef(null);
   
@@ -124,6 +123,7 @@ function CreateOpportunity() {
   });
   
   // Options for select components
+  // eslint-disable-next-line no-unused-vars
   const salesActivitiesOptions = [
     { value: "Conducted POC / Demo", label: "Conducted POC / Demo" },
     { value: "Customer has shown interest in solution", label: "Customer has shown interest in solution" },
@@ -131,6 +131,7 @@ function CreateOpportunity() {
     { value: "Identified budget", label: "Identified budget" }
   ];
   
+  // eslint-disable-next-line no-unused-vars
   const solutionsOptions = [
     { value: "TestSolution", label: "TestSolution" },
     { value: "New Relic One", label: "New Relic One" },
@@ -138,6 +139,7 @@ function CreateOpportunity() {
     { value: "Dynatrace", label: "Dynatrace" }
   ];
   
+  // eslint-disable-next-line no-unused-vars
   const awsProductsOptions = [
     { value: "AWS CloudWatch", label: "AWS CloudWatch" },
     { value: "Amazon EC2", label: "Amazon EC2" },

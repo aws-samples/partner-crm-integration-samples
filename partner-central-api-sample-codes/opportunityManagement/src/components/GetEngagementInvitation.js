@@ -9,19 +9,16 @@ import {
   SpaceBetween,
   Button,
   Box,
-  Alert,
-  Spinner,
-  ColumnLayout
+  Alert
 } from "@cloudscape-design/components";
 import { hasCredentials, getEngagementInvitationId, getCredentials } from '../utils/sessionStorage';
 
 function GetEngagementInvitation() {
   const navigate = useNavigate();
   const location = useLocation();
-  const [loading, setLoading] = useState(false);
+  const [loading] = useState(false);
   const [error, setError] = useState(null);
   const [invitationId, setInvitationId] = useState('');
-  const [showDetails, setShowDetails] = useState(false);
 
   useEffect(() => {
     // Check if credentials exist

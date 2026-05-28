@@ -102,6 +102,7 @@ function StartEngagementFromOpportunityTask() {
             <Box margin={{ top: 'l' }}>
               <Box variant="awsui-key-label">Opportunity ID</Box>
               <Box variant="samp">
+                {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
                 <a 
                   href="#" 
                   onClick={(e) => {
