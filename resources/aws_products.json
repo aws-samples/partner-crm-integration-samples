@@ -1278,6 +1278,12 @@
     "Description": "Amazon Bedrock models provided by Google"
   },
   {
+    "Identifier": "AmazonBedrockGrokModels",
+    "Name": "Amazon Bedrock \u2013 Grok Models",
+    "Family": "AI/ML",
+    "Description": "XAI Grok models on Amazon Bedrock."
+  },
+  {
     "Identifier": "AmazonBedrockGuardrails",
     "Name": "Amazon Bedrock - Guardrails",
     "Family": "Machine Learning",
@@ -2830,6 +2836,18 @@
     "Name": "Babelfish for Aurora PostgreSQL",
     "Family": "Database",
     "Description": "Run Microsoft SQL Server applications on PostgreSQL with little to no code change"
+  },
+  {
+    "Identifier": "ClaudeEnterpriseinAWSMarketplace",
+    "Name": "Claude Enterprise in AWS Marketplace",
+    "Family": "AI/ML",
+    "Description": "Gives every employee access to Anthropic Claude Chat, Claude Code, and Cowork"
+  },
+  {
+    "Identifier": "ClaudePlatformonAWS",
+    "Name": "Claude Platform on AWS",
+    "Family": "AI/ML",
+    "Description": "Build with Anthropic's Claude Platform using AWS credentials, billing, and access controls"
   },
   {
     "Identifier": "CloudEndureDisasterRecovery",
