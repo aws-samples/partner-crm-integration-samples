@@ -558,12 +558,6 @@
     "Description": "Register, organize, monitor, and remotely manage connected devices at scale"
   },
   {
-    "Identifier": "AWSIoTEvents",
-    "Name": "AWS IoT Events",
-    "Family": "Internet of Things",
-    "Description": "Easily detect and respond to events from IoT sensors and applications"
-  },
-  {
     "Identifier": "AWSIoTFleetWise",
     "Name": "AWS IoT FleetWise",
     "Family": "Internet of Things",
