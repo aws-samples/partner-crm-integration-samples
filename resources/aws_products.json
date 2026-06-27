@@ -1020,6 +1020,12 @@
     "Description": "Convert code from any programming language, to any programming language"
   },
   {
+    "Identifier": "AWSTransformcontinuousmodernization",
+    "Name": "AWS Transform - continuous modernization",
+    "Family": "Developer Tools",
+    "Description": "AWS Transform continuous modernization \u2013 driving autonomous tech debt analysis and remediation at scale."
+  },
+  {
     "Identifier": "AWSTransformforNET",
     "Name": "AWS Transform for .NET",
     "Family": "Developer Tools",
@@ -1156,6 +1162,12 @@
     "Name": "AgentCore payments",
     "Family": "Compute",
     "Description": "Enable AI agents to autonomously discover, authorize, and execute payments with a few lines of code"
+  },
+  {
+    "Identifier": "AgentToolkitforAWS",
+    "Name": "Agent Toolkit for AWS",
+    "Family": "AI/ML",
+    "Description": "The Agent Toolkit for AWS gives AI coding agents the tools, knowledge, and guardrails they need to work effectively with AWS services."
   },
   {
     "Identifier": "AlexaforBusiness",
