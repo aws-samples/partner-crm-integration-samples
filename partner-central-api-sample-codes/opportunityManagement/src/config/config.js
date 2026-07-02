@@ -1,7 +1,7 @@
 // Configuration file for the application
 export const config = {
-  // Internal flag to show additional configuration options
-  Internal: true
+  // Internal flag to show additional configuration options (Catalog, Endpoint URL)
+  Internal: false
 };
 
 // Catalog options

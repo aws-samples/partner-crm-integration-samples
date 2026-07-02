@@ -13,7 +13,7 @@ import {
   Select
 } from '@cloudscape-design/components';
 import { storeCredentials, hasCredentials, getCredentials } from '../utils/sessionStorage';
-import { CATALOG_OPTIONS } from '../config/config';
+import { CATALOG_OPTIONS, config } from '../config/config';
 
 const CredentialsForm = () => {
   const navigate = useNavigate();
@@ -179,24 +179,28 @@ const CredentialsForm = () => {
             />
           </FormField>
 
-          <FormField label="Catalog" description="Applies to all API calls and the Agent Chat. Use Sandbox for safe testing.">
-            <Select
-              selectedOption={CATALOG_OPTIONS.find(o => o.value === catalog)
-                ? { value: catalog, label: CATALOG_OPTIONS.find(o => o.value === catalog).name }
-                : null}
-              onChange={({ detail }) => setCatalog(detail.selectedOption?.value || CATALOG_OPTIONS[0].value)}
-              options={CATALOG_OPTIONS.map(o => ({ value: o.value, label: o.name }))}
-              placeholder="Select catalog"
-            />
-          </FormField>
+          {config.Internal && (
+            <FormField label="Catalog" description="Applies to all API calls and the Agent Chat. Use Sandbox for safe testing.">
+              <Select
+                selectedOption={CATALOG_OPTIONS.find(o => o.value === catalog)
+                  ? { value: catalog, label: CATALOG_OPTIONS.find(o => o.value === catalog).name }
+                  : null}
+                onChange={({ detail }) => setCatalog(detail.selectedOption?.value || CATALOG_OPTIONS[0].value)}
+                options={CATALOG_OPTIONS.map(o => ({ value: o.value, label: o.name }))}
+                placeholder="Select catalog"
+              />
+            </FormField>
+          )}
 
-          <FormField label="Endpoint URL">
-            <Input
-              value={endpointUrl}
-              onChange={({ detail }) => setEndpointUrl(detail.value)}
-              placeholder="https://partnercentral-selling.us-east-1.api.aws"
-            />
-          </FormField>
+          {config.Internal && (
+            <FormField label="Endpoint URL">
+              <Input
+                value={endpointUrl}
+                onChange={({ detail }) => setEndpointUrl(detail.value)}
+                placeholder="https://partnercentral-selling.us-east-1.api.aws"
+              />
+            </FormField>
+          )}
 
           <input
             type="file"

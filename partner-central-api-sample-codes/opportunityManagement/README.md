@@ -112,6 +112,9 @@ npm run deploy
 # Install dependencies
 npm install
 
+# Enable the React app entry point (replaces the static landing page)
+cp public/index-app.html public/index.html
+
 # Start development server
 npm start
 ```
