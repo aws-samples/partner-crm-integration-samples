@@ -16,7 +16,7 @@ import {
   ColumnLayout
 } from "@cloudscape-design/components";
 import { hasCredentials } from '../utils/sessionStorage';
-import { decodeHtmlEntities } from '../utils/commonUtils';
+import { decodeServerEntities } from '../utils/commonUtils';
 
 function EditOpportunity() {
   const { id } = useParams();
@@ -66,7 +66,7 @@ function EditOpportunity() {
         
         // Prepare form data (only decode HTML entities for text fields that might contain them)
         const formFields = {
-          CompanyName: decodeHtmlEntities(response.Customer?.Account?.CompanyName || ''),
+          CompanyName: decodeServerEntities(response.Customer?.Account?.CompanyName || ''),
           Duns: response.Customer?.Account?.Duns || '',
           Industry: response.Customer?.Account?.Industry || '',
           WebsiteUrl: response.Customer?.Account?.WebsiteUrl || '',
@@ -81,7 +81,7 @@ function EditOpportunity() {
           CustomerTitle: response.Customer?.Contacts?.[0]?.BusinessTitle || '',
           CustomerEmail: response.Customer?.Contacts?.[0]?.Email || '',
           CustomerPhone: response.Customer?.Contacts?.[0]?.Phone || '',
-          NextSteps: decodeHtmlEntities(response.LifeCycle?.NextSteps || ''),
+          NextSteps: decodeServerEntities(response.LifeCycle?.NextSteps || ''),
           ReviewStatus: response.LifeCycle?.ReviewStatus || '',
           Stage: response.LifeCycle?.Stage || '',
           TargetCloseDate: response.LifeCycle?.TargetCloseDate || '',
@@ -94,8 +94,8 @@ function EditOpportunity() {
           OpportunityType: response.OpportunityType || '',
           PrimaryNeedsFromAws: response.PrimaryNeedsFromAws || [],
           CompetitorName: response.Project?.CompetitorName || 'On-Prem',
-          CustomerBusinessProblem: decodeHtmlEntities(response.Project?.CustomerBusinessProblem || ''),
-          CustomerUseCase: decodeHtmlEntities(response.Project?.CustomerUseCase || ''),
+          CustomerBusinessProblem: decodeServerEntities(response.Project?.CustomerBusinessProblem || ''),
+          CustomerUseCase: decodeServerEntities(response.Project?.CustomerUseCase || ''),
           DeliveryModels: response.Project?.DeliveryModels || [],
           ExpectedAmount: response.Project?.ExpectedCustomerSpend?.[0]?.Amount || '',
           ExpectedCurrency: response.Project?.ExpectedCustomerSpend?.[0]?.CurrencyCode || '',
@@ -113,13 +113,13 @@ function EditOpportunity() {
         
         // Decode HTML entities in string fields only
         if (updatePayload.Project?.CustomerUseCase) {
-          updatePayload.Project.CustomerUseCase = decodeHtmlEntities(updatePayload.Project.CustomerUseCase);
+          updatePayload.Project.CustomerUseCase = decodeServerEntities(updatePayload.Project.CustomerUseCase);
         }
         if (updatePayload.Project?.CustomerBusinessProblem) {
-          updatePayload.Project.CustomerBusinessProblem = decodeHtmlEntities(updatePayload.Project.CustomerBusinessProblem);
+          updatePayload.Project.CustomerBusinessProblem = decodeServerEntities(updatePayload.Project.CustomerBusinessProblem);
         }
         if (updatePayload.Customer?.Account?.CompanyName) {
-          updatePayload.Customer.Account.CompanyName = decodeHtmlEntities(updatePayload.Customer.Account.CompanyName);
+          updatePayload.Customer.Account.CompanyName = decodeServerEntities(updatePayload.Customer.Account.CompanyName);
         }
         updatePayload.Identifier = updatePayload.Id;
         delete updatePayload.Id;
@@ -296,10 +296,10 @@ function EditOpportunity() {
       
       // Decode HTML entities in string fields only
       if (updatePayload.Project?.CustomerUseCase) {
-        updatePayload.Project.CustomerUseCase = decodeHtmlEntities(updatePayload.Project.CustomerUseCase);
+        updatePayload.Project.CustomerUseCase = decodeServerEntities(updatePayload.Project.CustomerUseCase);
       }
       if (updatePayload.Project?.CustomerBusinessProblem) {
-        updatePayload.Project.CustomerBusinessProblem = decodeHtmlEntities(updatePayload.Project.CustomerBusinessProblem);
+        updatePayload.Project.CustomerBusinessProblem = decodeServerEntities(updatePayload.Project.CustomerBusinessProblem);
       }
       
       // Replace Id with Identifier

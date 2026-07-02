@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { getOpportunityId, hasCredentials } from '../utils/sessionStorage';
-import { decodeHtmlEntities } from '../utils/commonUtils';
+import { decodeServerEntities } from '../utils/commonUtils';
 import {
   Container,
   Header,
@@ -77,10 +77,10 @@ function SimulateReview() {
       
       // Decode HTML entities in string fields only
       if (payload.Project?.CustomerUseCase) {
-        payload.Project.CustomerUseCase = decodeHtmlEntities(payload.Project.CustomerUseCase);
+        payload.Project.CustomerUseCase = decodeServerEntities(payload.Project.CustomerUseCase);
       }
       if (payload.Project?.CustomerBusinessProblem) {
-        payload.Project.CustomerBusinessProblem = decodeHtmlEntities(payload.Project.CustomerBusinessProblem);
+        payload.Project.CustomerBusinessProblem = decodeServerEntities(payload.Project.CustomerBusinessProblem);
       }
       
       // Explicitly set Catalog (not returned in GetOpportunity response)
@@ -195,7 +195,7 @@ function SimulateReview() {
               overflowX: 'auto',
               maxHeight: '400px'
             }}>
-              {decodeHtmlEntities(JSON.stringify(updateResponse, null, 2))}
+              {decodeServerEntities(JSON.stringify(updateResponse, null, 2))}
             </pre>
           </Container>
           
@@ -252,7 +252,7 @@ function SimulateReview() {
             overflowX: 'auto',
             maxHeight: '400px'
           }}>
-            {decodeHtmlEntities(JSON.stringify(
+            {decodeServerEntities(JSON.stringify(
               updatePayload && updatePayload.LifeCycle
                 ? { ...updatePayload, LifeCycle: { ...updatePayload.LifeCycle, ReviewStatus: reviewStatus } }
                 : updatePayload,

@@ -13,7 +13,7 @@ import {
 import { getOpportunity, getAwsOpportunitySummary } from '../services/api';
 import { cleanOpportunityData, enhanceWithAwsSummary } from '../utils/opportunityUtils';
 import { hasCredentials } from '../utils/sessionStorage';
-import { decodeHtmlEntities } from '../utils/commonUtils';
+import { decodeServerEntities } from '../utils/commonUtils';
 import Overview from './Overview';
 import NextSteps from './NextSteps';
 import TabsSection from './TabsSection';
@@ -178,7 +178,7 @@ function OpportunityDetails() {
               }));
             }
             
-            return decodeHtmlEntities(JSON.stringify(displayData, null, 2));
+            return decodeServerEntities(JSON.stringify(displayData, null, 2));
           })()}
         </pre>
       </SpaceBetween>
