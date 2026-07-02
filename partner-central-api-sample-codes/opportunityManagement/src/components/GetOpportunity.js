@@ -15,7 +15,7 @@ import {
   ExpandableSection
 } from "@cloudscape-design/components";
 import { hasCredentials, getOpportunityId, getCredentials, saveOpportunityId } from '../utils/sessionStorage';
-import { decodeHtmlEntities } from '../utils/commonUtils';
+import { decodeServerEntities } from '../utils/commonUtils';
 import { getAwsOpportunitySummary } from '../services/api';
 import { cleanOpportunityData, enhanceWithAwsSummary } from '../utils/opportunityUtils';
 import { PartnerCentralSellingClient, GetOpportunityCommand } from "@aws-sdk/client-partnercentral-selling";
@@ -274,7 +274,7 @@ function GetOpportunity() {
                 }));
               }
               
-              return decodeHtmlEntities(JSON.stringify(displayData, null, 4));
+              return decodeServerEntities(JSON.stringify(displayData, null, 4));
             })()}
           </pre>
         </SpaceBetween>
