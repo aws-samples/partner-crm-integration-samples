@@ -1320,6 +1320,12 @@
     "Description": "Deploy and operate AI agents powered by OpenAI frontier models on AWS infrastructure"
   },
   {
+    "Identifier": "AmazonBedrockManagedKnowledgeBase",
+    "Name": "Amazon Bedrock - Managed Knowledge Base",
+    "Family": "AI/ML",
+    "Description": "Fully managed capability which connects internal data sources with agentic retrieval that reasons across documents and delivers better accuracy than traditional RAG on complex queries."
+  },
+  {
     "Identifier": "AmazonBedrockMetaModels",
     "Name": "Amazon Bedrock - Meta Models",
     "Family": "Machine Learning",
@@ -1350,8 +1356,8 @@
     "Description": "Amazon Bedrock models provided by NVIDIA"
   },
   {
-    "Identifier": "AmazonBedrockOpenAICodex",
-    "Name": "Amazon Bedrock - OpenAI Codex",
+    "Identifier": "AmazonBedrockOpenAIChatGPTCodex",
+    "Name": "Amazon Bedrock - OpenAI ChatGPT Codex",
     "Family": "AI/ML",
     "Description": "OpenAI's AI coding agent running natively on Bedrock with AWS enterprise security and governance."
   },
@@ -2824,6 +2830,12 @@
     "Name": "Amazon WorkSpaces Thin Client",
     "Family": "End User Computing",
     "Description": "Reduce costs, simplify logistics, and accelerate deployment using virtual desktops"
+  },
+  {
+    "Identifier": "AmazonWorkSpacesforagents",
+    "Name": "Amazon WorkSpaces for agents",
+    "Family": "Compute",
+    "Description": "Amazon WorkSpaces enables AI agents to securely operate desktop applications just like humans."
   },
   {
     "Identifier": "AmazonWorkspaces",
