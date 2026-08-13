@@ -1314,8 +1314,8 @@
     "Description": "Amazon Bedrock models provided by Luma AI"
   },
   {
-    "Identifier": "AmazonBedrockManagedAgents",
-    "Name": "Amazon Bedrock - Managed Agents",
+    "Identifier": "AmazonBedrockManagedAgentsOpenAI",
+    "Name": "Amazon Bedrock - Managed Agents (OpenAI)",
     "Family": "AI/ML",
     "Description": "Deploy and operate AI agents powered by OpenAI frontier models on AWS infrastructure"
   },
@@ -1356,10 +1356,16 @@
     "Description": "Amazon Bedrock models provided by NVIDIA"
   },
   {
-    "Identifier": "AmazonBedrockOpenAIChatGPTCodex",
-    "Name": "Amazon Bedrock - OpenAI ChatGPT Codex",
+    "Identifier": "AmazonBedrockOpenAIChatGPTCodexandWork",
+    "Name": "Amazon Bedrock - OpenAI ChatGPT Codex and Work",
     "Family": "AI/ML",
     "Description": "OpenAI's AI coding agent running natively on Bedrock with AWS enterprise security and governance."
+  },
+  {
+    "Identifier": "AmazonBedrockOpenAIChatGPTWork",
+    "Name": "Amazon Bedrock - OpenAI ChatGPT Work",
+    "Family": "AI/ML",
+    "Description": "A multi-step agent within ChatGPT that gathers information across apps and files, uses the web, and creates finished materials like sheets, slides, docs, and Sites."
   },
   {
     "Identifier": "AmazonBedrockOpenAIModels",
@@ -1396,6 +1402,12 @@
     "Name": "Amazon Bedrock - Writer Models",
     "Family": "Machine Learning",
     "Description": "Amazon Bedrock models provided by Writer"
+  },
+  {
+    "Identifier": "AmazonBedrockZAIModels",
+    "Name": "Amazon Bedrock - Z AI Models",
+    "Family": "AI/ML",
+    "Description": "Amazon Bedrock models provided by Z.AI"
   },
   {
     "Identifier": "AmazonBedrockpoolsideModels",
@@ -2410,12 +2422,6 @@
     "Name": "Amazon Q Business",
     "Family": "Machine Learning",
     "Description": "The most capable generative AI-powered assistant for finding information, gaining insight, and taking action at work"
-  },
-  {
-    "Identifier": "AmazonQDeveloper",
-    "Name": "Amazon Q Developer",
-    "Family": "Developer Tools",
-    "Description": "GenAI-powered development tools to build, operate, and maintain applications"
   },
   {
     "Identifier": "AmazonQuantumLedgerDatabaseQLDB",
