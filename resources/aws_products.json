@@ -252,6 +252,12 @@
     "Description": "Stay connected to your AWS resources on-the-go"
   },
   {
+    "Identifier": "AWSContext",
+    "Name": "AWS Context",
+    "Family": "AI/ML",
+    "Description": "A fully managed service that delivers real-time, governed enterprise intelligence to AI agents for accurate, context-aware responses."
+  },
+  {
     "Identifier": "AWSControlTower",
     "Name": "AWS Control Tower",
     "Family": "Management & Governance",
@@ -1164,6 +1170,12 @@
     "Description": "A secure, serverless runtime purpose-built for deploying and scaling dynamic AI agents and tools"
   },
   {
+    "Identifier": "AgentCoreWebSearch",
+    "Name": "AgentCore Web Search",
+    "Family": "AI/ML",
+    "Description": "A fully managed, MCP-compatible web search tool on Amazon Bedrock AgentCore that grounds AI agents with real-time web knowledge."
+  },
+  {
     "Identifier": "AgentCorepayments",
     "Name": "AgentCore payments",
     "Family": "Compute",
@@ -1360,12 +1372,6 @@
     "Name": "Amazon Bedrock - OpenAI ChatGPT Codex and Work",
     "Family": "AI/ML",
     "Description": "OpenAI's AI coding agent running natively on Bedrock with AWS enterprise security and governance."
-  },
-  {
-    "Identifier": "AmazonBedrockOpenAIChatGPTWork",
-    "Name": "Amazon Bedrock - OpenAI ChatGPT Work",
-    "Family": "AI/ML",
-    "Description": "A multi-step agent within ChatGPT that gathers information across apps and files, uses the web, and creates finished materials like sheets, slides, docs, and Sites."
   },
   {
     "Identifier": "AmazonBedrockOpenAIModels",
