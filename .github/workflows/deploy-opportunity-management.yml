@@ -4,6 +4,7 @@ on:
   push:
     branches: [ main ]
     paths: [ 'partner-central-api-sample-codes/opportunityManagement/**' ]
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -30,6 +31,11 @@ jobs:
         cache-dependency-path: partner-central-api-sample-codes/opportunityManagement/package-lock.json
     - name: Install dependencies
       run: npm ci
+    - name: Use the app HTML template
+      # The repo ships public/index.html as a static landing page; the real
+      # CRA template (with <div id="root">) is public/index-app.html. Swap it
+      # in before building so React actually mounts (matches the README steps).
+      run: cp public/index-app.html public/index.html
     - name: Build React app
       run: npm run build
       env:
