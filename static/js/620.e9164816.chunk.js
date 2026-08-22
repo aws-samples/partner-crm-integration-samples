@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkopportunity_management=self.webpackChunkopportunity_management||[]).push([[620],{5620:(e,n,t)=>{t.d(n,{v4:()=>a.A});var a=t(7956)}}]);

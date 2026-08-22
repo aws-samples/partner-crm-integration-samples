@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/partner-crm-integration-samples/static/css/main.7653ebd7.css",
+    "main.js": "/partner-crm-integration-samples/static/js/main.3b30e1db.js",
+    "static/js/265.c8e4ee33.chunk.js": "/partner-crm-integration-samples/static/js/265.c8e4ee33.chunk.js",
+    "static/js/620.e9164816.chunk.js": "/partner-crm-integration-samples/static/js/620.e9164816.chunk.js",
+    "index.html": "/partner-crm-integration-samples/index.html"
+  },
+  "entrypoints": [
+    "static/css/main.7653ebd7.css",
+    "static/js/main.3b30e1db.js"
+  ]
+}
