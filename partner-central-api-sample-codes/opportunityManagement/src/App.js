@@ -23,6 +23,7 @@ import AcceptEngagementInvitation from './components/AcceptEngagementInvitation'
 import RejectEngagementInvitation from './components/RejectEngagementInvitation';
 import SimulateReview from './components/SimulateReview';
 import AgentChat from './components/AgentChat';
+import WorkshopSetupPage from './components/WorkshopSetupPage';
 import { clearCredentials } from './utils/sessionStorage';
 
 function App() {
@@ -33,37 +34,45 @@ function App() {
 
   return (
     <Router>
-      <div className="App">
-        <Header onSignOut={handleSignOut} />
-        <AppLayout
-          navigation={<Navigation />}
-          content={
-            <ContentLayout>
-              <Routes>
-                <Route path="/" element={<CredentialsForm />} />
-                <Route path="/opportunities" element={<OpportunitiesList />} />
-                <Route path="/opportunity/:id" element={<OpportunityDetails />} />
-                <Route path="/create-opportunity" element={<CreateOpportunity />} />
-                <Route path="/create-aws-opportunity" element={<CreateAwsOpportunity />} />
-                <Route path="/get-opportunity" element={<GetOpportunity />} />
-                <Route path="/edit-opportunity/:id" element={<EditOpportunity />} />
-                <Route path="/associate-opportunity/:id" element={<AssociateOpportunity />} />
-                <Route path="/assign-opportunity" element={<AssignOpportunity />} />
-                <Route path="/associate-opportunity-menu" element={<AssociateOpportunityMenu />} />
-                <Route path="/start-engagement-from-opportunity-task" element={<StartEngagementFromOpportunityTask />} />
-                <Route path="/engagement-invitations" element={<ListEngagementInvitations />} />
-                <Route path="/engagement-invitation/:id" element={<EngagementInvitationDetails />} />
-                <Route path="/get-engagement-invitation" element={<GetEngagementInvitation />} />
-                <Route path="/accept-engagement-invitation" element={<AcceptEngagementInvitation />} />
-                <Route path="/reject-engagement-invitation" element={<RejectEngagementInvitation />} />
-                <Route path="/simulate-review" element={<SimulateReview />} />
-                <Route path="/simulate-review/:id" element={<SimulateReview />} />
-                <Route path="/agent-chat" element={<AgentChat />} />
-              </Routes>
-            </ContentLayout>
-          }
-        />
-      </div>
+      <Routes>
+        {/* Standalone page (no nav/header) — workshop setup verification */}
+        <Route path="/test-workshop-setup" element={<WorkshopSetupPage />} />
+
+        {/* Main application (with nav + header) */}
+        <Route path="*" element={
+          <div className="App">
+            <Header onSignOut={handleSignOut} />
+            <AppLayout
+              navigation={<Navigation />}
+              content={
+                <ContentLayout>
+                  <Routes>
+                    <Route path="/" element={<CredentialsForm />} />
+                    <Route path="/opportunities" element={<OpportunitiesList />} />
+                    <Route path="/opportunity/:id" element={<OpportunityDetails />} />
+                    <Route path="/create-opportunity" element={<CreateOpportunity />} />
+                    <Route path="/create-aws-opportunity" element={<CreateAwsOpportunity />} />
+                    <Route path="/get-opportunity" element={<GetOpportunity />} />
+                    <Route path="/edit-opportunity/:id" element={<EditOpportunity />} />
+                    <Route path="/associate-opportunity/:id" element={<AssociateOpportunity />} />
+                    <Route path="/assign-opportunity" element={<AssignOpportunity />} />
+                    <Route path="/associate-opportunity-menu" element={<AssociateOpportunityMenu />} />
+                    <Route path="/start-engagement-from-opportunity-task" element={<StartEngagementFromOpportunityTask />} />
+                    <Route path="/engagement-invitations" element={<ListEngagementInvitations />} />
+                    <Route path="/engagement-invitation/:id" element={<EngagementInvitationDetails />} />
+                    <Route path="/get-engagement-invitation" element={<GetEngagementInvitation />} />
+                    <Route path="/accept-engagement-invitation" element={<AcceptEngagementInvitation />} />
+                    <Route path="/reject-engagement-invitation" element={<RejectEngagementInvitation />} />
+                    <Route path="/simulate-review" element={<SimulateReview />} />
+                    <Route path="/simulate-review/:id" element={<SimulateReview />} />
+                    <Route path="/agent-chat" element={<AgentChat />} />
+                  </Routes>
+                </ContentLayout>
+              }
+            />
+          </div>
+        } />
+      </Routes>
     </Router>
   );
 }
