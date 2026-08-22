@@ -17,14 +17,33 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./partner-central-api-sample-codes/opportunityManagement
     steps:
     - uses: actions/checkout@v4
+    - name: Setup Node
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20
+        cache: npm
+        cache-dependency-path: partner-central-api-sample-codes/opportunityManagement/package-lock.json
+    - name: Install dependencies
+      run: npm ci
+    - name: Build React app
+      run: npm run build
+      env:
+        # Create React App treats lint warnings as errors when CI=true (the
+        # default on GitHub Actions); keep the sample build resilient.
+        CI: false
     - name: Setup Pages
       uses: actions/configure-pages@v4
     - name: Upload artifact
       uses: actions/upload-pages-artifact@v3
       with:
-        path: './partner-central-api-sample-codes/opportunityManagement/public'
+        # Publish the compiled SPA (includes the /test-workshop-setup page),
+        # not the static public/ landing page.
+        path: './partner-central-api-sample-codes/opportunityManagement/build'
 
   deploy:
     environment:
