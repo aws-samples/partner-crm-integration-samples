@@ -762,6 +762,12 @@
     "Description": "Deploy network security across your Amazon VPCs with just a few clicks"
   },
   {
+    "Identifier": "AWSNetworkSecurityManager",
+    "Name": "AWS Network Security Manager",
+    "Family": "Security, Identity & Compliance",
+    "Description": "AWS Network Security Manager automates security policy definition and deployment across the AWS network security portfolio."
+  },
+  {
     "Identifier": "AWSNeuron",
     "Name": "AWS Neuron",
     "Family": "Machine Learning",
@@ -1030,6 +1036,12 @@
     "Name": "AWS Transform Custom",
     "Family": "Developer Tools",
     "Description": "Convert code from any programming language, to any programming language"
+  },
+  {
+    "Identifier": "AWSTransformMGN",
+    "Name": "AWS Transform MGN",
+    "Family": "Migration & Transfer",
+    "Description": "An AWS Transform capability to move and improve your on-premises and cloud-based applications"
   },
   {
     "Identifier": "AWSTransformcontinuousmodernization",
@@ -1402,6 +1414,12 @@
     "Name": "Amazon Bedrock - Undisclosed Model Provider",
     "Family": "AI/ML",
     "Description": "Select this only when the customer chooses not to disclose which model provider they are using or testing"
+  },
+  {
+    "Identifier": "AmazonBedrockWebSearch",
+    "Name": "Amazon Bedrock - Web Search",
+    "Family": "AI/ML",
+    "Description": "Web Search is an AWS-native tool that provides live, real-time web ground capabilities while keeping data inside the customer's AWS environment, available on both Amazon Bedrock and AgentCore."
   },
   {
     "Identifier": "AmazonBedrockWriterModels",
