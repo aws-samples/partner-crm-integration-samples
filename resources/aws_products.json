@@ -201,7 +201,7 @@
     "Identifier": "AWSCloudWAN",
     "Name": "AWS Cloud WAN",
     "Family": "Networking & Content Delivery",
-    "Description": "AWSCloudWAN"
+    "Description": "Build, manage, and monitor a unified global network across your cloud and on-premises environments"
   },
   {
     "Identifier": "AWSCodeArtifact",
@@ -2152,12 +2152,6 @@
     "Name": "Amazon File Cache",
     "Family": "Storage",
     "Description": "High-speed cache for datasets stored anywhere"
-  },
-  {
-    "Identifier": "AmazonFinSpace",
-    "Name": "Amazon FinSpace",
-    "Family": "Analytics",
-    "Description": "Store, catalog, prepare, and analyze financial industry data"
   },
   {
     "Identifier": "AmazonForecast",
