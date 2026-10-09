@@ -348,12 +348,6 @@
     "Description": "Test Android, iOS, and Web Apps on Real Devices in the Cloud"
   },
   {
-    "Identifier": "AWSDiode",
-    "Name": "AWS Diode",
-    "Family": "Networking & Content Delivery",
-    "Description": "Cloud-based CDS service that provides scalable and reliable delivery of data from one cloud security domain to another"
-  },
-  {
     "Identifier": "AWSDirectConnect",
     "Name": "AWS Direct Connect",
     "Family": "Networking & Content Delivery",
@@ -736,18 +730,6 @@
     "Name": "AWS Migration Hub Strategy Recommendations",
     "Family": "Migration & Transfer",
     "Description": "Analyzes your applications to help you determine the optimal strategy and tools to migrate and modernize at scale."
-  },
-  {
-    "Identifier": "AWSMissionNetworkingDedicatedCircuit",
-    "Name": "AWS Mission Networking Dedicated Circuit",
-    "Family": "Networking & Content Delivery",
-    "Description": "Dedicated Encrypted Network Connection to Amazon Dedicated Cloud(ADC)"
-  },
-  {
-    "Identifier": "AWSMissionNetworkingIPTunnel",
-    "Name": "AWS Mission Networking IP Tunnel",
-    "Family": "Networking & Content Delivery",
-    "Description": "Encrypted Network Connection to Amazon Dedicated Cloud(ADC) over the Internet"
   },
   {
     "Identifier": "AWSModularDataCenter",
