@@ -258,6 +258,18 @@
     "Description": "A fully managed service that delivers real-time, governed enterprise intelligence to AI agents for accurate, context-aware responses."
   },
   {
+    "Identifier": "AWSContinuumforCodeVulnerabilities",
+    "Name": "AWS Continuum for Code Vulnerabilities",
+    "Family": "Security, Identity & Compliance",
+    "Description": "Addresses the full lifecycle of a code vulnerability at machine speed: from discovery through actions. It reasons over your environment, confirms what is real, and drives toward resolution. It is model agnostic, using multiple frontier models where each performs best, and is built to incorporate the latest and most capable models as they emerge."
+  },
+  {
+    "Identifier": "AWSContinuumforPenTesting",
+    "Name": "AWS Continuum for Pen Testing",
+    "Family": "Security, Identity & Compliance",
+    "Description": "Proactively secure your applications throughout the development lifecycle with a frontier agent"
+  },
+  {
     "Identifier": "AWSControlTower",
     "Name": "AWS Control Tower",
     "Family": "Management & Governance",
@@ -856,12 +868,6 @@
     "Name": "AWS Secrets Manager",
     "Family": "Security, Identity & Compliance",
     "Description": "Easily rotate, manage, and retrieve database credentials, API keys, and other secrets through their lifecycle"
-  },
-  {
-    "Identifier": "AWSSecurityAgent",
-    "Name": "AWS Security Agent",
-    "Family": "Security, Identity & Compliance",
-    "Description": "Proactively secure your applications throughout the development lifecycle with a frontier agent"
   },
   {
     "Identifier": "AWSSecurityHub",
@@ -2910,8 +2916,8 @@
     "Description": "See, understand, and act on application and infrastructure health across AWS, Azure, GCP, and on-premises"
   },
   {
-    "Identifier": "CloudWatchOmniforAgents",
-    "Name": "CloudWatch Omni for Agents",
+    "Identifier": "CloudWatchOmniAgentObservability",
+    "Name": "CloudWatch Omni Agent Observability",
     "Family": "Management & Governance",
     "Description": "Monitor, evaluate, and optimize AI agents from development to production at scale, wherever you run them."
   },
