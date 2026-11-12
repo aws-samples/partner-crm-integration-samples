@@ -7,7 +7,7 @@ import java.util.Map;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-// snippet-start:[eventbridge.java2._create_schedule_rule.import]
+// snippet-start:[partnercentral-selling.java2.opportunity_event_handling.import]
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.eventbridge.EventBridgeClient;
 import software.amazon.awssdk.services.eventbridge.model.PutRuleRequest;
@@ -15,7 +15,7 @@ import software.amazon.awssdk.services.eventbridge.model.PutRuleResponse;
 import software.amazon.awssdk.services.eventbridge.model.PutTargetsRequest;
 import software.amazon.awssdk.services.eventbridge.model.PutTargetsResponse;
 import software.amazon.awssdk.services.eventbridge.model.Target;
-// snippet-end:[eventbridge.java2._create_schedule_rule.import]
+// snippet-end:[partnercentral-selling.java2.opportunity_event_handling.import]
 /**
  * Create Opportunity Created EventBridge rule and target is set to Lambda function
  */
