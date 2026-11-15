@@ -2394,12 +2394,6 @@
     "Description": "Easiest and most cost-effective way for companies to build their own frontier model"
   },
   {
-    "Identifier": "AmazonOmics",
-    "Name": "Amazon Omics",
-    "Family": "Machine Learning",
-    "Description": "Transform genomic, transcriptomic, and other omics data into insights"
-  },
-  {
     "Identifier": "AmazonOne",
     "Name": "Amazon One",
     "Family": "Business Applications",
