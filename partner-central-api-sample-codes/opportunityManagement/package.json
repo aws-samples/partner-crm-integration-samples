@@ -3,7 +3,7 @@
   "description": "AWS Partner Central API Opportunity Management Sample",
   "version": "0.3.0",
   "private": true,
-  "homepage": "https://aws-samples.github.io/partner-crm-integration-samples",
+  "homepage": "https://AminaCherkiLevio.github.io/opportunityManagement",
   "dependencies": {
     "@aws-crypto/sha256-browser": "^5.2.0",
     "@aws-sdk/client-partnercentral-selling": "^3.1036.0",
