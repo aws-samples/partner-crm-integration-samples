@@ -522,6 +522,12 @@
     "Description": "Store, access, and analyze medical images in the cloud at petabyte scale"
   },
   {
+    "Identifier": "AWSHealthOmics",
+    "Name": "AWS HealthOmics",
+    "Family": "AI/ML",
+    "Description": "Transform genomic, transcriptomic, and other omics data into insights"
+  },
+  {
     "Identifier": "AWSHealthScribe",
     "Name": "AWS HealthScribe",
     "Family": "Machine Learning",
@@ -2770,6 +2776,12 @@
     "Name": "Amazon Transcribe Medical",
     "Family": "Machine Learning",
     "Description": "Automatically convert medical speech to text"
+  },
+  {
+    "Identifier": "AmazonTranslate",
+    "Name": "Amazon Translate",
+    "Family": "AI/ML",
+    "Description": "Powerful Neural Machine Translation"
   },
   {
     "Identifier": "AmazonVPCLattice",
